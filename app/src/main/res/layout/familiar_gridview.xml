@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.iwgang.familiarrecyclerview.FamiliarRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mRecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    app:frv_dividerHorizontal="#FFEE00"
+    app:frv_dividerHorizontalHeight="10dp"
+    app:frv_dividerVertical="#FFCCDD"
+    app:frv_dividerVerticalHeight="30dp"
+    app:frv_itemViewBothSidesMargin="20dp"
+    app:frv_layoutManager="grid"
+    app:frv_layoutManagerOrientation="vertical"
+    app:frv_spanCount="3" />

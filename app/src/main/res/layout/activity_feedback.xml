@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/set_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@color/colorAccent"></RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/theme_table"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/rl_55dip"
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:id="@+id/hd_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="意见反馈"
+            android:textColor="@color/fbutton_default_color"
+            android:textSize="@dimen/text_16sp" />
+
+        <ImageButton
+            android:id="@+id/img_back_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12dp"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            />
+    </RelativeLayout>
+
+    <com.heiman.smarthome.widget.scrollview.CustomerScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+                <!--<TextView
+                    style="@style/option_item_text_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/Feedback_Content"
+                    android:textColor="@color/zigbeete_on"
+                    android:textSize="@dimen/text_size_16" />-->
+
+            </RelativeLayout>
+
+            <com.heiman.smarthome.widget.edittext.ClearEditText
+                android:id="@+id/et_Content"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="#ffffff"
+                android:gravity="left|top"
+                android:drawablePadding="25dip"
+                android:drawableRight="@drawable/delete_selector"
+                android:hint="反馈"
+                android:inputType="textMultiLine"
+                android:padding="12dp"
+                android:textColor="#3333"
+                android:textColorHint="#ffdddddd"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:background="#ffffff">
+
+                <ImageView
+                    android:id="@+id/image_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+<!--                <TextView
+                    style="@style/option_item_text_parent"
+                    android:text="@string/Feedback_Contact_information"
+                    android:textColor="@color/zigbeete_on"
+                    android:textSize="@dimen/text_size_16" />-->
+
+            </RelativeLayout>
+
+            <com.heiman.smarthome.widget.edittext.ClearEditText
+                android:id="@+id/et_Contact"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                android:hint="输入联系"
+                android:drawablePadding="25dip"
+                android:drawableRight="@drawable/delete_selector"
+                android:padding="12dp"
+                android:textColor="#333"
+                android:textColorHint="#ffdddddd"
+                android:textSize="@dimen/text_16sp" />
+
+            <com.heiman.smarthome.widget.button.FButton
+                android:id="@+id/btn_confirm"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="confirm"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="12dp"
+                fbutton:buttonColor="@color/fbutton_color_green_sea"
+                fbutton:shadowEnabled="true" />
+
+        </LinearLayout>
+    </com.heiman.smarthome.widget.scrollview.CustomerScrollView>
+</LinearLayout>
