@@ -4,7 +4,6 @@ package com.heiman.smarthome.smarthomesdk.Json;/**
 
 
 import com.heiman.smarthome.smarthomesdk.Constants;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +17,7 @@ import org.json.JSONObject;
  * @Description :
  */
 public class Currency {
-    private static String TEIDS = HttpManage.getInstance().getUserid() + "";
+//    private static String TEIDS = MyApplication.getMyApplication().getAppid() + "";
 
     /**
      * 设置时区
@@ -27,7 +26,7 @@ public class Currency {
      * @param GMT      时区
      * @return
      */
-    public static String SetGMT(String Nickname, String GMT) {
+    public static String SetGMT(String TEIDS,String Nickname, String GMT) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -52,7 +51,7 @@ public class Currency {
      * @param Nickname
      * @return
      */
-    public static String Getbasiclnfo(String Nickname) {
+    public static String Getbasiclnfo(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -80,7 +79,7 @@ public class Currency {
      * @param data     PL中值
      * @return
      */
-    public static String SetPL(String Nickname, JSONObject data) {
+    public static String SetPL(String TEIDS,String Nickname, JSONObject data) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -104,7 +103,7 @@ public class Currency {
      * @param OID      需要获取的OID值
      * @return
      */
-    public static String GetCountdown(String Nickname, JSONArray OID) {
+    public static String GetCountdown(String TEIDS,String Nickname, JSONArray OID) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -130,7 +129,7 @@ public class Currency {
      * @param isEn     是否升级
      * @return
      */
-    public static String Update(String Nickname, int isEn) {
+    public static String Update(String TEIDS,String Nickname, int isEn) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());

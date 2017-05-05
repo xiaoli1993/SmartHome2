@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--透明渐变的TabView-->
+    <declare-styleable name="AlphaTabView">
+        <attr name="tabIconNormal" format="reference" />
+        <attr name="tabIconSelected" format="reference" />
+        <attr name="tabText" format="string" />
+        <attr name="tabTextSize" format="dimension" />
+        <attr name="textColorNormal" format="color" />
+        <attr name="textColorSelected" format="color" />
+        <attr name="badgeBackgroundColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="DropDownMenu">
+
+        <attr name="ddunderlineColor" format="color" />
+        <attr name="dddividerColor" format="color" />
+        <attr name="ddtextSelectedColor" format="color" />
+        <attr name="ddtextUnselectedColor" format="color" />
+        <attr name="ddmenuBackgroundColor" format="color" />
+        <attr name="ddmaskColor" format="color" />
+        <attr name="ddmenuTextSize" format="dimension" />
+        <attr name="ddmenuSelectedIcon" format="reference" />
+        <attr name="ddmenuUnselectedIcon" format="reference" />
+        <attr name="ddmenuMenuHeightPercent" format="float" />
+    </declare-styleable>
+    <declare-styleable name="password_edit_text">
+
+        <attr name="show_drawable" format="integer" />
+        <attr name="hide_drawable" format="integer" />
+        <attr name="password_visible" format="boolean" />
+        <attr name="show_as_text" format="boolean" />
+        <attr name="hide_text" format="string" />
+        <attr name="show_text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="AutoTextView">
+        <attr name="autoTextColor" format="color" />
+        <attr name="autoTextSize" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="NiceSpinner">
+        <attr name="arrowTint" format="color" />
+        <attr name="hideArrow" format="boolean" />
+        <attr name="backgroundSelector" format="integer" />
+        <attr name="textTint" format="color" />
+    </declare-styleable>
+
+</resources>

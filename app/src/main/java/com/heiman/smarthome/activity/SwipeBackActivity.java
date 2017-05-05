@@ -1,14 +1,13 @@
 package com.heiman.smarthome.activity;
 
-import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.heiman.smarthome.R;
-import com.heiman.smarthome.widget.swipeback.CloseActivityClass;
-import com.heiman.smarthome.widget.swipeback.SwipeBackLayout;
+import com.heiman.widget.swipeback.CloseActivityClass;
+import com.heiman.widget.swipeback.SwipeBackLayout;
 
 
 public class SwipeBackActivity extends FragmentActivity {

@@ -4,7 +4,6 @@ package com.heiman.smarthome.smarthomesdk.Json;/**
 
 
 import com.heiman.smarthome.smarthomesdk.Constants;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +19,7 @@ import org.json.JSONObject;
  * @Description :   红外JOSON
  */
 public class Remote {
-    private static String TEIDS = HttpManage.getInstance().getUserid() + "";
+//    private static String TEIDS = MyApplication.getMyApplication().getAppid() + "";
 
     /**
      * 获取OID
@@ -29,7 +28,7 @@ public class Remote {
      * @param OID      需要获取的OID值
      * @return
      */
-    public static String GetCountdown(String Nickname, JSONArray OID) {
+    public static String GetCountdown(String TEIDS,String Nickname, JSONArray OID) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -55,7 +54,7 @@ public class Remote {
      * @param GMT      时区
      * @return
      */
-    public static String SetGMT(String Nickname, String GMT) {
+    public static String SetGMT(String TEIDS,String Nickname, String GMT) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -80,7 +79,7 @@ public class Remote {
      * @param Nickname
      * @return
      */
-    public static String Getbasiclnfo(String Nickname) {
+    public static String Getbasiclnfo(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -106,7 +105,7 @@ public class Remote {
      *
      * @return
      */
-    public static String GetDeviceMessage(String Nickname) {
+    public static String GetDeviceMessage(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -133,7 +132,7 @@ public class Remote {
      *
      * @return
      */
-    public static String GetTemp(String Nickname) {
+    public static String GetTemp(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -159,7 +158,7 @@ public class Remote {
      *
      * @return
      */
-    public static String GetRCTempAlarm(String Nickname) {
+    public static String GetRCTempAlarm(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -189,7 +188,7 @@ public class Remote {
      * @param t_ckvalid_low 下限使能标志，1使能报警阀值，0禁能报警阀值（R/W）
      * @return
      */
-    public static String SetRCTempAlarm(String Nickname, int ckup, int cklow, int t_ckvalid_up, int t_ckvalid_low) {
+    public static String SetRCTempAlarm(String TEIDS,String Nickname, int ckup, int cklow, int t_ckvalid_up, int t_ckvalid_low) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -219,7 +218,7 @@ public class Remote {
      * @param objectId 数据ID
      * @return
      */
-    public static String SetStudy(String Nickname, String objectId) {
+    public static String SetStudy(String TEIDS,String Nickname, String objectId) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -245,7 +244,7 @@ public class Remote {
      * @param devicename 设备名字
      * @return
      */
-    public static String SetRenoteName(String Nickname, String devicename) {
+    public static String SetRenoteName(String TEIDS,String Nickname, String devicename) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -271,7 +270,7 @@ public class Remote {
      * @param objectId 数据ID
      * @return
      */
-    public static String SetCode(String Nickname, String code, int ispower, int zip, String objectId) {
+    public static String SetCode(String TEIDS,String Nickname, String code, int ispower, int zip, String objectId) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());

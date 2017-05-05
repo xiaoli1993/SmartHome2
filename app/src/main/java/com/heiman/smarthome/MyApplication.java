@@ -3,7 +3,6 @@ package com.heiman.smarthome;
  * Copyright ©深圳市海曼科技有限公司
  */
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,14 +11,13 @@ import android.os.Looper;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
-import com.heiman.smarthome.manage.DeviceManage;
-import com.heiman.smarthome.mode.XlinkDevice;
-import com.heiman.smarthome.smarthomesdk.utils.XlinkUtils;
-import com.heiman.smarthome.utils.Cockroach;
+import com.heiman.baselibrary.BaseApplication;
+import com.heiman.baselibrary.Constant;
+import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.utils.Cockroach;
+import com.heiman.utils.XlinkUtils;
 import com.jiongbull.jlog.Logger;
-import com.jiongbull.jlog.constant.LogLevel;
-import com.jiongbull.jlog.constant.LogSegment;
-import com.jiongbull.jlog.util.TimeUtils;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.LogInterceptor;
 import com.orhanobut.hawk.NoEncryption;
@@ -27,18 +25,15 @@ import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
 import org.litepal.tablemanager.Connector;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,19 +51,19 @@ import io.xlink.wifi.sdk.listener.XlinkNetListener;
  * @Time :  2017/3/17 15:03
  * @Description :
  */
-public class MyApplication extends Application implements XlinkNetListener {
-    private static Logger sLogger;
+public class MyApplication extends BaseApplication implements XlinkNetListener {
+
     private static MyApplication myApplication;
     // 全局登录的 appId 和auth
     public int appid;
     public String authKey;
+    public String AccessToken;
+    public String Refresh_token;
 
     @Override
     public void onCreate() {
         super.onCreate();
         myApplication = this;
-        initLogSDK();
-        getLogger().d("--------------------LogSDKok--------------------");
         initBuglySDK();
         getLogger().d("--------------------buglaySDKok--------------------");
         initQuit();
@@ -93,7 +88,6 @@ public class MyApplication extends Application implements XlinkNetListener {
         XlinkAgent.getInstance().addXlinkListener(this);
         //优先内网连接(谨慎使用,如果优先内网,则外网会在内网连接成功或者失败,或者超时后再进行连接,可能会比较慢)
         XlinkAgent.getInstance().setPreInnerServiceMode(true);
-        Hawk.init(this).build();
         Hawk.init(this)
                 .setEncryption(new NoEncryption())
                 .setLogInterceptor(new LogInterceptor() {
@@ -143,32 +137,9 @@ public class MyApplication extends Application implements XlinkNetListener {
         });
     }
 
-    /**
-     * 打印信息SDK
-     */
-    private void initLogSDK() {
-        List<String> logLevels = new ArrayList<>();
-        logLevels.add(LogLevel.ERROR);
-        logLevels.add(LogLevel.WTF);
 
-        sLogger = Logger.Builder.newBuilder(getApplicationContext(), "heimanLog")
-                /* 下面的属性都是默认值，你可以根据需求决定是否修改它们. */
-                .setDebug(true)
-                .setWriteToFile(true)
-                .setLogDir(getString(R.string.app_name))
-                .setLogPrefix(getString(R.string.app_name) + File.separator + "id")
-                .setLogSegment(LogSegment.TWELVE_HOURS)
-                .setLogLevelsForFile(logLevels)
-                .setZoneOffset(TimeUtils.ZoneOffset.P0800)
-                .setTimeFormat("yyyy-MM-dd HH:mm:ss")
-                .setPackagedLevel(0)
-                .setStorage(null)
-                .build();
-    }
 
-    public static Logger getLogger() {
-        return sLogger;
-    }
+
 
     /**
      * BUG搜集以及热更新
@@ -494,5 +465,21 @@ public class MyApplication extends Application implements XlinkNetListener {
 
     public void setAppid(int appid) {
         this.appid = appid;
+    }
+
+    public String getAccessToken() {
+        return AccessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        AccessToken = accessToken;
+    }
+
+    public String getRefresh_token() {
+        return Refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token) {
+        Refresh_token = refresh_token;
     }
 }

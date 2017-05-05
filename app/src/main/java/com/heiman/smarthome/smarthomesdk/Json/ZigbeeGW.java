@@ -2,12 +2,9 @@ package com.heiman.smarthome.smarthomesdk.Json;/**
  * Created by hp on 2016/12/19.
  */
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.heiman.smarthome.smarthomesdk.Constants;
 import com.heiman.smarthome.smarthomesdk.bean.SceneBean;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +20,7 @@ import org.json.JSONObject;
  * @Description :   网关通讯JOSON
  */
 public class ZigbeeGW {
-    private static String TEIDS = HttpManage.getInstance().getUserid() + "";
+//    private static String TEIDS = MyApplication.getMyApplication().getAppid() + "";
 
     public static int ZIGBEEONE = 1;
     public static int ZIGBEETWO = 2;
@@ -44,7 +41,7 @@ public class ZigbeeGW {
      * @param Nickname
      * @return
      */
-    public static String GetZigbeeGW(String Nickname) {
+    public static String GetZigbeeGW(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -65,7 +62,7 @@ public class ZigbeeGW {
             return null;
         }
     }
-    public static String GetMessage(String Nickname) {
+    public static String GetMessage(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -99,7 +96,7 @@ public class ZigbeeGW {
      * @param wf       周期
      * @return
      */
-    public static String SetSubDeviceSetActAlmEn(String Nickname,
+    public static String SetSubDeviceSetActAlmEn(String TEIDS,String Nickname,
                                                  int Index, boolean enable, int sh, int sm, int eh,
                                                  int em, int wf) {
         try {
@@ -135,7 +132,7 @@ public class ZigbeeGW {
      * @param SubDeviceName 子设备名字
      * @return
      */
-    public static String ChangeSubDeviceName(String Nickname,
+    public static String ChangeSubDeviceName(String TEIDS,String Nickname,
                                           int Index, String SubDeviceName) {
         try {
             JSONObject obj = new JSONObject();
@@ -163,7 +160,7 @@ public class ZigbeeGW {
      * @param Index    索引
      * @return
      */
-    public static String RemoveSensor(String Nickname,
+    public static String RemoveSensor(String TEIDS,String Nickname,
                                          int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -189,7 +186,7 @@ public class ZigbeeGW {
      * @param Nickname
      * @return
      */
-    public static String GetSubDevice(String Nickname) {
+    public static String GetSubDevice(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -218,7 +215,7 @@ public class ZigbeeGW {
      * @return
      */
 
-    public static String GetGwName(String Nickname) {
+    public static String GetGwName(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -246,7 +243,7 @@ public class ZigbeeGW {
      * @param isEnable 0表示退出加网 1表示加网
      * @return
      */
-    public static String SetAllowAddSubDevice(String Nickname, boolean isEnable) {
+    public static String SetAllowAddSubDevice(String TEIDS,String Nickname, boolean isEnable) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -272,7 +269,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String SetSubDeviceClear(String Nickname, int Index, String descript) {
+    public static String SetSubDeviceClear(String TEIDS,String Nickname, int Index, String descript) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -301,7 +298,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetAlarm(String Nickname, int Index) {
+    public static String GetAlarm(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -329,7 +326,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetActAlmEN(String Nickname,
+    public static String GetActAlmEN(String TEIDS,String Nickname,
                                      int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -358,7 +355,7 @@ public class ZigbeeGW {
      * @param devicename
      * @return
      */
-    public static String ChangeDeviceName(String Nickname, String devicename) {
+    public static String ChangeDeviceName(String TEIDS,String Nickname, String devicename) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -384,7 +381,7 @@ public class ZigbeeGW {
      * @param index
      * @return
      */
-    public static String GetTHP(String Nickname, int index) {
+    public static String GetTHP(String TEIDS,String Nickname, int index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -411,7 +408,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetTHPtemp(String Nickname, int Index) {
+    public static String GetTHPtemp(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -439,7 +436,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String THPhumidity(String Nickname, int Index) {
+    public static String THPhumidity(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -467,7 +464,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String THPpressure(String Nickname, int Index) {
+    public static String THPpressure(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -496,7 +493,7 @@ public class ZigbeeGW {
      * @param level    亮度值
      * @return
      */
-    public static String SetRGBlevel(String Nickname,
+    public static String SetRGBlevel(String TEIDS,String Nickname,
                                      int Index, int level) {
         try {
             JSONObject obj = new JSONObject();
@@ -525,7 +522,7 @@ public class ZigbeeGW {
      * @param onoff    开关
      * @return
      */
-    public static String SetRGBonoff(String Nickname, int Index, boolean onoff) {
+    public static String SetRGBonoff(String TEIDS,String Nickname, int Index, boolean onoff) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -553,7 +550,7 @@ public class ZigbeeGW {
      * @param ct
      * @return
      */
-    public static String SetRGBct(String Nickname, int Index,
+    public static String SetRGBct(String TEIDS,String Nickname, int Index,
                                   int ct) {
         try {
             JSONObject obj = new JSONObject();
@@ -584,7 +581,7 @@ public class ZigbeeGW {
      * @param B
      * @return
      */
-    public static String SetRGBColor(String Nickname,int Index, long R, long G, long B) {
+    public static String SetRGBColor(String TEIDS,String Nickname,int Index, long R, long G, long B) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -614,7 +611,7 @@ public class ZigbeeGW {
      * @param onoff
      * @return
      */
-    public static String SetRGBcoloronoff(String Nickname,
+    public static String SetRGBcoloronoff(String TEIDS,String Nickname,
                                           int Index, boolean onoff) {
         try {
             JSONObject obj = new JSONObject();
@@ -642,7 +639,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String RemoveRGBorPlug(String Nickname,
+    public static String RemoveRGBorPlug(String TEIDS,String Nickname,
                                   int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -672,7 +669,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String SetCountDownONOFF(String Nickname, int leftTime,
+    public static String SetCountDownONOFF(String TEIDS,String Nickname, int leftTime,
                                            boolean onoff, int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -704,7 +701,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String RemoveCountDown(String Nickname, int Index) {
+    public static String RemoveCountDown(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -732,7 +729,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String RemoveTimer(String Nickname, int i, int Index) {
+    public static String RemoveTimer(String TEIDS,String Nickname, int i, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -760,7 +757,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String SetEnableTimer(String Nickname, int i,
+    public static String SetEnableTimer(String TEIDS,String Nickname, int i,
                                         boolean isEnable, int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -787,7 +784,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetCountdown(String Nickname, int Index) {
+    public static String GetCountdown(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -815,7 +812,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetTimer(String Nickname, int Index) {
+    public static String GetTimer(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -837,7 +834,7 @@ public class ZigbeeGW {
     }
 
     public static String TimeTabletimeCmdsingletimeFlag1(
-            String Nickname, int month, int day, int hour, int min, boolean onoff,
+            String TEIDS,String Nickname, int month, int day, int hour, int min, boolean onoff,
             int timerId, int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -873,7 +870,7 @@ public class ZigbeeGW {
         }
     }
 
-    public static String TimeTabletimeCmdweektimeFlag1(String Nickname,
+    public static String TimeTabletimeCmdweektimeFlag1(String TEIDS,String Nickname,
                                                        int wkFlag, int hour, int min, boolean onoff, int timerId, int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -908,7 +905,7 @@ public class ZigbeeGW {
         }
     }
 
-    public static String TimeTabletimeCmdweektimeFlag2(String Nickname,
+    public static String TimeTabletimeCmdweektimeFlag2(String TEIDS,String Nickname,
                                                        int wkFlag, int hour, int min, int hour2, int min2, int timerId,
                                                        int Index) {
         try {
@@ -952,7 +949,7 @@ public class ZigbeeGW {
     }
 
     public static String TimeTabletimeCmdsingletimeFlag2(
-            String Nickname, int month, int day, int hour, int min, int month2,
+            String TEIDS,String Nickname, int month, int day, int hour, int min, int month2,
             int day2, int hour2, int min2, int timerId, int Index) {
         try {
             JSONObject obj = new JSONObject();
@@ -1002,7 +999,7 @@ public class ZigbeeGW {
      *
      * @return
      */
-    public static String SetMute(String Nickname) {
+    public static String SetMute(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1027,7 +1024,7 @@ public class ZigbeeGW {
      * @param Index
      * @return
      */
-    public static String GetisAlarmSmoke(String Nickname, int Index) {
+    public static String GetisAlarmSmoke(String TEIDS,String Nickname, int Index) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1056,7 +1053,7 @@ public class ZigbeeGW {
      * @SetSoundtime 设置报警时间
      * @Setlighttime 设置夜灯时间
      **/
-    public static String SetLightonoff(String Nickname, boolean onoff) {
+    public static String SetLightonoff(String TEIDS,String Nickname, boolean onoff) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1083,7 +1080,7 @@ public class ZigbeeGW {
      * @param level    网关亮度分为 0-100 调节亮度
      * @return
      */
-    public static String SetLightlevel(String Nickname, int level) {
+    public static String SetLightlevel(String TEIDS,String Nickname, int level) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1110,7 +1107,7 @@ public class ZigbeeGW {
      * @param sound    声音响度分为 0-160级调节
      * @return
      */
-    public static String SetSound(String Nickname, int sound) {
+    public static String SetSound(String TEIDS,String Nickname, int sound) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1136,7 +1133,7 @@ public class ZigbeeGW {
      * @param language 如中国发送"CN" 美国发送"US"等
      * @return
      */
-    public static String Setlanguage(String Nickname, String language) {
+    public static String Setlanguage(String TEIDS,String Nickname, String language) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1163,7 +1160,7 @@ public class ZigbeeGW {
      * @param time     最大不超过256
      * @return
      */
-    public static String SetSoundtime(String Nickname, int time) {
+    public static String SetSoundtime(String TEIDS,String Nickname, int time) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1190,7 +1187,7 @@ public class ZigbeeGW {
      * @param defence  0 一键撤防 1 一键布防 2 在家撤防 3 在家布防
      * @return
      */
-    public static String Setdefence(String Nickname, int defence) {
+    public static String Setdefence(String TEIDS,String Nickname, int defence) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1218,7 +1215,7 @@ public class ZigbeeGW {
      * @param enabledoor
      * @return
      */
-    public static String Setlighttime(String Nickname, int time, boolean enablepir, boolean enabledoor) {
+    public static String Setlighttime(String TEIDS,String Nickname, int time, boolean enablepir, boolean enabledoor) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1244,7 +1241,7 @@ public class ZigbeeGW {
     /**
      * 网关 GET 命令
      **/
-    public static String Get(String Nickname, int command, String commande) {
+    public static String Get(String TEIDS,String Nickname, int command, String commande) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1272,7 +1269,7 @@ public class ZigbeeGW {
     /**
      * Zigbee插座指令
      */
-    public static String SetPlug(String Nickname, int index,
+    public static String SetPlug(String TEIDS,String Nickname, int index,
                                  int relayorusb,
                                  boolean enable) {
         try {
@@ -1302,7 +1299,7 @@ public class ZigbeeGW {
      * @RemoveScene 删除场景
      */
 
-    public static String SetScene(String Nickname, SceneBean sceneBean) {
+    public static String SetScene(String TEIDS,String Nickname, SceneBean sceneBean) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1329,7 +1326,7 @@ public class ZigbeeGW {
      *
      * @return
      */
-    public static String GetScene(String Nickname) {
+    public static String GetScene(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1355,7 +1352,7 @@ public class ZigbeeGW {
      * @param enable  场景使能   0.1 使能定时器 2 一键执行
      * @return
      */
-    public static String EnableScene(String Nickname, int SceneId, int enable) {
+    public static String EnableScene(String TEIDS,String Nickname, int SceneId, int enable) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1379,7 +1376,7 @@ public class ZigbeeGW {
      * @param enable  是否删除场景
      * @return
      */
-    public static String RemoveScene(String Nickname, int SceneId, boolean enable) {
+    public static String RemoveScene(String TEIDS,String Nickname, int SceneId, boolean enable) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -1409,7 +1406,7 @@ public class ZigbeeGW {
      * @param enable 使能温湿度
      * @return
      */
-    public static String SetTHPAlarm(String Nickname, int index, int tckup, int tcklow, int hckup, int hcklow, int enable) {
+    public static String SetTHPAlarm(String TEIDS,String Nickname, int index, int tckup, int tcklow, int hckup, int hcklow, int enable) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());

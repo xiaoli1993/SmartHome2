@@ -9,7 +9,7 @@
         android:id="@+id/set_layout"
         android:layout_width="fill_parent"
         android:layout_height="20dp"
-        android:background="@color/colorAccent"></RelativeLayout>
+        android:background="@color/colorAccent" />
 
     <RelativeLayout
         android:id="@+id/theme_table"
@@ -39,7 +39,7 @@
             />
     </RelativeLayout>
 
-    <com.heiman.smarthome.widget.scrollview.CustomerScrollView
+    <com.heiman.widget.scrollview.CustomerScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="#ffffff"
@@ -67,7 +67,7 @@
 
             </RelativeLayout>
 
-            <com.heiman.smarthome.widget.edittext.ClearEditText
+            <com.heiman.widget.edittext.ClearEditText
                 android:id="@+id/et_Content"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
@@ -109,7 +109,7 @@
 
             </RelativeLayout>
 
-            <com.heiman.smarthome.widget.edittext.ClearEditText
+            <com.heiman.widget.edittext.ClearEditText
                 android:id="@+id/et_Contact"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -122,7 +122,7 @@
                 android:textColorHint="#ffdddddd"
                 android:textSize="@dimen/text_16sp" />
 
-            <com.heiman.smarthome.widget.button.FButton
+            <com.heiman.widget.button.FButton
                 android:id="@+id/btn_confirm"
                 android:layout_width="120dp"
                 android:layout_height="45dp"
@@ -136,5 +136,5 @@
                 fbutton:shadowEnabled="true" />
 
         </LinearLayout>
-    </com.heiman.smarthome.widget.scrollview.CustomerScrollView>
+    </com.heiman.widget.scrollview.CustomerScrollView>
 </LinearLayout>

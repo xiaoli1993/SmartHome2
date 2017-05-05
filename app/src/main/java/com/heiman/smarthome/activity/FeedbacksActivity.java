@@ -23,12 +23,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.heiman.smarthome.Constant;
+import com.heiman.baselibrary.Constant;
 import com.heiman.smarthome.R;
-import com.heiman.smarthome.utils.SmartHomeUtils;
-import com.heiman.smarthome.widget.button.FButton;
-import com.heiman.smarthome.widget.edittext.ClearEditText;
-import com.heiman.smarthome.widget.swipeback.CloseActivityClass;
+import com.heiman.smarthome.smarthomesdk.utils.SmartHomeUtils;
+import com.heiman.widget.button.FButton;
+import com.heiman.widget.edittext.ClearEditText;
+import com.heiman.widget.swipeback.CloseActivityClass;
 
 import java.io.IOException;
 

@@ -2,8 +2,10 @@ package com.heiman.smarthome.smarthomesdk.utils;/**
  * Copyright ©深圳市海曼科技有限公司.
  */
 
+import android.content.Context;
 import android.graphics.Bitmap;
-
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
 import com.heiman.smarthome.smarthomesdk.Constants;
 
@@ -138,6 +140,22 @@ public class Utils {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    public static String getSSid(Context context) {
+        WifiManager wm = (WifiManager) context.getSystemService(context.WIFI_SERVICE);
+        if (wm != null) {
+            WifiInfo wi = wm.getConnectionInfo();
+            if (wi != null) {
+                String s = wi.getSSID();
+                if (s.length() > 2 && s.charAt(0) == '"' && s.charAt(s.length() - 1) == '"') {
+                    return s.substring(1, s.length() - 1);
+                } else {
+                    return s;
+                }
+            }
+        }
+        return "";
     }
 
     /**

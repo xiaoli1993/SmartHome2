@@ -4,7 +4,6 @@ package com.heiman.smarthome.smarthomesdk.Json;/**
 
 
 import com.heiman.smarthome.smarthomesdk.Constants;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +21,6 @@ import org.json.JSONObject;
  */
 public class AirDetector {
 
-    private static String TEIDS = HttpManage.getInstance().getUserid() + "";
 
 
     public static class AIR_OID {
@@ -47,7 +45,7 @@ public class AirDetector {
      * @param OID      需要获取的OID值
      * @return
      */
-    public static String GetCountdown(String Nickname, JSONArray OID) {
+    public static String GetCountdown(String TEIDS,String Nickname, JSONArray OID) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -73,7 +71,7 @@ public class AirDetector {
      * @param GMT      时区
      * @return
      */
-    public static String SetGMT(String Nickname, String GMT) {
+    public static String SetGMT(String TEIDS,String Nickname, String GMT) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -98,7 +96,7 @@ public class AirDetector {
      * @param Nickname
      * @return
      */
-    public static String Getbasiclnfo(String Nickname) {
+    public static String Getbasiclnfo(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -124,7 +122,7 @@ public class AirDetector {
      *
      * @return
      */
-    public static String GetDeviceMessage(String Nickname) {
+    public static String GetDeviceMessage(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -152,7 +150,7 @@ public class AirDetector {
      * @param OID
      * @return
      */
-    public static String GetAirMessage(String Nickname, int OID) {
+    public static String GetAirMessage(String TEIDS,String Nickname, int OID) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -178,7 +176,7 @@ public class AirDetector {
      *
      * @return
      */
-    public static String GetTHPAlarm(String Nickname) {
+    public static String GetTHPAlarm(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -206,7 +204,7 @@ public class AirDetector {
      * @param devicename 设备名字
      * @return
      */
-    public static String SetAirName(String Nickname, String devicename) {
+    public static String SetAirName(String TEIDS,String Nickname, String devicename) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -230,7 +228,7 @@ public class AirDetector {
      * @param MESSAGE 数值
      * @return
      */
-    public static String SetAirMessage(String Nickname, int OID, int MESSAGE) {
+    public static String SetAirMessage(String TEIDS,String Nickname, int OID, int MESSAGE) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -255,7 +253,7 @@ public class AirDetector {
      * @param language 语言 CN表示中文显示，US表英文显示
      * @return
      */
-    public static String SetAirLanguage(String Nickname, String language) {
+    public static String SetAirLanguage(String TEIDS,String Nickname, String language) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -281,7 +279,7 @@ public class AirDetector {
      * @param alarm TVOC报警设置 0为不报警 1为轻度污染才报警 2 为重度污染才报警
      * @return
      */
-    public static String SetAirTOVC(String Nickname, int alarm) {
+    public static String SetAirTOVC(String TEIDS,String Nickname, int alarm) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -309,7 +307,7 @@ public class AirDetector {
      * @param ckvalid 使能标志，1使能报警阀值，0禁能报警阀值（R/W）
      * @return
      */
-    public static String SetAirPM25(String Nickname, int ckup, int ckvalid) {
+    public static String SetAirPM25(String TEIDS,String Nickname, int ckup, int ckvalid) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -338,7 +336,7 @@ public class AirDetector {
      * @param ckvalid 使能标志，1使能报警阀值，0禁能报警阀值（R/W）
      * @return
      */
-    public static String SetAirCHCO(String Nickname, int ckup, int ckvalid) {
+    public static String SetAirCHCO(String TEIDS,String Nickname, int ckup, int ckvalid) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -369,7 +367,7 @@ public class AirDetector {
      * @param t_ckvalid_low 下限使能标志，1使能报警阀值，0禁能报警阀值（R/W）
      * @return
      */
-    public static String SetAirTEMP(String Nickname, int ckup, int cklow, int t_ckvalid_up, int t_ckvalid_low) {
+    public static String SetAirTEMP(String TEIDS,String Nickname, int ckup, int cklow, int t_ckvalid_up, int t_ckvalid_low) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -402,7 +400,7 @@ public class AirDetector {
      * @param h_ckvalid_low 下限使能标志，1使能报警阀值，0禁能报警阀值（R/W）
      * @return
      */
-    public static String SetAirHUMP(String Nickname, int ckup, int cklow, int h_ckvalid_up, int h_ckvalid_low) {
+    public static String SetAirHUMP(String TEIDS,String Nickname, int ckup, int cklow, int h_ckvalid_up, int h_ckvalid_low) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());

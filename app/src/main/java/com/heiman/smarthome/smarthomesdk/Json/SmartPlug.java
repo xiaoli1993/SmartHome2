@@ -3,7 +3,6 @@ package com.heiman.smarthome.smarthomesdk.Json;
 import com.google.gson.Gson;
 import com.heiman.smarthome.smarthomesdk.Constants;
 import com.heiman.smarthome.smarthomesdk.bean.TimerBean;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +17,7 @@ import org.json.JSONObject;
  * @Description :   插座JOSON
  */
 public class SmartPlug {
-    private static String TEIDS = HttpManage.getInstance().getUserid() + "";
+//    private static String TEIDS = MyApplication.getMyApplication().getAppid() + "";
 
     public static int mgetSN() {
         return (int) ((Math.random() * 9 + 1) * 100000);
@@ -32,7 +31,7 @@ public class SmartPlug {
      * @param isopen   是否开启
      * @return
      */
-    public static String SetPowerSwitch(String Nickname, int isopen) {
+    public static String SetPowerSwitch(String TEIDS,String Nickname, int isopen) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -60,7 +59,7 @@ public class SmartPlug {
      * @param onoff    开关
      * @return
      */
-    public static String SetPowerCountDown(String Nickname, int leftTime, boolean onoff) {
+    public static String SetPowerCountDown(String TEIDS,String Nickname, int leftTime, boolean onoff) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -90,7 +89,7 @@ public class SmartPlug {
      * @param Nickname 用户名
      * @return
      */
-    public static String RemoveCountDown(String Nickname) {
+    public static String RemoveCountDown(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -119,7 +118,7 @@ public class SmartPlug {
      * @param usbonoff 开关
      * @return
      */
-    public static String SetUSBCountDown(String Nickname, int leftTime, boolean usbonoff) {
+    public static String SetUSBCountDown(String TEIDS,String Nickname, int leftTime, boolean usbonoff) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -153,7 +152,7 @@ public class SmartPlug {
      * @param isEnable 是否使能
      * @return
      */
-    public static String SetTimerEnable(String Nickname, int timerID, boolean isEnable) {
+    public static String SetTimerEnable(String TEIDS,String Nickname, int timerID, boolean isEnable) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -178,7 +177,7 @@ public class SmartPlug {
      * @param Nickname 用户名
      * @return
      */
-    public static String GetCountdown(String Nickname) {
+    public static String GetCountdown(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -205,7 +204,7 @@ public class SmartPlug {
      * @param Nickname 用户名
      * @return
      */
-    public static String GetTimer(String Nickname) {
+    public static String GetTimer(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -233,7 +232,7 @@ public class SmartPlug {
      * @param timerBean 定时器数据
      * @return
      */
-    public static String SetTimer(String Nickname, int timerId, TimerBean timerBean) {
+    public static String SetTimer(String TEIDS,String Nickname, int timerId, TimerBean timerBean) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -262,7 +261,7 @@ public class SmartPlug {
      * @param timerID        第几个定时器
      * @return
      */
-    public static String RemoveTimer(String Nickname, int timerID) {
+    public static String RemoveTimer(String TEIDS,String Nickname, int timerID) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -286,7 +285,7 @@ public class SmartPlug {
      * @param Nickname
      * @return
      */
-    public static String GetSmartPlug(String Nickname) {
+    public static String GetSmartPlug(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -316,7 +315,7 @@ public class SmartPlug {
      * @param Nickname
      * @return
      */
-    public static String GetSmartPlugSwitch(String Nickname) {
+    public static String GetSmartPlugSwitch(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", mgetSN());
@@ -344,7 +343,7 @@ public class SmartPlug {
      * @param Nickname
      * @return
      */
-    public static String GetSmartPlugPVC(String Nickname) {
+    public static String GetSmartPlugPVC(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", mgetSN());
@@ -374,7 +373,7 @@ public class SmartPlug {
      * @param Nickname
      * @return
      */
-    public static String GetSmartPlugElectricity(String Nickname) {
+    public static String GetSmartPlugElectricity(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -401,7 +400,7 @@ public class SmartPlug {
      * @param Nickname
      * @return
      */
-    public static String SetCalibration(String Nickname) {
+    public static String SetCalibration(String TEIDS,String Nickname) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -429,7 +428,7 @@ public class SmartPlug {
      * @param devicename 插座名称
      * @return
      */
-    public static String ChangeDeviceName(String Nickname, String devicename) {
+    public static String ChangeDeviceName(String TEIDS,String Nickname, String devicename) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());
@@ -456,7 +455,7 @@ public class SmartPlug {
      * @param onoff    开关
      * @return
      */
-    public static String SetUSBSwitch(String Nickname, boolean onoff) {
+    public static String SetUSBSwitch(String TEIDS,String Nickname, boolean onoff) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("SN", SmartPlug.mgetSN());

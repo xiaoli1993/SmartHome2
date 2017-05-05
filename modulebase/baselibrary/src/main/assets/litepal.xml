@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+
+    <dbname value="heiman" />
+    <version value="1" />
+    <list>
+        <mapping class="com.heiman.baselibrary.mode.XlinkDevice" />
+        <mapping class="com.heiman.baselibrary.mode.SubDevice" />
+        <mapping class="com.heiman.baselibrary.mode.DataDevice" />
+    </list>
+
+</litepal>

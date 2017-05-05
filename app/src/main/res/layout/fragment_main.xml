@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <Button
+        android:id="@+id/buttonStartG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPW"
+        android:text="guidance" />
+
+    <Button
+        android:id="@+id/buttonStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonStartS"
+        android:layout_below="@+id/buttonStartS"
+        android:layout_marginTop="20dp"
+        android:text="stop" />
+
+    <Button
+        android:id="@+id/buttonStartS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextKey"
+        android:layout_below="@+id/editTextKey"
+        android:layout_marginTop="14dp"
+        android:text="start sniffer" />
+
+    <EditText
+        android:id="@+id/editTextPW"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonStartG"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textPassword">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextKey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextPW"
+        android:layout_below="@+id/editTextPW"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textViewMsg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonStop"
+        android:layout_below="@+id/buttonStop"
+        android:layout_marginTop="26dp"
+        android:text="TextView" />
+
+
+</RelativeLayout>

@@ -5,13 +5,12 @@ package com.heiman.smarthome.smarthomesdk.http;/**
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
+import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.smarthomesdk.utils.Utils;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -27,6 +26,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+//import com.heiman.smarthome.MyApplication;
 
 /**
  * Copyright ©深圳市海曼科技有限公司
@@ -106,7 +107,7 @@ public class HttpManage {
 
 
     // 获取用户订阅的设备列表
-    private final String getsubDevicesUrl = "/v2/user/{user_id}/subscribe/devices?version=";
+    private final String getsubDevicesUrl = host + "/v2/user/{user_id}/subscribe/devices?version=0";
     // 注册GCM
     private final String gcmregisterUrl = host + "/v2/user/{user_id}/gcm_register";
     // 注销GCM
@@ -138,33 +139,6 @@ public class HttpManage {
     // 数据表S查询
     private final String datastUrl = host + "/v2/datas/";
 
-    private String AccessToken;
-    private int userid;
-    private String refreshtoken;
-
-    public String getRefreshtoken() {
-        return refreshtoken;
-    }
-
-    public void setRefreshtoken(String refreshtoken) {
-        this.refreshtoken = refreshtoken;
-    }
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
-
-    public String getAccessToken() {
-        return AccessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        AccessToken = accessToken;
-    }
 
     /**
      * code : 5031001
@@ -177,25 +151,6 @@ public class HttpManage {
         return instance;
     }
 
-    /**
-     * 初始化，必须最先调用.
-     *
-     * @param AccessToken 云智易平台上的access_token
-     * @param userid      云智易平台上的appid
-     */
-    public static void init(String AccessToken, int userid, String refreshtoken) {
-        Log.i("HeimanSDK", "instance.access_token:" + AccessToken + "userid:" + userid);
-        if (instance == null) {
-            instance = new HttpManage();
-            instance.AccessToken = AccessToken;
-            instance.userid = userid;
-            instance.refreshtoken = refreshtoken;
-        } else {
-            getInstance().AccessToken = AccessToken;
-            getInstance().userid = userid;
-            getInstance().refreshtoken = refreshtoken;
-        }
-    }
 
     /**
      * 全局的http代理
@@ -308,11 +263,11 @@ public class HttpManage {
      * @param callback
      */
     public void initThirPwd(Context context, String password, final ResultCallback callback) {
-        String url = initthirdpwdUrl.replace("{user_id}", getUserid() + "");
+        String url = initthirdpwdUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("password", password);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url, headers, params, callback);
 
     }
@@ -333,13 +288,13 @@ public class HttpManage {
      * @param callback
      */
     public void onBindthird(Context context, String open_id, String access_token, String source, final ResultCallback callback) {
-        String url = bindingthirdUrl.replace("{user_id}", getUserid() + "");
+        String url = bindingthirdUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("open_id", open_id);
         params.put("access_token", access_token);
         params.put("source", source);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url, headers, params, callback);
 
     }
@@ -348,9 +303,9 @@ public class HttpManage {
      * 11.获取用户详细信息
      */
     public void getUserInfo(Context context, final ResultCallback callback) {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         get(context, url, headers, callback);
     }
 
@@ -363,7 +318,7 @@ public class HttpManage {
         params.put("old_password", oldPasswd);
         params.put("new_password", newPasswd);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, resetPasswordUrl, headers, params, callback);
     }
 
@@ -400,11 +355,11 @@ public class HttpManage {
      * .修改用户信息
      */
     public void modifyUser(Context context, String nickname, final ResultCallback callback) {
-        String url = modifyUserUrl.replace("{user_id}", getUserid() + "");
+        String url = modifyUserUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("nickname", nickname);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
 
@@ -416,12 +371,12 @@ public class HttpManage {
      * @param callback     重设监听器
      */
     public void onGCM(Context context, String appid, String device_token, final ResultCallback callback) {
-        String url = gcmregisterUrl.replace("{user_id}", getUserid() + "");
+        String url = gcmregisterUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("app_id", appid);
         params.put("device_token", device_token);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
 
@@ -432,11 +387,11 @@ public class HttpManage {
      * @param callback 重设监听器
      */
     public void onDeleteGCM(Context context, String appid, final ResultCallback callback) {
-        String url = gcmunregisterUrl.replace("{user_id}", getUserid() + "");
+        String url = gcmunregisterUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("app_id", appid);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
 
@@ -447,11 +402,11 @@ public class HttpManage {
      * @param callback 重设监听器
      */
     public void onDeleteAPN(Context context, String appid, final ResultCallback callback) {
-        String url = apnunregisterUrl.replace("{user_id}", getUserid() + "");
+        String url = apnunregisterUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("app_id", appid);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
 
@@ -461,7 +416,7 @@ public class HttpManage {
      */
     public void getShareList(Context context, final ResultCallback callback) {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         get(context, shareListUrl, headers, callback);
     }
 
@@ -497,7 +452,7 @@ public class HttpManage {
         params.put("mode", mode);
         params.put("device_id", deviceId + "");
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, shareDeviceUrl, headers, params, callback);
     }
 
@@ -511,7 +466,7 @@ public class HttpManage {
         Map<String, String> params = new HashMap<String, String>();
         params.put("invite_code", inviteCode);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, denyShareUrl, headers, params, callback);
     }
 
@@ -524,7 +479,7 @@ public class HttpManage {
         Map<String, String> params = new HashMap<String, String>();
         params.put("invite_code", inviteCode);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, acceptShareUrl, headers, params, callback);
     }
 
@@ -534,7 +489,7 @@ public class HttpManage {
      */
     public void DeleteSharedevice(Context context, String invite_code, final ResultCallback callback) {
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         delete(context, deletesharedeviceUrl + "/" + invite_code, headers, callback);
 
     }
@@ -548,7 +503,7 @@ public class HttpManage {
         Map<String, String> params = new HashMap<String, String>();
         params.put("invite_code", invite_code);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, cancelsharedeviceUrl, headers, params, callback);
 
     }
@@ -575,7 +530,7 @@ public class HttpManage {
         params.put("expire", "7200");
         params.put("mode", mode);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, sharedeviceUrl, headers, params, callback);
     }
 
@@ -583,12 +538,12 @@ public class HttpManage {
      * 订阅设备
      */
     public void subscribe(Context context, String productId, int deviceId, final ResultCallback callback) {
-        String url = subscribeUrl.replace("{user_id}", getUserid() + "");
+        String url = subscribeUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("product_id", productId);
         params.put("device_id", deviceId + "");
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url, headers, params, callback);
     }
 
@@ -598,24 +553,24 @@ public class HttpManage {
      * @param deviceId 设备ID
      */
     public void unsubscribe(Context context, int deviceId, final ResultCallback callback) {
-        String url = unsubscribeUrl.replace("{user_id}", getUserid() + "");
+        String url = unsubscribeUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put("device_id", deviceId + "");
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url, headers, params, callback);
     }
 
+
     /**
      * 获取用户订阅的设备列表
-     *
      */
     public void getSubscribe(Context context, final ResultCallback callback) {
-        String url = getsubDevicesUrl.replace("{user_id}", getUserid() + "");
-        Map<String, String> params = new HashMap<String, String>();
+        String url = getsubDevicesUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
-        post(context, url, headers, params, callback);
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
+        MyApplication.getLogger().v(url + "\n" + MyApplication.getMyApplication().getAccessToken());
+        get(context, url, headers, callback);
     }
 
     /**
@@ -627,11 +582,11 @@ public class HttpManage {
      * @param value 扩展属性value值
      */
     public void SetProperty(Context context, String key, String value, final ResultCallback callback) {
-        String url = Property.replace("{user_id}", getUserid() + "");
+        String url = Property.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put(key, value);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url, headers, params, callback);
     }
 
@@ -639,10 +594,10 @@ public class HttpManage {
      * .获取用户扩展属性
      */
     public void GetOneProperty(Context context, String key, final ResultCallback callback) {
-        String url = Property.replace("{user_id}", getUserid() + "");
+        String url = Property.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url + key, headers, params, callback);
     }
 
@@ -654,7 +609,7 @@ public class HttpManage {
      * @param data 消息ID
      */
     public void SetMessageRead(Context context, String data, final ResultCallback callback) {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         StringEntity entity = null;
         try {
             entity = new StringEntity(data.toString(), "UTF-8");
@@ -662,7 +617,7 @@ public class HttpManage {
             e.printStackTrace();
         }
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         // params.put("device_id", device_id);
         post2(context, url + "/message_read", entity, callback, headers);
 
@@ -686,7 +641,7 @@ public class HttpManage {
             e.printStackTrace();
         }
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post2(context, host + "/v2/product/" + product_id + "/device/"
                 + deviceid + "/subdevices", entity, callback, headers);
 
@@ -701,7 +656,7 @@ public class HttpManage {
         String url = getDeviceUrl.replace("{device_id}", deviceId + "");
         url = url.replace("{product_id}", productIdd);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         get(context, url, headers, callback);
     }
 
@@ -719,7 +674,7 @@ public class HttpManage {
         Map<String, String> params = new HashMap<String, String>();
         params.put("name", Devicename);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
 
@@ -729,7 +684,7 @@ public class HttpManage {
     public void getSubscribeList(Context context, int uid, int versionid, final ResultCallback callback) {
         String url = String.format(subscribeListUrl, uid);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         get(context, url, headers, callback);
     }
 
@@ -739,7 +694,7 @@ public class HttpManage {
     public void deleteShare(Context context, String inviteCode, final ResultCallback callback) {
         String url = deleteShareUrl.replace("{invite_code}", inviteCode);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         delete(context, url, headers, callback);
     }
 
@@ -751,7 +706,7 @@ public class HttpManage {
      */
     public void OnGetCodeChage(Context context, String user, final ResultCallback callback) {
 
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         String Urlphoenoremail;
         if (Utils.isEmial(user)) {
@@ -762,7 +717,7 @@ public class HttpManage {
             Urlphoenoremail = "/phone/sms_verifycode";
         }
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url + Urlphoenoremail, params, headers, callback);
     }
 
@@ -776,7 +731,7 @@ public class HttpManage {
      * @param callback
      */
     public void OnChagePhoneorEmail(Context context, String user, String verifycode, String password, final ResultCallback callback) {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         String Urlphoenoremail;
         if (Utils.isEmial(user)) {
@@ -789,7 +744,7 @@ public class HttpManage {
         params.put("verifycode", verifycode);
         params.put("password", password);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, url + Urlphoenoremail, params, headers, callback);
     }
 
@@ -799,9 +754,9 @@ public class HttpManage {
      */
     public void onRefresh(Context context, final ResultCallback callback) {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("refresh_token", getRefreshtoken());
+        params.put("refresh_token", MyApplication.getMyApplication().getRefresh_token());
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, refreshUrl, params, headers, callback);
     }
 
@@ -816,7 +771,7 @@ public class HttpManage {
         params.put("product_id", product_id);
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, newestversionUrl, params, headers, callback);
     }
 
@@ -831,7 +786,7 @@ public class HttpManage {
         params.put("product_id", product_id);
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post(context, updeviceUrl, params, headers, callback);
     }
 
@@ -844,7 +799,7 @@ public class HttpManage {
         byte[] datas = Utils.getBitmapByte(bitmap);
         ByteArrayEntity entity = new ByteArrayEntity(datas);
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post2(context, headportraitUrl, entity, callback, headers);
     }
 
@@ -862,7 +817,7 @@ public class HttpManage {
                               String limit, JSONArray device,
                               String create_date,
                               final ResultCallback callback) throws JSONException {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         RequestParams params = new RequestParams();
         params.put("offset", offset);
         params.put("limit", limit);
@@ -881,15 +836,11 @@ public class HttpManage {
             from.put("$in", device);
             params.put("query", query);
         }
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(params.toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
-        post2(context, url + "/messages", entity, callback, headers);
+        MyApplication.getLogger().d(url + "/messages" + "\n" + params.getStringData());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
+        post2(context, url + "/messages", params.getJsonEntity(), callback, headers);
     }
 
     /**
@@ -906,7 +857,7 @@ public class HttpManage {
                             String limit, JSONArray device,
                             boolean is_pushhs,
                             final ResultCallback callback) throws JSONException {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         RequestParams params = new RequestParams();
         params.put("offset", offset);
         params.put("limit", limit);
@@ -927,15 +878,10 @@ public class HttpManage {
             from.put("$in", device);
             params.put("query", query);
         }
-        StringEntity entity = null;
-        try {
-            entity = new StringEntity(params.toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
-        post2(context, url + "/messages", entity, callback, headers);
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
+        post2(context, url + "/messages", params.getJsonEntity(), callback, headers);
 
     }
 
@@ -948,7 +894,7 @@ public class HttpManage {
      */
     public void GetMessages(Context context, RequestParams params,
                             final ResultCallback callback) throws JSONException {
-        String url = getUserInfoUrl.replace("{user_id}", getUserid() + "");
+        String url = getUserInfoUrl.replace("{user_id}", MyApplication.getMyApplication().getAppid() + "");
         StringEntity entity = null;
         try {
             entity = new StringEntity(params.toString(), "UTF-8");
@@ -956,7 +902,7 @@ public class HttpManage {
             e.printStackTrace();
         }
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put("Access-Token", getAccessToken());
+        headers.put("Access-Token", MyApplication.getMyApplication().getAccessToken());
         post2(context, url + "/messages", entity, callback, headers);
 
     }
