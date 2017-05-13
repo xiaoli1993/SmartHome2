@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/left_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <include
+        android:id="@+id/ll1"
+        layout="@layout/nav_header_main_home" />
+
+    <include
+        android:id="@+id/bottom_view"
+        layout="@layout/left_view_bottom_layout"
+        android:background="@color/main_bg" />
+
+    <LinearLayout
+        android:id="@+id/ll_gw"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/ll1"
+        android:background="@drawable/selector_text"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:src="@drawable/main_right_gw" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/spinner_gw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableRight="@drawable/main_right_gw" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/ll_gw"
+        android:background="@color/grid_dr" />
+
+    <ListView
+        android:id="@+id/left_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_view"
+        android:layout_below="@id/view"
+        android:divider="@color/grid_dr"
+        android:dividerHeight="1px"
+        android:scrollbars="none"
+        android:textColor="#ffffff" />
+</RelativeLayout>

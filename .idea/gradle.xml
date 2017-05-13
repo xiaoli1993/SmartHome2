@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$/modulebase/baselibrary" />
             <option value="$PROJECT_DIR$/modulebase/datacom" />
             <option value="$PROJECT_DIR$/modulebase/dbsqlite" />
-            <option value="$PROJECT_DIR$/modulebase/network" />
             <option value="$PROJECT_DIR$/modulebase/thirdparty" />
             <option value="$PROJECT_DIR$/modulebase/utils" />
             <option value="$PROJECT_DIR$/modulebase/widget" />

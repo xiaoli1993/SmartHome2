@@ -1,7 +1,7 @@
 package com.heiman.baselibrary;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,29 +10,28 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.aitangba.swipeback.SwipeBackActivity;
-import com.heiman.utils.XlinkUtils;
-import com.heiman.widget.spinner.NiceSpinner;
+import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.jaeger.library.StatusBarUtil;
-import com.ldoublem.loadingviewlib.LVCircularCD;
+import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
 /**
  * @Author : 肖力
  * @Time :  2017/5/5 11:03
- * @Description :
+ * @Description :基础类
  * @Modify record :
  */
 
-public abstract class BaseActivity extends SwipeBackActivity implements View.OnClickListener {
+public abstract class BaseActivity extends SwipeBackActivity {
 
     private FrameLayout titleBar;
     private ImageView titleBarReturn;
     private TextView titleBarTitle;
-    private NiceSpinner titleBarTitleSpinner;
+    private MaterialSpinner titleBarTitleSpinner;
     private TextView subTitleBarTitle;
     private ImageView titleBarMore;
     private ImageView titleBarRedpoint;
@@ -42,18 +41,14 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
     // 内容区域的布局
     private View contentView;
     private LinearLayout ly_content;
-
-    //错误等待
-    private LVCircularCD loadBarLayout;
-
-    private RelativeLayout resetLayout;
-    private TextView resetTextView;
-    private TextView resetButton;
-
-    private RelativeLayout emptyLayout;
-    private ImageView imgEmpty;
-    private TextView tvEmtyHit;
-
+    private KProgressHUD hud = null;
+    private static final int ACTIVITY_CREATE = 1;
+    private static final int ACTIVITY_START = 2;
+    private static final int ACTIVITY_RESUME = 3;
+    private static final int ACTIVITY_PAUSE = 4;
+    private static final int ACTIVITY_STOP = 5;
+    private static final int ACTIVITY_DESTROY = 6;
+    public int activityState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +66,39 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
         titleBar = (FrameLayout) findViewById(R.id.title_bar);
         titleBarReturn = (ImageView) findViewById(R.id.title_bar_return);
         titleBarTitle = (TextView) findViewById(R.id.title_bar_title);
-        titleBarTitleSpinner = (NiceSpinner) findViewById(R.id.title_bar_title_spinner);
+        titleBarTitleSpinner = (MaterialSpinner) findViewById(R.id.title_bar_title_spinner);
         subTitleBarTitle = (TextView) findViewById(R.id.sub_title_bar_title);
         titleBarMore = (ImageView) findViewById(R.id.title_bar_more);
         titleBarRedpoint = (ImageView) findViewById(R.id.title_bar_redpoint);
         titleBarShare = (ImageView) findViewById(R.id.title_bar_share);
         ly_content = (LinearLayout) findViewById(R.id.ly_content);
-        resetLayout = (RelativeLayout) findViewById(R.id.resetLayout);
-        resetTextView = (TextView) findViewById(R.id.reset_textView);
-        resetButton = (TextView) findViewById(R.id.reset_button);
-        emptyLayout = (RelativeLayout) findViewById(R.id.emptyLayout);
-        imgEmpty = (ImageView) findViewById(R.id.imgEmpty);
-        tvEmtyHit = (TextView) findViewById(R.id.tvEmtyHit);
-        titleBarReturn.setOnClickListener(this);
-        titleBarMore.setOnClickListener(this);
-        titleBarShare.setOnClickListener(this);
+        titleBarReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickedTopLeftButtton(v);
+            }
+        });
+        titleBarMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickTopRightText(v);
+            }
+        });
+        titleBarShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickTopShareImg(v);
+            }
+        });
+    }
+
+    /**
+     * 跳转 Activity
+     *
+     * @param cls
+     */
+    public void starActivity(Class<?> cls) {
+        startActivity(new Intent(this, cls));
     }
 
     /***
@@ -220,38 +233,12 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
     protected void showHeadView(boolean isShow) {
         titleBar.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
+
     //显示头部
     protected void showContenView(boolean isShow) {
         contentLayout.setVisibility(isShow ? View.VISIBLE : View.GONE);
     }
-    //显示等待
-    protected void showLoadView(boolean isShow) {
-        loadBarLayout.setVisibility(isShow ? View.VISIBLE : View.GONE);
-        loadBarLayout.setViewColor(Color.rgb(0, 255, 0));
-        loadBarLayout.startAnim();
-    }
 
-    //显示网络错误重置
-    protected void showResetView(boolean isShow) {
-        resetLayout.setVisibility(isShow ? View.VISIBLE : View.GONE);
-    }
-
-    //显示空数据
-    protected void showEmptyView(boolean isShow) {
-        emptyLayout.setVisibility(isShow ? View.VISIBLE : View.GONE);
-    }
-
-    @Override
-    public final void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.title_bar_return) {
-            onClickedTopLeftButtton(v);
-        } else if (i == R.id.title_bar_more) {
-            onClickTopRightText(v);
-        } else if (i == R.id.title_bar_share) {
-            onClickTopShareImg(v);
-        }
-    }
 
     //返回按键
     protected void onClickedTopLeftButtton(View view) {
@@ -266,6 +253,129 @@ public abstract class BaseActivity extends SwipeBackActivity implements View.OnC
     //分享按键
     protected void onClickTopShareImg(View view) {
 
+    }
+
+    /**
+     * 显示HUM等待
+     */
+    public void showHUDProgress() {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE).show();
+        }
+    }
+
+    public void showHUDProgress(String message) {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setLabel(message)
+                    .setCancellable(true).show();
+        }
+    }
+
+    public void showHUDProgress(String message, String DetailsLabel) {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setLabel(message)
+                    .setDetailsLabel(DetailsLabel).show();
+        }
+    }
+
+    public void showHUDProgress(View imageView, String message) {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setCustomView(imageView)
+                    .setLabel(message).show();
+        }
+    }
+
+    public void showHUDProgress(int color, String message) {
+        hud = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setWindowColor(color)
+                .setLabel(message)
+                .setAnimationSpeed(2).show();
+    }
+
+    public void showHUDProgressUpdata(String message) {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                    .setLabel(message).show();
+        }
+    }
+
+    public void showHUDProgressUpdata(String message, String DetailsLabel) {
+        if (hud == null) {
+            hud = KProgressHUD.create(this)
+                    .setStyle(KProgressHUD.Style.PIE_DETERMINATE)
+                    .setLabel(message)
+                    .setDetailsLabel(DetailsLabel).show();
+        }
+    }
+
+    public void setHUMMAXProgressUpdata(int max) {
+        if (hud != null) {
+            hud.setMaxProgress(max);
+        }
+    }
+
+    public void setHUMProgressUpdata(int currentProgress) {
+        if (hud != null) {
+            hud.setProgress(currentProgress);
+        }
+    }
+
+    public void setHUMLabel(String label) {
+        if (hud != null) {
+            hud.setLabel(label);
+        }
+    }
+
+    public void dismissHUMProgress() {
+        if (hud != null) {
+            hud.dismiss();
+            hud = null;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        activityState = ACTIVITY_START;
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityState = ACTIVITY_RESUME;
+        BaseApplication.getMyApplication().setCurrentActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityState = ACTIVITY_PAUSE;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        activityState = ACTIVITY_STOP;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        activityState = ACTIVITY_DESTROY;
     }
 }
 

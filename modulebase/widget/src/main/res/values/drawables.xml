@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="wither">#FFFFFF</drawable>
+    <drawable name="transparentb">#FFFFFFFF</drawable>
+    <drawable name="default_pressed">#10000000</drawable>
+</resources>

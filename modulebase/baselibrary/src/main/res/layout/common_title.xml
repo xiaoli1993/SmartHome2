@@ -12,25 +12,6 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" />
 
-    <com.ldoublem.loadingviewlib.LVCircularCD
-        android:id="@+id/load_bar_layout"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:visibility="gone" />
 
-    <include
-        android:id="@+id/errorLayout"
-        layout="@layout/reset_error_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/emptyLayout"
-        layout="@layout/view_empty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
 
 </LinearLayout>

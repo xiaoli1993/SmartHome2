@@ -20,6 +20,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
+
     // lint配置
     lintOptions {
         //移除lint检查的error
@@ -39,10 +41,10 @@ dependencies {
     compile rootProject.ext.dependencies.design
     compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'
     apt 'com.github.mzule.activityrouter:compiler:1.1.7'
+    compile 'com.loopj.android:android-async-http:1.4.6'
     testCompile 'junit:junit:4.12'
     compile project(':datacom')
     compile project(':dbsqlite')
-    compile project(':network')
     compile project(':thirdparty')
     compile project(':utils')
     compile project(':widget')

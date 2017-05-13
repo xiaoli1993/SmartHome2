@@ -1,79 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.heiman.smarthome.activity.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <FrameLayout
-        android:id="@+id/mViewPager"
+    <include
+        layout="@layout/app_bar_main_home"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#888" />
+    <RelativeLayout
+        android:id="@+id/rl_left"
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#fff">
 
-    <com.heiman.widget.bottomnavigation.AlphaTabsIndicator
-        android:id="@+id/alphaIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:orientation="horizontal">
+        <include
+            layout="@layout/main_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
-        <com.heiman.widget.bottomnavigation.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/bottom_home_normal"
-            app:tabIconSelected="@mipmap/bottom_home_pressed"
-            app:tabText="@string/Home"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-
-        <com.heiman.widget.bottomnavigation.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/bottom_scene_normal"
-            app:tabIconSelected="@mipmap/bottom_scene_pressed"
-            app:tabText="@string/Scene"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-
-        <com.heiman.widget.bottomnavigation.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/bottom_automation_normal"
-            app:tabIconSelected="@mipmap/bottom_automation_pressed"
-            app:tabText="@string/Automation"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-
-
-        <com.heiman.widget.bottomnavigation.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/bottom_room_normal"
-            app:tabIconSelected="@mipmap/bottom_room_pressed"
-            app:tabText="@string/Room"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-    </com.heiman.widget.bottomnavigation.AlphaTabsIndicator>
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

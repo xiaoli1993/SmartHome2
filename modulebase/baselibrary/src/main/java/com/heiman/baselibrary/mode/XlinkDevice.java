@@ -1,12 +1,15 @@
-package com.heiman.baselibrary.mode;/**
- * Created by hp on 2016/8/18.
- */
+package com.heiman.baselibrary.mode;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import io.xlink.wifi.sdk.XDevice;
+import io.xlink.wifi.sdk.XlinkAgent;
 
 
 /**
@@ -27,11 +30,130 @@ public class XlinkDevice extends DataSupport {
     private String hardwareVer;// 硬件版本
     private int deviceType;// 设备类型
     private String deviceName;// 设备名字
-    private int deviceState;// 设备状态
+    private int deviceState;// 是否在线  设备状态 0不在线  1局域网在线 2云端在线
     private boolean isupdevice;// 是否升级
+    private int userId;//用户ID
     private int deviceId;//设备ID
     private String productId;//设备PID
+    private int bindFlag;// 是否绑定 1表示绑定 0表示未绑定
+    private int authFlag;// 1表示分享设备，0表示未分享设备
+    private boolean isHome;// 是否家庭设备
+    private int homeID;// 是否家庭设备
+    private boolean isShared;// 是否是分享权限,默认是可以控制
+    public String ownerName;// 分享设备的拥有者
+    public String roomName;// 房间名
     private String xDevice;//xDevice
+    private String aesKey;//加密秘钥
+    private String active_date; // 激活时间
+    private String last_login; //最近上线时间
+    private String authorize_code;// 认证码
+    private String active_code;//激活码
+
+    public String getActive_date() {
+        return active_date;
+    }
+
+    public void setActive_date(String active_date) {
+        this.active_date = active_date;
+    }
+
+    public String getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(String last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getAuthorize_code() {
+        return authorize_code;
+    }
+
+    public void setAuthorize_code(String authorize_code) {
+        this.authorize_code = authorize_code;
+    }
+
+    public String getActive_code() {
+        return active_code;
+    }
+
+    public void setActive_code(String active_code) {
+        this.active_code = active_code;
+    }
+
+    public String getAesKey() {
+        return aesKey;
+    }
+
+    public void setAesKey(String aesKey) {
+        this.aesKey = aesKey;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getBindFlag() {
+        return bindFlag;
+    }
+
+    public void setBindFlag(int bindFlag) {
+        this.bindFlag = bindFlag;
+    }
+
+    public int getAuthFlag() {
+        return authFlag;
+    }
+
+    public void setAuthFlag(int authFlag) {
+        this.authFlag = authFlag;
+    }
+
+    public boolean isHome() {
+        return isHome;
+    }
+
+    public void setHome(boolean home) {
+        isHome = home;
+    }
+
+    public int getHomeID() {
+        return homeID;
+    }
+
+    public void setHomeID(int homeID) {
+        this.homeID = homeID;
+    }
+
+    public boolean isShared() {
+        return isShared;
+    }
+
+    public void setShared(boolean shared) {
+        isShared = shared;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
 
     public long getId() {
         return id;
@@ -153,8 +275,9 @@ public class XlinkDevice extends DataSupport {
         this.productId = productId;
     }
 
-    public String getxDevice() {
-        return xDevice;
+    public XDevice getxDevice() throws JSONException {
+        JSONObject jsonObject = new JSONObject(xDevice);
+        return XlinkAgent.JsonToDevice(jsonObject);
     }
 
     public void setxDevice(String xDevice) {

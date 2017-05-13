@@ -198,4 +198,11 @@
         <item name="android:minHeight">20dip</item>
         <item name="android:maxHeight">20dip</item>
     </style>
+
+    <string name="GoHome">Home</string>
+
+    <style name="CustomPopWindowStyle">
+        <item name="android:windowEnterAnimation">@anim/popwindow_anim_in</item>
+        <item name="android:windowExitAnimation">@anim/popwindow_anim_out</item>
+    </style>
 </resources>

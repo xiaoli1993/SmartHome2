@@ -29,5 +29,6 @@ dependencies {
     compile rootProject.ext.dependencies.appcompatV7
     compile rootProject.ext.dependencies.design
     compile 'org.litepal.android:core:1.5.1'
+    compile 'com.orhanobut:hawk:2.0.1'
     testCompile 'junit:junit:4.12'
 }

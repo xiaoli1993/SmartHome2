@@ -2,64 +2,242 @@ package com.heiman.smarthome.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.heiman.baselibrary.Constant;
+import com.heiman.baselibrary.http.HttpManage;
+import com.heiman.baselibrary.http.XlinkUtils;
+import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
-import com.heiman.smarthome.smarthomesdk.http.HttpManage;
-import com.heiman.smarthome.smarthomesdk.utils.SmartHomeUtils;
+import com.heiman.smarthome.adapter.MainLeftAdapter;
+import com.heiman.smarthome.fragment.AutomationFragment;
+import com.heiman.smarthome.fragment.HomeFragment;
+import com.heiman.smarthome.fragment.RoomFragment;
+import com.heiman.smarthome.fragment.SceneFragment;
+import com.heiman.smarthome.modle.LeftMain;
 import com.heiman.widget.bottomnavigation.AlphaTabsIndicator;
-import com.orhanobut.hawk.Hawk;
+import com.heiman.widget.bottomnavigation.OnTabChangedListner;
+import com.jaeger.library.StatusBarUtil;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import io.xlink.wifi.sdk.XlinkAgent;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     private AlphaTabsIndicator alphaTabsIndicator;
+    private DrawerLayout drawerLayout;
+    private RelativeLayout rlLeft;
+    private FrameLayout mFrmeLayout;
+    private ListView leftListview;
+    private ImageView imageUserAvatar;
+    private TextView tvNikeName;
+    private TextView tvDeviceNumber;
+    private LinearLayout llRoomTemp;
+    private ImageView imageRoomTemp;
+    private TextView tvRoomTemp;
+    private LinearLayout llOutdoorTemp;
+    private ImageView imageOutdoorTemp;
+    private TextView tvOutdoorTemp;
+    private MaterialSpinner spinnerGw;
+
+    private Fragment mTab01;
+    private Fragment mTab02;
+    private Fragment mTab03;
+    private Fragment mTab04;
+    private MainLeftAdapter adapter;
+    private List<LeftMain> leftMainList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        doLogin();
+        if (!XlinkAgent.getInstance().isConnectedLocal()) {
+            XlinkAgent.getInstance().start();
+        }
+        if (!XlinkAgent.getInstance().isConnectedOuterNet()) {
+            XlinkAgent.getInstance().login(MyApplication.getMyApplication().getAppid(), MyApplication.getMyApplication().getAuthKey());
+        }
+        initWidget();
         initDevice();
-        alphaTabsIndicator = (AlphaTabsIndicator) findViewById(R.id.alphaIndicator);
-//        alphaTabsIndicator.setViewPager(mViewPger);
+        setSelect(0);
+        initData();
+        initEven();
+    }
 
+    private void initEven() {
+        adapter = new MainLeftAdapter(this, leftMainList);
+        leftListview.setAdapter(adapter);
+        leftListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+//                        Bundle paramBundle = new Bundle();
+//                        paramBundle.putString(Constant.DEVICE_MAC, "abc123456");
+//                        paramBundle.putBoolean(Constant.IS_SUB, false);
+//                        startActivityForName("com.heiman.gateway.GwActivity", paramBundle);
+//                        startActivity(new Intent(MainActivity.this, DeviceListActivity.class));
+                        break;
+                    case 1:
+//                        startActivity(new Intent(MainActivity.this, ShareDeviceActivity.class));
+                        break;
+                    case 2:
+//                        feedbackeAgent.startDefaultThreadActivity();
+                        break;
+                    case 3:
+
+                        break;
+                    case 4:
+//                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        break;
+                }
+            }
+        });
+    }
+
+    private void initData() {
+        leftMainList = new ArrayList<LeftMain>();
+
+        leftMainList.add(new LeftMain(R.drawable.main_right_news, "消息", 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_home, "家庭管理", 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_share, "设备分享", 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_pod, "产品手册", 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_settings, "设置", 0));
+
+    }
+
+    public void openDrawers() {
+        drawerLayout.openDrawer(rlLeft);
+    }
+
+    private void initWidget() {
+        alphaTabsIndicator = (AlphaTabsIndicator) findViewById(R.id.alphaIndicator);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        rlLeft = (RelativeLayout) findViewById(R.id.rl_left);
+        mFrmeLayout = (FrameLayout) findViewById(R.id.mFrmeLayout);
+        leftListview = (ListView) findViewById(R.id.left_listview);
+        imageUserAvatar = (ImageView) findViewById(R.id.image_user_avatar);
+        tvNikeName = (TextView) findViewById(R.id.tv_NikeName);
+        tvDeviceNumber = (TextView) findViewById(R.id.tv_device_number);
+        llRoomTemp = (LinearLayout) findViewById(R.id.ll_room_temp);
+        imageRoomTemp = (ImageView) findViewById(R.id.image_room_temp);
+        tvRoomTemp = (TextView) findViewById(R.id.tv_room_temp);
+        llOutdoorTemp = (LinearLayout) findViewById(R.id.ll_outdoor_temp);
+        imageOutdoorTemp = (ImageView) findViewById(R.id.image_outdoor_temp);
+        tvOutdoorTemp = (TextView) findViewById(R.id.tv_outdoor_temp);
+        spinnerGw = (MaterialSpinner) findViewById(R.id.spinner_gw);
+
+        StatusBarUtil.setColorForDrawerLayout(this, drawerLayout, getResources().getColor(R.color.white));
         alphaTabsIndicator.getTabView(0).showNumber(6);
         alphaTabsIndicator.getTabView(1).showNumber(888);
         alphaTabsIndicator.getTabView(2).showNumber(88);
         alphaTabsIndicator.getTabView(3).showPoint();
-    }
-
-    private void doLogin() {
-        HttpManage.getInstance().doLogin(MyApplication.getMyApplication(), "554674787@qq.com", "xiaoli.", new HttpManage.ResultCallback<Map<String, String>>() {
+        alphaTabsIndicator.setOnTabChangedListner(new OnTabChangedListner() {
             @Override
-            public void onError(Header[] headers, HttpManage.Error error) {
-
-            }
-
-            @Override
-            public void onSuccess(int code, Map<String, String> response) {
-                String authKey = (String) response.get("authorize");
-                String accessToken = (String) response.get("access_token");
-                int appid = Integer.parseInt(response.get("user_id"));
-                Hawk.put("appId", appid);
-                Hawk.put("authKey", authKey);
-//                SharedPreferencesUtil.keepShared("appId", appid);
-//                SharedPreferencesUtil.keepShared("authKey", authKey);
-                MyApplication.getMyApplication().setAccessToken(accessToken);
-                MyApplication.getMyApplication().setAppid(appid);
-                MyApplication.getMyApplication().setAuthKey(authKey);
-                startActivity(new Intent(MainActivity.this, MainHomeActivity.class));
+            public void onTabSelected(int tabNum) {
+                MyApplication.getLogger().i("点击第" + tabNum + "个");
+                setSelect(tabNum);
             }
         });
+        List<String> strings = new ArrayList<String>();
+        List<XlinkDevice> getDevices = DeviceManage.getInstance().getDevices();
+        for (int i = 0; i < getDevices.size(); i++) {
+            if (getDevices.get(i).getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY) {
+                strings.add(getDevices.get(i).getDeviceName());
+            }
+        }
+        spinnerGw.setTextColor(getResources().getColor(R.color.class_V));
+        spinnerGw.setItems(strings);
+        spinnerGw.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                XlinkUtils.shortTips(MyApplication.getMyApplication(), "点击：" + item, getResources().getColor(R.color.class_J), getResources().getColor(R.color.white), 0, false);
+            }
+        });
+
+    }
+
+    private void setSelect(int i) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        hideFragment(transaction);
+        switch (i) {
+            case 0:
+                if (mTab01 == null) {
+                    mTab01 = new HomeFragment();
+                    transaction.add(R.id.mFrmeLayout, mTab01);
+                } else {
+                    transaction.show(mTab01);
+                }
+                break;
+            case 1:
+                if (mTab02 == null) {
+                    mTab02 = new SceneFragment();
+                    transaction.add(R.id.mFrmeLayout, mTab02);
+                } else {
+                    transaction.show(mTab02);
+
+                }
+                break;
+            case 2:
+                if (mTab03 == null) {
+                    mTab03 = new AutomationFragment();
+                    transaction.add(R.id.mFrmeLayout, mTab03);
+                } else {
+                    transaction.show(mTab03);
+                }
+                break;
+            case 3:
+                if (mTab04 == null) {
+                    mTab04 = new RoomFragment();
+                    transaction.add(R.id.mFrmeLayout, mTab04);
+                } else {
+                    transaction.show(mTab04);
+                }
+                break;
+        }
+
+        transaction.commit();
+    }
+
+    private void hideFragment(FragmentTransaction transaction) {
+        if (mTab01 != null) {
+            transaction.hide(mTab01);
+        }
+        if (mTab02 != null) {
+            transaction.hide(mTab02);
+        }
+        if (mTab03 != null) {
+            transaction.hide(mTab03);
+        }
+        if (mTab04 != null) {
+            transaction.hide(mTab04);
+        }
     }
 
     private void initDevice() {
@@ -71,13 +249,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(int code, String response) {
+                MyApplication.getLogger().json(response);
                 try {
                     JSONObject object = new JSONObject(response);
                     JSONArray list = object.getJSONArray("list");
                     int iSize = list.length();
                     for (int i = 0; i < iSize; i++) {
                         JSONObject jsonObj = list.getJSONObject(i);
-                        SmartHomeUtils.subscribeToDevice(jsonObj);
+                        SmartHomeUtils.subscribeToDevice(jsonObj.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -86,30 +265,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    int MAX_LIMIT = 0;
-    int MAX_Refresh = 100;
-    public boolean isRefreshMessage = true;
-
-    private void getMessage(final String CreateDate) {
+    /**
+     * 通过包名跳转
+     *
+     * @param activityName
+     */
+    public void startActivityForName(String activityName, Bundle paramBundle) {
         try {
-            HttpManage.getInstance().GetMessagesID(MyApplication.getMyApplication(), MAX_LIMIT + "", MAX_Refresh + "", SmartHomeUtils.getdeviceid(), CreateDate, new HttpManage.ResultCallback<String>() {
-                @Override
-                public void onError(Header[] headers, HttpManage.Error error) {
-                    MyApplication.getLogger().e("获取消息失败:" + error.getMsg() + "\t" + error.getCode());
-                }
+            Class clazz = Class.forName(activityName);
+            Intent intent = new Intent(this, clazz);
+            if (paramBundle != null)
+                intent.putExtras(paramBundle);
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-                @Override
-                public void onSuccess(int code, String response) {
-                    MyApplication.getLogger().json(response);
-//                    Gson gaon = new Gson();
-//                    Messages messages = gaon.fromJson(response, Messages.class);
-//                    if (messages.getCount()==0){
-//
-//                    }
-                }
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public void startActivityForName(String activityName) {
+        try {
+            Class clazz = Class.forName(activityName);
+            Intent intent = new Intent(this, clazz);
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

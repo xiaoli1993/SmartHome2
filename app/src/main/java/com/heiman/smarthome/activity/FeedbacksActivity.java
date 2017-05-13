@@ -23,9 +23,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.heiman.baselibrary.BaseActivity;
 import com.heiman.baselibrary.Constant;
 import com.heiman.smarthome.R;
-import com.heiman.smarthome.smarthomesdk.utils.SmartHomeUtils;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.widget.button.FButton;
 import com.heiman.widget.edittext.ClearEditText;
 import com.heiman.widget.swipeback.CloseActivityClass;
@@ -41,7 +42,7 @@ import java.io.IOException;
  * @Time :  2017/1/16 08:52
  * @Description :
  */
-public class FeedbacksActivity extends SwipeBackActivity implements View.OnClickListener {
+public class FeedbacksActivity extends BaseActivity implements View.OnClickListener {
 
     private RelativeLayout setLayout;
     private RelativeLayout themeTable;
@@ -127,8 +128,6 @@ public class FeedbacksActivity extends SwipeBackActivity implements View.OnClick
 //        tintManager.setStatusBarTintEnabled(true);
 //        tintManager.setStatusBarTintResource(ThemeUtils.changeTheme(currentTheme));
         // 设置从做到右滑出
-        setEdgeFromLeft();
-        setOverrideExitAniamtion(false);
     }
 
     private void setTranslucentStatus(boolean on) {

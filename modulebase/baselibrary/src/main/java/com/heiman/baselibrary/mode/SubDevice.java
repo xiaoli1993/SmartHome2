@@ -1,6 +1,4 @@
-package com.heiman.baselibrary.mode;/**
- * Created by hp on 2016/8/18.
- */
+package com.heiman.baselibrary.mode;
 
 import org.litepal.crud.DataSupport;
 
@@ -24,19 +22,30 @@ public class SubDevice extends DataSupport {
     }
 
     private boolean onlineStatus;//在线状态
-    private boolean relayOnoff; //开关状态
-    private boolean usbOnoff;//USB开关状态
-    private boolean rgbOnoff;//RGB开关状态
+    private int relayOnoff; //开关状态
+    private int usbOnoff;//USB开关状态
+    private int rgbOnoff;//RGB开关状态
     private int rgblevel;//亮度
+    private int R;//RGB 顏色R
+    private int G;//RGB 顏色G
+    private int B;//RGB 顏色B
     private int deviceOnoff;//设备状态
     private int deviceType;//设备类型
     private int index;//设备索引
     private String deviceName;//设备名称
     private String deviceState;//设备状态
     private String zigbeeMac;//设备mac地址
+    private String deviceMac;//网关mac
     private String temp;//温度
     private String humidity;//湿度
+    private String tCkUp;//高温度阀值
+    private String tCkLow;//低温度阀值
+    private String hCkUp;//高湿度阀值
+    private String hCkLow;//低湿度阀值
+    private int thpCkOnoff;//温湿度报警阀值使能标志
     private int pressure;//压力
+    private int batteryPercent;//剩余电量
+    private boolean batteryAlm;//低电量报警标志
     private String TOVC;
     private String PM25;
     private String CHCO;
@@ -50,6 +59,23 @@ public class SubDevice extends DataSupport {
     private int wf;
     private boolean enable;
     private Date lastDate;
+    private int userId;//用户ID
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getDeviceMac() {
+        return deviceMac;
+    }
+
+    public void setDeviceMac(String deviceMac) {
+        this.deviceMac = deviceMac;
+    }
 
     public long getId() {
         return id;
@@ -87,27 +113,27 @@ public class SubDevice extends DataSupport {
         this.onlineStatus = onlineStatus;
     }
 
-    public boolean isRelayOnoff() {
+    public int getRelayOnoff() {
         return relayOnoff;
     }
 
-    public void setRelayOnoff(boolean relayOnoff) {
+    public void setRelayOnoff(int relayOnoff) {
         this.relayOnoff = relayOnoff;
     }
 
-    public boolean isUsbOnoff() {
+    public int getUsbOnoff() {
         return usbOnoff;
     }
 
-    public void setUsbOnoff(boolean usbOnoff) {
+    public void setUsbOnoff(int usbOnoff) {
         this.usbOnoff = usbOnoff;
     }
 
-    public boolean isRgbOnoff() {
+    public int getRgbOnoff() {
         return rgbOnoff;
     }
 
-    public void setRgbOnoff(boolean rgbOnoff) {
+    public void setRgbOnoff(int rgbOnoff) {
         this.rgbOnoff = rgbOnoff;
     }
 
@@ -117,6 +143,30 @@ public class SubDevice extends DataSupport {
 
     public void setRgblevel(int rgblevel) {
         this.rgblevel = rgblevel;
+    }
+
+    public int getR() {
+        return R;
+    }
+
+    public void setR(int r) {
+        R = r;
+    }
+
+    public int getG() {
+        return G;
+    }
+
+    public void setG(int g) {
+        G = g;
+    }
+
+    public int getB() {
+        return B;
+    }
+
+    public void setB(int b) {
+        B = b;
     }
 
     public int getDeviceOnoff() {
@@ -183,12 +233,68 @@ public class SubDevice extends DataSupport {
         this.humidity = humidity;
     }
 
+    public String gettCkUp() {
+        return tCkUp;
+    }
+
+    public void settCkUp(String tCkUp) {
+        this.tCkUp = tCkUp;
+    }
+
+    public String gettCkLow() {
+        return tCkLow;
+    }
+
+    public void settCkLow(String tCkLow) {
+        this.tCkLow = tCkLow;
+    }
+
+    public String gethCkUp() {
+        return hCkUp;
+    }
+
+    public void sethCkUp(String hCkUp) {
+        this.hCkUp = hCkUp;
+    }
+
+    public String gethCkLow() {
+        return hCkLow;
+    }
+
+    public void sethCkLow(String hCkLow) {
+        this.hCkLow = hCkLow;
+    }
+
+    public int getThpCkOnoff() {
+        return thpCkOnoff;
+    }
+
+    public void setThpCkOnoff(int thpCkOnoff) {
+        this.thpCkOnoff = thpCkOnoff;
+    }
+
     public int getPressure() {
         return pressure;
     }
 
     public void setPressure(int pressure) {
         this.pressure = pressure;
+    }
+
+    public int getBatteryPercent() {
+        return batteryPercent;
+    }
+
+    public void setBatteryPercent(int batteryPercent) {
+        this.batteryPercent = batteryPercent;
+    }
+
+    public boolean isBatteryAlm() {
+        return batteryAlm;
+    }
+
+    public void setBatteryAlm(boolean batteryAlm) {
+        this.batteryAlm = batteryAlm;
     }
 
     public String getTOVC() {
@@ -271,20 +377,20 @@ public class SubDevice extends DataSupport {
         this.sm = sm;
     }
 
-    public boolean isEnable() {
-        return enable;
-    }
-
-    public void setEnable(boolean enable) {
-        this.enable = enable;
-    }
-
     public int getWf() {
         return wf;
     }
 
     public void setWf(int wf) {
         this.wf = wf;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 
     public Date getLastDate() {

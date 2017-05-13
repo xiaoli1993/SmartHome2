@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_transparent_white" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.heiman.widget.scrollview.NestedParent
+            android:id="@+id/nested_scroll_parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="9.6dp"
+                        android:text="@string/MyScene" />
+                </LinearLayout>
+
+                <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                    android:id="@+id/recycler_scene"
+                    android:layout_width="match_parent"
+                    android:layout_height="291dp"
+                    android:background="@color/white"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="9.6dp"
+                        android:text="@string/MyDevice" />
+                </LinearLayout>
+
+                <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                    android:id="@+id/recycler_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    app:frv_dividerHorizontal="@color/grid_dr"
+                    app:frv_dividerHorizontalHeight="1px"
+                    app:frv_dividerVertical="@color/grid_dr"
+                    app:frv_dividerVerticalHeight="1px"
+                    app:frv_itemViewBothSidesMargin="1px"
+                    app:frv_layoutManager="grid"
+                    app:frv_layoutManagerOrientation="vertical"
+                    app:frv_spanCount="3" />
+            </LinearLayout>
+        </com.heiman.widget.scrollview.NestedParent>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

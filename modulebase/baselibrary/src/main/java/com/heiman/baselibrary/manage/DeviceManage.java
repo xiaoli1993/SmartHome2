@@ -6,14 +6,11 @@ package com.heiman.baselibrary.manage;
 import com.heiman.baselibrary.mode.XlinkDevice;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
-import org.litepal.crud.callback.FindMultiCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.xlink.wifi.sdk.XDevice;
 import io.xlink.wifi.sdk.XlinkAgent;
 
 /**
@@ -43,21 +40,32 @@ public class DeviceManage {
      */
     public synchronized List<XlinkDevice> getDevices() {
         listDev.clear();
-        DataSupport.findAllAsync(XlinkDevice.class).listen(new FindMultiCallback() {
-            @Override
-            public <T> void onFinish(List<T> t) {
-                listDev = (List<XlinkDevice>) t;
-                for (XlinkDevice device : listDev) {
-                    try {
-                        JSONObject devicejson = new JSONObject(device.getxDevice());
-                        XDevice xdevice = XlinkAgent.JsonToDevice(devicejson);
-                        XlinkAgent.getInstance().initDevice(xdevice);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+//        DataSupport.findAllAsync(XlinkDevice.class).listen(new FindMultiCallback() {
+//            @Override
+//            public <T> void onFinish(List<T> t) {
+//                listDev = (List<XlinkDevice>) t;
+//                for (XlinkDevice device : listDev) {
+////                    MyApplication.getLogger().json(device.getxDevice());
+//                    try {
+//                        JSONObject devicejson = new JSONObject(device.getxDevice());
+//                        XDevice xdevice = XlinkAgent.JsonToDevice(devicejson);
+//                        XlinkAgent.getInstance().initDevice(xdevice);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+
+        listDev = DataSupport.findAll(XlinkDevice.class);
+        for (XlinkDevice device : listDev) {
+//                    MyApplication.getLogger().json(device.getxDevice());
+            try {
+                XlinkAgent.getInstance().initDevice(device.getxDevice());
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
+        }
         return listDev;
     }
 
@@ -89,11 +97,17 @@ public class DeviceManage {
      * @param dev
      */
     public void addDevice(XlinkDevice dev) {
-        List<XlinkDevice> Xldevice = DataSupport.where("deviceMac = ?", dev.getDeviceMac()).find(XlinkDevice.class);
-        if (Xldevice != null && !Xldevice.isEmpty()) {
+        List<XlinkDevice> Xldevice = null;
+        try {
+            Xldevice = DataSupport.where("deviceMac = ?", dev.getDeviceMac()).find(XlinkDevice.class);
+
+        } catch (Exception e) {
             dev.save();
-        } else {
+        }
+        if (Xldevice != null && !Xldevice.isEmpty()) {
             dev.updateAll("deviceMac = ?", dev.getDeviceMac());
+        } else {
+            dev.save();
         }
     }
 

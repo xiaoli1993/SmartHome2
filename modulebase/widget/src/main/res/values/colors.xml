@@ -148,7 +148,17 @@
 
     <color name="mask_color">#88888888</color>
     <color name="check_bg">#f2f2f2</color>
+    <color name="login_dr">#454545</color>
+    <color name="grid_dr">#e4efef</color>
     <color name="un_press_color">#9C27B0</color>
     <color name="blue">#0000FF</color>
     <color name="light_gray">#fff5f5f5</color>
+
+    <color name="color_999999">#999999</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_c61a04">#c61a04</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_d81e06">#d81e06</color>
+    <color name="color_b0b8b2">#b0b8b2</color>
 </resources>

@@ -23,6 +23,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    useLibrary 'org.apache.http.legacy'
+
     buildTypes {
         release {
             minifyEnabled false

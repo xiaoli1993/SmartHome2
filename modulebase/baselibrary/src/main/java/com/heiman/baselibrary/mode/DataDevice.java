@@ -1,6 +1,4 @@
-package com.heiman.baselibrary.mode;/**
- * Created by hp on 2016/8/18.
- */
+package com.heiman.baselibrary.mode;
 
 import org.litepal.crud.DataSupport;
 
@@ -13,8 +11,8 @@ import java.util.Date;
  */
 public class DataDevice extends DataSupport {
     private long id;
-    private Date date;//添加时间
-    private XlinkDevice wifiDevice;
+    private Date date;// 添加时间
+    private XlinkDevice xlinkDevice;
     private SubDevice subDevice;
     private String userid;// 用户ID
     private String userName;// 用户昵称
@@ -22,32 +20,90 @@ public class DataDevice extends DataSupport {
     private String deviceMac;// 设备mac
     private String subMac;// 子设备mac
     private String subID;//  子设备ID
+    private String subType;// 子设备类型
     private String actionName;// 动作名称
-    private String year;//年
-    private String month;//月
-    private String day;//日
-    private String HH;//时
-    private String mm;//分
-    private String ss;//秒
-    private String bodyLocKey;//数据内容
-    private String temp;//温度
-    private String humidity;//湿度
-    private String TOVC;
-    private String PM25;
-    private String CHCO;
-    private String AQI;
-    private String PM10;
-    private String GAS;
+    private String year;// 年
+    private String month;// 月
+    private String day;// 日
+    private String HH;// 时
+    private String mm;// 分
+    private String ss;// 秒
+    private String bodyLocKey;// 数据内容
+    private String temp;// 温度
+    private String humidity;// 湿度
+    private String electricity;// 电量
+    private String TOVC;// TVOC
+    private String PM25;// PM2.5
+    private String CHCO;// 甲醛
+    private String AQI;// 空气质量
+    private String PM10;// PM10
+    private String GAS;// 气体
 
 
-    private String messageID;//消息ID
-    private String messageType;//消息类型
-    private String notifyType;//通知类型
-    private String createDate;//创建时间
-    private String isPush;//是否已读
-    private String isRead;//是否推送
-    private String alertName;//触发告警规则名称
-    private String alertValue;//触发告警的数据端点值
+    private String messageID;// 消息ID
+    private int messageType;// 消息类型
+    private int notifyType;// 通知类型
+    private String createDate;// 创建时间
+    private boolean isRead;// 是否已读
+    private boolean isPush;// 是否推送
+    private String alertName;// 触发告警规则名称
+    private String alertValue;// 触发告警的数据端点值
+
+    public String getElectricity() {
+        return electricity;
+    }
+
+    public void setElectricity(String electricity) {
+        this.electricity = electricity;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
+
+    public int getNotifyType() {
+        return notifyType;
+    }
+
+    public void setNotifyType(int notifyType) {
+        this.notifyType = notifyType;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
+
+    public boolean isPush() {
+        return isPush;
+    }
+
+    public void setPush(boolean push) {
+        isPush = push;
+    }
 
     public long getId() {
         return id;
@@ -65,12 +121,12 @@ public class DataDevice extends DataSupport {
         this.date = date;
     }
 
-    public XlinkDevice getWifiDevice() {
-        return wifiDevice;
+    public XlinkDevice getXlinkDevice() {
+        return xlinkDevice;
     }
 
-    public void setWifiDevice(XlinkDevice wifiDevice) {
-        this.wifiDevice = wifiDevice;
+    public void setXlinkDevice(XlinkDevice xlinkDevice) {
+        this.xlinkDevice = xlinkDevice;
     }
 
     public SubDevice getSubDevice() {
@@ -265,45 +321,6 @@ public class DataDevice extends DataSupport {
         this.messageID = messageID;
     }
 
-    public String getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(String messageType) {
-        this.messageType = messageType;
-    }
-
-    public String getNotifyType() {
-        return notifyType;
-    }
-
-    public void setNotifyType(String notifyType) {
-        this.notifyType = notifyType;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
-    }
-
-    public String getIsPush() {
-        return isPush;
-    }
-
-    public void setIsPush(String isPush) {
-        this.isPush = isPush;
-    }
-
-    public String getIsRead() {
-        return isRead;
-    }
-
-    public void setIsRead(String isRead) {
-        this.isRead = isRead;
-    }
 
     public String getAlertName() {
         return alertName;
