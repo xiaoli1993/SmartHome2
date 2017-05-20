@@ -91,7 +91,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
         XlinkAgent.setCMServer(Constant.IO_URL, Constant.IO_PORT);//正式平台地址
         XlinkAgent.getInstance().addXlinkListener(this);
         //优先内网连接(谨慎使用,如果优先内网,则外网会在内网连接成功或者失败,或者超时后再进行连接,可能会比较慢)
-        XlinkAgent.getInstance().setPreInnerServiceMode(true);
+//        XlinkAgent.getInstance().setPreInnerServiceMode(true);
         boolean isappid = Hawk.contains(Constant.APPID);
         if (isappid) {
             appid = Hawk.get(Constant.APPID);

@@ -20,6 +20,7 @@ import com.heiman.baselibrary.Json.HeimanCom;
 import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.mode.AESKey;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.gateway.modle.SmartLinkS;
@@ -29,6 +30,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.longthink.api.LTLink;
 
 import org.apache.http.Header;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -44,7 +46,9 @@ import java.util.TimerTask;
 
 import io.xlink.wifi.sdk.XDevice;
 import io.xlink.wifi.sdk.XlinkAgent;
+import io.xlink.wifi.sdk.XlinkCode;
 import io.xlink.wifi.sdk.listener.ScanDeviceListener;
+import io.xlink.wifi.sdk.listener.SetDeviceAccessKeyListener;
 
 /**
  * @Author : 肖力
@@ -58,6 +62,8 @@ public class LTLinkActivity extends GwBaseActivity {
 
     private TextView tvSsid;
     private Button btnPeizhi;
+    private Button btnecho;
+    private Button btnechos;
     private boolean isStart = true;
     private RecvThread mReceiver;
     private boolean isAdd = false;
@@ -71,6 +77,7 @@ public class LTLinkActivity extends GwBaseActivity {
     private ImageView titleBarShare;
     private Timer timethread = new Timer();
     private SmartLinkS smartLink;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +95,16 @@ public class LTLinkActivity extends GwBaseActivity {
         titleBarMore = (ImageView) findViewById(R.id.title_bar_more);
         titleBarRedpoint = (ImageView) findViewById(R.id.title_bar_redpoint);
         titleBarShare = (ImageView) findViewById(R.id.title_bar_share);
-
         titleBarTitle.setText(getResources().getString(R.string.Home));
         titleBarTitle.setTextColor(getResources().getColor(R.color.class_V));
 
         tvSsid = (TextView) findViewById(R.id.tv_ssid);
         btnPeizhi = (Button) findViewById(R.id.btn_peizhi);
+        btnecho = (Button) findViewById(R.id.btn_eco);
+        btnechos = (Button) findViewById(R.id.btn_ecos);
+        btnecho.setOnClickListener(this);
+        btnechos.setOnClickListener(this);
+
         tvSsid.setText(SmartHomeUtils.getSSid(LTLinkActivity.this) + "");
         btnPeizhi.setOnClickListener(this);
         getPwdSmartlink().setText("heiman2016");
@@ -176,7 +187,7 @@ public class LTLinkActivity extends GwBaseActivity {
         XlinkAgent.getInstance().scanDeviceByProductId(Constant.ZIGBEE_H1GW_NEW_PRODUCTID, new ScanDeviceListener() {
             @Override
             public void onGotDeviceByScan(XDevice xDevice) {
-                BaseApplication.getLogger().d("no!smartLink" + xDevice.getMacAddress() + "\t" + smartLink.getDevice().getMacAddress());
+                BaseApplication.getLogger().d("no!smartLink" + xDevice.getMacAddress() + "\tkey:" + xDevice.getAccessKey() + "\t" + smartLink.getDevice().getMacAddress());
                 if (xDevice.getMacAddress().equals(smartLink.getDevice().getMacAddress().toUpperCase())) {
                     LTLink.getInstance().stopLink();
                     mReceiver.runStop();
@@ -204,6 +215,7 @@ public class LTLinkActivity extends GwBaseActivity {
                     XlinkDevice xlinkDevice = new XlinkDevice();
                     BaseApplication.getLogger().d("no!smartLink5");
                     xlinkDevice.setxDevice(XlinkAgent.deviceToJson(xDevice).toString());
+                    BaseApplication.getLogger().json(XlinkAgent.deviceToJson(xDevice).toString());
                     xlinkDevice.setDeviceType(Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW);
                     xlinkDevice.setDeviceMac(xDevice.getMacAddress());
                     xlinkDevice.setDeviceName(xDevice.getMacAddress());
@@ -211,41 +223,83 @@ public class LTLinkActivity extends GwBaseActivity {
                     xlinkDevice.setDate(new Date());
                     xlinkDevice.setProductId(xDevice.getProductId());
                     xlinkDevice.setAccessKey(xDevice.getAccessKey() + "");
-                    xlinkDevice.setDeviceState(1);
+                    xlinkDevice.setDeviceState(0);
                     BaseApplication.getLogger().d("no!smartLink6");
                     setDevice(xlinkDevice);
+                    XlinkAgent.getInstance().initDevice(xDevice);
                     if (xDevice.getVersion() == 1) {
                         BaseApplication.getLogger().d("no!smartLink7");
-                        connectDevice();
+                        try {
+                            connectDevice();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         DeviceManage.getInstance().addDevice(xlinkDevice);
                         isAdd = true;
                     } else if (xDevice.getVersion() >= 2) {
                         BaseApplication.getLogger().d("no!smartLink8");
                         if (xDevice.getAccessKey() > 0) {
                             BaseApplication.getLogger().d("no!smartLink9");
-                            connectDevice();
+                            boolean isconnect = false;
+                            try {
+                                isconnect = connectDevice();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             DeviceManage.getInstance().addDevice(xlinkDevice);
                             isAdd = true;
-                            List<String> OID = new ArrayList<String>();
-                            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
-                            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-                            String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
-                            sendData(sb);
+                            if (isconnect) {
+                                List<String> OID = new ArrayList<String>();
+                                OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+//                            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
+//                            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
+                                String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+                                BaseApplication.getLogger().json(sb);
+                                sendData(sb, false);
+                            }
                         } else {
                             BaseApplication.getLogger().d("no!smartLink10");
-                            int i = openDevicePassword(xDevice);
-                            if (i == 0) {
-                                BaseApplication.getLogger().d("no!smartLink12");
-                                isAdd = true;
-                                List<String> OID = new ArrayList<String>();
-                                OID.add(HeimanCom.COM_GW_OID.GW_NAME);
-                                OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-                                String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
-                                sendData(sb);
-                            }
+//                            int codes = openDevicePassword(xDevice);
+                            XlinkAgent.getInstance().setDeviceAccessKey(
+                                    xDevice, Constant.passwrods,
+                                    new SetDeviceAccessKeyListener() {
+                                        @Override
+                                        public void onSetLocalDeviceAccessKey(XDevice xdevice, int code, int msgId) {
+                                            switch (code) {
+                                                case XlinkCode.SUCCEED:
+                                                    device.setAccessKey(xdevice.getAccessKey() + "");
+                                                    device.setxDevice(XlinkAgent.deviceToJson(xdevice).toString());
+                                                    BaseApplication.getLogger().i("pwd:" + xdevice.getAccessKey());
+                                                    DeviceManage.getInstance().addDevice(device);
+                                                    isAdd = true;
+                                                    boolean isconnect = false;
+                                                    try {
+                                                        isconnect = connectDevice();
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    if (isconnect) {
+                                                        new Handler().postDelayed(new Runnable() {
+                                                            public void run() {
+                                                                //execute the task
+                                                                List<String> OID = new ArrayList<String>();
+                                                                OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+                                                                String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+                                                                BaseApplication.getLogger().json(sb);
+                                                                sendData(sb, false);
+                                                            }
+                                                        }, 1000);
+                                                    }
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+
+                                        }
+                                    });
+
                         }
                     }
-                    XlinkAgent.getInstance().subscribeDevice(xDevice, xDevice.getAccessKey(), null);
                 }
             }
         });
@@ -319,6 +373,18 @@ public class LTLinkActivity extends GwBaseActivity {
                 LTLink.getInstance().stopLink();
                 isStart = true;
             }
+        } else if (i == R.id.btn_eco) {
+            List<String> OID = new ArrayList<String>();
+            OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+            String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+            BaseApplication.getLogger().json(sb);
+            sendData(sb, false);
+        } else if (i == R.id.btn_ecos) {
+            List<String> OID = new ArrayList<String>();
+            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
+            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
+            String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+            sendData(sb);
         }
     }
 
@@ -333,6 +399,18 @@ public class LTLinkActivity extends GwBaseActivity {
 
     @Override
     public void deviceData(String dataString) {
+        BaseApplication.getLogger().json(dataString);
+        Gson gson = new Gson();
+        AESKey aesKey = gson.fromJson(dataString, AESKey.class);
 
+        device.setAesKey(aesKey.getPL().getAesKey());
+        DeviceManage.getInstance().addDevice(device);
+
+        List<String> OID = new ArrayList<String>();
+        OID.add(HeimanCom.COM_GW_OID.GW_NAME);
+        OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
+        String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+        BaseApplication.getLogger().json(sb);
+        sendData(sb);
     }
 }

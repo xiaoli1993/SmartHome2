@@ -25,8 +25,10 @@ import io.xlink.wifi.sdk.XDevice;
 import io.xlink.wifi.sdk.XlinkAgent;
 import io.xlink.wifi.sdk.XlinkCode;
 import io.xlink.wifi.sdk.listener.ConnectDeviceListener;
+import io.xlink.wifi.sdk.listener.GetSubscribeKeyListener;
 import io.xlink.wifi.sdk.listener.SendPipeListener;
 import io.xlink.wifi.sdk.listener.SetDeviceAccessKeyListener;
+import io.xlink.wifi.sdk.listener.SubscribeDeviceListener;
 
 /**
  * @Author : 肖力
@@ -37,8 +39,8 @@ import io.xlink.wifi.sdk.listener.SetDeviceAccessKeyListener;
 
 public abstract class GwBaseActivity extends FragmentActivity implements View.OnClickListener {
 
-    private XlinkDevice device;//设备信息
-    private SubDevice subDevice;//子设备信息
+    public XlinkDevice device;//设备信息
+    public SubDevice subDevice;//子设备信息
     private static final int ACTIVITY_CREATE = 1;
     private static final int ACTIVITY_START = 2;
     private static final int ACTIVITY_RESUME = 3;
@@ -207,7 +209,11 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
             BaseApplication.getMyApplication().setCurrentActivity(this);
             if (device.getDeviceState() == 0 && XlinkUtils.isConnected(this)) {
                 BaseApplication.getLogger().i("连接设备");
-                connectDevice();
+                try {
+                    connectDevice();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             try {
                 deviceData(pipeData);
@@ -401,16 +407,35 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
     /**
      * 连接设备
      */
-    public boolean connectDevice() {
+    public boolean connectDevice() throws JSONException {
         if (device.getDeviceState() != 0) {
             return true;
         }
         int ret = 0;
-        try {
-            ret = XlinkAgent.getInstance().connectDevice(device.getxDevice(), device.getAccessKey(), connectDeviceListener);
-        } catch (JSONException e) {
-            e.printStackTrace();
+        //V3版本获取SUBKEY
+        if ((device.getxDevice().getVersion() >= 3) && (device.getxDevice().getSubKey() <= 0)) {
+            BaseApplication.getLogger().i("V3版本获取SUBKEY:" + device.getxDevice().getMacAddress() + " " + device.getxDevice().getSubKey() + "\t" + device.getxDevice().getMacAddress());
+            XlinkAgent.getInstance().getInstance().getDeviceSubscribeKey(device.getxDevice(), device.getxDevice().getAccessKey(), new GetSubscribeKeyListener() {
+                @Override
+                public void onGetSubscribekey(XDevice xdevice, int code, int subKey) {
+                    BaseApplication.getLogger().i("sss:" + xdevice.getAccessKey() + "sce:" + xdevice.getSubKey());
+                    device.setxDevice(XlinkAgent.deviceToJson(xdevice).toString());
+                    DeviceManage.getInstance().updateDevice(device);
+                }
+            });
         }
+        //订阅设备,V3版本设备开始使用subKey订阅设备。
+        XlinkAgent.getInstance().subscribeDevice(device.getxDevice(), device.getxDevice().getSubKey(), new SubscribeDeviceListener() {
+            @Override
+            public void onSubscribeDevice(XDevice xdevice, int code) {
+                BaseApplication.getLogger().i("绑定：" + code);
+                if (code == XlinkCode.SUCCEED) {
+//                    device.setSubscribe(true);
+                }
+            }
+        });
+        ret = XlinkAgent.getInstance().connectDevice(device.getxDevice(), device.getxDevice().getAccessKey(), device.getxDevice().getSubKey(), connectDeviceListener);
+        BaseApplication.getLogger().i("返回连接：" + ret + "\tkey:" + device.getxDevice().getAccessKey() + "\tsub:" + device.getxDevice().getSubKey());
         if (ret < 0) {// 调用设备失败
             device.setDeviceState(0);
             switch (ret) {
@@ -514,21 +539,21 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
      * @param xDevice
      */
     public int openDevicePassword(XDevice xDevice) {
-        int ret = 0;
-        if (device.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_PLUGIN) {
+        if (xDevice.getVersion() == 1) {
             return setDevicePassword(8888, xDevice);
         } else {
             return setDevicePassword(Constant.passwrods, xDevice);
         }
     }
 
+
     private int setDevicePassword(final int password, XDevice xDevice) {
-        int ret = XlinkAgent.getInstance().setDeviceAccessKey(
+        int code = XlinkAgent.getInstance().setDeviceAccessKey(
                 xDevice, password,
                 new SetDeviceAccessKeyListener() {
                     @Override
-                    public void onSetLocalDeviceAccessKey(XDevice xdevice,
-                                                          int code, int msgId) {
+                    public void onSetLocalDeviceAccessKey(XDevice xdevice, int code, int msgId) {
+                        BaseApplication.getLogger().i("返回：" + code + "\t" + "pawword:" + password);
                         switch (code) {
                             case XlinkCode.SUCCEED:
                                 SUCCEED(xdevice, password);
@@ -536,28 +561,34 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                             default:
                                 break;
                         }
+
                     }
                 });
+        return code;
 
-        return ret;
     }
 
     private void SUCCEED(XDevice xd, int pwd) {
         device.setAccessKey(pwd + "");
+        device.setxDevice(XlinkAgent.deviceToJson(xd).toString());
+        BaseApplication.getLogger().i("pwd:" + pwd);
         DeviceManage.getInstance().addDevice(device);
-        connectDevice();
-        XlinkAgent.getInstance().subscribeDevice(xd, pwd, null);
     }
 
     public boolean sendData(final String bs) {
         if (device.getDeviceState() == 0) {
-            connectDevice();
+            try {
+                connectDevice();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         int ret = 0;
         String aesBs = null;
         try {
             try {
+                device.setAesKey("1234567890abcdf");
                 aesBs = AES128Utils.HmEncrypt(bs, device.getAesKey());
             } catch (Exception e) {
                 e.printStackTrace();
@@ -593,18 +624,26 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
 
             return false;
         } else {
-            BaseApplication.getLogger().d("发送加密前数据：" + bs + "\n发送加密后数据：" + aesBs);
+            BaseApplication.getLogger().d("发送加密前数据：" + bs + "\t长度：" + bs.length() + "\n发送加密后数据：" + aesBs + "\t长度：" + aesBs.length());
         }
         return true;
     }
 
     public boolean sendData(final String bs, boolean isAes) {
         if (device.getDeviceState() == 0) {
-            connectDevice();
+            try {
+                connectDevice();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return false;
         }
         int ret = 0;
         try {
+            BaseApplication.getLogger().json(XlinkAgent.deviceToJson(device.getxDevice()).toString());
+//            if (device.getxDevice().getDeviceId()==0){
+//                ret = XlinkAgent.getInstance().sendLocalPipeData(device.getxDevice(), bs.getBytes(), pipeListener);
+//            }
             ret = XlinkAgent.getInstance().sendPipeData(device.getxDevice(), bs.getBytes(), pipeListener);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -644,6 +683,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         @Override
         public void onSendLocalPipeData(XDevice xdevice, int code, int messageId) {
             // setDeviceStatus(false);
+            BaseApplication.getLogger().json(XlinkAgent.deviceToJson(xdevice).toString());
             switch (code) {
                 case XlinkCode.SUCCEED:
                     device.setDeviceState(1);
@@ -656,7 +696,12 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     break;
                 case XlinkCode.SERVER_CODE_UNAUTHORIZED:
                     BaseApplication.getLogger().i("控制设备失败,当前帐号未订阅此设备，请重新订阅");
-                    connectDevice();
+                    device.setDeviceState(0);
+                    try {
+                        connectDevice();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case XlinkCode.SERVER_DEVICE_OFFLIEN:
                     BaseApplication.getLogger().e("设备不在线");

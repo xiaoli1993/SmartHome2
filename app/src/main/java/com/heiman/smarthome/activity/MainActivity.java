@@ -40,8 +40,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import io.xlink.wifi.sdk.XlinkAgent;
 
@@ -70,11 +74,20 @@ public class MainActivity extends FragmentActivity {
     private Fragment mTab04;
     private MainLeftAdapter adapter;
     private List<LeftMain> leftMainList;
-
+    public static String timeZone() {
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"),
+                Locale.getDefault());
+        MyApplication.getLogger().i("时区1："+TimeZone.getTimeZone("GMT"));
+        String timeZone = new SimpleDateFormat("Z").format(calendar.getTime());
+        MyApplication.getLogger().i("时区2："+calendar.getTime());
+        MyApplication.getLogger().i("时区3："+timeZone);
+        return timeZone.substring(0, 3);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MyApplication.getLogger().i("时区3："+timeZone());
         if (!XlinkAgent.getInstance().isConnectedLocal()) {
             XlinkAgent.getInstance().start();
         }

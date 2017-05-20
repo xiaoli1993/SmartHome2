@@ -87,6 +87,22 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_eco"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:text="不加密"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_ecos"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:text="加密"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
     </LinearLayout>
 
 
