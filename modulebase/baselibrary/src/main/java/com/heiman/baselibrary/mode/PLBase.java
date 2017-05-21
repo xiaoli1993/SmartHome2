@@ -1,5 +1,7 @@
 package com.heiman.baselibrary.mode;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Copyright ©深圳市海曼科技有限公司
  */
@@ -19,6 +21,16 @@ public class PLBase {
     private int SN;
     private int CID;
     private String SID;
+    @Expose
+    private int ENCRYPT;
+
+    public int getENCRYPT() {
+        return ENCRYPT;
+    }
+
+    public void setENCRYPT(int ENCRYPT) {
+        this.ENCRYPT = ENCRYPT;
+    }
 
     public String getTEID() {
         return TEID;
@@ -27,6 +39,7 @@ public class PLBase {
     public void setTEID(String TEID) {
         this.TEID = TEID;
     }
+
     public int getRC() {
         return RC;
     }

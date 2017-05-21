@@ -17,12 +17,14 @@ import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.GwBaseActivity;
 import com.heiman.baselibrary.Json.HeimanCom;
+import com.heiman.baselibrary.Json.SmartPlug;
 import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.mode.AESKey;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
+import com.heiman.datacom.aes.AES128Utils;
 import com.heiman.gateway.modle.SmartLinkS;
 import com.heiman.utils.HexDump;
 import com.jaeger.library.StatusBarUtil;
@@ -187,7 +189,7 @@ public class LTLinkActivity extends GwBaseActivity {
         XlinkAgent.getInstance().scanDeviceByProductId(Constant.ZIGBEE_H1GW_NEW_PRODUCTID, new ScanDeviceListener() {
             @Override
             public void onGotDeviceByScan(XDevice xDevice) {
-                BaseApplication.getLogger().d("no!smartLink" + xDevice.getMacAddress() + "\tkey:" + xDevice.getAccessKey() + "\t" + smartLink.getDevice().getMacAddress());
+                BaseApplication.getLogger().d("no!smartLink" + xDevice.getMacAddress() + "\tkey:" + xDevice.getAccessKey() + "\tsubkey:" + xDevice.getSubKey());
                 if (xDevice.getMacAddress().equals(smartLink.getDevice().getMacAddress().toUpperCase())) {
                     LTLink.getInstance().stopLink();
                     mReceiver.runStop();
@@ -249,22 +251,26 @@ public class LTLinkActivity extends GwBaseActivity {
                             DeviceManage.getInstance().addDevice(xlinkDevice);
                             isAdd = true;
                             if (isconnect) {
-                                List<String> OID = new ArrayList<String>();
-                                OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-//                            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
-//                            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-                                String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
-                                BaseApplication.getLogger().json(sb);
-                                sendData(sb, false);
+                                new Handler().postDelayed(new Runnable() {
+                                    public void run() {
+                                        //execute the task
+                                        List<String> OID = new ArrayList<String>();
+                                        OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+                                        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+                                        BaseApplication.getLogger().json(sb);
+                                        sendData(sb, false);
+                                    }
+                                }, 1000);
                             }
                         } else {
-                            BaseApplication.getLogger().d("no!smartLink10");
-//                            int codes = openDevicePassword(xDevice);
-                            XlinkAgent.getInstance().setDeviceAccessKey(
-                                    xDevice, Constant.passwrods,
+                            BaseApplication.getLogger().d("no!smartLink10:" + "没设置密码");
+                            int codes = Constant.passwrods;
+                            int code = XlinkAgent.getInstance().setDeviceAccessKey(
+                                    xDevice, codes,
                                     new SetDeviceAccessKeyListener() {
                                         @Override
                                         public void onSetLocalDeviceAccessKey(XDevice xdevice, int code, int msgId) {
+                                            BaseApplication.getLogger().i("code:" + code);
                                             switch (code) {
                                                 case XlinkCode.SUCCEED:
                                                     device.setAccessKey(xdevice.getAccessKey() + "");
@@ -284,7 +290,7 @@ public class LTLinkActivity extends GwBaseActivity {
                                                                 //execute the task
                                                                 List<String> OID = new ArrayList<String>();
                                                                 OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-                                                                String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+                                                                String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
                                                                 BaseApplication.getLogger().json(sb);
                                                                 sendData(sb, false);
                                                             }
@@ -297,6 +303,7 @@ public class LTLinkActivity extends GwBaseActivity {
 
                                         }
                                     });
+                            BaseApplication.getLogger().i("code:" + code + "\t" + codes);
 
                         }
                     }
@@ -364,6 +371,7 @@ public class LTLinkActivity extends GwBaseActivity {
     public void onClickListener(View v) {
         int i = v.getId();
         if (i == R.id.btn_peizhi) {
+//            timethread.schedule(task, 0, 500); // 启动timer
             showHUDProgress();
             if (isStart) {
                 BaseApplication.getLogger().i("密码:" + getPwdSmartlink().getText().toString());
@@ -376,14 +384,15 @@ public class LTLinkActivity extends GwBaseActivity {
         } else if (i == R.id.btn_eco) {
             List<String> OID = new ArrayList<String>();
             OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-            String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
             BaseApplication.getLogger().json(sb);
             sendData(sb, false);
         } else if (i == R.id.btn_ecos) {
             List<String> OID = new ArrayList<String>();
             OID.add(HeimanCom.COM_GW_OID.GW_NAME);
             OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-            String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+//            device.setAesKey("1234567890abcdf");
             sendData(sb);
         }
     }
@@ -402,15 +411,22 @@ public class LTLinkActivity extends GwBaseActivity {
         BaseApplication.getLogger().json(dataString);
         Gson gson = new Gson();
         AESKey aesKey = gson.fromJson(dataString, AESKey.class);
-
-        device.setAesKey(aesKey.getPL().getAesKey());
+        String accKEY = device.getAccessKey().substring(0, 15);
+        String aesKeyb = "";
+        try {
+            aesKeyb = AES128Utils.HmDecrypt(aesKey.getPL().getAesKey(), accKEY);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        device.setAesKey(aesKeyb);
         DeviceManage.getInstance().addDevice(device);
 
         List<String> OID = new ArrayList<String>();
         OID.add(HeimanCom.COM_GW_OID.GW_NAME);
         OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-        String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
+        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
         BaseApplication.getLogger().json(sb);
+
         sendData(sb);
     }
 }

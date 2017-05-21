@@ -1,8 +1,10 @@
 package com.heiman.baselibrary.Json;
 
 import com.google.gson.Gson;
+import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.mode.HeimanGet;
+import com.heiman.baselibrary.mode.HeimanSet;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class HeimanCom {
     public static class COM_GW_OID {
         public static final String DEVICE_BASIC_INFORMATION = "2.1.1.1";                         // 基本信息
         public static final String GW_TIME_ZONE = "2.1.1.1.7";                                   // 时区
-        public static final String GET_AES_KEY = "2.1.1.6";                                      // AES秘钥
+        public static final String GET_AES_KEY = "2.1.1.8";                                      // AES秘钥
         public static final String GW_BASIC_INFORMATION = "2.1.1.255.0.1";                       // 网关设置的基本信息
         public static final String GW_BEEP_SOUND_LEVEL = "2.1.1.255.0.1.1";                      // 网关声音调节
         public static final String GW_BEEP_TIMER = "2.1.1.255.0.1.2";                            // 网关报警声音时长
@@ -64,20 +66,49 @@ public class HeimanCom {
 
     }
 
-    public static String getOID(String nickName, String teid, int encrypt, List<String> OID) {
+    /**
+     * 获取设备OID值
+     *
+     * @param SN      6位随机数用于判断ACK
+     * @param encrypt 是否加密
+     * @param OID     所需OID
+     * @return
+     */
+    public static String getOID(int SN, int encrypt, List<String> OID) {
         Gson gson = new Gson();
         HeimanGet heimanGet = new HeimanGet();
         heimanGet.setCID(Constant.JOSN_CID.COMMAND_GET);
         heimanGet.setENCRYPT(encrypt);
-        heimanGet.setSID(nickName);
-        heimanGet.setSN(SmartPlug.mgetSN());
-        heimanGet.setTEID(teid);
+        heimanGet.setSID(BaseApplication.getMyApplication().getUserInfo().getNickname());
+        heimanGet.setSN(SN);
+        heimanGet.setTEID(BaseApplication.getMyApplication().getUserInfo().getId() + "");
         HeimanGet.PLBean PL = new HeimanGet.PLBean();
         PL.setOID(OID);
         heimanGet.setPL(PL);
         return gson.toJson(heimanGet);
     }
 
+    /**
+     * 设置时区
+     *
+     * @param SN       随机数
+     * @param encrypt  是否加密
+     * @param timeZone 时区
+     * @return
+     */
+    public static String setTimeZone(int SN, int encrypt, String timeZone) {
+        Gson gson = new Gson();
+        HeimanSet heimanSet = new HeimanSet();
+        heimanSet.setCID(Constant.JOSN_CID.COMMAND_GET);
+        heimanSet.setENCRYPT(encrypt);
+        heimanSet.setSID(BaseApplication.getMyApplication().getUserInfo().getNickname());
+        heimanSet.setSN(SN);
+        heimanSet.setTEID(BaseApplication.getMyApplication().getUserInfo().getId() + "");
+        HeimanSet.PLBean plBean = new HeimanSet.PLBean();
+        plBean.setTimeZone(timeZone);
+        heimanSet.setPL(plBean);
+        return gson.toJson(heimanSet);
+    }
 
     public int getVersion() {
         return Version;

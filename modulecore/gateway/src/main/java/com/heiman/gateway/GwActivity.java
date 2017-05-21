@@ -6,6 +6,7 @@ import android.view.View;
 import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.GwBaseActivity;
 import com.heiman.baselibrary.Json.HeimanCom;
+import com.heiman.baselibrary.Json.SmartPlug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,9 @@ public class GwActivity extends GwBaseActivity {
         List<String> OID = new ArrayList<String>();
         OID.add(HeimanCom.COM_GW_OID.GW_NAME);
         OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-        String sb = HeimanCom.getOID(BaseApplication.getMyApplication().getUserInfo().getNickname(), BaseApplication.getMyApplication().getUserInfo().getId() + "", 1, OID);
-        sendData(sb);
+        String sb = HeimanCom.setTimeZone(SmartPlug.mgetSN(), 1, "3:31");
+        BaseApplication.getLogger().json(sb);
+        sendData(sb,false);
     }
 
     @Override

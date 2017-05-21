@@ -414,7 +414,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         int ret = 0;
         //V3版本获取SUBKEY
         if ((device.getxDevice().getVersion() >= 3) && (device.getxDevice().getSubKey() <= 0)) {
-            BaseApplication.getLogger().i("V3版本获取SUBKEY:" + device.getxDevice().getMacAddress() + " " + device.getxDevice().getSubKey() + "\t" + device.getxDevice().getMacAddress());
+            BaseApplication.getLogger().i("V3版本获取SUBKEY:" + device.getxDevice().getMacAddress() + " " + device.getxDevice().getSubKey() + "\t" + device.getxDevice().getAccessKey());
             XlinkAgent.getInstance().getInstance().getDeviceSubscribeKey(device.getxDevice(), device.getxDevice().getAccessKey(), new GetSubscribeKeyListener() {
                 @Override
                 public void onGetSubscribekey(XDevice xdevice, int code, int subKey) {
@@ -587,8 +587,11 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         int ret = 0;
         String aesBs = null;
         try {
-            try {
+            if (device.getAesKey().equals("") || device.getAesKey() == null) {
                 device.setAesKey("1234567890abcdf");
+            }
+
+            try {
                 aesBs = AES128Utils.HmEncrypt(bs, device.getAesKey());
             } catch (Exception e) {
                 e.printStackTrace();
