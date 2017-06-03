@@ -5,6 +5,7 @@ package com.heiman.baselibrary.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -43,6 +44,25 @@ import io.xlink.wifi.sdk.XlinkAgent;
  * @Description :
  */
 public class SmartHomeUtils {
+    /**
+     * 判断字符串是否为空
+     *
+     * @param str 字符串
+     * @return 是否为空
+     */
+    public static boolean isEmptyString(String str) {
+        return str == null || str.trim().length() == 0;
+    }
+
+    /**
+     * 判断List是否为空
+     *
+     * @param list 字符串
+     * @return 是否为空
+     */
+    public static boolean isEmptyList(List list) {
+        return list == null || list.isEmpty();
+    }
 
     /**
      * Try to return the absolute file path from the given Uri
@@ -383,6 +403,12 @@ public class SmartHomeUtils {
         return "";
     }
 
+    /**
+     * 返回HTTP错误码
+     *
+     * @param code 错误码
+     * @return
+     */
     public static String showHttpCode(int code) {
         switch (code) {
             case HttpConstant.PARAM_NETIO_ERROR:
@@ -551,6 +577,139 @@ public class SmartHomeUtils {
                 return BaseApplication.getMyApplication().getString(R.string.SERVICE_EXCEPTION);
             default:
                 return BaseApplication.getMyApplication().getString(R.string.OTHER_ER);
+        }
+    }
+
+    /**
+     * 这个是广播注册
+     *
+     * @return
+     */
+    public static IntentFilter regFilter() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(Constant.BROADCAST_RECVPIPE);
+        myIntentFilter.addAction(Constant.BROADCAST_DEVICE_CHANGED);
+        myIntentFilter.addAction(Constant.BROADCAST_DEVICE_SYNC);
+        myIntentFilter.addAction(Constant.BROADCAST_RECVPIPE_SYNC);
+        myIntentFilter.addAction(Constant.BROADCAST_CONNENCT_SUCCESS);
+        myIntentFilter.addAction(Constant.BROADCAST_CONNENCT_FAIL);
+        myIntentFilter.addAction(Constant.BROADCAST_SEND_OVERTIME);
+        myIntentFilter.addAction(Constant.BROADCAST_SEND_SUCCESS);
+        myIntentFilter.addAction(Constant.BROADCAST_SEND_SUCCESS);
+        return myIntentFilter;
+    }
+
+    /**
+     * 根据Type转换成图片
+     *
+     * @param isSub      是否是子设备
+     * @param deviceType 设备类型
+     * @return
+     */
+    public static int typeToIcon(boolean isSub, int deviceType) {
+        if (isSub) {
+            switch (deviceType) {
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+                    return R.drawable.device_light;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                    return R.drawable.device_door;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                    return R.drawable.device_water;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                    return R.drawable.device_pir;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                    return R.drawable.device_smoke;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+                    return R.drawable.device_thp;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                    return R.drawable.device_gas;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                    return R.drawable.device_co;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                    return R.drawable.device_sos;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                    return R.drawable.device_sw;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                    return R.drawable.device_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                    return R.drawable.device_e_plug;
+                default:
+                    return R.drawable.device_gw;
+            }
+        } else {
+            switch (deviceType) {
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_RC:
+                    return R.drawable.device_rc;
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY:
+                    return R.drawable.device_gw;
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_PLUGIN:
+                    return R.drawable.device_plug;
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_METRTING_PLUGIN:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_AIR:
+                    return R.drawable.device_e_plug;
+                default:
+                    return R.drawable.device_gw;
+            }
+        }
+    }
+
+    /**
+     * 根据Type转换成昵称
+     *
+     * @param isSub      是否是子设备
+     * @param deviceType 设备类型
+     * @return
+     */
+    public static String typeToNikeName(boolean isSub, int deviceType) {
+        if (isSub) {
+            switch (deviceType) {
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_rgb);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_door);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_water);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_pir);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_smorke);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_temp_hum);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_gas);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_co);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_sos);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_sw);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_plug);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_e_plug);
+                default:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_plug);
+            }
+        } else {
+            switch (deviceType) {
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_RC:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_rc);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_min_gw);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_min_gw);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_max_gw);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_PLUGIN:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_plug);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_METRTING_PLUGIN:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_e_plug);
+                case Constant.DEVICE_TYPE.DEVICE_WIFI_AIR:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_air);
+                default:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_max_gw);
+            }
         }
     }
 }

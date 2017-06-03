@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,27 +21,29 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.heiman.baselibrary.BaseFragment;
-import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.mode.Scene;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
+import com.heiman.smarthome.activity.AddDeviceActivity;
 import com.heiman.smarthome.activity.MainActivity;
 import com.heiman.smarthome.adapter.GroupAdapter;
 import com.heiman.smarthome.adapter.MainDevicesAdapter;
 import com.heiman.smarthome.adapter.MainSceneAdapter;
 import com.heiman.smarthome.modle.ListMain;
 import com.heiman.widget.dialog.MenuDialog;
+import com.heiman.widget.helper.OnStartDragListener;
+import com.heiman.widget.helper.SimpleItemTouchHelperCallback;
 import com.heiman.widget.recyclerview.FullyGridLayoutManager;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
+import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**
  * @Author : 肖力
@@ -48,7 +52,7 @@ import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
  * @Modify record :
  */
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener, OnStartDragListener {
     private FrameLayout titleBar;
     private ImageView titleBarReturn;
     private TextView titleBarTitle;
@@ -59,10 +63,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private ImageView titleBarShare;
 
     private SwipeRefreshLayout swipeLayout;
-    private SwipeMenuRecyclerView recyclerScene;
+    private FamiliarRecyclerView recyclerScene;
     private FamiliarRecyclerView recyclerDevice;
     private List<ListMain> listMainList;
     private MainDevicesAdapter mainDevicesAdapter;
+    private MainSceneAdapter mainSceneAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,9 +92,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         titleBarShare = (ImageView) view.findViewById(R.id.title_bar_share);
         swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeLayout);
 
-        recyclerScene = (SwipeMenuRecyclerView) view.findViewById(R.id.recycler_scene);
+        recyclerScene = (FamiliarRecyclerView) view.findViewById(R.id.recycler_scene);
         recyclerDevice = (FamiliarRecyclerView) view.findViewById(R.id.recycler_device);
-
+//        recyclerDevice.addHeaderView(HeaderAndFooterViewUtil.getHeadView(getActivity(), true, 0x00000000, getResources().getString(R.string.MyDevice)));
         titleBar.setBackgroundColor(getResources().getColor(R.color.white));
         titleBarReturn.setImageResource(R.mipmap.home_menu);
         titleBarMore.setImageResource(R.mipmap.home_add);
@@ -172,16 +177,30 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         manager.setOrientation(GridLayoutManager.VERTICAL);
         manager.setSmoothScrollbarEnabled(true);
         recyclerDevice.setLayoutManager(manager);
+
+        recyclerDevice.setItemAnimator(new LandingAnimator());
+        recyclerDevice.setHasFixedSize(true);
+
 //        recyclerDevice.setDivider() ;
 
 //        recyclerDevice.addItemDecoration(new ListViewDecoration());// 添加分割线。
 //        recyclerDevice.setNestedScrollingEnabled(false);
-        recyclerDevice.setAdapter(new MainDevicesAdapter(getActivity(), listMainList));
-
+        mainDevicesAdapter = new MainDevicesAdapter(getActivity(), listMainList);
+        recyclerDevice.setAdapter(mainDevicesAdapter);
+        mainSceneAdapter = new MainSceneAdapter(getActivity(), sceneList);
         recyclerScene.setLayoutManager(new FullyGridLayoutManager(recyclerScene.getContext(), 3, GridLayoutManager.VERTICAL, false));
-        recyclerScene.setAdapter(new MainSceneAdapter(getActivity(), sceneList));
+        recyclerScene.setAdapter(mainSceneAdapter);
         recyclerScene.setNestedScrollingEnabled(false);
 
+        final int spanCount = getResources().getInteger(R.integer.grid_columns);
+        final GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), spanCount);
+        recyclerScene.setHasFixedSize(true);
+        recyclerScene.setLayoutManager(layoutManager);
+        //垂直+水平分割线
+//        recyclerScene.addItemDecoration(new GridDividerItemDecortion(1, getResources().getColor(R.color.grid_dr)));
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mainSceneAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(recyclerScene);
     }
 
     private List<String> mockData() {
@@ -207,9 +226,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                         MyApplication.getLogger().e("点击：" + items[which]);
                         switch (which) {
                             case 0:
-                                Bundle paramBundle = new Bundle();
-                                paramBundle.putBoolean(Constant.IS_DEVICE, false);
-                                startActivityForName("com.heiman.gateway.LTLinkActivity", paramBundle);
+                                openActivity(AddDeviceActivity.class);
+//                                Bundle paramBundle = new Bundle();
+//                                paramBundle.putBoolean(Constant.IS_DEVICE, false);
+//                                startActivityForName("com.heiman.gateway.LTLinkActivity", paramBundle);
                                 break;
                             case 1:
                                 break;
@@ -312,5 +332,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }).start();
     }
 
+    private ItemTouchHelper mItemTouchHelper;
 
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
+    }
 }

@@ -20,13 +20,15 @@ import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
 import com.heiman.smarthome.modle.ListMain;
 import com.heiman.widget.dragindicator.DragIndicatorView;
+import com.heiman.widget.helper.ItemTouchHelperAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/24.
  */
-public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context context;
     private List<ListMain> results;
 
@@ -45,6 +47,8 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void setOnItemClickListener(MyItemClickListener listener) {
         this.mItemClickListener = listener;
     }
+
+
 
     public interface MyItemClickListener {
         public void onItemClick(View view, int postion);

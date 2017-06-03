@@ -51,7 +51,7 @@
                     android:layout_marginRight="15dp"
                     android:src="@drawable/login_icon_account" />
 
-                <EditText
+                <com.heiman.widget.edittext.ClearEditText
                     android:id="@+id/et_mobile"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -64,13 +64,6 @@
                     android:textColorHint="@color/class_V"
                     android:textSize="14dp" />
 
-                <ImageView
-                    android:id="@+id/iv_clean_phone"
-                    android:layout_width="40dp"
-                    android:layout_height="fill_parent"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/search_clear_pressed"
-                    android:visibility="gone" />
             </LinearLayout>
 
             <View
@@ -91,7 +84,7 @@
                     android:layout_marginRight="15dp"
                     android:src="@drawable/login_icon_password" />
 
-                <EditText
+                <com.heiman.widget.edittext.ClearEditText
                     android:id="@+id/et_password"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -105,14 +98,6 @@
                     android:textColor="@color/class_V"
                     android:textColorHint="@color/class_V"
                     android:textSize="14dp" />
-
-                <ImageView
-                    android:id="@+id/clean_password"
-                    android:layout_width="40dp"
-                    android:layout_height="fill_parent"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/search_clear_pressed"
-                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_show_pwd"
@@ -152,7 +137,8 @@
                     android:layout_weight="1"
                     android:text="忘记密码"
                     android:textColor="@color/color_b0b8b2"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"
+                    android:clickable="true"/>
 
                 <TextView
                     android:id="@+id/tv_regist"
@@ -163,7 +149,8 @@
                     android:layout_marginLeft="21dp"
                     android:text="注册账号"
                     android:textColor="@color/color_b0b8b2"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"
+                    android:clickable="true"/>
             </LinearLayout>
 
         </LinearLayout>

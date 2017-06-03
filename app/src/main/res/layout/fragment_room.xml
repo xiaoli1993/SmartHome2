@@ -3,9 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_room"
     android:orientation="vertical">
 
     <include layout="@layout/title_bar_transparent_white" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="2px"
+        android:background="@color/grid_dr" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
@@ -13,12 +19,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
-            android:id="@+id/recycler_device"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="卧室"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_device"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:frv_divider="@null"
+                app:frv_dividerHeight="0px"
+                app:frv_layoutManager="linear"
+                app:frv_layoutManagerOrientation="vertical" />
+
+            <include layout="@layout/layou_bottom_room_add" />
+        </LinearLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

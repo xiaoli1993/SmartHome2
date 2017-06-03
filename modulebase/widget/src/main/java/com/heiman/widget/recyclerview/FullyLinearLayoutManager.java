@@ -43,8 +43,8 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {
             measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(widthSize, widthMode),
-                    View.MeasureSpec.makeMeasureSpec(heightSize, heightMode),
+                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     mMeasuredDimension);
 
             if (getOrientation() == HORIZONTAL) {
@@ -79,7 +79,7 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
     private void measureScrapChild(RecyclerView.Recycler recycler, int position, int widthSpec,
                                    int heightSpec, int[] measuredDimension) {
         try {
-            View view = recycler.getViewForPosition(position);//fix 动态添加时报IndexOutOfBoundsException
+            View view = recycler.getViewForPosition(0);//fix 动态添加时报IndexOutOfBoundsException
 
             if (view != null) {
                 RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
@@ -97,6 +97,7 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
         }
     }
 }

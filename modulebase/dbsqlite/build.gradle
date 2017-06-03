@@ -1,5 +1,19 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'org.greenrobot.greendao'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.0'
+    }
+}
+greendao{
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.heiman.greendao.gen' //自动生成的工具类的包名
+    targetGenDir 'src/main/java' //路径
+}
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -31,4 +45,5 @@ dependencies {
     compile 'org.litepal.android:core:1.5.1'
     compile 'com.orhanobut:hawk:2.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'org.greenrobot:greendao:3.2.0'
 }

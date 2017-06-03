@@ -17,6 +17,11 @@
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".GwMoreMenuActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

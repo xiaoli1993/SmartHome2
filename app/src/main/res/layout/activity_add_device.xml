@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_transparent_white" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@drawable/divider_recycler" />
+
+    <com.heiman.widget.scrollview.MyScrollView
+        android:id="@+id/nested_scroll_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_wifi_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:frv_dividerHorizontal="@color/grid_dr"
+                app:frv_dividerHorizontalHeight="1px"
+                app:frv_dividerVertical="@color/grid_dr"
+                app:frv_dividerVerticalHeight="1px"
+                app:frv_itemViewBothSidesMargin="1px"
+                app:frv_layoutManager="grid"
+                app:frv_layoutManagerOrientation="vertical"
+                app:frv_spanCount="3" />
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_sub_device"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:frv_dividerHorizontal="@color/grid_dr"
+                app:frv_dividerHorizontalHeight="1px"
+                app:frv_dividerVertical="@color/grid_dr"
+                app:frv_dividerVerticalHeight="1px"
+                app:frv_itemViewBothSidesMargin="1px"
+                app:frv_layoutManager="grid"
+                app:frv_layoutManagerOrientation="vertical"
+                app:frv_spanCount="3" />
+        </LinearLayout>
+    </com.heiman.widget.scrollview.MyScrollView>
+</LinearLayout>

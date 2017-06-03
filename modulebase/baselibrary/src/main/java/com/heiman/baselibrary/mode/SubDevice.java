@@ -60,6 +60,15 @@ public class SubDevice extends DataSupport {
     private boolean enable;
     private Date lastDate;
     private int userId;//用户ID
+    private String roomID;//房间ID
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
 
     public int getUserId() {
         return userId;

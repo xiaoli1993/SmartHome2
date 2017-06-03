@@ -3,9 +3,9 @@
     android:id="@+id/ll_recyc"
     android:layout_width="match_parent"
     android:layout_height="164dp"
-    android:paddingBottom="10dp"
     android:background="@drawable/selector"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
 
     <ImageView
         android:id="@+id/image_updata"
@@ -44,6 +44,10 @@
         android:layout_below="@+id/image_icon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:text="TextView01"
         android:textColor="#535353"
         android:textSize="14dp" />

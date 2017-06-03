@@ -16,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/alertdialog_custom_panel_padding_bottom"
-        android:src="@drawable/main_right_image_head" />
+        android:src="@drawable/main_right_image_head"
+        android:clickable="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import android.view.Window;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.manage.SubDeviceManage;
+import com.heiman.baselibrary.mode.DataDevice;
 import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.datacom.aes.AES128Utils;
@@ -20,6 +21,9 @@ import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.hawk.Hawk;
 
 import org.json.JSONException;
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import io.xlink.wifi.sdk.XDevice;
 import io.xlink.wifi.sdk.XlinkAgent;
@@ -52,7 +56,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
     private boolean isRegisterBroadcast = false;
     private boolean isRun;// 界面是否可见
     private String pipeData = null;//保存数据
-    private boolean isDevice;
+    public boolean isDevice;
 
     @Override
     public void onClick(View v) {
@@ -260,9 +264,11 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
+            BaseApplication.getLogger().v("接收广播:" + isDevice);
             if (isDevice) {
                 String action = intent.getAction();
                 String mac = intent.getStringExtra(Constant.DEVICE_MAC);
+                BaseApplication.getLogger().v("接收广播:" + mac);
                 if (mac == null || !mac.equals(device.getDeviceMac())) {
                     return;
                 }
@@ -272,8 +278,9 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     BaseApplication.getLogger().i("收到数据：" + data);
                     try {
                         data = AES128Utils.HmDecrypt(data, device.getAesKey());
+                        BaseApplication.getLogger().i("收到数据解密：" + data + "\n" + device.getAesKey());
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
                     pipeData = data;
                     if (!isRun) { // 当界面不可见，把pipeData存起来，然后等onResume再更新界面
@@ -285,8 +292,9 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     BaseApplication.getLogger().i("收到SYNC数据：" + data);
                     try {
                         data = AES128Utils.HmDecrypt(data, device.getAesKey());
+                        BaseApplication.getLogger().i("收到SYNC数据：" + data + "\n" + device.getAesKey());
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
                     }
                     pipeData = data;
                     if (!isRun) { // 当界面不可见，把pipeData存起来，然后等onResume再更新界面
@@ -568,6 +576,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
 
     }
 
+
     private void SUCCEED(XDevice xd, int pwd) {
         device.setAccessKey(pwd + "");
         device.setxDevice(XlinkAgent.deviceToJson(xd).toString());
@@ -587,9 +596,6 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         int ret = 0;
         String aesBs = null;
         try {
-            if (device.getAesKey().equals("") || device.getAesKey() == null) {
-                device.setAesKey("1234567890abcdf");
-            }
 
             try {
                 aesBs = AES128Utils.HmEncrypt(bs, device.getAesKey());
@@ -598,6 +604,14 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                 BaseApplication.getLogger().i("加密失败" + device.getAesKey());
                 aesBs = bs;
             }
+            try {
+                String sbe = AES128Utils.HmDecrypt(aesBs, device.getAesKey());
+                BaseApplication.getLogger().i("解密数据:" + sbe);
+            } catch (Exception e) {
+                e.printStackTrace();
+                BaseApplication.getLogger().i("解密失败:");
+            }
+
             ret = XlinkAgent.getInstance().sendPipeData(device.getxDevice(), aesBs.getBytes(), pipeListener);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -717,6 +731,19 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
             DeviceManage.getInstance().updateDevice(device);
         }
     };
+
+    /**
+     * 获取设备信息
+     *
+     * @param year   年
+     * @param month  月
+     * @param day    日
+     * @param limit  查询长度
+     * @param offset 查询范围
+     */
+    public void getDeviceDiary(String year, String month, String day, int limit, int offset) {
+        List<DataDevice> dataDeviceList = DataSupport.where("userid = ? and deviceMac = ? and subMac = ? and year = ? and month = ? and day = ?", BaseApplication.getMyApplication().getUserInfo().getId() + "", device.getDeviceMac(), subDevice.getDeviceMac(), year + "", month + "", day + "").limit(limit).offset(offset).find(DataDevice.class);
+    }
 
     public XlinkDevice getDevice() {
         return device;

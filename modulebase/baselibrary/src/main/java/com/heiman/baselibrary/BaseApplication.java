@@ -66,14 +66,12 @@ public class BaseApplication extends Application implements XlinkNetListener {
         initBackActivity();
         initLogSDK();
         getLogger().d("--------------------LogSDKok--------------------");
-
         Hawk.init(this).setLogInterceptor(new LogInterceptor() {
             @Override
             public void onLog(String message) {
                 BaseApplication.getLogger().i(message);
             }
-        })
-                .build();
+        }).build();
         initLiteSDK();
         getLogger().d("--------------------LiteSDKok--------------------");
         initQuit();
@@ -273,7 +271,15 @@ public class BaseApplication extends Application implements XlinkNetListener {
         if (device != null) {
 //            // 发送广播，那个activity需要该数据可以监听广播，并获取数据，然后进行响应的处理
 //            // TimerManage.getInstance().parseByte(device,data);
-            getData(Constant.BROADCAST_RECVPIPE_SYNC, device, data);
+//            getData(Constant.BROADCAST_RECVPIPE_SYNC, device, data);
+            try {
+                String resb = new String(data, "UTF-8");
+                BaseApplication.getLogger().i(resb);
+                myApplication.sendPipeBroad(Constant.BROADCAST_RECVPIPE, device, resb);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
@@ -289,7 +295,14 @@ public class BaseApplication extends Application implements XlinkNetListener {
         if (device != null) {
 //            // 发送广播，那个activity需要该数据可以监听广播，并获取数据，然后进行响应的处理
 //            // TimerManage.getInstance().parseByte(device,data);
-            getData(Constant.BROADCAST_RECVPIPE_SYNC, device, data);
+//            getData(Constant.BROADCAST_RECVPIPE_SYNC, device, data);
+            try {
+                String resb = new String(data, "UTF-8");
+                BaseApplication.getLogger().i(resb);
+                myApplication.sendPipeBroad(Constant.BROADCAST_RECVPIPE_SYNC, device, resb);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -304,6 +317,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
     /**
      */
     public void sendPipeBroad(String action, XlinkDevice device, String data) {
+        BaseApplication.getLogger().i("广播:" + device.getDeviceMac());
         Intent intent = new Intent(action);
         intent.putExtra(Constant.DEVICE_MAC, device.getDeviceMac());
         if (data != null) {
@@ -425,7 +439,13 @@ public class BaseApplication extends Application implements XlinkNetListener {
                         }
                     } catch (Exception e) {
                         // TODO Auto-generated catch block
-//                    e.printStackTrace();
+                        e.printStackTrace();
+//                        try {
+//                            String resb = new String(data, "UTF-8");
+//                            myApplication.sendPipeBroad(Constant.BROADCAST_RECVPIPE_SYNC, device, resb);
+//                        } catch (UnsupportedEncodingException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 }
             }

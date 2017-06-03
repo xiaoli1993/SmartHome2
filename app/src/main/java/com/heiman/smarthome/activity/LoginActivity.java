@@ -17,7 +17,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -30,6 +29,7 @@ import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
+import com.heiman.widget.edittext.ClearEditText;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.hawk.Hawk;
@@ -48,10 +48,8 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView logo;
     private ScrollView scrollView;
-    private EditText et_mobile;
-    private EditText et_password;
-    private ImageView iv_clean_phone;
-    private ImageView clean_password;
+    private ClearEditText et_mobile;
+    private ClearEditText et_password;
     private ImageView iv_show_pwd;
     private Button btn_login;
     private TextView forget_password;
@@ -78,10 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void intiView() {
         logo = (ImageView) findViewById(R.id.logo);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-        et_mobile = (EditText) findViewById(R.id.et_mobile);
-        et_password = (EditText) findViewById(R.id.et_password);
-        iv_clean_phone = (ImageView) findViewById(R.id.iv_clean_phone);
-        clean_password = (ImageView) findViewById(R.id.clean_password);
+        et_mobile = (ClearEditText) findViewById(R.id.et_mobile);
+        et_password = (ClearEditText) findViewById(R.id.et_password);
         iv_show_pwd = (ImageView) findViewById(R.id.iv_show_pwd);
         btn_login = (Button) findViewById(R.id.btn_login);
         forget_password = (TextView) findViewById(R.id.tv_forget_password);
@@ -93,8 +89,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initListener() {
-        iv_clean_phone.setOnClickListener(this);
-        clean_password.setOnClickListener(this);
         iv_show_pwd.setOnClickListener(this);
         btn_login.setOnClickListener(this);
         et_mobile.addTextChangedListener(new TextWatcher() {
@@ -110,11 +104,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!TextUtils.isEmpty(s) && iv_clean_phone.getVisibility() == View.GONE) {
-                    iv_clean_phone.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(s)) {
-                    iv_clean_phone.setVisibility(View.GONE);
-                }
             }
         });
         et_password.addTextChangedListener(new TextWatcher() {
@@ -130,11 +119,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!TextUtils.isEmpty(s) && clean_password.getVisibility() == View.GONE) {
-                    clean_password.setVisibility(View.VISIBLE);
-                } else if (TextUtils.isEmpty(s)) {
-                    clean_password.setVisibility(View.GONE);
-                }
                 if (s.toString().isEmpty())
                     return;
 //                if (!s.toString().matches("[A-Za-z0-9]+")) {
@@ -230,12 +214,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .setLabel(getString(R.string.Logins))
                         .setCancellable(true).show();
                 onLogin(et_mobile.getText().toString().trim(), et_password.getText().toString().trim());
-                break;
-            case R.id.iv_clean_phone:
-                et_mobile.setText("");
-                break;
-            case R.id.clean_password:
-                et_password.setText("");
                 break;
             case R.id.iv_show_pwd:
                 if (et_password.getInputType() != InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {

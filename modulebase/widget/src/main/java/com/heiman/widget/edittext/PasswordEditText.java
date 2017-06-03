@@ -2,6 +2,7 @@ package com.heiman.widget.edittext;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -72,9 +73,9 @@ public class PasswordEditText extends AppCompatEditText {
                 mShowTextString = TextUtils.isEmpty(mShowTextString) ? getContext().getString(R.string.show_text) : mShowTextString;
             }
         }
-
         mHideDrawable.setBounds(0, 0, mHideDrawable.getIntrinsicWidth(), mHideDrawable.getIntrinsicHeight());
         mShowDrawable.setBounds(0, 0, mShowDrawable.getIntrinsicWidth(), mShowDrawable.getIntrinsicHeight());
+
         if (mPasswordVisible) {
             showPassword();
         } else {
@@ -92,10 +93,21 @@ public class PasswordEditText extends AppCompatEditText {
     }
 
     private void showPassword() {
+        Drawable[] drawables = getCompoundDrawables();
+        Drawable left = null;
+        Drawable top = null;
+        Drawable bottom = null;
+        try {
+            left = drawables[0];
+            top = drawables[1];
+            bottom = drawables[3];
+        } catch (Exception e) {
+
+        }
         if (mShowAsText) {
-            setCompoundDrawables(null, null, new TextDrawable(mHideTextString), null);
+            setCompoundDrawables(left, top, new TextDrawable(mHideTextString), bottom);
         } else {
-            setCompoundDrawables(null, null, mHideDrawable, null);
+            setCompoundDrawables(left, top, mHideDrawable, bottom);
         }
         setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         setSelection(getText().length());
@@ -103,10 +115,21 @@ public class PasswordEditText extends AppCompatEditText {
     }
 
     private void hidePassword() {
+        Drawable[] drawables = getCompoundDrawables();
+        Drawable left = null;
+        Drawable top = null;
+        Drawable bottom = null;
+        try {
+            left = drawables[0];
+            top = drawables[1];
+            bottom = drawables[3];
+        } catch (Exception e) {
+
+        }
         if (mShowAsText) {
-            setCompoundDrawables(null, null, new TextDrawable(mShowTextString), null);
+            setCompoundDrawables(left, top, new TextDrawable(mShowTextString), bottom);
         } else {
-            setCompoundDrawables(null, null, mShowDrawable, null);
+            setCompoundDrawables(left, top, mShowDrawable, bottom);
         }
         setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         setSelection(getText().length());

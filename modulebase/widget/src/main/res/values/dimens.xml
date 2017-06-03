@@ -182,4 +182,6 @@
     <dimen name="std_titlebar_redpoint_margin_top">10dp</dimen>
     <dimen name="three_grid_unit">24dp</dimen>
     <dimen name="one_and_a_half_grid_unit">12dp</dimen>
+    <dimen name="radio_button_conner_radius">5dp</dimen>
+    <dimen name="radio_button_stroke_border">1dp</dimen>
 </resources>

@@ -1,6 +1,9 @@
 package com.heiman.baselibrary.Json;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.mode.HeimanGet;
@@ -24,7 +27,7 @@ public class HeimanCom {
     public static class COM_GW_OID {
         public static final String DEVICE_BASIC_INFORMATION = "2.1.1.1";                         // 基本信息
         public static final String GW_TIME_ZONE = "2.1.1.1.7";                                   // 时区
-        public static final String GET_AES_KEY = "2.1.1.8";                                      // AES秘钥
+        public static final String GET_AES_KEY = "2.1.1.1.8";                                    // AES秘钥
         public static final String GW_BASIC_INFORMATION = "2.1.1.255.0.1";                       // 网关设置的基本信息
         public static final String GW_BEEP_SOUND_LEVEL = "2.1.1.255.0.1.1";                      // 网关声音调节
         public static final String GW_BEEP_TIMER = "2.1.1.255.0.1.2";                            // 网关报警声音时长
@@ -97,9 +100,37 @@ public class HeimanCom {
      * @return
      */
     public static String setTimeZone(int SN, int encrypt, String timeZone) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setExclusionStrategies(new ExclusionStrategy() {
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes fa) {
+                        if (fa.getName().equals("beepsoundlevel")) {
+                            return true;
+                        } else if (fa.getName().equals("betimer")) {
+                            return true;
+                        } else if (fa.getName().equals("gwlanguage")) {
+                            return true;
+                        } else if (fa.getName().equals("gwlightlevel")) {
+                            return true;
+                        } else if (fa.getName().equals("gwlightonoff")) {
+                            return true;
+                        } else if (fa.getName().equals("_setGwName")) {
+                            return true;
+                        } else if (fa.getName().equals("RC")) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+                })
+                .create();
         HeimanSet heimanSet = new HeimanSet();
-        heimanSet.setCID(Constant.JOSN_CID.COMMAND_GET);
+        heimanSet.setCID(Constant.JOSN_CID.COMMAND_SEND);
         heimanSet.setENCRYPT(encrypt);
         heimanSet.setSID(BaseApplication.getMyApplication().getUserInfo().getNickname());
         heimanSet.setSN(SN);
@@ -110,8 +141,8 @@ public class HeimanCom {
         return gson.toJson(heimanSet);
     }
 
+
     public int getVersion() {
         return Version;
     }
-
 }

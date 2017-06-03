@@ -166,7 +166,7 @@
         <item name="android:fastScrollEnabled">false</item>
         <item name="android:divider">@null</item>
         <item name="android:listSelector">@android:color/transparent</item>
-        <item name="android:fadingEdge">@null</item>
+        <item name="android:fadingEdge">none</item>
         <item name="android:scrollingCache">false</item>
         <item name="android:padding">10dp</item>
         <item name="android:clipToPadding">false</item>
@@ -204,5 +204,53 @@
     <style name="CustomPopWindowStyle">
         <item name="android:windowEnterAnimation">@anim/popwindow_anim_in</item>
         <item name="android:windowExitAnimation">@anim/popwindow_anim_out</item>
+    </style>
+
+    <style name="RadioButton">
+        <item name="android:textColor">@drawable/button_text_color</item>
+        <item name="android:minHeight">33dp</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <!-- 分段显示-->
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <attr name="colors" format="color|reference" />
+        <attr name="texts" format="string|reference" />
+        <attr name="android:textSize" />
+        <attr name="direction" format="enum">
+            <enum name="horizon" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="gaps" format="dimension|reference" />
+        <attr name="horizonGap" format="dimension|reference" />
+        <attr name="verticalGap" format="dimension|reference" />
+    </declare-styleable>
+ <style name="dialog_exit_account">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:backgroundDimAmount">0.1</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_margin">0dp</item>
+    </style>
+
+    <style name="dialog_set_head_pic" parent="dialog_exit_account">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
+
+    <style name="dialog_animation">
+        <item name="android:windowEnterAnimation">@anim/enter</item>
+        <item name="android:windowExitAnimation">@anim/exit</item>
     </style>
 </resources>

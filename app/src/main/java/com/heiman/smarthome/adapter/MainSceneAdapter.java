@@ -10,14 +10,16 @@ import android.widget.TextView;
 
 import com.heiman.baselibrary.mode.Scene;
 import com.heiman.smarthome.R;
+import com.heiman.widget.helper.ItemTouchHelperAdapter;
 
+import java.util.Collections;
 import java.util.List;
 
 
 /**
  * Created by Administrator on 2015/11/24.
  */
-public class MainSceneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MainSceneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ItemTouchHelperAdapter {
     private Context context;
     private List<Scene> results;
 
@@ -29,6 +31,19 @@ public class MainSceneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public MainSceneAdapter(Context context, List<Scene> results) {
         this.context = context;
         this.results = results;
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(results, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+        return true;
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+        results.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override

@@ -38,7 +38,13 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         StatusBarUtil.setTranslucent(this, 50);
         setLoginCacheView();
-
+//        ClassUtils.getConMethod(heimanSet);
+//        ClassUtils.getClassFields(heimanSet);
+//        try {
+//            ClassUtils.runClassMethod(heimanSet);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void setLoginCacheView() {

@@ -12,7 +12,7 @@
         android:paddingLeft="@dimen/std_titlebar_margin_left_right"
         android:paddingRight="@dimen/std_titlebar_margin_left_right"
         android:scaleType="center"
-        android:src="@drawable/std_tittlebar_main_device_back_white" />
+        android:src="@drawable/std_tittlebar_main_device_back" />
 
     <TextView
         android:id="@+id/title_bar_title"
@@ -71,6 +71,15 @@
         android:layout_marginTop="@dimen/std_titlebar_redpoint_margin_top"
         android:scaleType="center"
         android:src="@drawable/std_tittlebar_main_device_massage_point"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/title_tv_Right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="@dimen/std_titlebar_margin_left_right"
+        android:paddingLeft="@dimen/std_titlebar_margin_left_right"
         android:visibility="gone" />
 
     <ImageView

@@ -45,4 +45,22 @@ public class AES128Utils {
         int len = AES128Converter.DecryptBuf(chars, chars.length, decrypt, AESKeyStr.getBytes());
         return new String(decrypt, 0, len, "UTF-8");
     }
+
+    /**
+     * AES128解密，BASE64解码
+     *
+     * @param inputStr  加密后数据字符
+     * @param AESKeyStr 加密字符串，16字节
+     * @return 返回解密后数据
+     * @throws Exception
+     */
+    public static byte[] HmbyeDecrypt(String inputStr, String AESKeyStr) throws Exception {
+        byte[] encrypted1 = Base64.decode(inputStr.substring(1, inputStr.length() - 1).getBytes());
+        byte[] chars = new byte[encrypted1.length];
+        System.arraycopy(encrypted1, 0, chars, 0, encrypted1.length);
+        byte[] decrypt = new byte[chars.length + 16];
+        int len = AES128Converter.DecryptBuf(chars, chars.length, decrypt, AESKeyStr.getBytes());
+        return decrypt;
+    }
+
 }

@@ -21,7 +21,9 @@
         <activity
             android:name=".LTLinkActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".GwMoreMenuActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

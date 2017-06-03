@@ -1,0 +1,120 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/class_A_10_trans">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/navigation_bar_parting_line_color"/>
+
+    <com.heiman.widget.edittext.ClearEditText
+        android:id="@+id/edit_phone_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/common_input_bg"
+        android:drawableLeft="@drawable/login_icon_account"
+        android:drawablePadding="10dp"
+        android:hint="@string/input_phone_num"
+        android:inputType="phone"
+        android:maxLines="1"
+        android:minLines="1"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/support_only_chinese_phone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edit_verification_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/login_icon_password"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:maxLines="1"
+            android:minLines="1"
+            android:background="@drawable/common_input_bg"
+            android:hint="@string/input_verification_code" />
+        <TextView
+            android:id="@+id/txt_get_verification_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="12dp"
+            android:clickable="true"
+            android:text="@string/txt_get_verification_code"/>
+    </RelativeLayout>
+
+    <com.heiman.widget.edittext.PasswordEditText
+        android:id="@+id/edit_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:maxLines="1"
+        android:minLines="1"
+        android:background="@drawable/common_input_bg"
+        android:hint="@string/input_password"/>
+
+    <com.heiman.widget.edittext.PasswordEditText
+        android:id="@+id/edit_password_next_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/login_icon_password"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="10dp"
+        android:drawablePadding="10dp"
+        android:maxLines="1"
+        android:minLines="1"
+        android:background="@drawable/common_input_bg"
+        android:hint="@string/input_password_next_time"/>
+
+    <com.heiman.widget.button.FButton
+        android:id="@+id/btn_regist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/btn_regist"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="bottom|center_horizontal">
+        <TextView
+            android:id="@+id/txt_use_email_regist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:padding="20dp"
+            android:clickable="true"
+            android:text="@string/txt_use_email_regist"/>
+    </LinearLayout>
+
+</LinearLayout>

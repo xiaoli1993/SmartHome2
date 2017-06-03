@@ -1,11 +1,11 @@
 package com.heiman.smarthome.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.heiman.baselibrary.BaseFragment;
 import com.heiman.smarthome.R;
 
 /**
@@ -15,7 +15,7 @@ import com.heiman.smarthome.R;
  * @Modify record :
  */
 
-public class AutomationFragment extends Fragment {
+public class AutomationFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

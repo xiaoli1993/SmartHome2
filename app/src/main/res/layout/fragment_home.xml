@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.heiman.widget.scrollview.NestedParent
+        <com.heiman.widget.scrollview.MyScrollView
             android:id="@+id/nested_scroll_parent_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -35,12 +35,19 @@
                         android:text="@string/MyScene" />
                 </LinearLayout>
 
-                <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+                <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
                     android:id="@+id/recycler_scene"
                     android:layout_width="match_parent"
-                    android:layout_height="291dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/white"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                    app:frv_dividerHorizontal="@color/grid_dr"
+                    app:frv_dividerHorizontalHeight="1px"
+                    app:frv_dividerVertical="@color/grid_dr"
+                    app:frv_dividerVerticalHeight="1px"
+                    app:frv_itemViewBothSidesMargin="1px"
+                    app:frv_layoutManager="grid"
+                    app:frv_layoutManagerOrientation="vertical"
+                    app:frv_spanCount="3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,7 +64,8 @@
                 <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
                     android:id="@+id/recycler_device"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     app:frv_dividerHorizontal="@color/grid_dr"
                     app:frv_dividerHorizontalHeight="1px"
                     app:frv_dividerVertical="@color/grid_dr"
@@ -67,7 +75,7 @@
                     app:frv_layoutManagerOrientation="vertical"
                     app:frv_spanCount="3" />
             </LinearLayout>
-        </com.heiman.widget.scrollview.NestedParent>
+        </com.heiman.widget.scrollview.MyScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

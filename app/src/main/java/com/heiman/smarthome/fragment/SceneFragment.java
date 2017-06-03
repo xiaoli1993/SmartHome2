@@ -3,12 +3,12 @@ package com.heiman.smarthome.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.heiman.baselibrary.BaseFragment;
 import com.heiman.smarthome.R;
 
 /**
@@ -18,7 +18,7 @@ import com.heiman.smarthome.R;
  * @Modify record :
  */
 
-public class SceneFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class SceneFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     private SwipeRefreshLayout swipeLayout;
 
     @Override

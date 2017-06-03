@@ -1,23 +1,31 @@
 package com.heiman.baselibrary;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.aitangba.swipeback.SwipeBackActivity;
 import com.heiman.baselibrary.http.XlinkUtils;
+import com.heiman.utils.permission.PerUtils;
+import com.heiman.utils.permission.PerimissionsCallback;
+import com.heiman.utils.permission.PermissionEnum;
+import com.heiman.utils.permission.PermissionManager;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.jaeger.library.StatusBarUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.kaopiz.kprogresshud.KProgressHUD;
+
+import java.util.ArrayList;
 
 /**
  * @Author : 肖力
@@ -26,7 +34,7 @@ import com.kaopiz.kprogresshud.KProgressHUD;
  * @Modify record :
  */
 
-public abstract class BaseActivity extends SwipeBackActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     private FrameLayout titleBar;
     private ImageView titleBarReturn;
@@ -49,16 +57,67 @@ public abstract class BaseActivity extends SwipeBackActivity {
     private static final int ACTIVITY_STOP = 5;
     private static final int ACTIVITY_DESTROY = 6;
     public int activityState;
+    public Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.common_title);
         StatusBarUtil.setTranslucent(this, 50);
         CloseActivityClass.activityList.add(this);
         initTitleView();
         XlinkUtils.StatusBarLightMode(this);
+        mContext = this;
+    }
+
+    /**
+     * 通过包名跳转
+     *
+     * @param activityName
+     */
+    public void startActivityForName(String activityName) {
+        try {
+            Class clazz = Class.forName(activityName);
+            Intent intent = new Intent(this, clazz);
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 通过包名跳转
+     *
+     * @param activityName
+     */
+    public void startActivityForName(String activityName, Bundle paramBundle) {
+        try {
+            Class clazz = Class.forName(activityName);
+            Intent intent = new Intent(this, clazz);
+            if (paramBundle != null)
+                intent.putExtras(paramBundle);
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 跳转界面
+     *
+     * @param paramClass
+     */
+    protected void openActivity(Class<?> paramClass) {
+        BaseApplication.getLogger().e(getClass().getSimpleName(), "openActivity：：" + paramClass.getSimpleName());
+        openActivity(paramClass, null);
+    }
+
+    protected void openActivity(Class<?> paramClass, Bundle paramBundle) {
+        Intent localIntent = new Intent(this, paramClass);
+        if (paramBundle != null)
+            localIntent.putExtras(paramBundle);
+        startActivity(localIntent);
     }
 
     //初始化标题
@@ -341,6 +400,64 @@ public abstract class BaseActivity extends SwipeBackActivity {
         }
     }
 
+    /**
+     * 权限检查
+     *
+     * @param permissions 所需检测权限数组
+     *                    PermissionEnum.READ_EXTERNAL_STORAGE, PermissionEnum.WRITE_EXTERNAL_STORAGE, PermissionEnum.CAMERA;
+     */
+    public void checkPermissions(PermissionEnum... permissions) {
+        PermissionManager
+                .with(this)
+                .tag(1000)
+                .permission(permissions)
+                .callback(new PerimissionsCallback() {
+                    @Override
+                    public void onGranted(ArrayList<PermissionEnum> grantedList) {
+                        Toast.makeText(mContext, R.string.Permission_is_granted, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onDenied(ArrayList<PermissionEnum> deniedList) {
+                        Toast.makeText(mContext, R.string.Permission_denied, Toast.LENGTH_SHORT).show();
+                        PermissionDenied(deniedList);
+                    }
+                })
+                .checkAsk();
+    }
+
+    private void PermissionDenied(final ArrayList<PermissionEnum> permissionsDenied) {
+        StringBuilder msgCN = new StringBuilder();
+        for (int i = 0; i < permissionsDenied.size(); i++) {
+
+            if (i == permissionsDenied.size() - 1) {
+                msgCN.append(permissionsDenied.get(i).getName_cn());
+            } else {
+                msgCN.append(permissionsDenied.get(i).getName_cn() + ",");
+            }
+        }
+        if (mContext == null) {
+            return;
+        }
+
+        AlertDialog alertDialog = new AlertDialog.Builder(mContext)
+                .setMessage(String.format(mContext.getResources().getString(R.string.permission_explain), msgCN.toString()))
+                .setCancelable(false)
+                .setPositiveButton(R.string.per_setting, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PerUtils.openApplicationSettings(mContext, R.class.getPackage().getName());
+                    }
+                })
+                .setNegativeButton(R.string.per_cancle, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(mContext, R.string.Click_Cancel, Toast.LENGTH_SHORT).show();
+                    }
+                }).create();
+        alertDialog.show();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -377,5 +494,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
         super.onDestroy();
         activityState = ACTIVITY_DESTROY;
     }
+
+
 }
 

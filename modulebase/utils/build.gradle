@@ -30,4 +30,9 @@ dependencies {
     compile rootProject.ext.dependencies.design
     compile 'com.github.JiongBull:jlog:0.1.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+
+    compile 'top.zibin:Luban:1.0.9'
 }

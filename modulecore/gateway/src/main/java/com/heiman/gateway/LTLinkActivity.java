@@ -27,6 +27,7 @@ import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.datacom.aes.AES128Utils;
 import com.heiman.gateway.modle.SmartLinkS;
 import com.heiman.utils.HexDump;
+import com.heiman.utils.UsefullUtill;
 import com.jaeger.library.StatusBarUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.longthink.api.LTLink;
@@ -41,6 +42,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
@@ -155,7 +157,7 @@ public class LTLinkActivity extends GwBaseActivity {
                             BaseApplication.getLogger().d("smartLink2" + res);
                             smartLink = gson.fromJson(res, SmartLinkS.class);
                             BaseApplication.getLogger().d("smartLink" + gson.toJson(smartLink).toString());
-                            timethread.schedule(task, 0, 500); // 启动timer
+                            timethread.schedule(task, 1000, 3000); // 启动timer
                         } catch (Exception e) {
 
                         }
@@ -229,6 +231,7 @@ public class LTLinkActivity extends GwBaseActivity {
                     BaseApplication.getLogger().d("no!smartLink6");
                     setDevice(xlinkDevice);
                     XlinkAgent.getInstance().initDevice(xDevice);
+                    isDevice = true;
                     if (xDevice.getVersion() == 1) {
                         BaseApplication.getLogger().d("no!smartLink7");
                         try {
@@ -256,7 +259,7 @@ public class LTLinkActivity extends GwBaseActivity {
                                         //execute the task
                                         List<String> OID = new ArrayList<String>();
                                         OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-                                        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+                                        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
                                         BaseApplication.getLogger().json(sb);
                                         sendData(sb, false);
                                     }
@@ -290,7 +293,7 @@ public class LTLinkActivity extends GwBaseActivity {
                                                                 //execute the task
                                                                 List<String> OID = new ArrayList<String>();
                                                                 OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-                                                                String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+                                                                String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
                                                                 BaseApplication.getLogger().json(sb);
                                                                 sendData(sb, false);
                                                             }
@@ -384,16 +387,24 @@ public class LTLinkActivity extends GwBaseActivity {
         } else if (i == R.id.btn_eco) {
             List<String> OID = new ArrayList<String>();
             OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
-            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
             BaseApplication.getLogger().json(sb);
             sendData(sb, false);
         } else if (i == R.id.btn_ecos) {
-            List<String> OID = new ArrayList<String>();
-            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
-            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
-//            device.setAesKey("1234567890abcdf");
-            sendData(sb);
+//            List<String> OID = new ArrayList<String>();
+//            OID.add(HeimanCom.COM_GW_OID.GW_NAME);
+//            OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
+//            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+////            device.setAesKey("1234567890abcdf");
+//            sendData(sb);
+            new Handler().postDelayed(new Runnable() {
+                public void run() {
+                    //execute the task
+                    String sb = HeimanCom.setTimeZone(SmartPlug.mgetSN(), 1, "+6.30");
+                    BaseApplication.getLogger().json(sb);
+                    sendData(sb);
+                }
+            }, 1000);
         }
     }
 
@@ -411,22 +422,25 @@ public class LTLinkActivity extends GwBaseActivity {
         BaseApplication.getLogger().json(dataString);
         Gson gson = new Gson();
         AESKey aesKey = gson.fromJson(dataString, AESKey.class);
-        String accKEY = device.getAccessKey().substring(0, 15);
-        String aesKeyb = "";
         try {
-            aesKeyb = AES128Utils.HmDecrypt(aesKey.getPL().getAesKey(), accKEY);
+            BaseApplication.getLogger().i("aesKeyb:" + aesKey.getPL().getAesKey());
+            String aesKeyb = AES128Utils.HmDecrypt(aesKey.getPL().getAesKey(), Constant.ZIGBEE_H1GW_NEW_KEY);
+            BaseApplication.getLogger().i("aesKeyb:" + Arrays.toString(aesKeyb.getBytes()) + "\t秘钥字符串：" + aesKeyb
+                    + "\n" + UsefullUtill.bytesToHxString(aesKeyb.getBytes())
+
+            );
+            device.setAesKey(aesKeyb);
+            DeviceManage.getInstance().addDevice(device);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
-        device.setAesKey(aesKeyb);
-        DeviceManage.getInstance().addDevice(device);
 
-        List<String> OID = new ArrayList<String>();
-        OID.add(HeimanCom.COM_GW_OID.GW_NAME);
-        OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
-        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
-        BaseApplication.getLogger().json(sb);
+//        List<String> OID = new ArrayList<String>();
+//        OID.add(HeimanCom.COM_GW_OID.GW_NAME);
+//        OID.add(HeimanCom.COM_GW_OID.DEVICE_BASIC_INFORMATION);
+//        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 1, OID);
+//        BaseApplication.getLogger().json(sb);
+//        sendData(sb);
 
-        sendData(sb);
     }
 }

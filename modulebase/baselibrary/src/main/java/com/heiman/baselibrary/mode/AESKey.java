@@ -89,7 +89,7 @@ public class AESKey {
          * 2.1.1.6 : AES128
          */
 
-        @SerializedName("2.1.1.6")
+        @SerializedName("2.1.1.1.8")
         private String AesKey;
 
         public String getAesKey() {

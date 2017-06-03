@@ -42,22 +42,46 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.tencent.bugly.hotfix.fileProvider"
+            android:authorities="com.heiman.smarthome.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         <!-- Bugly升级SDK配置结束 -->
         <!-- XLINK 内网服务 -->
         <service android:name="io.xlink.wifi.sdk.XlinkUdpService" />
         <!-- XLINK 公网服务 -->
         <service android:name="io.xlink.wifi.sdk.XlinkTcpService" />
+        <!--海曼服务-->
+        <service android:name=".HeimanServer" />
 
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.RoomMoreActivity" />
+        <activity android:name=".activity.RoomEditActivity" />
+        <activity android:name=".activity.AddDeviceActivity" />
+        <activity android:name=".activity.ConfigurationWizardActivity" />
+        <activity android:name=".activity.UserCenterActivity" />
+        <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.AuthorizeManaActivity" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ResetPwdActivity" />
+        <activity android:name=".activity.CommonProblemActivity" />
+        <activity android:name="com.heiman.widget.UCropView.WeiChatCropActivity" />
+        <activity android:name=".activity.FeedBackActivity" />
+        <activity android:name=".activity.InformationActivity" />
+        <activity
+            android:name=".activity.ShareDeviceActivity"
+            android:label="@string/title_activity_share_device"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.RegistActivity" />
+        <activity android:name=".activity.RegistUseEmailActivity" />
+        <activity android:name=".activity.PhoneGetBackPasswordActivity" />
+        <activity android:name=".activity.EmailGetBackPasswordActivity"></activity>
+
     </application>
 
 </manifest>

@@ -27,6 +27,10 @@ public class Constant {
     public static final String BROADCAST_RECVPIPE = PACKAGE_NAME + ".recv-pipe";
     public static final String BROADCAST_RECVPIPE_SYNC = PACKAGE_NAME + ".recv-pipe-sync";
     public static final String BROADCAST_DEVICE_CHANGED = PACKAGE_NAME + ".device-changed";
+    public static final String BROADCAST_CONNENCT_SUCCESS = PACKAGE_NAME + ".connenctsuccess";
+    public static final String BROADCAST_CONNENCT_FAIL = PACKAGE_NAME + ".connenctfail";
+    public static final String BROADCAST_SEND_OVERTIME = PACKAGE_NAME + ".sendovertime";
+    public static final String BROADCAST_SEND_SUCCESS = PACKAGE_NAME + ".sendsuccess";
     public static final String BROADCAST_EVENT_NOTIFY = PACKAGE_NAME + ".event-notify";
     public static final String BROADCAST_LOG_ACTION = PACKAGE_NAME + ".Log_action";
     public static final String BROADCAST_SEND_DATA = PACKAGE_NAME + ".send_data";
@@ -46,6 +50,9 @@ public class Constant {
     public static final String DATA = "data";
     // public static final String DEVICE = "device";
     public static final String DEVICE_MAC = "device-mac";
+    public static final String ROOM_ID = "room-id";
+    public static final String ROOM_NAME = "room-name";
+    public static final String ROOM_URL = "room-url";
     public static final String ZIGBEE_MAC = "zigbee-mac";
     public static final String IS_SUB = "is-sub";
     public static final String STATUS = "status";
@@ -97,12 +104,27 @@ public class Constant {
     // ZigBee 新小网关
     public static String ZIGBEE_H1GW_NEW_PRODUCTID = "0fc2c50412264ce29dae547ff08b941e";
 
+    public static String ZIGBEE_H1GW_NEW_KEY = "2f187a0983ea42db";
+
+
     //Json CID指令集
     public static class JOSN_CID {
         public static final int COMMAND_SEND = 30011;                               //CID   控制指令
         public static final int COMMAND_SEND_BACK = 30012;                          //CID   返回控制指令
         public static final int COMMAND_GET = 30021;                                //CID   获取数据指令
         public static final int COMMAND_GET_BACK = 30022;                           //CID   返回数据指令
+    }
+
+    //RC集合
+    public static class JOSN_RC {
+        public static final int SUCCESS = 1;                                         //成功
+        public static final int UNKNOWN_ERROR = 0;                                   //未知错误
+        public static final int PARAMETER_ERROR = -1;                                //参数错误
+        public static final int DECRYPTION_FAILURE = -2;                             //解密失败 (明文回复)
+        public static final int THE_OID_DOES_NOT_EXISTt = -3;                        //不存在该OID
+        public static final int CID_DOES_NOT_EXIST = -4;                             //CID不存在
+        public static final int PL_CANNOT_BE_EMPTY = -5;                             //PL中不能为空
+        public static final int TEID_CANNOT_BE_EMPTY = -6;                           //TEID不能为空
     }
 
     // 设备的设备类型TYPE

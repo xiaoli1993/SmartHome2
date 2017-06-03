@@ -25,6 +25,23 @@ import java.util.List;
 
 public class BaseFragment extends Fragment {
     /**
+     * 跳转界面
+     *
+     * @param paramClass
+     */
+    protected void openActivity(Class<?> paramClass) {
+        BaseApplication.getLogger().e(getClass().getSimpleName(), "openActivity：：" + paramClass.getSimpleName());
+        openActivity(paramClass, null);
+    }
+
+    protected void openActivity(Class<?> paramClass, Bundle paramBundle) {
+        Intent localIntent = new Intent(getActivity(), paramClass);
+        if (paramBundle != null)
+            localIntent.putExtras(paramBundle);
+        startActivity(localIntent);
+    }
+
+    /**
      * 通过包名跳转
      *
      * @param activityName

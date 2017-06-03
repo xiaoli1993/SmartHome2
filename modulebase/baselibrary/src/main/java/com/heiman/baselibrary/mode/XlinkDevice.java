@@ -26,7 +26,7 @@ public class XlinkDevice extends DataSupport {
     private String softwareVer;// 软件版本
     private String timeZone;// 时区
     private String deviceMac;// mac地址
-    private String accessKey;// 密码
+    private String accessKey;// 云智易密码
     private String hardwareVer;// 硬件版本
     private int deviceType;// 设备类型
     private String deviceName;// 设备名字
@@ -48,6 +48,24 @@ public class XlinkDevice extends DataSupport {
     private String last_login; //最近上线时间
     private String authorize_code;// 认证码
     private String active_code;//激活码
+    private String accessAESKey;// AES密码
+    private String roomID;//房间ID
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
+
+    public String getAccessAESKey() {
+        return accessAESKey;
+    }
+
+    public void setAccessAESKey(String accessAESKey) {
+        this.accessAESKey = accessAESKey;
+    }
 
     public String getActive_date() {
         return active_date;
@@ -282,5 +300,11 @@ public class XlinkDevice extends DataSupport {
 
     public void setxDevice(String xDevice) {
         this.xDevice = xDevice;
+    }
+
+
+    @Override
+    public String toString() {
+        return getDeviceName();
     }
 }

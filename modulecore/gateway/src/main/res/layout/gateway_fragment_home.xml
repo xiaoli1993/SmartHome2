@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btn_home"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/image_home"
+                        android:layout_width="61dp"
+                        android:layout_height="61dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/device_gas" />
+
+                    <TextView
+                        android:id="@+id/tv_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/gateway_at_home" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/grid_dr" />
+
+                <LinearLayout
+                    android:id="@+id/btn_away"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/image_away"
+                        android:layout_width="61dp"
+                        android:layout_height="61dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/device_gas" />
+
+                    <TextView
+                        android:id="@+id/tv_away"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/gateway_away" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/grid_dr" />
+
+                <LinearLayout
+                    android:id="@+id/btn_disarm"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/image_disarm"
+                        android:layout_width="61dp"
+                        android:layout_height="61dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/device_gas" />
+
+                    <TextView
+                        android:id="@+id/tv_disarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/gateway_disarm" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/grid_dr" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:text="@string/gateway_device" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/grid_dr" />
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_device"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:frv_divider="@color/grid_dr"
+                app:frv_dividerHeight="1px"
+                app:frv_layoutManager="linear"
+                app:frv_layoutManagerOrientation="vertical" />
+
+            <include layout="@layout/layout_bottom_add" />
+
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

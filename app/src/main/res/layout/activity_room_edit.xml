@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:melove="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_transparent_white" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@drawable/divider_recycler" />
+
+    <com.heiman.widget.scrollview.MyScrollView
+        android:id="@+id/nested_scroll_parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/room_name"
+                    android:textColor="@color/class_6"
+                    android:textSize="10dp" />
+
+            </RelativeLayout>
+
+            <com.heiman.widget.edittext.ClearEditText
+                android:id="@+id/et_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:hint="Emain/Phone"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:textColor="@color/class_V"
+                android:textColorHint="@color/class_W"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_room_device_number"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@color/main_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:textColor="@color/class_6"
+                android:textSize="10dp" />
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_room_device"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:frv_divider="@color/grid_dr"
+                app:frv_dividerHeight="1px"
+                app:frv_layoutManager="linear"
+                app:frv_layoutManagerOrientation="vertical" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@color/main_bg"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="@string/Unallocated_room_equipment"
+                android:textColor="@color/class_6"
+                android:textSize="10dp" />
+
+            <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                android:id="@+id/recycler_not_room_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:frv_divider="@color/grid_dr"
+                app:frv_dividerHeight="1px"
+                app:frv_layoutManager="linear"
+                app:frv_layoutManagerOrientation="vertical" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:paddingTop="10dp">
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/Room_wallpaper"
+                        android:textColor="@color/class_6"
+                        android:textSize="10dp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_photograph"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:text="@string/Photograph"
+                            android:textColor="@color/class_6"
+                            android:textSize="12dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@drawable/divider_recycler" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_select_existing"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:text="@string/Select_existing_wallpaper"
+                            android:textColor="@color/class_6"
+                            android:textSize="12dp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/arrow_right" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@drawable/divider_recycler" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/main_bg"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.heiman.widget.imageview.MLImageView
+                            android:id="@+id/image_room_bg"
+                            android:layout_width="96dp"
+                            android:layout_height="166.6dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/main_room"
+                            melove:radius="8dp"
+                            melove:shape_type="rectangle" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </com.heiman.widget.scrollview.MyScrollView>
+</LinearLayout>

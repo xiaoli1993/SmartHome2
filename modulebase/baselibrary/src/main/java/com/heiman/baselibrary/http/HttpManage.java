@@ -5,11 +5,13 @@ package com.heiman.baselibrary.http;/**
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
+import com.heiman.utils.UsefullUtill;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -21,11 +23,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 //import com.heiman.smarthome.BaseApplication;
 
@@ -44,6 +55,8 @@ public class HttpManage {
     //    private static final String COMPANY_ID = "1007d2acea6d2000";
     public static String COMPANY_ID = "1007d2ada7d4a000";
     private static String host = "https://console.heiman.cn:443";
+    private static final String FEEDBACK_HOST = "http://47.88.192.21:80/";
+    public static final int MAX_UPLOAD_IMAGE_FILE_SIZE = 2 * 1024 * 1024;
 
     public static String getCompanyId() {
         return COMPANY_ID;
@@ -80,7 +93,7 @@ public class HttpManage {
     // 获取用户信息
     private final String getUserInfoUrl = host + "/v2/user/{user_id}";
     // 设置用户扩展属性
-    private final String Property = "/v2/user/{user_id}/property";
+    private final String Property = host + "/v2/user/{user_id}/property";
     // 获取某个用户绑定的设备列表。
     private final String subscribeListUrl = host + "/v2/user/%d/subscribe/devices";
     // public final String subscribeListUrl = host + "/v2/user/%d/subscribe/devices?version=%d";
@@ -94,6 +107,8 @@ public class HttpManage {
     private final String shareListUrl = host + "/v2/share/device/list";
     // 设备管理员分享设备给指定用户
     private final String sharedeviceUrl = host + "/v2/upgrade/device";
+    // 管理员（用户）获取所有设备分享请求列表
+    private final String listsharedeviceUrl = host + "/v2/share/device/list";
     // 设备管理员收回设备分享
     private final String cancelsharedeviceUrl = host + "/v2/share/device/cancel";
     // 管理员或用户删除这条分享记录
@@ -139,6 +154,14 @@ public class HttpManage {
     private final String tabletUrl = host + "/v2/data/";
     // 数据表S查询
     private final String datastUrl = host + "/v2/datas/";
+    //增加反馈信息
+    private final String feedbackInsert = FEEDBACK_HOST + "SmartHome/feedBack/join";
+    //查询反馈记录
+    private final String feedbackList = FEEDBACK_HOST + "SmartHome/feedBack/list";
+    //删除指定反馈记录id的反馈记录
+    private final String feedbackDelete = FEEDBACK_HOST + "SmartHome/feedBack/cancel/{id}";
+    //上传意见反馈图片
+    private final String feedbackUploadPhoto = FEEDBACK_HOST + "SmartHome/feedBack/uploadPictures";
 
 
     /**
@@ -224,6 +247,7 @@ public class HttpManage {
         }
         params.put("corp_id", COMPANY_ID);
         params.put("password", pwd);
+        params.put("resource", "2");
         post(context, loginUrl, params, callback);
     }
 
@@ -488,7 +512,7 @@ public class HttpManage {
     /**
      * .管理员或用户删除这条分享记录
      */
-    public void DeleteSharedevice(Context context, String invite_code, final ResultCallback callback) {
+    public void deleteSharedevice(Context context, String invite_code, final ResultCallback callback) {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
         delete(context, deletesharedeviceUrl + "/" + invite_code, headers, callback);
@@ -500,7 +524,7 @@ public class HttpManage {
      *
      * @param invite_code "分享ID"
      */
-    public void CancelSharedevice(Context context, String invite_code, final ResultCallback callback) {
+    public void cancelShareDevice(Context context, String invite_code, final ResultCallback callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("invite_code", invite_code);
         Map<String, String> headers = new HashMap<String, String>();
@@ -524,7 +548,7 @@ public class HttpManage {
      *                  "email": 邮件方式分享
      *                  back      "invite_code" : "分享ID"
      */
-    public void Sharedevice(Context context, String user, String device_id, String mode, final ResultCallback callback) {
+    public void shareDevice(Context context, String user, String device_id, String mode, final ResultCallback callback) {
         Map<String, String> params = new HashMap<String, String>();
         params.put("device_id", device_id);
         params.put("user", user);
@@ -533,6 +557,32 @@ public class HttpManage {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
         post(context, sharedeviceUrl, headers, params, callback);
+    }
+
+    /**
+     * .管理员（用户）获取所有设备分享请求列表
+     * back :
+     * invite_code	是	分享ID
+     * from_id	是	分享者ID，一般都是设备管理员的ID。
+     * from_user	是	分享者帐号，一般都是设备管理员的ID。
+     * to_id	是	分享给谁
+     * to_user	是	分享给谁的帐号
+     * device_id	是	设备ID
+     * state	是	分享状态;{
+     * pending	string	等待接收
+     * accept	string	已接收
+     * deny	string	拒绝
+     * overtime	string	超时
+     * cancel	string	已取消
+     * invalid	string	无效的请求
+     * }
+     * create_date	是	分享产生时间
+     * expire_date	是	分享过期时间
+     */
+    public void getlistSharedevice(Context context, final ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, listsharedeviceUrl, headers, callback);
     }
 
     /**
@@ -582,7 +632,7 @@ public class HttpManage {
      * @param key   扩展属性key值
      * @param value 扩展属性value值
      */
-    public void SetProperty(Context context, String key, String value, final ResultCallback callback) {
+    public void setProperty(Context context, String key, String value, final ResultCallback callback) {
         String url = Property.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         params.put(key, value);
@@ -594,12 +644,11 @@ public class HttpManage {
     /**
      * .获取用户扩展属性
      */
-    public void GetOneProperty(Context context, String key, final ResultCallback callback) {
+    public void getOneProperty(Context context, String key, final ResultCallback callback) {
         String url = Property.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
-        Map<String, String> params = new HashMap<String, String>();
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post(context, url + key, headers, params, callback);
+        get(context, url + "/" + key, headers, callback);
     }
 
     /**
@@ -609,7 +658,7 @@ public class HttpManage {
      *
      * @param data 消息ID
      */
-    public void SetMessageRead(Context context, String data, final ResultCallback callback) {
+    public void setMessageRead(Context context, String data, final ResultCallback callback) {
         String url = getUserInfoUrl.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
         StringEntity entity = null;
         try {
@@ -620,7 +669,7 @@ public class HttpManage {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
         // params.put("device_id", device_id);
-        post2(context, url + "/message_read", entity, callback, headers);
+        post(context, url + "/message_read", entity, callback, headers);
 
     }
 
@@ -632,7 +681,7 @@ public class HttpManage {
      * @param data       数据
      * @param callback
      */
-    public void SetSubDevice(Context context, String product_id, int deviceid, String data,
+    public void setSubDevice(Context context, String product_id, int deviceid, String data,
                              final ResultCallback callback) {
 
         StringEntity entity = null;
@@ -643,7 +692,7 @@ public class HttpManage {
         }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, host + "/v2/product/" + product_id + "/device/"
+        post(context, host + "/v2/product/" + product_id + "/device/"
                 + deviceid + "/subdevices", entity, callback, headers);
 
     }
@@ -705,7 +754,7 @@ public class HttpManage {
      *
      * @param user 手机或邮箱
      */
-    public void OnGetCodeChage(Context context, String user, final ResultCallback callback) {
+    public void onGetCodeChage(Context context, String user, final ResultCallback callback) {
 
         String url = getUserInfoUrl.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
@@ -731,7 +780,7 @@ public class HttpManage {
      * @param password   用户登录密码
      * @param callback
      */
-    public void OnChagePhoneorEmail(Context context, String user, String verifycode, String password, final ResultCallback callback) {
+    public void onChagePhoneorEmail(Context context, String user, String verifycode, String password, final ResultCallback callback) {
         String url = getUserInfoUrl.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
         Map<String, String> params = new HashMap<String, String>();
         String Urlphoenoremail;
@@ -762,18 +811,29 @@ public class HttpManage {
     }
 
     /**
+     * .刷新凭证
+     */
+    public void onRefreshs(Context context, final ResultCallback callback) throws JSONException {
+        RequestParams params = new RequestParams();
+        params.put("refresh_token", BaseApplication.getMyApplication().getRefresh_token());
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, refreshUrl, params.getJsonEntity(), callback, headers);
+    }
+
+    /**
      * .用户查询设备固件最新版本
      *
      * @param product_id 产品ID
      * @param device_id  设备ID
      */
     public void onVersion(Context context, String product_id, String device_id, final ResultCallback callback) {
-        Map<String, String> params = new HashMap<String, String>();
+        RequestParams params = new RequestParams();
         params.put("product_id", product_id);
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post(context, newestversionUrl, params, headers, callback);
+        post(context, newestversionUrl, params.getJsonEntity(),callback, headers );
     }
 
     /**
@@ -783,12 +843,144 @@ public class HttpManage {
      * @param device_id  设备ID
      */
     public void onUpdevice(Context context, String product_id, String device_id, final ResultCallback callback) {
-        Map<String, String> params = new HashMap<String, String>();
+        RequestParams params = new RequestParams();
         params.put("product_id", product_id);
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post(context, updeviceUrl, params, headers, callback);
+        post(context, updeviceUrl, params.getJsonEntity(),callback, headers );
+    }
+
+    /**
+     * .创建数据表/查询
+     * {
+     * "offset":"请求列表的偏移量",
+     * "limit":"请求数量",
+     * "filter":["字段A","字段B"],
+     * "query":
+     * {
+     * "filed1":{"$in":["字段值","字段值"]},
+     * "filed3":{"$lt":"字段值"}
+     * },
+     * "order":
+     * {
+     * "filed1":"desc",
+     * "filed2":"asc"
+     * }
+     * }
+     * offset	　否｜　从某个偏移量开始请求，默认为0
+     * limit	否	请求的条目数量，默认为10
+     * filter	否	字段过滤，可以指定返回结果列表的字段
+     * query	否	查询条件，可以根据不同字段加上不同的比较指令来查询，支持比较指令包含如下
+     * $in：包含于该列表任意一个值
+     * $lt：小于该字段值
+     * $lte：小于或等于字段值
+     * $gt：大于该字段值
+     * $gte：大于或等于该字段值
+     * order	否	可以指定通过某字段排序，desc降序，asc升序
+     *
+     * @param data      数据内容
+     * @param tableName 表名称
+     */
+    public void postData(Context context, String data, String tableName, final ResultCallback callback) {
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(data.toString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, tabletUrl + tableName, entity, callback, headers);
+        BaseApplication.getLogger().i("Access-Token:" + BaseApplication.getMyApplication().getAccessToken() + "\ndata:" + data + "\nURL:" + tabletUrl + tableName + "/");
+    }
+
+    /**
+     * .创建数据表/查询
+     * {
+     * "offset":"请求列表的偏移量",
+     * "limit":"请求数量",
+     * "filter":["字段A","字段B"],
+     * "query":
+     * {
+     * "filed1":{"$in":["字段值","字段值"]},
+     * "filed3":{"$lt":"字段值"}
+     * },
+     * "order":
+     * {
+     * "filed1":"desc",
+     * "filed2":"asc"
+     * }
+     * }
+     * offset	　否｜　从某个偏移量开始请求，默认为0
+     * limit	否	请求的条目数量，默认为10
+     * filter	否	字段过滤，可以指定返回结果列表的字段
+     * query	否	查询条件，可以根据不同字段加上不同的比较指令来查询，支持比较指令包含如下
+     * $in：包含于该列表任意一个值
+     * $lt：小于该字段值
+     * $lte：小于或等于字段值
+     * $gt：大于该字段值
+     * $gte：大于或等于该字段值
+     * order	否	可以指定通过某字段排序，desc降序，asc升序
+     *
+     * @param data      数据内容
+     * @param tableName 表名称
+     */
+    public void ckData(Context context, String data, String tableName, final ResultCallback callback) {
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(data.toString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, datastUrl + tableName, entity, callback, headers);
+    }
+
+    /**
+     * .更新数据表
+     *
+     * @param data      数据内容
+     * @param tableName 表名称
+     */
+    public void putData(Context context, String data, String tableName, String object_id, final ResultCallback callback) {
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(data.toString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        put(context, tabletUrl + tableName + "/" + object_id, entity, callback, headers);
+        BaseApplication.getLogger().i("Access-Token:" + BaseApplication.getMyApplication().getAccessToken() + "\ndata:" + data + "\nURL:" + tabletUrl + tableName + "/" + object_id);
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param tableName 表名称
+     * @param object_id 数据表类型
+     */
+    public void getData(Context context, String tableName, String object_id,
+                        final ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, tabletUrl + tableName + "/" + object_id, headers, callback);
+    }
+
+    /**
+     * 删除数据表
+     *
+     * @param tableName 表名称
+     * @param object_id 数据表类型
+     */
+    public void deleteData(Context context, String tableName, String object_id,
+                           final ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        delete(context, tabletUrl + tableName + "/" + object_id, headers, callback);
     }
 
     /**
@@ -801,7 +993,7 @@ public class HttpManage {
         ByteArrayEntity entity = new ByteArrayEntity(datas);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, headportraitUrl, entity, callback, headers);
+        post(context, headportraitUrl, entity, callback, headers);
     }
 
     /**
@@ -841,7 +1033,7 @@ public class HttpManage {
         Map<String, String> headers = new HashMap<String, String>();
         BaseApplication.getLogger().d(url + "/messages" + "\n" + params.getStringData());
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, url + "/messages", params.getJsonEntity(), callback, headers);
+        post(context, url + "/messages", params.getJsonEntity(), callback, headers);
     }
 
     /**
@@ -862,7 +1054,7 @@ public class HttpManage {
         params.put("name", name);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, url, params.getJsonEntity(), callback, headers);
+        post(context, url, params.getJsonEntity(), callback, headers);
         BaseApplication.getLogger().i("url:" + url + "\tAccessToken:" + BaseApplication.getMyApplication().getAccessToken()
                 + "product_id:" + product_id + "mac:" + mac + "name:" + name);
     }
@@ -905,7 +1097,7 @@ public class HttpManage {
 
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, url + "/messages", params.getJsonEntity(), callback, headers);
+        post(context, url + "/messages", params.getJsonEntity(), callback, headers);
 
     }
 
@@ -927,8 +1119,182 @@ public class HttpManage {
         }
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post2(context, url + "/messages", entity, callback, headers);
+        post(context, url + "/messages", entity, callback, headers);
+    }
 
+    /**
+     * 增加反馈记录
+     *
+     * @param userId         用户id
+     * @param content        反馈内容
+     * @param label          反馈标签
+     * @param contact        联系方式
+     * @param image          图片的下载地址
+     * @param resultCallback
+     */
+    public void feedbackInsert(Context context, String userId, String content, String label, String contact, String image, final ResultCallback resultCallback) {
+        HashMap<String, String> params = new HashMap<>();
+
+        if (!TextUtils.isEmpty(userId)) {
+            params.put("userId", userId);
+        }
+        params.put("content", content);
+        params.put("label", label);
+
+        if (!TextUtils.isEmpty(contact)) {
+
+            if (SmartHomeUtils.isEmial(contact)) {
+                params.put("email", contact);
+            } else {
+                params.put("phone", contact);
+            }
+        }
+
+        if (!TextUtils.isEmpty(image)) {
+            params.put("image", image);
+        }
+        String json = UsefullUtill.getJSONStr(params);
+        BaseApplication.getLogger().e("json:" + json);
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(json, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        headers.put(AsyncHttpClient.HEADER_CONTENT_TYPE, "application/json;charset=utf-8");
+        put(context, feedbackInsert, entity, resultCallback, headers);
+    }
+
+    /**
+     * 查询意见反馈记录
+     *
+     * @param userId         用户id
+     * @param offset         偏移
+     * @param limit          查询条数
+     * @param resultCallback
+     */
+    public void feedbackList(Context context, String userId, int offset, int limit, final ResultCallback resultCallback) {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("limit", limit);
+        params.put("filter", new String[]{"feed_back.id", "feed_back.user_id", "feed_back.user_name", "feed_back.content", "feed_back.Image", "feed_back.label", "feed_back.create_time"});
+        HashMap<String, Object> userIdMap = new HashMap<>();
+        userIdMap.put("$eq", userId);
+        HashMap<String, Object> queryMap = new HashMap<>();
+        queryMap.put("feed_back.user_id", userIdMap);
+        params.put("query", queryMap);
+        String json = UsefullUtill.getJSONStr(params);
+        BaseApplication.getLogger().e("json:" + json);
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            BaseApplication.getLogger().e("jsonObject:" + jsonObject);
+        } catch (JSONException e) {
+            BaseApplication.getLogger().e(e.getMessage());
+        }
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(json, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        headers.put(AsyncHttpClient.HEADER_CONTENT_TYPE, "application/json;charset=utf-8");
+        post(context, feedbackList, entity, resultCallback, headers);
+    }
+
+    /**
+     * 删除意见反馈信息
+     *
+     * @param feedbackId     意见反馈id
+     * @param resultCallback
+     */
+    public void feedbackDelete(Context context, String feedbackId, final ResultCallback resultCallback) {
+        String url = feedbackDelete.replace("{id}", feedbackId);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        headers.put(AsyncHttpClient.HEADER_CONTENT_TYPE, "application/json;charset=utf-8");
+        delete(context, url, headers, resultCallback);
+    }
+
+    /**
+     * @param file 需要上传的文件
+     * @return 图片在服务器的存储路径
+     */
+    public String feedbackUploadPhoto(File file) {
+        String result = null;
+        String BOUNDARY = UUID.randomUUID().toString(); // 边界标识 随机生成
+        String PREFIX = "--";
+        String LINE_END = "\r\n";
+        String CONTENT_TYPE = "multipart/form-data"; // 内容类型
+        try {
+            URL url = new URL(feedbackUploadPhoto);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(10000);
+            conn.setDoInput(true); // 允许输入流
+            conn.setDoOutput(true); // 允许输出流
+            conn.setUseCaches(false); // 不允许使用缓存
+            conn.setRequestMethod("POST"); // 请求方式
+            conn.setRequestProperty("Charset", "utf-8"); // 设置编码
+            conn.setRequestProperty("connection", "keep-alive");
+            conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
+            if (file != null) {
+                /**
+                 * 当文件不为空，把文件包装并且上传
+                 */
+                DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+                StringBuffer sb = new StringBuffer();
+                sb.append(PREFIX);
+                sb.append(BOUNDARY);
+                sb.append(LINE_END);
+                /**
+                 * 这里重点注意： name里面的值为服务端需要key 只有这个key 才可以得到对应的文件
+                 * filename是文件的名字，包含后缀名的 比如:abc.png
+                 */
+                sb.append("Content-Disposition: form-data; name=\"uploadfile\"; filename=\""
+                        + file.getName() + "\"" + LINE_END);
+                sb.append("Content-Type: application/octet-stream; charset=" + "utf-8" + LINE_END);
+                sb.append(LINE_END);
+                dos.write(sb.toString().getBytes());
+                InputStream is = new FileInputStream(file);
+                byte[] bytes = new byte[1024];
+                int len = 0;
+                while ((len = is.read(bytes)) != -1) {
+                    dos.write(bytes, 0, len);
+                }
+                is.close();
+                dos.write(LINE_END.getBytes());
+                byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
+                dos.write(end_data);
+                dos.flush();
+                /**
+                 * 获取响应码 200=成功 当响应成功，获取响应的流
+                 */
+                int res = conn.getResponseCode();
+                BaseApplication.getLogger().e("response code:" + res);
+                if (res == 200) {
+                    BaseApplication.getLogger().e("request success");
+                    InputStream input = conn.getInputStream();
+                    StringBuffer sb1 = new StringBuffer();
+                    int ss;
+                    while ((ss = input.read()) != -1) {
+                        sb1.append((char) ss);
+                    }
+                    result = sb1.toString();
+                    BaseApplication.getLogger().e("result : " + result);
+                } else {
+                    BaseApplication.getLogger().e("request error");
+                }
+            }
+        } catch (MalformedURLException e) {
+            BaseApplication.getLogger().e(e.getMessage());
+        } catch (IOException e) {
+            BaseApplication.getLogger().e(e.getMessage());
+        }
+        return result;
     }
 
     //    public void checkUpdate(String deviceId,final ResultCallback callback){
@@ -959,7 +1325,7 @@ public class HttpManage {
 //        post(url, header, map, callback);
 //    }
 //=========================================================================================
-    private void post2(Context context, String url, HttpEntity entity, ResultCallback handler, Map<String, String> headers) {
+    private void post(Context context, String url, HttpEntity entity, ResultCallback handler, Map<String, String> headers) {
         Header[] headersdata = map2Header(headers);
         client.post(context, url, headersdata, entity, "application/json", handler);
     }
@@ -985,6 +1351,11 @@ public class HttpManage {
         StringEntity entity = params2StringEntity(params);
         Header[] headersdata = map2Header(headers);
         client.post(context, url, headersdata, entity, "application/json", callback);
+    }
+
+    private void put(Context context, String url, HttpEntity entity, ResultCallback handler, Map<String, String> headers) {
+        Header[] headersdata = map2Header(headers);
+        client.put(context, url, headersdata, entity, "application/json", handler);
     }
 
     private void put(Context context, String url, Map<String, String> headers, Map<String, String> params, ResultCallback callback) {
@@ -1047,6 +1418,7 @@ public class HttpManage {
 
         @Override
         public void onSuccess(int code, Header[] headers, String msg) {
+            BaseApplication.getLogger().json(msg);
             if (mType == String.class) {
                 onSuccess(code, (T) msg);
             } else {
