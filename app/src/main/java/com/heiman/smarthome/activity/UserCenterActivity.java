@@ -15,12 +15,11 @@ import android.widget.TextView;
 
 import com.heiman.baselibrary.BaseActivity;
 import com.heiman.baselibrary.manage.DeviceManage;
-import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.smarthome.MyApplication;
+import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.smarthome.R;
 import com.heiman.utils.AsyncBitmapLoader;
-import com.heiman.utils.LogUtil;
 import com.heiman.utils.UsefullUtill;
 
 import java.util.HashMap;
@@ -48,8 +47,6 @@ public class UserCenterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_user_center);
         setContentLayout(R.layout.activity_user_center);
-        showHeadView(false);
-
         txtNickName = (TextView) findViewById(R.id.txt_nick_name);
         imgBtnBack = (ImageButton) findViewById(R.id.ivbtn_back);
         imgBtnHead = (ImageButton) findViewById(R.id.ivbtn_head);
@@ -70,6 +67,8 @@ public class UserCenterActivity extends BaseActivity {
         txtAbout.setOnClickListener(mOnClickListener);
         txtSet.setOnClickListener(mOnClickListener);
         txtExitAccount.setOnClickListener(mOnClickListener);
+
+        showHeadView(false);
     }
 
     @Override
@@ -82,7 +81,7 @@ public class UserCenterActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             if (!UsefullUtill.judgeClick(R.layout.activity_user_center, 500)) {
-                LogUtil.e("点击过快！");
+                MyApplication.getLogger().e("点击过快！");
                 return;
             }
             switch (v.getId()) {
@@ -167,13 +166,14 @@ public class UserCenterActivity extends BaseActivity {
                     if (userInfo != null) {
                         String nickName = getString(R.string.txt_nick_name) + userInfo.getNickname();
                         nickName = UsefullUtill.autoSplitText(txtNickName, nickName);
-                        LogUtil.e("nickName:" + nickName);
+                        MyApplication.getLogger().e("nickName:" + nickName);
+                        
                         txtNickName.setText(nickName);
                     }
                     break;
                 case MSG_SET_HEADER_PHOTO:
                     String imgUrl = userInfo.getAvatar();
-                    LogUtil.e("imgUrl:" + imgUrl);
+                    MyApplication.getLogger().e("imgUrl:" + imgUrl);
                     if (!TextUtils.isEmpty(imgUrl)) {
                         Bitmap bitmap = asyncBitmapLoader.loadBitmap(imgBtnHead, imgUrl, new AsyncBitmapLoader.ImageCallback() {
                             @Override
@@ -212,12 +212,12 @@ public class UserCenterActivity extends BaseActivity {
 
                     if (userInfo != null) {
                         nickName = getString(R.string.txt_nick_name) + userInfo.getNickname();
-                        LogUtil.e("nickName:" + nickName);
+                        MyApplication.getLogger().e("nickName:" + nickName);
                         mHandler.sendEmptyMessage(MSG_SET_USER_NICKNAME);
                         xDevices = DeviceManage.getInstance().getDevices();
                         if (xDevices != null) {
                             deviceTotal = xDevices.size() + getString(R.string.txt_device_total);
-                            LogUtil.e("deviceTotal:" + deviceTotal);
+                            MyApplication.getLogger().e("deviceTotal:" + deviceTotal);
                         }
                         mHandler.sendEmptyMessage(MSG_SET_HEADER_PHOTO);
                     } else {

@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.bigkoo.pickerview.TimePickerView;
 import com.heiman.baselibrary.BaseActivity;
-import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
@@ -93,6 +92,8 @@ public class UserInfoActivity extends BaseActivity {
     private final static int MSG_RESET_BIRTHDAY_SUCCEED = 10009;
     private final static int MSG_RESET_BIRTHDAY_FAIL = 10010;
     private final static int MSG_INIT_USERINFO = 10011;
+    private final static int MSG_GET_GENDER_SUCCEED = 10012;
+    private final static int MSG_GET_BIRTHDAY_SUCCEED = 10013;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -135,7 +136,7 @@ public class UserInfoActivity extends BaseActivity {
                                 if (bitmap != null) {
                                     HttpManage.getInstance().uploadHeadportrait(MyApplication.getMyApplication(), bitmap, upLoadPhotoCallback);
                                 } else {
-                                    BaseApplication.getLogger().e("bitmap is null!");
+                                    MyApplication.getLogger().e("bitmap is null!");
                                 }
                             }
 
@@ -205,11 +206,13 @@ public class UserInfoActivity extends BaseActivity {
                 case MSG_INIT_USERINFO:
                     userInfo = MyApplication.getMyApplication().getUserInfo();
                     if (userInfo != null) {
+                        getBirthday();
+                        getGender();
                         txtNickNameInfo.setText(userInfo.getNickname());
                         txtAccount.setText(userInfo.getAccount());
                         txtEmail.setText(userInfo.getEmail());
                         txtPhoneNumber.setText(userInfo.getPhone());
-                        txtBirthdayInfo.setText(userInfo.getCreate_date());
+                        txtBirthdayInfo.setText("");
                         mHandler.sendEmptyMessage(MSG_SET_HEADER_PHOTO);
 
                         if (userInfo.getGender() == 1) {
@@ -217,10 +220,29 @@ public class UserInfoActivity extends BaseActivity {
                         } else if (userInfo.getGender() == 2) {
                             txtGenderInfo.setText(R.string.txt_gender_female);
                         } else {
-                            txtGenderInfo.setText(R.string.txt_gender_unknown);
+                            txtGenderInfo.setText("");
                         }
                     } else {
                         mHandler.sendEmptyMessageDelayed(MSG_INIT_USERINFO, 100);
+                    }
+                    break;
+                case MSG_GET_GENDER_SUCCEED:
+
+                    if (msg.obj != null) {
+                        String gender = msg.obj.toString();
+                        if ("1".equals(gender)) {
+                            txtGenderInfo.setText(R.string.txt_gender_male);
+                        } else if ("2".equals(gender)) {
+                            txtGenderInfo.setText(R.string.txt_gender_female);
+                        } else {
+                            txtGenderInfo.setText("");
+                        }
+                    }
+                    break;
+                case MSG_GET_BIRTHDAY_SUCCEED:
+
+                    if (msg.obj != null) {
+                        txtBirthdayInfo.setText(msg.obj.toString());
                     }
                     break;
             }
@@ -232,8 +254,7 @@ public class UserInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_user_info);
         setContentLayout(R.layout.activity_user_info);
-//        StatusBarUtil.setTranslucent(this, 50);
-        BaseApplication.getLogger().e("onCreate");
+        MyApplication.getLogger().e("onCreate");
         txtHead = (TextView) findViewById(R.id.txt_head);
         txtHeadRight = (TextView) findViewById(R.id.txt_head_right);
         txtNickName = (TextView) findViewById(R.id.txt_nick_name);
@@ -266,20 +287,12 @@ public class UserInfoActivity extends BaseActivity {
         showTitleView(true);
 
         setTitle(getString(R.string.txt_user_info));
-
-        initData();
-
-    }
-
-    private void initData() {
-
-        HttpManage.getInstance().getOneProperty(UserInfoActivity.this, "Gender", upLoadPhotoCallback);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        BaseApplication.getLogger().e("onResume");
+        MyApplication.getLogger().e("onResume");
         mHandler.sendEmptyMessage(MSG_INIT_USERINFO);
     }
 
@@ -322,7 +335,7 @@ public class UserInfoActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             if (!UsefullUtill.judgeClick(R.layout.activity_user_info, 500)) {
-                BaseApplication.getLogger().e("点击过快！");
+                MyApplication.getLogger().e("点击过快！");
                 return;
             }
             switch (v.getId()) {
@@ -357,7 +370,7 @@ public class UserInfoActivity extends BaseActivity {
                     if (o != null && o instanceof EditText) {
                         EditText editNickName = (EditText) o;
                         nickName = editNickName.getText().toString();
-                        BaseApplication.getLogger().e("nickName:" + nickName);
+                        MyApplication.getLogger().e("nickName:" + nickName);
                         HttpManage.getInstance().modifyUser(MyApplication.getMyApplication(), nickName, resetNickNameCallback);
                     }
                     dismissDialog(v);
@@ -415,14 +428,15 @@ public class UserInfoActivity extends BaseActivity {
             public void onTimeSelect(Date date, View v) {//选中事件回调
                 try {
                     String dateStr = DateFormat.format("yyyyy-MM-dd", date).toString();
-                    BaseApplication.getLogger().e("date:" + dateStr);
+                    MyApplication.getLogger().e("date:" + dateStr);
+                    txtBirthdayInfo.setText(dateStr);
                     HttpManage.getInstance().setProperty(MyApplication.getMyApplication(), "Birthday", dateStr, setBirthdayCallback);
                 } catch (Exception e) {
-                    BaseApplication.getLogger().e(e.getMessage());
+                    MyApplication.getLogger().e(e.getMessage());
                 }
             }
         }).setRange(calendar.get(Calendar.YEAR) - 100, calendar.get(Calendar.YEAR))
-                .setType(new boolean[]{true, true, true, false, false, false})
+                .setType(new boolean[]{true,true,true,false,false,false})
                 .build();
         pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
         pvTime.show();
@@ -490,7 +504,7 @@ public class UserInfoActivity extends BaseActivity {
         rbtnFeMale.setTag(dialog);
         rbtnFeMale.setTag(R.id.rgp_gender_selector, rgpGenderSelector);
         dialog.show();
-        BaseApplication.getLogger().e("gender:" + userInfo.getGender());
+        MyApplication.getLogger().e("gender:" + userInfo.getGender());
         if (userInfo.getGender() == 1) {
             rbtnMale.setChecked(true);
         } else if (userInfo.getGender() == 2) {
@@ -513,7 +527,7 @@ public class UserInfoActivity extends BaseActivity {
         @Override
         public void onError(Header[] headers, HttpManage.Error error) {
             if (error != null) {
-                BaseApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
                 Message msg = new Message();
                 msg.what = MSG_RESET_NICK_NAME_FAIL;
                 Bundle bundle = new Bundle();
@@ -527,7 +541,7 @@ public class UserInfoActivity extends BaseActivity {
 
         @Override
         public void onSuccess(int code, String response) {
-            BaseApplication.getLogger().e("code:" + code + "\tresponse:" + response);
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
             mHandler.sendEmptyMessage(MSG_RESET_NICK_NAME_SUCCEED);
         }
     };
@@ -536,7 +550,7 @@ public class UserInfoActivity extends BaseActivity {
         @Override
         public void onError(Header[] headers, HttpManage.Error error) {
             if (error != null) {
-                BaseApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
                 Message msg = new Message();
                 msg.what = MSG_RESET_GENDER_FAIL;
                 Bundle bundle = new Bundle();
@@ -548,7 +562,7 @@ public class UserInfoActivity extends BaseActivity {
 
         @Override
         public void onSuccess(int code, String response) {
-            BaseApplication.getLogger().e("code:" + code + "\tresponse:" + response);
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
             mHandler.sendEmptyMessage(MSG_RESET_GENDER_SUCCEED);
         }
     };
@@ -557,7 +571,7 @@ public class UserInfoActivity extends BaseActivity {
         @Override
         public void onError(Header[] headers, HttpManage.Error error) {
             if (error != null) {
-                BaseApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
                 Message msg = new Message();
                 msg.what = MSG_RESET_BIRTHDAY_FAIL;
                 msg.obj = SmartHomeUtils.showHttpCode(error.getCode());
@@ -567,7 +581,7 @@ public class UserInfoActivity extends BaseActivity {
 
         @Override
         public void onSuccess(int code, String response) {
-            BaseApplication.getLogger().e("code:" + code + "\tresponse:" + response);
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
             mHandler.sendEmptyMessage(MSG_RESET_BIRTHDAY_SUCCEED);
         }
     };
@@ -590,7 +604,7 @@ public class UserInfoActivity extends BaseActivity {
         @Override
         public void onError(Header[] headers, HttpManage.Error error) {
             if (error != null) {
-                BaseApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
                 Message msg = new Message();
                 msg.what = MSG_RESETHEAD_PHOTO_FAIL;
                 msg.obj = SmartHomeUtils.showHttpCode(error.getCode());
@@ -600,14 +614,14 @@ public class UserInfoActivity extends BaseActivity {
 
         @Override
         public void onSuccess(int code, String response) {
-            BaseApplication.getLogger().json(response);
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 if (jsonObject.has("url")) {
                     response = jsonObject.getString("url");
                 }
             } catch (JSONException e) {
-                BaseApplication.getLogger().e(e.getMessage());
+                MyApplication.getLogger().e(e.getMessage());
             }
             String url = "http://static.heimantech.com" + response.substring(response.lastIndexOf("/"));
             userInfo.setAvatar(url);
@@ -615,4 +629,62 @@ public class UserInfoActivity extends BaseActivity {
             mHandler.sendEmptyMessage(MSG_RESET_HEAD_PHOTO_SUCCEED);
         }
     };
+
+    private HttpManage.ResultCallback<String> getBirthdayCallback = new HttpManage.ResultCallback<String>() {
+        @Override
+        public void onError(Header[] headers, HttpManage.Error error) {
+            if (error != null) {
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+            }
+        }
+
+        @Override
+        public void onSuccess(int code, String response) {
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
+            Message msg = new Message();
+            msg.what = MSG_GET_BIRTHDAY_SUCCEED;
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.has("Birthday")) {
+                    msg.obj = jsonObject.getString("Birthday");
+                }
+            } catch (JSONException e) {
+                MyApplication.getLogger().e(e.getMessage());
+            }
+            mHandler.sendMessage(msg);
+        }
+    };
+
+    private void getBirthday() {
+        HttpManage.getInstance().getOneProperty(MyApplication.getMyApplication(), "Birthday", getBirthdayCallback);
+    }
+
+    private HttpManage.ResultCallback<String> getGenderCallback = new HttpManage.ResultCallback<String>() {
+        @Override
+        public void onError(Header[] headers, HttpManage.Error error) {
+            if (error != null) {
+                MyApplication.getLogger().e("Code:" + error.getCode() + SmartHomeUtils.showHttpCode(error.getCode()));
+            }
+        }
+
+        @Override
+        public void onSuccess(int code, String response) {
+            MyApplication.getLogger().e("code:" + code + "\tresponse:" + response);
+            Message msg = new Message();
+            msg.what = MSG_GET_GENDER_SUCCEED;
+            try {
+                JSONObject jsonObject = new JSONObject(response);
+                if (jsonObject.has("Gender")) {
+                    msg.obj = jsonObject.getString("Gender");
+                }
+            } catch (JSONException e) {
+                MyApplication.getLogger().e(e.getMessage());
+            }
+            mHandler.sendMessage(msg);
+        }
+    };
+
+    private void getGender() {
+        HttpManage.getInstance().getOneProperty(MyApplication.getMyApplication(), "Gender", getGenderCallback);
+    }
 }

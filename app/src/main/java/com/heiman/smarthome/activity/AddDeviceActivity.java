@@ -104,7 +104,13 @@ public class AddDeviceActivity extends BaseActivity {
                 final DeviceType deviceType = wifiList.get(position);
                 Bundle paramBundle = new Bundle();
                 paramBundle.putInt(Constant.TYPE, deviceType.getDeviceType());
-                openActivity(ConfigurationWizardActivity.class, paramBundle);
+                if (deviceType.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
+                    paramBundle.putBoolean(Constant.IS_DEVICE, false);
+                    startActivityForName("com.heiman.gateway.LTLinkActivity", paramBundle);
+                } else {
+                    openActivity(ConfigurationWizardActivity.class, paramBundle);
+                }
+
             }
         });
         recyclerSubDevice = (FamiliarRecyclerView) findViewById(R.id.recycler_sub_device);

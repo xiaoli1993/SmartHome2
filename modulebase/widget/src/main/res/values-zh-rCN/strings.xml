@@ -180,7 +180,7 @@
     <string name="Permission_is_granted">权限被允许</string>
     <string name="Permission_denied">权限被拒绝</string>
     <string name="Click_Cancel">点击了取消</string>
-  <string name="txt_nick_name">昵称：</string>
+    <string name="txt_nick_name">昵称：</string>
     <string name="txt_nick_name_info">哈哈哈123456789</string>
     <string name="txt_device_total">个智能设备</string>
     <string name="txt_alarm_total">报警总数</string>
@@ -299,4 +299,22 @@
     <string name="toast_get_back_password_fail">找回密码失败</string>
     <string name="toast_get_back_password_succeed">找回密码成功！</string>
     <string name="toast_click_activation_email">请进入邮箱点击激活邮件！</string>
+
+
+    <string name="RC_0">未知错误</string>
+    <string name="RC_1">参数错误</string>
+    <string name="RC_2">解密失败</string>
+    <string name="RC_3">不存在该OID</string>
+    <string name="RC_4">CID不存在</string>
+    <string name="RC_5">PL中不能为空</string>
+    <string name="RC_6">TEID不能为空</string>
+    <string name="current_firmware_is_last">固件已是最新版本</string>
+    <string name="current_version">当前版本：</string>
+    <string name="upgrade_remind">升级提醒：</string>
+    <string name="update_content">更新内容：</string>
+    <string name="upgrade_do_not_disconnect_the_power">更新过程中请勿断开设备电源。</string>
+    <string name="update_now">立即更新</string>
+    <string name="btn_confirm3">确&#12288;&#12288;定</string>
+    <string name="update_firmware_fail">更新固件失败！</string>
+    <string name="update_firmware_succeed">更新固件成功！</string>
 </resources>

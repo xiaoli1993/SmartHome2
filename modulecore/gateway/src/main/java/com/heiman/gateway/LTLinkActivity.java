@@ -22,6 +22,7 @@ import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.mode.AESKey;
+import com.heiman.baselibrary.mode.HeimanSet;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.datacom.aes.AES128Utils;
@@ -402,7 +403,14 @@ public class LTLinkActivity extends GwBaseActivity {
                     //execute the task
                     String sb = HeimanCom.setTimeZone(SmartPlug.mgetSN(), 1, "+6.30");
                     BaseApplication.getLogger().json(sb);
-                    sendData(sb);
+//                    sendData(sb);
+                    HeimanSet.PLBean.GwBasicOID gwBasicOID = new HeimanSet.PLBean.GwBasicOID();
+                    gwBasicOID.setAlarmlevel(10);
+                    BaseApplication.getLogger().json(HeimanCom.setBasic(SmartPlug.mgetSN(), 1, gwBasicOID));
+                    BaseApplication.getLogger().json(HeimanCom.setDeviceName(SmartPlug.mgetSN(), 1, "92929"));
+                    BaseApplication.getLogger().json(HeimanCom.setJoinSub(SmartPlug.mgetSN(), 1, 2));
+
+
                 }
             }, 1000);
         }

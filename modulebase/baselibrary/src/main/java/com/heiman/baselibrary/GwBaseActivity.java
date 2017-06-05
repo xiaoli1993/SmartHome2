@@ -15,12 +15,14 @@ import com.heiman.baselibrary.manage.SubDeviceManage;
 import com.heiman.baselibrary.mode.DataDevice;
 import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.datacom.aes.AES128Utils;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.hawk.Hawk;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
@@ -286,6 +288,16 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     if (!isRun) { // 当界面不可见，把pipeData存起来，然后等onResume再更新界面
                         return;
                     }
+                    try {
+                        JSONObject jsonObject = new JSONObject(data);
+                        int RC = jsonObject.getInt("RC");
+                        if (RC <= 0) {
+                            XlinkUtils.shortTips(BaseApplication.getMyApplication(), SmartHomeUtils.showRcCode(RC), getResources().getColor(R.color.class_J), getResources().getColor(R.color.white), 0, false);
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     deviceData(data);
                 } else if (action.equals(Constant.BROADCAST_RECVPIPE_SYNC)) {
                     String data = intent.getStringExtra(Constant.DATA);
@@ -299,6 +311,16 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     pipeData = data;
                     if (!isRun) { // 当界面不可见，把pipeData存起来，然后等onResume再更新界面
                         return;
+                    }
+                    try {
+                        JSONObject jsonObject = new JSONObject(data);
+                        int RC = jsonObject.getInt("RC");
+                        if (RC <= 0) {
+                            XlinkUtils.shortTips(BaseApplication.getMyApplication(), SmartHomeUtils.showRcCode(RC), getResources().getColor(R.color.class_J), getResources().getColor(R.color.white), 0, false);
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                     deviceData(data);
                 } else if (action.equals(Constant.BROADCAST_DEVICE_CHANGED)) {

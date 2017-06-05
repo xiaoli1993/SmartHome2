@@ -403,6 +403,27 @@ public class SmartHomeUtils {
         return "";
     }
 
+    public static String showRcCode(int RC) {
+        switch (RC) {
+            case Constant.JOSN_RC.UNKNOWN_ERROR:
+                return BaseApplication.getMyApplication().getString(R.string.RC_0);
+            case Constant.JOSN_RC.PARAMETER_ERROR:
+                return BaseApplication.getMyApplication().getString(R.string.RC_1);
+            case Constant.JOSN_RC.DECRYPTION_FAILURE:
+                return BaseApplication.getMyApplication().getString(R.string.RC_2);
+            case Constant.JOSN_RC.THE_OID_DOES_NOT_EXIST:
+                return BaseApplication.getMyApplication().getString(R.string.RC_3);
+            case Constant.JOSN_RC.CID_DOES_NOT_EXIST:
+                return BaseApplication.getMyApplication().getString(R.string.RC_4);
+            case Constant.JOSN_RC.PL_CANNOT_BE_EMPTY:
+                return BaseApplication.getMyApplication().getString(R.string.RC_5);
+            case Constant.JOSN_RC.TEID_CANNOT_BE_EMPTY:
+                return BaseApplication.getMyApplication().getString(R.string.RC_6);
+            default:
+                return BaseApplication.getMyApplication().getString(R.string.RC_0);
+        }
+    }
+
     /**
      * 返回HTTP错误码
      *
@@ -633,6 +654,26 @@ public class SmartHomeUtils {
                     return R.drawable.device_plug;
                 case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
                     return R.drawable.device_e_plug;
+
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+                    return R.drawable.device_e_plug;
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+                    return R.drawable.device_e_plug;
+
                 default:
                     return R.drawable.device_gw;
             }
@@ -688,6 +729,26 @@ public class SmartHomeUtils {
                     return BaseApplication.getMyApplication().getString(R.string.device_name_plug);
                 case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
                     return BaseApplication.getMyApplication().getString(R.string.device_name_e_plug);
+
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_one_onoff);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_two_onoff);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_three_onoff);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_rc);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_relay);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_sound_light_alarm);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_Illuminance);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_air);
+                case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+                    return BaseApplication.getMyApplication().getString(R.string.device_name_temp_k);
+
                 default:
                     return BaseApplication.getMyApplication().getString(R.string.device_name_plug);
             }
@@ -712,4 +773,117 @@ public class SmartHomeUtils {
             }
         }
     }
+
+    /**
+     * 设备类型转成y1
+     *
+     * @param deviceType
+     * @return
+     */
+    public static int typeToY1(int deviceType) {
+
+        switch (deviceType) {
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                return 4;
+            default:
+                return 0;
+        }
+    }
+
+    /**
+     * 设备类型转成y2
+     *
+     * @param deviceType
+     * @return
+     */
+    public static int typeToY2(int deviceType) {
+
+        switch (deviceType) {
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+                return 5;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                return 6;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                return 5;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+                return 7;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+                return 2;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+                return 3;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+                return 4;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                return 8;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                return 9;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                return 1;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                return 2;
+            default:
+                return 0;
+        }
+    }
+
 }

@@ -17,6 +17,7 @@ public class PLBase {
      */
 
     private String TEID;
+    @Expose(serialize = true, deserialize = false)
     private int RC;
     private int SN;
     private int CID;

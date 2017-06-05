@@ -121,7 +121,7 @@ public class Constant {
         public static final int UNKNOWN_ERROR = 0;                                   //未知错误
         public static final int PARAMETER_ERROR = -1;                                //参数错误
         public static final int DECRYPTION_FAILURE = -2;                             //解密失败 (明文回复)
-        public static final int THE_OID_DOES_NOT_EXISTt = -3;                        //不存在该OID
+        public static final int THE_OID_DOES_NOT_EXIST = -3;                        //不存在该OID
         public static final int CID_DOES_NOT_EXIST = -4;                             //CID不存在
         public static final int PL_CANNOT_BE_EMPTY = -5;                             //PL中不能为空
         public static final int TEID_CANNOT_BE_EMPTY = -6;                           //TEID不能为空
@@ -131,13 +131,25 @@ public class Constant {
     public static class DEVICE_TYPE {
         // ZigBee设备
         public static final int DEVICE_ZIGBEE_RGB = 1;                           //ZIGBEE RGB灯
+        public static final int DEVICE_ZIGBEE_ONE_ONOFF = 2;                     //ZIGBEE 一路开关
+        public static final int DEVICE_ZIGBEE_TWO_ONOFF = 3;                     //ZIGBEE 二路开关
+        public static final int DEVICE_ZIGBEE_THREE_ONOFF = 4;                   //ZIGBEE 三路开关
+        public static final int DEVICE_ZIGBEE_RC = 5;                            //ZIGBEE 红外转发器
+        public static final int DEVICE_ZIGBEE_RELAY = 6;                         //ZIGBEE 继电器
+
         public static final int DEVICE_ZIGBEE_DOORS = 17;                        //ZIGBEE 门磁
         public static final int DEVICE_ZIGBEE_WATER = 18;                        //ZIGBEE 水浸
         public static final int DEVICE_ZIGBEE_PIR = 19;                          //ZIGBEE 红外
         public static final int DEVICE_ZIGBEE_SMOKE = 20;                        //ZIGBEE 烟感
         public static final int DEVICE_ZIGBEE_THP = 21;                          //ZIGBEE 温湿度
         public static final int DEVICE_ZIGBEE_GAS = 22;                          //ZIGBEE 气感
-        public static final int DEVICE_ZIGBEE_CO = 24;                           //ZIGBEE 一氧化碳
+        public static final int DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM= 23;         //ZIGBEE 声光警号
+
+        public static final int DEVICE_ZIGBEE_CO = 24;                           //ZIGBEE 一氧化碳探测器
+        public static final int DEVICE_ZIGBEE_ILLUMINANCE= 25;                   //ZIGBEE 光照度
+        public static final int DEVICE_ZIGBEE_AIR = 26;                          //ZIGBEE 空气质量
+        public static final int DEVICE_ZIGBEE_THERMOSTAT = 27;                   //ZIGBEE 温控器
+
         public static final int DEVICE_ZIGBEE_SOS = 49;                          //ZIGBEE SOS报警器
         public static final int DEVICE_ZIGBEE_SW = 50;                           //ZIGBEE 遥控器
         public static final int DEVICE_ZIGBEE_PLUGIN = 67;                       //ZIGBEE 智能插座
