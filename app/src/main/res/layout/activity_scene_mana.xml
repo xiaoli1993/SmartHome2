@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/class_A_10_trans">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
+
+    <RelativeLayout
+        android:id="@+id/rl_scene_icon_container"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/txt_scene_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/scene_mana_scene_icon"
+            android:textColor="@color/txt_color"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/img_scene_icon_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="20dp"
+            android:src="@drawable/personal_next" />
+
+        <ImageView
+            android:id="@+id/img_scene_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/img_scene_icon_setting"
+            android:paddingRight="10dp"
+            android:src="@drawable/scene_mana_scene_icon_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/navigation_bar_parting_line_color" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_scene_edit_control"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_below="@id/rl_scene_icon_container">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/scene_mana_scene_explain"
+            android:textColor="@color/txt_hint_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txt_scene_eidt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:paddingRight="20dp"
+            android:text="@string/scene_mana_scene_edit"
+            android:textColor="@color/btn_regist_color"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/rl_scene_edit_control"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/navigation_bar_parting_line_color" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_scene_add_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="90dp"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_scene_add_action"
+        android:text="@string/scene_mana_add_action"
+        android:textColor="@color/txt_hint_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txt_scene_add_time_delay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="90dp"
+        android:drawablePadding="10dp"
+        android:drawableTop="@drawable/icon_scene_add_delay"
+        android:text="@string/scene_mana_add_time_delay"
+        android:textColor="@color/txt_hint_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txt_scene_eidt_time_delay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_scene_add_action"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="45dp"
+        android:text="@string/scene_mana_scene_edit"
+        android:textColor="@color/btn_regist_color"
+        android:textSize="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_scene_delay_container"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_above="@+id/txt_scene_eidt_time_delay"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txt_scene_time_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_scene_time"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="29dp"
+            android:text="@string/scene_mana_time_delay_action"
+            android:textColor="@color/txt_hint_color"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/navigation_bar_parting_line_color" />
+
+    </RelativeLayout>
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/recycler_scene_devices_action"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_scene_delay_container"
+        android:layout_below="@+id/rl_scene_edit_control"
+        android:layout_marginTop="1px"
+        android:background="@color/white">
+
+    </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+</RelativeLayout>

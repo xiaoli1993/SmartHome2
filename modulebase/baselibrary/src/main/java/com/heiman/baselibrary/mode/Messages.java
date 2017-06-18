@@ -3,6 +3,8 @@ package com.heiman.baselibrary.mode;
  * Copyright ©深圳市海曼科技有限公司
  */
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 /**
@@ -14,19 +16,21 @@ import java.util.List;
  */
 public class Messages {
 
-    /**
-     * count : 总数量
-     * list : [{"id":"消息ID","type":"消息类型","notify_type":"通知类型","from":"消息发送者","to":"接收者","content":"消息内容","create_date":"创建时间","is_read":"是否已读","is_push":"是否推送","alert_name":"触发告警规则名称","alert_value":"触发告警的数据端点值"}]
-     */
 
-    private String count;
+    /**
+     * count : 20065
+     * list : [{"id":"58d31df690124f202bfbd119","to":[],"content":"{\"message\":{\"electricity\":\"0.000\",\"time\":\"2017-3-23 23:59:59\"},\"plugMac\":\"ACCF23A18CDC\"}","alert_value":"{\"message\":{\"electricity\":\"0.000\",\"time\":\"2017-3-23 23:59:59\"},\"plugMac\":\"ACCF23A18CDC\"}","create_date":"2017-03-23T08:59:34.358Z","alert_name":"electricity_notice","notify_type":1,"from":1144505255,"type":1,"is_read":false,"is_push":false}]
+     */
+    @Expose
+    private int count;
+    @Expose
     private List<ListBean> list;
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
@@ -40,29 +44,40 @@ public class Messages {
 
     public static class ListBean {
         /**
-         * id : 消息ID
-         * type : 消息类型
-         * notify_type : 通知类型
-         * from : 消息发送者
-         * to : 接收者
-         * content : 消息内容
-         * create_date : 创建时间
-         * is_read : 是否已读
-         * is_push : 是否推送
-         * alert_name : 触发告警规则名称
-         * alert_value : 触发告警的数据端点值
+         * id : 58d31df690124f202bfbd119
+         * to : []
+         * content : {"message":{"electricity":"0.000","time":"2017-3-23 23:59:59"},"plugMac":"ACCF23A18CDC"}
+         * alert_value : {"message":{"electricity":"0.000","time":"2017-3-23 23:59:59"},"plugMac":"ACCF23A18CDC"}
+         * create_date : 2017-03-23T08:59:34.358Z
+         * alert_name : electricity_notice
+         * notify_type : 1
+         * from : 1144505255
+         * type : 1
+         * is_read : false
+         * is_push : false
          */
+        @Expose
         private String id;
-        private String type;
-        private String notify_type;
-        private String from;
-        private String to;
+        @Expose
         private String content;
-        private String create_date;
-        private String is_read;
-        private String is_push;
-        private String alert_name;
+        @Expose
         private String alert_value;
+        @Expose
+        private String create_date;
+        @Expose
+        private String alert_name;
+        @Expose
+        private int notify_type;
+        @Expose
+        private int from;
+        @Expose
+        private int type;
+        @Expose
+        private boolean is_read;
+        @Expose
+        private boolean is_push;
+        @Expose
+        private List<?> to;
 
         public String getId() {
             return id;
@@ -70,38 +85,6 @@ public class Messages {
 
         public void setId(String id) {
             this.id = id;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getNotify_type() {
-            return notify_type;
-        }
-
-        public void setNotify_type(String notify_type) {
-            this.notify_type = notify_type;
-        }
-
-        public String getFrom() {
-            return from;
-        }
-
-        public void setFrom(String from) {
-            this.from = from;
-        }
-
-        public String getTo() {
-            return to;
-        }
-
-        public void setTo(String to) {
-            this.to = to;
         }
 
         public String getContent() {
@@ -112,28 +95,20 @@ public class Messages {
             this.content = content;
         }
 
+        public String getAlert_value() {
+            return alert_value;
+        }
+
+        public void setAlert_value(String alert_value) {
+            this.alert_value = alert_value;
+        }
+
         public String getCreate_date() {
             return create_date;
         }
 
         public void setCreate_date(String create_date) {
             this.create_date = create_date;
-        }
-
-        public String getIs_read() {
-            return is_read;
-        }
-
-        public void setIs_read(String is_read) {
-            this.is_read = is_read;
-        }
-
-        public String getIs_push() {
-            return is_push;
-        }
-
-        public void setIs_push(String is_push) {
-            this.is_push = is_push;
         }
 
         public String getAlert_name() {
@@ -144,12 +119,52 @@ public class Messages {
             this.alert_name = alert_name;
         }
 
-        public String getAlert_value() {
-            return alert_value;
+        public int getNotify_type() {
+            return notify_type;
         }
 
-        public void setAlert_value(String alert_value) {
-            this.alert_value = alert_value;
+        public void setNotify_type(int notify_type) {
+            this.notify_type = notify_type;
+        }
+
+        public int getFrom() {
+            return from;
+        }
+
+        public void setFrom(int from) {
+            this.from = from;
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
+        public boolean isIs_read() {
+            return is_read;
+        }
+
+        public void setIs_read(boolean is_read) {
+            this.is_read = is_read;
+        }
+
+        public boolean isIs_push() {
+            return is_push;
+        }
+
+        public void setIs_push(boolean is_push) {
+            this.is_push = is_push;
+        }
+
+        public List<?> getTo() {
+            return to;
+        }
+
+        public void setTo(List<?> to) {
+            this.to = to;
         }
     }
 }

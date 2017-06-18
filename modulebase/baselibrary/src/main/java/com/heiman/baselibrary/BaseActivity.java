@@ -20,12 +20,14 @@ import com.heiman.utils.permission.PerUtils;
 import com.heiman.utils.permission.PerimissionsCallback;
 import com.heiman.utils.permission.PermissionEnum;
 import com.heiman.utils.permission.PermissionManager;
+import com.heiman.widget.popwindow.HintPopupWindow;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.jaeger.library.StatusBarUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author : 肖力
@@ -58,6 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private static final int ACTIVITY_DESTROY = 6;
     public int activityState;
     public Context mContext;
+    private HintPopupWindow hintPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -495,6 +498,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         activityState = ACTIVITY_DESTROY;
     }
 
+    /**
+     * 显示模糊pop
+     *
+     * @param view
+     * @param strList
+     * @param clickList
+     */
+    public void showHintPopupWindow(View view, ArrayList<String> strList, List<View.OnClickListener> clickList) {
+        hintPopupWindow = new HintPopupWindow(this, strList, clickList);
+        hintPopupWindow.showPopupWindow(view);
+    }
+
+    public void disHintPopupWind() {
+        if (hintPopupWindow != null) {
+            hintPopupWindow.dismissPopupWindow();
+        }
+
+    }
 
 }
 

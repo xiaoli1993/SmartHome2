@@ -119,5 +119,4 @@ public class BaseFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
-
 }

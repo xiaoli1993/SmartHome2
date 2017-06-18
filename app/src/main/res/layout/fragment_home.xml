@@ -7,13 +7,19 @@
 
     <include layout="@layout/title_bar_transparent_white" />
 
+    <View
+        android:id="@+id/view_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.heiman.widget.scrollview.MyScrollView
+        <ScrollView
             android:id="@+id/nested_scroll_parent_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -35,19 +41,24 @@
                         android:text="@string/MyScene" />
                 </LinearLayout>
 
-                <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
-                    android:id="@+id/recycler_scene"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:frv_dividerHorizontal="@color/grid_dr"
-                    app:frv_dividerHorizontalHeight="1px"
-                    app:frv_dividerVertical="@color/grid_dr"
-                    app:frv_dividerVerticalHeight="1px"
-                    app:frv_itemViewBothSidesMargin="1px"
-                    app:frv_layoutManager="grid"
-                    app:frv_layoutManagerOrientation="vertical"
-                    app:frv_spanCount="3" />
+                    android:layout_height="wrap_content">
+
+                    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                        android:id="@+id/recycler_scene"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        app:frv_dividerHorizontal="@color/grid_dr"
+                        app:frv_dividerHorizontalHeight="1px"
+                        app:frv_dividerVertical="@color/grid_dr"
+                        app:frv_dividerVerticalHeight="1px"
+                        app:frv_itemViewBothSidesMargin="1px"
+                        app:frv_layoutManager="grid"
+                        app:frv_layoutManagerOrientation="vertical"
+                        app:frv_spanCount="3" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -61,21 +72,25 @@
                         android:text="@string/MyDevice" />
                 </LinearLayout>
 
-                <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
-                    android:id="@+id/recycler_device"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    app:frv_dividerHorizontal="@color/grid_dr"
-                    app:frv_dividerHorizontalHeight="1px"
-                    app:frv_dividerVertical="@color/grid_dr"
-                    app:frv_dividerVerticalHeight="1px"
-                    app:frv_itemViewBothSidesMargin="1px"
-                    app:frv_layoutManager="grid"
-                    app:frv_layoutManagerOrientation="vertical"
-                    app:frv_spanCount="3" />
+                    android:layout_height="wrap_content">
+
+                    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+                        android:id="@+id/recycler_device"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:frv_dividerHorizontal="@color/grid_dr"
+                        app:frv_dividerHorizontalHeight="1px"
+                        app:frv_dividerVertical="@color/grid_dr"
+                        app:frv_dividerVerticalHeight="1px"
+                        app:frv_itemViewBothSidesMargin="1px"
+                        app:frv_layoutManager="grid"
+                        app:frv_layoutManagerOrientation="vertical"
+                        app:frv_spanCount="3" />
+                </RelativeLayout>
             </LinearLayout>
-        </com.heiman.widget.scrollview.MyScrollView>
+        </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

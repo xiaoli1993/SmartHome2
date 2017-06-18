@@ -229,8 +229,9 @@
     <string name="txt_authorize_mana_bottom">账号绑定成功后可用于快捷登录</string>
     <string name="reset_pwd">修改密码</string>
     <string name="input_old_pwd">请输入旧密码：</string>
-    <string name="edit_hit_old_pwd">旧密码</string>
-    <string name="edit_hit_new_pwd">新密码</string>
+    <string name="edit_hit_old_pwd">请输入旧密码</string>
+    <string name="edit_hit_new_pwd">请输入新密码</string>
+<string name="edit_hit_new_pwd_next_time">请重新输入新密码</string>
     <string name="input_new_pwd">请输入新密码：</string>
     <string name="input_new_pwd_next_time">再次输入新密码：</string>
     <string name="btn_complete">完成</string>
@@ -241,15 +242,15 @@
     <string name="reset_gender_fail">设置性别失败：</string>
     <string name="reset_gender_succeed">设置性别成功！</string>
     <string name="txt_feed_back_content">反馈内容</string>
-    <string name="edit_hit_input_feed_back_content">请输入想反馈的问题</string>
+    <string name="edit_hit_input_feed_back_content">为了更好的为您解决问题，请填写反馈内容，上传问题截图。</string>
     <string name="txt_contact_way">联系方式</string>
-    <string name="edit_hit_contact_way">手机/邮箱</string>
+    <string name="edit_hit_contact_way">请输入手机号或邮箱</string>
     <string name="txt_check_app_version">检查APP版本更新</string>
     <string name="txt_use_policy">使用条款和隐私政策</string>
     <string name="txt_app_version">当前APP版本号：</string>
     <string name="txt_copyright">Copyright@深圳市海曼科技有限公司</string>
     <string name="setting_show_detail_message">通知显示消息详情</string>
-    <string name="txt_explain_setting_show_detail_message">若关闭，当收到报警消息时，通知提示将不显示报警消息以及更新固件消息</string>
+    <string name="txt_explain_setting_show_detail_message">若关闭，当接收新消息通知时，则不再显示报警消息。</string>
     <string name="txt_explain_setting_voice_vibration">设置系统功能消息提示音及震动</string>
     <string name="setting_voice">声音</string>
     <string name="setting_vibration">震动</string>
@@ -317,4 +318,234 @@
     <string name="btn_confirm3">确&#12288;&#12288;定</string>
     <string name="update_firmware_fail">更新固件失败！</string>
     <string name="update_firmware_succeed">更新固件成功！</string>
+    <string name="confirm">提交</string>
+    <string name="Enter_Family_Name">请输入家庭名称</string>
+    <string name="Create_family">创建家庭</string>
+    <string name="name_isempty">名字不能为空！</string>
+    <string name="loading">加载中...</string>
+    <string name="news">消息</string>
+    <string name="Family_management">家庭管理</string>
+    <string name="Set_up">设置</string>
+    <string name="Member_of_family">家庭成员</string>
+    <string name="people">人</string>
+    <string name="home_Modify_family_name">修改家庭名称</string>
+    <string name="home_Delete_family">删除家庭</string>
+    <string name="password">密码</string>
+    <string name="email_phone">邮箱/手机</string>
+    <string name="login">登录</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="regist">注册账号</string>
+    <string name="quick_logon">快速登录</string>
+    <string name="gateway_Lamp_brightness">灯亮度</string>
+    <string name="gateway_Chinese">中文</string>
+    <string name="gateway_English">英文</string>
+    <string name="gateway_Device_language">设备语言</string>
+    <string name="gateway_alarm_duration">报警时长</string>
+    <string name="gateway_Sound_settings">声音设置</string>
+    <string name="gateway_Operation_diary">操作日记</string>
+    <string name="gateway_Add_sub_device">添加子设备</string>
+    <string name="gateway_Night_light_time">小夜灯时间</string>
+    <string name="gateway_Send_in">发送中...</string>
+    <string name="gateway_beep_volume">提示音量</string>
+    <string name="gateway_alarm_volume">报警音量</string>
+    <string name="home_My_Home">我的家庭</string>
+  <string name="txt_about_logo">海曼智能家居</string>
+
+    <string name="default_scene_at_home_arm">在家布防</string>
+    <string name="default_scene_go_out_arm">外出布防</string>
+    <string name="default_scene_disarm">撤防</string>
+    <string name="default_scene_sleep">睡觉</string>
+    <string name="default_scene_get_up">起床</string>
+
+    <string-array name="default_scenes">
+        <item>@string/default_scene_at_home_arm</item>
+        <item>@string/default_scene_go_out_arm</item>
+        <item>@string/default_scene_disarm</item>
+        <item>@string/default_scene_sleep</item>
+        <item>@string/default_scene_get_up</item>
+    </string-array>
+
+    <string name="scene_mana_add_scene">添加场景</string>
+    <string name="scene_mana_save_scene">保存</string>
+    <string name="scene_mana_scene_icon">场景图标</string>
+    <string name="scene_mana_scene_explain">触发该场景时执行以下动作</string>
+    <string name="scene_mana_scene_edit">编辑</string>
+    <string name="scene_mana_add_action">添加动作</string>
+    <string name="scene_mana_add_time_delay">添加延时</string>
+    <string name="scene_mana_time_delay_action">0秒后执行</string>
+
+    <!--智能灯泡操作-->
+    <string name="rgb_on">打开灯</string>
+    <string name="rgb_off">关闭灯</string>
+    <string name="rgb_color_255">灯光亮度0-255</string>
+    <string name="rgb_color_65535">灯光颜色0-65535</string>
+    <array name="rgb_execs">
+        <item>@string/rgb_on</item>
+        <item>@string/rgb_off</item>
+        <item>@string/rgb_color_255</item>
+        <item>@string/rgb_color_65535</item>
+    </array>
+
+    <!--温控器操作-->
+    <string name="thermostat_on">温控器开</string>
+    <string name="thermostat_off">温控器关</string>
+    <string name="thermostat_control">温度控制</string>
+    <array name="thermostat_execs">
+        <item>@string/thermostat_on</item>
+        <item>@string/thermostat_off</item>
+        <item>@string/thermostat_control</item>
+    </array>
+
+    <!--网关操作-->
+    <string name="gateway_exec_at_home">在家布防</string>
+    <string name="gateway_exec_go_out">外出布防</string>
+    <string name="gateway_exec_dis_arm">撤防</string>
+    <string name="gateway_rgb_on">打开灯</string>
+    <string name="gateway_rgb_off">关闭灯</string>
+    <string name="gateway_rgb_color_255">灯光亮度0-255</string>
+    <string name="gateway_rgb_color_65535">灯光颜色0-65535</string>
+    <array name="gateway_execs">
+        <item>@string/gateway_exec_at_home</item>
+        <item>@string/gateway_exec_go_out</item>
+        <item>@string/gateway_exec_dis_arm</item>
+        <item>@string/gateway_rgb_on</item>
+        <item>@string/gateway_rgb_off</item>
+        <item>@string/gateway_rgb_color_255</item>
+        <item>@string/gateway_rgb_color_65535</item>
+    </array>
+
+    <!--门磁、红外操作-->
+    <string name="doors_and_pir_arm">布防</string>
+    <string name="doors_and_pir_dis_arm">撤防</string>
+    <array name="doors_and_pir_execs">
+        <item>@string/doors_and_pir_arm</item>
+        <item>@string/doors_and_pir_dis_arm</item>
+    </array>
+
+    <!--声光报警操作-->
+    <string name="sound_and_light_alarm_device_alarm">设备报警</string>
+    <array name="sound_and_light_alarm_execs">
+        <item>@string/sound_and_light_alarm_device_alarm</item>
+    </array>
+
+    <!--开关操作-->
+    <string name="onoff_one_on">打开第一路开关</string>
+    <string name="onoff_one_off">关闭第一路开关</string>
+    <string name="onoff_two_on">打开第二路开关</string>
+    <string name="onoff_two_off">关闭第二路开关</string>
+    <string name="onoff_three_on">打开第三路开关</string>
+    <string name="onoff_three_off">关闭第三路开关</string>
+    <array name="onoff_execs">
+        <item>@string/onoff_one_on</item>
+        <item>@string/onoff_one_off</item>
+        <item>@string/onoff_two_on</item>
+        <item>@string/onoff_two_off</item>
+        <item>@string/onoff_three_on</item>
+        <item>@string/onoff_three_off</item>
+    </array>
+
+    <!--计量插座操作-->
+    <string name="metrting_plugin_on">打开电源</string>
+    <string name="metrting_plugin_off">关闭电源</string>
+    <array name="metrting_plugin_execs">
+        <item>@string/metrting_plugin_on</item>
+        <item>@string/metrting_plugin_off</item>
+    </array>
+
+    <!--USB插座、智能插座执行操作-->
+    <string name="plugin_on">打开电源</string>
+    <string name="plugin_off">关闭电源</string>
+    <string name="plugin_usb_on">打开USB</string>
+    <string name="plugin_usb_off">关闭USB</string>
+    <string name="plugin_on_usb_off">打开电源，关闭USB</string>
+    <string name="plugin_off_usb_off">关闭电源，关闭USB</string>
+    <string name="plugin_on_usb_on">打开电源，打开USB</string>
+    <string name="plugin_off_usb_on">关闭电源，打开USB</string>
+    <array name="plugin_execs">
+        <item>@string/plugin_on</item>
+        <item>@string/plugin_off</item>
+        <item>@string/plugin_usb_on</item>
+        <item>@string/plugin_usb_off</item>
+        <item>@string/plugin_on_usb_off</item>
+        <item>@string/plugin_off_usb_off</item>
+        <item>@string/plugin_on_usb_on</item>
+        <item>@string/plugin_off_usb_on</item>
+    </array>
+
+    <!--继电器操作-->
+    <string name="relay_on">打开继电器</string>
+    <string name="relay_off">关闭继电器</string>
+    <array name="relay_execs">
+        <item>@string/relay_on</item>
+        <item>@string/relay_off</item>
+    </array>
+
+    <string name="tittle_launch_condition">启动条件</string>
+    <string name="launch_condition_all">全部</string>
+    <string name="launch_condition_living">客厅</string>
+    <string name="launch_condition_bedroom">卧室</string>
+    <string name="launch_condition_kitchen">厨房</string>
+    <string name="launch_condition_office">办公室</string>
+    <array name="default_condition">
+        <item>@string/launch_condition_all</item>
+        <item>@string/launch_condition_living</item>
+        <item>@string/launch_condition_bedroom</item>
+        <item>@string/launch_condition_kitchen</item>
+        <item>@string/launch_condition_office</item>
+    </array>
+    <string name="txt_hint_search">搜索</string>
+    <string name="intelligent_device">智能设备</string>
+    <string name="device_exec_submit">提交</string>
+
+    <string name="Monday">周一</string>
+    <string name="Tuesday">周二</string>
+    <string name="Wednesday">周三</string>
+    <string name="Thursday">周四</string>
+    <string name="Friday">周五</string>
+    <string name="Saturday">周六</string>
+    <string name="Sunday">周日</string>
+    <string name="Daily">工作日</string>
+    <string name="Weekdays">周末</string>
+    <string name="one_time">一次</string>
+    <string name="everyday">每天</string>
+    <string name="monday_to_friday">周一至周五</string>
+    <string name="custom">自定义</string>
+
+    <string name="link_mana_add_automation">添加自动化</string>
+    <string name="link_condition1">①满足条件时</string>
+    <string name="link_condition2">②满足以下所有条件/任意条件时</string>
+    <string name="link_condition3">③将执行以下任务</string>
+    <string name="link_risk_warning">风险提示:删除该自动化任意一条件，则导致自动化执行失败。若执行条件中设备处于离线状态，自动化也将执行失败。</string>
+    <string name="txt_delete">删除</string>
+    <string name="txt_open">打开</string>
+    <string name="txt_timing">定时</string>
+    <string name="txt_link_condition_add_common_used">通用</string>
+    <string name="txt_timer">定时器</string>
+    <string name="txt_repeat">重复</string>
+    <string name="txt_start">开启</string>
+    <string name="txt_exec_scene">执行某个场景</string>
+
+    <string name="title_temp_hum">温湿度</string>
+    <string name="alarm_record">报警记录</string>
+    <string name="alarm_condition_setting">报警阀值设置</string>
+    <string name="device_mac_address">设备的MAC</string>
+    <string name="residual_electricity">剩余电量</string>
+    <string name="temp_alarm_condition_setting">温度报警阀值设置</string>
+    <string name="hum_alarm_condition_setting">湿度报警阀值设置</string>
+    <string name="temp_alarm_condition_explain1">当设备温度低于temp度网关将报警并推送温度过低提示</string>
+    <string name="temp_alarm_condition_explain2">当设备温度高于temp度网关将报警并推送温度过高提示</string>
+    <string name="hum_alarm_condition_explain1">当设备湿度低于hum%网关将报警并推送湿度过低提示</string>
+    <string name="hum_alarm_condition_explain2">当设备湿度高于hum%网关将报警并推送湿度过高提示</string>
+    <string name="temp_hum_restore_default_values">恢复默认值</string>
+    <string name="title_temp">温度</string>
+    <string name="title_hum">湿度</string>
+    <string name="txt_current_hum">当前湿度：</string>
+    <string name="txt_current_temp">当前温度：</string>
+    <string name="gateway_Make_sure_the_device_is_deleted">确定删除该设备？</string>
+    <string name="gateway_Deleting">正在删除中...</string>
+    <string name="gateway_Delete_failed">删除失败</string>
+    <string name="gateway_Delete_successfully">删除成功</string>
+    <string name="Default_room">默认房间</string>
+    <string name="devicecommon_Connection_success">连接成功</string>
+    <string name="devicecommon_Select_the_location_of_the_device">选择设备所在位置</string>
 </resources>

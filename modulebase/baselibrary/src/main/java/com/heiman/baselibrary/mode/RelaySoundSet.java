@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -15,8 +16,10 @@ public class RelaySoundSet {
      * duration : 60
      */
     @Expose
+    @SerializedName("OF")
     private int onoff = 9999;
     @Expose
+    @SerializedName("DT")
     private int duration = 9999;
 
     public int getOnoff() {

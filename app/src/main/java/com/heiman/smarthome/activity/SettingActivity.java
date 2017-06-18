@@ -5,11 +5,11 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.heiman.baselibrary.BaseActivity;
-import com.heiman.greendao.SettingTool;
-import com.heiman.smarthome.MyApplication;
+import com.heiman.baselibrary.Constant;
 import com.heiman.smarthome.R;
 import com.heiman.utils.LogUtil;
 import com.heiman.widget.togglebutton.ToggleButton;
+import com.orhanobut.hawk.Hawk;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener{
 
@@ -41,9 +41,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onResume() {
         super.onResume();
-        initToggleButtonState(toggleSettingShowMessage, SettingTool.SMARTHOME_SETTING_SHOW_DETAIL_MESSAGE);
-        initToggleButtonState(toggleSettingVoice, SettingTool.SMARTHOME_SETTING_VOICE);
-        initToggleButtonState(toggleSttingVibration, SettingTool.SMARTHOME_SETTING_VIBRATION);
+        initToggleButtonState(toggleSettingShowMessage, Constant.SMARTHOME_SETTING_SHOW_DETAIL_MESSAGE);
+        initToggleButtonState(toggleSettingVoice, Constant.SMARTHOME_SETTING_VOICE);
+        initToggleButtonState(toggleSttingVibration, Constant.SMARTHOME_SETTING_VIBRATION);
     }
 
 
@@ -51,32 +51,32 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private ToggleButton.OnToggleChanged mOnToggleChanged = new ToggleButton.OnToggleChanged() {
         @Override
         public void onToggle(View view, boolean on) {
-            String settingValue = on ? SettingTool.SMARTHOME_SETTING_VALUE_ON : SettingTool.SMARTHOME_SETTING_VALUE_OFF;
+            String settingValue = on ? Constant.SMARTHOME_SETTING_VALUE_ON : Constant.SMARTHOME_SETTING_VALUE_OFF;
             String settingKey = "";
             switch (view.getId()) {
                 case R.id.toggle_setting_show_detail_message:
                     LogUtil.e("on:" + on);
-                    settingKey = SettingTool.SMARTHOME_SETTING_SHOW_DETAIL_MESSAGE;
+                    settingKey = Constant.SMARTHOME_SETTING_SHOW_DETAIL_MESSAGE;
                     break;
                 case R.id.toggle_setting_voice:
                     LogUtil.e("on:" + on);
-                    settingKey = SettingTool.SMARTHOME_SETTING_VOICE;
+                    settingKey = Constant.SMARTHOME_SETTING_VOICE;
                     break;
                 case R.id.toggle_setting_vibration:
                     LogUtil.e("on:" + on);
-                    settingKey = SettingTool.SMARTHOME_SETTING_VIBRATION;
+                    settingKey = Constant.SMARTHOME_SETTING_VIBRATION;
                     break;
             }
 
             if (!TextUtils.isEmpty(settingKey)) {
-                SettingTool.getInstance(MyApplication.getMyApplication()).addSetting(settingKey, settingValue);
+                Hawk.put(settingKey, settingValue);
             }
         }
     };
 
     private void initToggleButtonState(ToggleButton toggleButton, String settingKey) {
-        SettingTool settingTool = SettingTool.getInstance(MyApplication.getMyApplication());
-        if (SettingTool.SMARTHOME_SETTING_VALUE_ON.equals(settingTool.getSettingValue(settingKey, SettingTool.SMARTHOME_SETTING_VALUE_ON))) {
+
+        if (Constant.SMARTHOME_SETTING_VALUE_ON.equals(Hawk.get(settingKey, Constant.SMARTHOME_SETTING_VALUE_ON))) {
             toggleButton.setToggleOn();
         } else {
             toggleButton.setToggleOff();

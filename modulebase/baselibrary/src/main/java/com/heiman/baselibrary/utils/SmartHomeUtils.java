@@ -65,6 +65,23 @@ public class SmartHomeUtils {
     }
 
     /**
+     * 报警数据返回 转换成type
+     *
+     * @param loc_key 报警loc_key
+     * @return
+     */
+    public static int getType(String loc_key) {
+        int type = 0;
+        String loc_keya[] = loc_key.split("_");
+        try {
+            type = Integer.parseInt(loc_keya[2]);
+        } catch (Exception e) {
+            type = Integer.parseInt(loc_keya[1]);
+        }
+        return type;
+    }
+
+    /**
      * Try to return the absolute file path from the given Uri
      *
      * @param context
@@ -167,11 +184,14 @@ public class SmartHomeUtils {
                     version = 2;
                 } else if (product_id.equals(Constant.ZIGBEE_H1GW_NEW_PRODUCTID)) {
                     devicetype = Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW;
-                    version = 2;
+                    version = 3;
+                } else if (product_id.equals(Constant.ZIGBEE_H2GW_PRODUCTID)) {
+                    devicetype = Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW;
+                    version = 3;
                 }
                 deviceName = httpDevice.getName();
                 if (deviceName.equals("") || deviceName == null) {
-                    if (product_id.equals(Constant.ZIGBEE_PRODUCTID) || product_id.equals(Constant.ZIGBEE_H1GW_NEW_PRODUCTID)) {
+                    if (product_id.equals(Constant.ZIGBEE_PRODUCTID) || product_id.equals(Constant.ZIGBEE_H1GW_NEW_PRODUCTID) || product_id.equals(Constant.ZIGBEE_H2GW_PRODUCTID)) {
                         deviceName = "ZGW_" + mac;
                     } else if (product_id.equals(Constant.PLUGIN_PRODUCTID)) {
                         deviceName = "PLUG_" + mac;
@@ -213,7 +233,11 @@ public class SmartHomeUtils {
                 } else if (product_id.equals(Constant.ZIGBEE_H1GW_NEW_PRODUCTID)) {
                     devicetype = Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW;
                     deviceName = "ZGW_" + mac;
-                    version = 2;
+                    version = 3;
+                } else if (product_id.equals(Constant.ZIGBEE_H2GW_PRODUCTID)) {
+                    devicetype = Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW;
+                    deviceName = "ZGW_" + mac;
+                    version = 3;
                 }
             }
             JSONObject obj = new JSONObject();
@@ -268,6 +292,8 @@ public class SmartHomeUtils {
                 return Constant.AIR_PRODUCTID;
             case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW:
                 return Constant.ZIGBEE_H1GW_NEW_PRODUCTID;
+            case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW:
+                return Constant.ZIGBEE_H2GW_PRODUCTID;
             default:
                 return Constant.ZIGBEE_PRODUCTID;
         }
@@ -885,5 +911,66 @@ public class SmartHomeUtils {
                 return 0;
         }
     }
+    public static final int Period_Sign = 0x80;
+    public static final int Monday = 0x01;
+    public static final int Tuesday = 0x02;
+    public static final int Wednesday = 0x04;
+    public static final int Thursday = 0x08;
+    public static final int Friday = 0x10;
+    public static final int Saturday = 0x20;
+    public static final int Sunday = 0x40;
+    public static final int Everyday = 0x7f;
+
+    public static String getWkString(Context mContext, int wk) {
+        String WkString = "";
+        int i = 0x01;
+        while (i < 0x80) {
+            int s = wk & i;
+            switch (s) {
+                case Monday:
+                    WkString = mContext.getString(R.string.Monday);
+                    break;
+                case Tuesday:
+                    WkString = WkString + " " + mContext.getString(R.string.Tuesday);
+                    break;
+                case Wednesday:
+                    WkString = WkString + " " + mContext.getString(R.string.Wednesday);
+                    break;
+                case Thursday:
+                    WkString = WkString + " " + mContext.getString(R.string.Thursday);
+                    break;
+                case Friday:
+                    WkString = WkString + " " + mContext.getString(R.string.Friday);
+                    break;
+                case Saturday:
+                    WkString = WkString + " " + mContext.getString(R.string.Saturday);
+                    break;
+                case Sunday:
+                    WkString = WkString + " " + mContext.getString(R.string.Sunday);
+                    break;
+            }
+            i = i << 1;
+        }
+        if (WkString.equals(mContext.getString(R.string.Monday)
+                + " " + mContext.getString(R.string.Tuesday)
+                + " " + mContext.getString(R.string.Wednesday)
+                + " " + mContext.getString(R.string.Thursday)
+                + " " + mContext.getString(R.string.Friday)
+                + " " + mContext.getString(R.string.Saturday)
+                + " " + mContext.getString(R.string.Sunday))) {
+            WkString = mContext.getString(R.string.everyday);
+        } else if (WkString.equals(mContext.getString(R.string.Monday)
+                + " " + mContext.getString(R.string.Tuesday)
+                + " " + mContext.getString(R.string.Wednesday)
+                + " " + mContext.getString(R.string.Thursday)
+                + " " + mContext.getString(R.string.Friday))) {
+            WkString = mContext.getString(R.string.Daily);
+        } else if (WkString.equals(" " + mContext.getString(R.string.Saturday)
+                + " " + mContext.getString(R.string.Sunday))) {
+            WkString = mContext.getString(R.string.Weekdays);
+        }
+        return WkString;
+    }
+
 
 }

@@ -104,11 +104,18 @@ public class AddDeviceActivity extends BaseActivity {
                 final DeviceType deviceType = wifiList.get(position);
                 Bundle paramBundle = new Bundle();
                 paramBundle.putInt(Constant.TYPE, deviceType.getDeviceType());
-                if (deviceType.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
-                    paramBundle.putBoolean(Constant.IS_DEVICE, false);
-                    startActivityForName("com.heiman.gateway.LTLinkActivity", paramBundle);
-                } else {
-                    openActivity(ConfigurationWizardActivity.class, paramBundle);
+                switch (deviceType.getDeviceType()) {
+                    case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW:
+                        paramBundle.putBoolean(Constant.IS_DEVICE, false);
+                        startActivityForName("com.heiman.gateway.LTLinkActivity", paramBundle);
+                        break;
+                    case Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW:
+                        paramBundle.putBoolean(Constant.IS_DEVICE, false);
+                        startActivityForName("com.heiman.gateway.XlinkScanActivity", paramBundle);
+                        break;
+                    default:
+                        openActivity(ConfigurationWizardActivity.class, paramBundle);
+                        break;
                 }
 
             }
@@ -144,7 +151,11 @@ public class AddDeviceActivity extends BaseActivity {
     }
 
     private void initData() {
-
+        Bundle bundle = this.getIntent().getExtras();
+        boolean isSub = bundle.getBoolean(Constant.IS_SUB, false);
+        if (isSub) {
+            recyclerWifiDevice.setVisibility(View.GONE);
+        }
         wifiList.add(new DeviceType(false, DeviceType.ITEM_TYPE_WIFI_DEVICE, Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW, ""));
         wifiList.add(new DeviceType(false, DeviceType.ITEM_TYPE_WIFI_DEVICE, Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW, ""));
         wifiList.add(new DeviceType(false, DeviceType.ITEM_TYPE_WIFI_DEVICE, Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY, ""));

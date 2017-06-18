@@ -1,8 +1,10 @@
 package com.heiman.smarthome.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,6 +72,7 @@ public class FeedBackActivity extends BaseActivity {
                     submitFeedback();
                     break;
                 case MSG_SELET_IMAGE_FILE_TOO_LARGE:
+                    dismissHUMProgress();
                     Toast.makeText(FeedBackActivity.this, R.string.select_photo_too_large, Toast.LENGTH_LONG).show();
                     break;
                 case MSG_IMAGE_COMPRESS_COMPLETE:
@@ -78,6 +81,7 @@ public class FeedBackActivity extends BaseActivity {
                 case MSG_SUBMIT_FEEDBACK_COMPLETE:
                     dismissHUMProgress();
                     Toast.makeText(FeedBackActivity.this, R.string.submit_feedback_complete, Toast.LENGTH_LONG).show();
+                    finish();
                     break;
                 case MSG_SUBMIT_FEEDBACK_FAIL:
                     dismissHUMProgress();
@@ -119,6 +123,7 @@ public class FeedBackActivity extends BaseActivity {
         showTitleView(true);
 
         setTitle(getString(R.string.txt_feed_back));
+//        setReturnImage(R.drawable.back_black);
     }
 
     @Override
@@ -140,9 +145,10 @@ public class FeedBackActivity extends BaseActivity {
                     }
                     break;
                 case GALLERY_REQUEST_CODE:
-                    final Uri selectedUri = data.getData();
+                    Uri selectedUri = data.getData();
+
                     if (selectedUri != null) {
-                        final String path = selectedUri.getPath();
+                        String path = getRealFilePath(selectedUri);
                         LogUtil.e("path:" + path);
                         localImgPath.add(path);
                     } else {
@@ -237,10 +243,9 @@ public class FeedBackActivity extends BaseActivity {
 
     private void showTakePhotOrSelectPhotoDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_set_head_pic_dialog, null);
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.dialog_set_head_pic)
-                .setView(view)
-                .setCancelable(true)
-                .create();
+        Dialog dialog = new Dialog(this, R.style.dialog_set_head_pic);
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         Button btnTakePhoto = (Button) view.findViewById(R.id.btn_phone_takephoto);
         Button btnLocalPhoto = (Button) view.findViewById(R.id.btn_local_photo);
@@ -267,8 +272,8 @@ public class FeedBackActivity extends BaseActivity {
     private void dismissDialog(View v) {
         Object o = v.getTag();
 
-        if (o != null && o instanceof AlertDialog) {
-            AlertDialog dialog = (AlertDialog) o;
+        if (o != null && o instanceof Dialog) {
+            Dialog dialog = (Dialog) o;
             dialog.dismiss();
         }
     }
@@ -338,16 +343,10 @@ public class FeedBackActivity extends BaseActivity {
 
             @Override
             public void onSuccess(File file) {
+                LogUtil.e("onSuccess");
                 if (file.length() < HttpManage.MAX_UPLOAD_IMAGE_FILE_SIZE) {
                     compressedImgPath.add(file.getPath());
-
-                    if (localImgPath.size() > 0) {
-                        tempImgPath = localImgPath.remove(0);
-                        File imgFile = new File(tempImgPath);
-                        UsefullUtill.photoCompress(FeedBackActivity.this, imgFile, this);
-                    } else {
-                        mHandler.sendEmptyMessage(MSG_IMAGE_COMPRESS_COMPLETE);
-                    }
+                    compressSelectedImage();
                 } else {
                     mHandler.sendEmptyMessage(MSG_SELET_IMAGE_FILE_TOO_LARGE);
                 }
@@ -355,6 +354,7 @@ public class FeedBackActivity extends BaseActivity {
 
             @Override
             public void onError(Throwable e) {
+                LogUtil.e("onError");
                 mHandler.sendEmptyMessage(MSG_SELET_IMAGE_FILE_TOO_LARGE);
             }
         };
@@ -362,9 +362,42 @@ public class FeedBackActivity extends BaseActivity {
         if (localImgPath.size() > 0) {
             tempImgPath = localImgPath.remove(0);
             File file = new File(tempImgPath);
-            UsefullUtill.photoCompress(this, file, onCompressListener);
+            if (file.exists()) {
+                UsefullUtill.photoCompress(this, file, onCompressListener);
+            } else {
+                compressSelectedImage();
+            }
         } else {
             mHandler.sendEmptyMessage(MSG_IMAGE_COMPRESS_COMPLETE);
         }
+    }
+
+    public String getRealFilePath(Uri uri ) {
+
+        if ( null == uri ) {
+            return null;
+        }
+        final String scheme = uri.getScheme();
+        String data = "";
+
+        if ( scheme == null ) {
+            data = uri.getPath();
+        } else if ( ContentResolver.SCHEME_FILE.equals( scheme ) ) {
+            data = uri.getPath();
+        } else if ( ContentResolver.SCHEME_CONTENT.equals( scheme ) ) {
+            Cursor cursor = getContentResolver().query( uri, new String[] { MediaStore.Images.ImageColumns.DATA }, null, null, null );
+
+            if ( null != cursor ) {
+                if ( cursor.moveToFirst() ) {
+                    int index = cursor.getColumnIndex( MediaStore.Images.ImageColumns.DATA );
+
+                    if ( index > -1 ) {
+                        data = cursor.getString( index );
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
     }
 }

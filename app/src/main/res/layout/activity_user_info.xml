@@ -6,276 +6,329 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/navigation_bar_parting_line_color"/>
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/class_A_10_trans"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp">
+                android:layout_height="78dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
                 <TextView
                     android:id="@+id/txt_head"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/img_head"
                     android:layout_toStartOf="@+id/img_head"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:gravity="center_vertical"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:text="@string/txt_head_pic"
                     android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/txt_head_pic"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp"
 
-                     />
+                    />
+
                 <ImageView
                     android:id="@+id/img_head"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/main_right_image_head"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@+id/txt_head_right"
-                    />
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/main_right_image_head" />
+
                 <TextView
                     android:id="@+id/txt_head_right"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
-                    android:drawableRight="@drawable/right"
-                    android:paddingRight="10dp"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:drawableRight="@drawable/personal_next"
+                    android:paddingRight="20dp" />
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/navigation_bar_parting_line_color" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="46dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/txt_nick_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:text="@string/txt_nick_name2"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_nick_name2"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/txt_nick_name_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical|right"
                     android:clickable="true"
-                    android:drawableRight="@drawable/right"
-                    android:drawablePadding="10dp"
-                    android:text="@string/txt_nick_name_info2"/>
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/personal_next"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="20dp"
+                    android:text="@string/txt_nick_name_info2"
+                    android:textColor="@color/prompt_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@color/white">
+
                 <TextView
                     android:id="@+id/txt_account"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:text="@string/txt_account"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_account"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/txt_account_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="35dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical|right"
                     android:clickable="true"
-                    android:text="@string/txt_account_info"/>
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="45dp"
+                    android:text="@string/txt_account_info"
+                    android:textColor="@color/comment_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
-            <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:id="@+id/txt_email"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:textSize="15sp"
-                android:textColor="@color/txt_color"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:text="@string/txt_email"/>
-            <TextView
-                android:id="@+id/txt_email_info"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingRight="35dp"
-                android:textSize="12sp"
-                android:textColor="@color/txt_color"
-                android:gravity="center_vertical|right"
-                android:clickable="true"
-                android:text="@string/txt_email_info"/>
 
-        </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/navigation_bar_parting_line_color" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_email"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/txt_email_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="45dp"
+                    android:text="@string/txt_email_info"
+                    android:textColor="@color/comment_text_color"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/navigation_bar_parting_line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
                 <TextView
                     android:id="@+id/txt_phone_number"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:text="@string/txt_phone_number"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_phone_number"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/txt_phone_number_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="35dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical|right"
                     android:clickable="true"
-                    android:text="@string/txt_phone_number_info"/>
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="45dp"
+                    android:text="@string/txt_phone_number_info"
+                    android:textColor="@color/comment_text_color"
+                    android:textSize="14sp" />
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="10dp">
+
                 <TextView
                     android:id="@+id/txt_birthday"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:text="@string/txt_birthday"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_birthday"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/txt_birthday_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical|right"
                     android:clickable="true"
-                    android:drawableRight="@drawable/right"
-                    android:drawablePadding="10dp"
-                    android:text="@string/txt_birthday_info"/>
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/personal_next"
+                    android:gravity="center_vertical|right"
+                    android:paddingRight="20dp"
+                    android:text="@string/txt_birthday_info"
+                    android:textColor="@color/prompt_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/navigation_bar_parting_line_color" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="46dp"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
                 <TextView
                     android:id="@+id/txt_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:text="@string/txt_gender"/>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_gender"
+                    android:textColor="@color/txt_color"
+                    android:textSize="15sp" />
+
                 <TextView
                     android:id="@+id/txt_gender_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
+                    android:clickable="true"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/personal_next"
                     android:gravity="center_vertical|right"
-                    android:clickable="true"
-                    android:drawableRight="@drawable/right"
-                    android:drawablePadding="10dp"
-                    android:text="@string/txt_gender_male"/>
+                    android:paddingRight="20dp"
+                    android:text="@string/txt_gender_male"
+                    android:textColor="@color/prompt_text_color"
+                    android:textSize="14sp" />
             </LinearLayout>
-            <View
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/navigation_bar_parting_line_color"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
-                <TextView
-                    android:id="@+id/txt_authorized_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical"
-                    android:clickable="true"
-                    android:text="@string/txt_authorized_login"/>
+                android:layout_height="46dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
                 <TextView
                     android:id="@+id/txt_authorized_login_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:drawableRight="@drawable/personal_next"
+                    android:paddingRight="20dp" />
+
+                <ImageView
+                    android:id="@+id/img_authorization_wb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="7dp"
+                    android:src="@drawable/authorization_wb"
+                    android:layout_toLeftOf="@+id/txt_authorized_login_info"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/img_authorization_wechat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="7dp"
+                    android:src="@drawable/authorization_wechat"
+                    android:layout_toLeftOf="@+id/img_authorization_wb"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/img_authorization_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="7dp"
+                    android:src="@drawable/authorization_qq"
+                    android:layout_toLeftOf="@+id/img_authorization_wechat"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:id="@+id/txt_authorized_login"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingRight="10dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/txt_color"
-                    android:gravity="center_vertical|right"
                     android:clickable="true"
-                    android:drawableRight="@drawable/right"
-                    android:drawablePadding="10dp"
-                    android:text="@string/txt_authorized_login"/>
-            </LinearLayout>
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/txt_authorized_login"
+                    android:textColor="@color/txt_color"
+                    android:background="@color/transparent"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

@@ -266,7 +266,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
     @Override
     public void onRecvPipeData(short messageId, XDevice xdevice, byte[] data) {
         // TODO Auto-generated method stub
-        getLogger().e("onRecvPipeData::device:" + xdevice.toString() + "data:" + data);
+        getLogger().e("onRecvPipeData:device:" + xdevice.toString() + "data:" + data);
         XlinkDevice device = DeviceManage.getInstance().getDevice(xdevice.getMacAddress());
         if (device != null) {
 //            // 发送广播，那个activity需要该数据可以监听广播，并获取数据，然后进行响应的处理
@@ -289,7 +289,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
     @Override
     public void onRecvPipeSyncData(short messageId, XDevice xdevice, byte[] data) {
         // TODO Auto-generated method stub
-        getLogger().e("onRecvPipeSyncData::device:" + xdevice.toString() + "data:"
+        getLogger().e("onRecvPipeSyncData:device:" + xdevice.toString() + "data:"
                 + data);
         XlinkDevice device = DeviceManage.getInstance().getDevice(xdevice.getMacAddress());
         if (device != null) {

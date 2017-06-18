@@ -35,6 +35,10 @@ android {
             assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 repositories {
     flatDir {
@@ -50,6 +54,8 @@ dependencies {
     compile rootProject.ext.dependencies.design
     compile project(':baselibrary')
     compile project(':gateway')
+    compile project(':home')
+    compile project(':temphum')
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
@@ -61,5 +67,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile project(':devicecommon')
 }
 

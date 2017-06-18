@@ -116,6 +116,8 @@
     <color name="class_E_50_trans">#7faaaaaa</color>
     <color name="class_L_30_trans">#4B2288DD</color>
     <color name="class_P_50_trans">#7f606060</color>
+    <color name="transparent_text_18807a">#bb18807a</color>
+    <color name="text_18807a">#18807a</color>
 
     <drawable name="transparent">#00ffffff</drawable>
 
@@ -168,7 +170,7 @@
     <color name="ml_gray">#ff9e9e9e</color>
     <color name="ml_blue">#ff239efe</color>
     <color name="ml_red">#ffff0000</color>
-       <color name="txt_color">#333333</color> <!--正文颜色-->
+    <color name="txt_color">#333333</color> <!--正文颜色-->
     <color name="prompt_text_color">#666666</color> <!--提示文字颜色-->
     <color name="auxiliary_text_color">#808080</color> <!--辅助文字颜色-->
     <color name="comment_text_color">#999999</color> <!--注释文字颜色-->
@@ -176,4 +178,24 @@
     <color name="page_background_color">#f7f7f7</color> <!--页面背景颜色-->
     <color name="content_area_color">#ffffff</color> <!--内容区域（九宫格、列表） 标签栏-->
     <color name="navigation_bar_parting_line_color">#e4efef</color> <!--导航栏分割线颜色、内容区域处九宫格分割线颜色-->
+
+    <color name="txt_about_logo_font_color">#EA6542</color>
+    <color name="txt_about_copyright">#CC333333</color>
+    <color name="edit_input_color">#73807f</color>
+    <color name="txt_hint_color">#E6333333</color>
+    <color name="txt_hint_color2">#E6999999</color>
+
+    <color name="btn_regist_color">#18807A</color>
+
+    <color name="condition_device_name_color">#535353</color>
+
+    <color name="link_risk_warning_font_color">#cc808080</color>
+    <color name="link_risk_warning_red_font_color">#ccff0000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#2ed184</color>
+    <color name="colorSeekBarDefault">#c3c3c3</color>
+    <color name="color_range_seekbar_edge">#1f18807A</color>
+    <color name="temp_hum_font_color">#373737</color>
+    <color name="app_green">#53CAC3</color>
 </resources>

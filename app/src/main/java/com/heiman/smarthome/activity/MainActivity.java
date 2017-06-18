@@ -3,10 +3,10 @@ package com.heiman.smarthome.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
@@ -17,13 +17,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
+import com.heiman.baselibrary.GwBaseActivity;
+import com.heiman.baselibrary.Json.HeimanCom;
+import com.heiman.baselibrary.Json.SmartPlug;
 import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.manage.RoomManage;
+import com.heiman.baselibrary.manage.SubDeviceManage;
+import com.heiman.baselibrary.mode.Room;
+import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
+import com.heiman.devicecommon.ShareDeviceActivity;
 import com.heiman.smarthome.HeimanServer;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
@@ -35,6 +47,7 @@ import com.heiman.smarthome.fragment.SceneFragment;
 import com.heiman.smarthome.modle.LeftMain;
 import com.heiman.widget.bottomnavigation.AlphaTabsIndicator;
 import com.heiman.widget.bottomnavigation.OnTabChangedListner;
+import com.heiman.widget.imageview.CircleImageView;
 import com.jaeger.library.StatusBarUtil;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -42,25 +55,29 @@ import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
+import org.litepal.crud.callback.FindMultiCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import de.greenrobot.event.EventBus;
 import io.xlink.wifi.sdk.XlinkAgent;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends GwBaseActivity {
 
     private AlphaTabsIndicator alphaTabsIndicator;
     private DrawerLayout drawerLayout;
     private RelativeLayout rlLeft;
     private FrameLayout mFrmeLayout;
     private ListView leftListview;
-    private ImageView imageUserAvatar;
+    private CircleImageView imageUserAvatar;
     private TextView tvNikeName;
     private TextView tvDeviceNumber;
     private LinearLayout llRoomTemp;
@@ -77,6 +94,11 @@ public class MainActivity extends FragmentActivity {
     private Fragment mTab04;
     private MainLeftAdapter adapter;
     private List<LeftMain> leftMainList;
+    private XlinkDevice selectedGateway;
+
+    public XlinkDevice getSelectedGateway() {
+        return selectedGateway;
+    }
 
     public static String timeZone() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT"),
@@ -99,12 +121,84 @@ public class MainActivity extends FragmentActivity {
         if (!XlinkAgent.getInstance().isConnectedOuterNet()) {
             XlinkAgent.getInstance().login(MyApplication.getMyApplication().getAppid(), MyApplication.getMyApplication().getAuthKey());
         }
+        initDevice();
         startCustomService();
         initWidget();
-        initDevice();
         setSelect(0);
         initData();
         initEven();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void deviceData(String dataString) {
+
+    }
+
+    private void initDevice() {
+        DataSupport.findAllAsync(XlinkDevice.class).listen(new FindMultiCallback() {
+            @Override
+            public <T> void onFinish(List<T> t) {
+                MyApplication.getLogger().i("设备:" + t.size());
+                List<XlinkDevice> xlinkDeviceList = (List<XlinkDevice>) t;
+                MyApplication.getLogger().i("设备:" + xlinkDeviceList.size());
+                for (XlinkDevice xlinkDevice : xlinkDeviceList) {
+                    MyApplication.getLogger().i("设备:" + xlinkDevice.getDeviceMac() + xlinkDevice.getAccessAESKey());
+                    DeviceManage.getInstance().addDevice(xlinkDevice);
+                    if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
+                        if (SmartHomeUtils.isEmptyString(xlinkDevice.getAccessAESKey())) {
+                            List<String> OID = new ArrayList<String>();
+                            OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+                            String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
+                            BaseApplication.getLogger().json(sb);
+                            if (xlinkDevice.getDeviceState() != 0) {
+                                sendData(sb, false);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        DataSupport.findAllAsync(SubDevice.class).listen(new FindMultiCallback() {
+            @Override
+            public <T> void onFinish(List<T> t) {
+                List<SubDevice> subDeviceList = (List<SubDevice>) t;
+                for (SubDevice subDevice : subDeviceList) {
+                    SubDeviceManage.deviceMap.put(subDevice.getZigbeeMac(), subDevice);
+                }
+            }
+        });
+        HttpManage.getInstance().ckData(MyApplication.getMyApplication(), "", "Room", new HttpManage.ResultCallback<String>() {
+            @Override
+            public void onError(Header[] headers, HttpManage.Error error) {
+                MyApplication.getLogger().e("msg:" + error.getMsg() + "\tcode:" + error.getCode());
+            }
+
+            @Override
+            public void onSuccess(int code, String response) {
+                MyApplication.getLogger().json(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray list = jsonObject.getJSONArray("list");
+                    int iSize = list.length();
+                    for (int i = 0; i < iSize; i++) {
+                        JSONObject jsonObj = list.getJSONObject(i);
+                        Gson gson = new Gson();
+                        Room room = gson.fromJson(jsonObj.toString(), Room.class);
+                        MyApplication.getLogger().i("room_name:" + room.getRoom_name() + "\tcreator:" + room.getCreator() + "\nURL:" + room.getRoom_bg_url());
+                        RoomManage.getInstance().addHome(room);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void initEven() {
@@ -125,6 +219,7 @@ public class MainActivity extends FragmentActivity {
                         break;
                     case 1:
 //                        startActivity(new Intent(MainActivity.this, ShareDeviceActivity.class));
+                        startActivityForName("com.heiman.home.HomeListActivity");
                         break;
                     case 2:
 //                        feedbackeAgent.startDefaultThreadActivity();
@@ -156,15 +251,19 @@ public class MainActivity extends FragmentActivity {
 
                         break;
                     case 4:
-//                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        startActivity(new Intent(MainActivity.this, SettingActivity.class));
                         break;
                 }
             }
         });
+        initSpinnerGW();
+    }
+
+    private void initSpinnerGW() {
         List<XlinkDevice> gateWays = new ArrayList<>();
         List<XlinkDevice> getDevices = DeviceManage.getInstance().getDevices();
         for (int i = 0; i < getDevices.size(); i++) {
-            if (getDevices.get(i).getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY) {
+            if (getDevices.get(i).getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY || getDevices.get(i).getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW || getDevices.get(i).getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
                 gateWays.add(getDevices.get(i));
             }
         }
@@ -172,12 +271,46 @@ public class MainActivity extends FragmentActivity {
         if (!SmartHomeUtils.isEmptyList(gateWays)) {
             spinnerGw.setItems(gateWays);
             spinnerGw.setTag(gateWays);
+            selectedGateway = gateWays.get(0);
+            device = selectedGateway;
+
+            /**增加测试数据子设备**/
+            List<SubDevice> subDeviceList = SubDeviceManage.getInstance().getDevices();
+            if (subDeviceList.size() <= 0) {
+                SubDevice subDevice = new SubDevice();
+                subDevice.setWifiDevice(device);
+                subDevice.setDeviceMac(device.getDeviceMac());
+                subDevice.setZigbeeMac("aabbcceeffdd");
+                subDevice.setId(1231456);
+                subDevice.setIndex(1231456);
+                subDevice.setDate(new Date());
+                subDevice.setAQI("");
+                subDevice.setDeviceName("假的温湿度传感器");
+                subDevice.setDeviceType(Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP);
+                SubDeviceManage.getInstance().addDevice(subDevice);
+
+                SubDevice subDevice2 = new SubDevice();
+                subDevice2.setWifiDevice(device);
+                subDevice2.setDeviceMac(device.getDeviceMac());
+                subDevice2.setZigbeeMac("aabbccddeeff");
+                subDevice2.setId(12314567);
+                subDevice2.setIndex(12314567);
+                subDevice2.setDate(new Date());
+                subDevice2.setAQI("");
+                subDevice2.setDeviceName("假的计量插座");
+                subDevice2.setDeviceType(Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN);
+                SubDeviceManage.getInstance().addDevice(subDevice2);
+            }
+            /**增加测试数据子设备**/
         }
         spinnerGw.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<XlinkDevice>() {
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, XlinkDevice item) {
                 XlinkUtils.shortTips(MyApplication.getMyApplication(), "点击：" + (item == null ? "null" : item.toString()), getResources().getColor(R.color.class_J), getResources().getColor(R.color.white), 0, false);
+                List gateWay = (List) spinnerGw.getTag();
+                selectedGateway = (XlinkDevice) gateWay.get(spinnerGw.getSelectedIndex());
+                device = selectedGateway;
             }
         });
     }
@@ -191,11 +324,11 @@ public class MainActivity extends FragmentActivity {
     private void initData() {
         leftMainList = new ArrayList<LeftMain>();
 
-        leftMainList.add(new LeftMain(R.drawable.main_right_news, "消息", 0));
-        leftMainList.add(new LeftMain(R.drawable.main_right_home, "家庭管理", 0));
-        leftMainList.add(new LeftMain(R.drawable.main_right_share, "设备分享", 0));
-        leftMainList.add(new LeftMain(R.drawable.main_right_pod, "产品手册", 0));
-        leftMainList.add(new LeftMain(R.drawable.main_right_settings, "设置", 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_news, getString(R.string.news), 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_home, getString(R.string.Family_management), 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_share, getString(R.string.Device_sharing), 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_pod, getString(R.string.Product_manual), 0));
+        leftMainList.add(new LeftMain(R.drawable.main_right_settings, getString(R.string.Set_up), 0));
 
 
         tvNikeName.setText(MyApplication.getMyApplication().getUserInfo().getNickname());
@@ -205,6 +338,16 @@ public class MainActivity extends FragmentActivity {
         if (!SmartHomeUtils.isEmptyString(MyApplication.getMyApplication().getUserInfo().getPhone())) {
             tvDeviceNumber.setText(MyApplication.getMyApplication().getUserInfo().getPhone());
         }
+        if (!SmartHomeUtils.isEmptyString(MyApplication.getMyApplication().getUserInfo().getAvatar())) {
+            Glide.with(MainActivity.this).load(MyApplication.getMyApplication().getUserInfo().getAvatar())
+                    .centerCrop()
+                    .dontAnimate()
+                    .priority(Priority.NORMAL)
+                    .placeholder(R.drawable.main_right_image_head)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageUserAvatar);
+        }
+
     }
 
     public void openDrawers() {
@@ -217,7 +360,7 @@ public class MainActivity extends FragmentActivity {
         rlLeft = (RelativeLayout) findViewById(R.id.rl_left);
         mFrmeLayout = (FrameLayout) findViewById(R.id.mFrmeLayout);
         leftListview = (ListView) findViewById(R.id.left_listview);
-        imageUserAvatar = (ImageView) findViewById(R.id.image_user_avatar);
+        imageUserAvatar = (CircleImageView) findViewById(R.id.image_user_avatar);
         tvNikeName = (TextView) findViewById(R.id.tv_NikeName);
         tvDeviceNumber = (TextView) findViewById(R.id.tv_device_number);
         llRoomTemp = (LinearLayout) findViewById(R.id.ll_room_temp);
@@ -303,30 +446,6 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    private void initDevice() {
-        HttpManage.getInstance().getSubscribe(MyApplication.getMyApplication(), new HttpManage.ResultCallback<String>() {
-            @Override
-            public void onError(Header[] headers, HttpManage.Error error) {
-                MyApplication.getLogger().e("获取订阅设备出错:" + error.getMsg() + "\t" + error.getCode());
-            }
-
-            @Override
-            public void onSuccess(int code, String response) {
-                MyApplication.getLogger().json(response);
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray list = object.getJSONArray("list");
-                    int iSize = list.length();
-                    for (int i = 0; i < iSize; i++) {
-                        JSONObject jsonObj = list.getJSONObject(i);
-                        SmartHomeUtils.subscribeToDevice(jsonObj.toString());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * 通过包名跳转
@@ -343,6 +462,11 @@ public class MainActivity extends FragmentActivity {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void onClickListener(View v) {
+
     }
 
     public void startActivityForName(String activityName) {
@@ -366,4 +490,12 @@ public class MainActivity extends FragmentActivity {
             }
         }
     };
+
+    public void onEventMainThread(String event) {
+        String msg = "onEventMainThread收到了消息：" + event;
+        if (!TextUtils.isEmpty(event) && "get bind devices".equals(event)) {
+            initSpinnerGW();
+        }
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 }

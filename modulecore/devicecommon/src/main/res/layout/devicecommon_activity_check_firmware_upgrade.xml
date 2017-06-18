@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:FButton="http://schemas.android.com/apk/res-auto"
+    xmlns:RoundProgressBar="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_transparent_white" />
+
+    <ImageView
+        android:id="@+id/img_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/login_icon" />
+
+    <TextView
+        android:id="@+id/txt_firmware"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/current_firmware_is_last"
+        android:textColor="@color/txt_color"
+        android:textSize="15sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txt_current_firmware"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/current_version"
+        android:textSize="12sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txt_update_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/update_content"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/ll_update_warning_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/txt_update_warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/login_icon_pre"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/upgrade_do_not_disconnect_the_power" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.heiman.widget.button.FButton
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/btn_confirm3"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone"
+
+            FButton:buttonColor="@color/btn_regist_color"
+            FButton:cornerRadiusl="30dp"
+            FButton:shadowEnabled="false" />
+
+        <com.heiman.widget.button.FButton
+            android:id="@+id/btn_update_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/update_now"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="gone"
+
+            FButton:buttonColor="@color/btn_regist_color"
+            FButton:cornerRadiusl="30dp"
+            FButton:shadowEnabled="false" />
+
+        <com.heiman.widget.progressbar.RoundProgressBar
+            android:id="@+id/rbar_update_progress"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"
+
+            RoundProgressBar:roundColor="@color/fbutton_color_emerald"
+            RoundProgressBar:roundProgressColor="@color/fbutton_color_green_sea"
+            RoundProgressBar:roundWidth="1dp"
+            RoundProgressBar:textColor="@color/txt_color"
+            RoundProgressBar:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/img_update_succeed"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/std_icon_chackbox_chack"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -73,15 +73,24 @@
         <activity android:name="com.heiman.widget.UCropView.WeiChatCropActivity" />
         <activity android:name=".activity.FeedBackActivity" />
         <activity android:name=".activity.InformationActivity" />
-        <activity
-            android:name=".activity.ShareDeviceActivity"
-            android:label="@string/title_activity_share_device"
-            android:theme="@style/AppTheme" />
         <activity android:name=".activity.RegistActivity" />
         <activity android:name=".activity.RegistUseEmailActivity" />
         <activity android:name=".activity.PhoneGetBackPasswordActivity" />
-        <activity android:name=".activity.EmailGetBackPasswordActivity"></activity>
+        <activity android:name=".activity.EmailGetBackPasswordActivity" />
 
+        <activity android:name="com.heiman.devicecommon.ShareDeviceActivity" />
+        <activity android:name=".activity.RegistActivity" />
+        <activity android:name=".activity.RegistUseEmailActivity" />
+        <activity android:name=".activity.PhoneGetBackPasswordActivity" />
+        <activity android:name=".activity.EmailGetBackPasswordActivity" />
+        <activity android:name=".activity.SceneManaActivity" />
+        <activity android:name=".activity.LaunchConditionActivity" />
+        <activity android:name=".activity.DeviceExecActivity" />
+        <activity android:name=".activity.LinkManaActivity" />
+        <activity android:name=".activity.LinkConditionAddActivity" />
+        <activity android:name=".activity.TimerActivity" />
+        <activity android:name=".activity.LinkExecAddActivity" />
+        <activity android:name=".activity.LinkAddExecSceneActivity"/>
     </application>
 
 </manifest>

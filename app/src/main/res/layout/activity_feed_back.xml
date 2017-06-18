@@ -3,95 +3,104 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:FButton="http://schemas.android.com/apk/res-auto"
+    android:background="@color/class_A_10_trans"
     android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/navigation_bar_parting_line_color"/>
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:textSize="12sp"
-        android:textColor="@color/txt_color"
+        android:gravity="center_vertical"
         android:text="@string/txt_feed_back_content"
-        />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        android:textColor="@color/txt_color"
+        android:textSize="16sp" />
 
-                <EditText
-                    android:id="@+id/edit_feed_back_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
-                    android:gravity="top"
-                    android:hint="@string/edit_hit_input_feed_back_content"
-                    android:lineSpacingExtra="5dp"
-                    android:minLines="8"
-                    android:maxLines="8"
-                    android:padding="10dp"
-                    android:textSize="12sp" />
-                <ImageButton
-                    android:id="@+id/ivbtn_choose_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/std_tittlebar_main_device_share"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignLeft="@+id/edit_feed_back_content"
-                    android:layout_alignStart="@+id/edit_feed_back_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginBottom="12dp" />
-            </RelativeLayout>
-            <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_feed_back_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="top"
+                android:hint="@string/edit_hit_input_feed_back_content"
+                android:lineSpacingExtra="5dp"
+                android:maxLines="8"
+                android:minLines="8"
+                android:padding="10dp"
+                android:textColor="@color/txt_color"
+                android:textColorHint="@color/comment_text_color"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/ivbtn_choose_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:textSize="12sp"
-                android:textColor="@color/txt_color"
-                android:text="@string/txt_contact_way"/>
-            <EditText
-                android:id="@+id/edit_contact_way"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:background="@color/white"
-                android:textSize="12sp"
-                android:maxLines="1"
-                android:hint="@string/edit_hit_contact_way"
-                />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_alignLeft="@+id/edit_feed_back_content"
+                android:layout_alignBottom="@+id/edit_feed_back_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/feedback_img" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:text="@string/txt_contact_way"
+            android:textColor="@color/txt_color"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_contact_way"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:hint="@string/edit_hit_contact_way"
+            android:textColor="@color/txt_color"
+            android:textColorHint="@color/comment_text_color"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
+
+        <com.heiman.widget.button.FButton
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="48dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/btn_submit_selector"
             android:gravity="center"
             android:text="@string/btn_submit"
             android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+
+            FButton:buttonColor="@color/btn_regist_color"
+            FButton:cornerRadiusl="30dp"
+            FButton:shadowEnabled="false"/>
     </RelativeLayout>
 
 </LinearLayout>

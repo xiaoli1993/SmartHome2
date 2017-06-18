@@ -1,9 +1,9 @@
 package com.heiman.smarthome.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -32,6 +32,8 @@ public class PhoneGetBackPasswordActivity extends BaseActivity implements View.O
     private EditText editPasswordNextTime;
     private Button btnSubmit;
     private TextView txtGetBackPasswordUseEmail;
+    private TextView txtPasswordRemind;
+    private TextView txtPasswordNextTimeRemind;
 
     private int getVerCodeInterval = 120;
 
@@ -94,6 +96,8 @@ public class PhoneGetBackPasswordActivity extends BaseActivity implements View.O
         editPasswordNextTime = (EditText) findViewById(R.id.edit_password_next_time);
         btnSubmit = (Button) findViewById(R.id.btn_submit);
         txtGetBackPasswordUseEmail = (TextView) findViewById(R.id.txt_use_email_get_back_password);
+        txtPasswordRemind = (TextView) findViewById(R.id.txt_password_remind);
+        txtPasswordNextTimeRemind = (TextView) findViewById(R.id.txt_password_next_time_remind);
 
         txtVerCode.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
@@ -111,6 +115,7 @@ public class PhoneGetBackPasswordActivity extends BaseActivity implements View.O
         showTitleView(true);
 
         setTitle(getString(R.string.phone_get_back_password));
+//        setReturnImage(R.drawable.back_black);
     }
 
     @Override
@@ -264,6 +269,22 @@ public class PhoneGetBackPasswordActivity extends BaseActivity implements View.O
 
     @Override
     public void afterTextChanged(Editable s) {
+        if (editPassword.getText() == s) {
+            String password = editPassword.getText().toString();
+            if (TextUtils.isEmpty(password) || password.length() < 6 || password.length() > 16) {
+                txtPasswordRemind.setVisibility(View.VISIBLE);
+                return;
+            }
+            txtPasswordRemind.setVisibility(View.GONE);
+        }
 
+        if (editPasswordNextTime.getText() == s) {
+            String password = editPasswordNextTime.getText().toString();
+            if (TextUtils.isEmpty(password) || password.length() < 6 || password.length() > 16) {
+                txtPasswordNextTimeRemind.setVisibility(View.VISIBLE);
+                return;
+            }
+            txtPasswordNextTimeRemind.setVisibility(View.GONE);
+        }
     }
 }

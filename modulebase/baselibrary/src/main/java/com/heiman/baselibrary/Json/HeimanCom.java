@@ -21,12 +21,14 @@ import com.heiman.baselibrary.mode.SensorSet;
 import com.heiman.baselibrary.mode.THPSet;
 import com.heiman.baselibrary.mode.ThermostatSet;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
+import com.heiman.utils.UsefullUtill;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
 /**
  * @Author : 肖力
  * @Time :  2017/5/9 11:32
@@ -53,6 +55,7 @@ public class HeimanCom {
         public static final String GW_LGENABLE_AND_LGTIMER = "2.1.1.255.0.1.6";                  // 网关小夜灯
         public static final String GW_NAME = "2.1.1.254";                                        // 网关名称
         public static final String GW_SUB = "2.1.1.0";                                           // 子设备信息
+        public static final String GW_SUB_SS = "2.1.1.0.252";                                     // 子设备状态
         public static final String GW_UPDATA = "2.1.1.6";                                        // 设备更新
         public static final String GW_DEPLOY_DEFENCE = "2.1.1.255.0.5.2";                        // 设置网关撤布防信息
         public static final String GW_DEPLOY_DEFENCE_ACTION = "2.1.1.255.0.5";                   // 网关撤布防执行
@@ -126,6 +129,8 @@ public class HeimanCom {
                     @Override
                     public boolean shouldSkipField(FieldAttributes fa) {
                         switch (fa.getName()) {
+                            case "baseObjId":
+                                return true;
                             case "aesKeyOID":
                                 return true;
                             case "deviceNameOID":
@@ -175,6 +180,8 @@ public class HeimanCom {
                     @Override
                     public boolean shouldSkipField(FieldAttributes fa) {
                         switch (fa.getName()) {
+                            case "baseObjId":
+                                return true;
                             case "aesKeyOID":
                                 return true;
                             case "timeZoneOID":
@@ -224,6 +231,8 @@ public class HeimanCom {
                     @Override
                     public boolean shouldSkipField(FieldAttributes fa) {
                         switch (fa.getName()) {
+                            case "baseObjId":
+                                return true;
                             case "aesKeyOID":
                                 return true;
                             case "timeZoneOID":
@@ -278,6 +287,7 @@ public class HeimanCom {
      * @return
      */
     public static String setBasic(int SN, int encrypt, final HeimanSet.PLBean.GwBasicOID gwBasicOID) {
+
         Gson gson = new GsonBuilder()
                 .setExclusionStrategies(new ExclusionStrategy() {
                     @Override
@@ -328,6 +338,8 @@ public class HeimanCom {
                             }
                         }
                         switch (fa.getName()) {
+                            case "baseObjId":
+                                return true;
                             case "aesKeyOID":
                                 return true;
                             case "addSubOID":
@@ -498,13 +510,13 @@ public class HeimanCom {
      * @return
      */
     public static String setScene(int SN, int encrypt, Scene scene) {
-        Gson gson = new Gson();
+        //Gson gson = new Gson();
         scene.setCID(Constant.JOSN_CID.COMMAND_SEND);
         scene.setENCRYPT(encrypt);
         scene.setSID(BaseApplication.getMyApplication().getUserInfo().getNickname());
         scene.setSN(SN);
         scene.setTEID(BaseApplication.getMyApplication().getUserInfo().getId() + "");
-        return gson.toJson(scene);
+        return scene.getJsonString();
     }
 
 
@@ -569,7 +581,27 @@ public class HeimanCom {
             return null;
         }
     }
-
+    /**
+     * 获取网关场景
+     * @param SN 随机数
+     * @param encrypt 是否加密
+     * @return
+     */
+    public static String getScene(int SN, int encrypt) {
+        HashMap<String, Object> map = new HashMap<>();
+            map.put("SN", SN);
+            map.put("CID", Constant.JOSN_CID.COMMAND_GET);
+            map.put("SID", BaseApplication.getMyApplication().getUserInfo().getNickname());
+            map.put("TEID", BaseApplication.getMyApplication().getUserInfo().getId() + "");
+            map.put("ENCRYPT", encrypt);
+            HashMap<String, Object> data = new HashMap<>();
+            ArrayList<String> list = new ArrayList<>();
+            list.add(COM_GW_OID.SCENE);
+            data.put("OID", list);
+            map.put("PL", data);
+            String jsonData = UsefullUtill.getJSONStr(map);
+            return jsonData;
+    }
     /**
      * 设置联动
      *
@@ -578,7 +610,7 @@ public class HeimanCom {
      * @param link    设置场景
      * @return
      */
-    public static String setScene(int SN, int encrypt, Link link) {
+    public static String setLink(int SN, int encrypt, Link link) {
         Gson gson = new Gson();
         link.setCID(Constant.JOSN_CID.COMMAND_SEND);
         link.setENCRYPT(encrypt);
@@ -650,7 +682,27 @@ public class HeimanCom {
             return null;
         }
     }
-
+   /**
+     * 获取联动
+     * @param SN 随机数
+     * @param encrypt 是否加密
+     * @return
+     */
+    public static String getLink(int SN, int encrypt) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("SN", SN);
+        map.put("CID", Constant.JOSN_CID.COMMAND_GET);
+        map.put("SID", BaseApplication.getMyApplication().getUserInfo().getNickname());
+        map.put("TEID", BaseApplication.getMyApplication().getUserInfo().getId() + "");
+        map.put("ENCRYPT", encrypt);
+        HashMap<String, Object> data = new HashMap<>();
+        ArrayList<String> list = new ArrayList<>();
+        list.add(COM_GW_OID.LINK.replace(".0", ""));
+        data.put("OID", list);
+        map.put("PL", data);
+        String jsonData = UsefullUtill.getJSONStr(map);
+        return jsonData;
+    }
     /**
      * 设置子设备数据
      *
@@ -671,7 +723,9 @@ public class HeimanCom {
         plBase.setTEID(BaseApplication.getMyApplication().getUserInfo().getId() + "");
         String base = gson.toJson(plBase);
         // 2.1.1.0.y1.y2.index.getep;
-        String SUBOID = COM_GW_OID.SET_SUB.replace("{y1}", SmartHomeUtils.typeToY1(deviceType) + "").replace("{y1}", SmartHomeUtils.typeToY2(deviceType) + "").replace("{index}", index);
+        String SUBOID = COM_GW_OID.SET_SUB.replace("y1", SmartHomeUtils.typeToY1(deviceType) + "")
+                .replace("y2", SmartHomeUtils.typeToY2(deviceType) + "")
+                .replace("index", index);
 //        String subSeting = gson.toJson(objects);
         try {
             JSONObject obj = new JSONObject(base);

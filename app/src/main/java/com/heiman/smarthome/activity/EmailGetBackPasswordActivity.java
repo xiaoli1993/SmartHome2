@@ -1,17 +1,15 @@
 package com.heiman.smarthome.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
 import com.heiman.utils.LogUtil;
 import com.heiman.utils.UsefullUtill;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.apache.http.Header;
 
@@ -77,6 +74,7 @@ public class EmailGetBackPasswordActivity extends BaseActivity implements View.O
         showTitleView(true);
 
         setTitle(getString(R.string.email_get_back_password));
+//        setReturnImage(R.drawable.back_black);
     }
 
     @Override

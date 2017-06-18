@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -17,12 +18,16 @@ public class ThermostatSet {
      * t_ckvalid  : 1
      */
     @Expose
+    @SerializedName("OF")
     private int onoff = 9999;
     @Expose
+    @SerializedName("TU")
     private String t_ckup = "";
     @Expose
+    @SerializedName("TL")
     private String t_cklow = "";
     @Expose
+    @SerializedName("TA")
     private int t_ckvalid = 9999;
 
     public int getOnoff() {

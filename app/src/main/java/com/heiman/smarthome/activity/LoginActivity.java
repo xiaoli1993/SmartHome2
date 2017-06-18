@@ -16,7 +16,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -29,6 +28,9 @@ import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
+import com.heiman.utils.LogUtil;
+import com.heiman.utils.UsefullUtill;
+import com.heiman.widget.button.FButton;
 import com.heiman.widget.edittext.ClearEditText;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -51,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ClearEditText et_mobile;
     private ClearEditText et_password;
     private ImageView iv_show_pwd;
-    private Button btn_login;
+    private FButton btn_login;
     private TextView forget_password;
     private TextView regist;
     private int screenHeight = 0;//屏幕高度
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        StatusBarUtil.setTranslucent(this, 50);
         intiView();
         initListener();
+
     }
 
     private void intiView() {
@@ -79,16 +82,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         et_mobile = (ClearEditText) findViewById(R.id.et_mobile);
         et_password = (ClearEditText) findViewById(R.id.et_password);
         iv_show_pwd = (ImageView) findViewById(R.id.iv_show_pwd);
-        btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login = (FButton) findViewById(R.id.btn_login);
         forget_password = (TextView) findViewById(R.id.tv_forget_password);
         regist = (TextView) findViewById(R.id.tv_regist);
         service = findViewById(R.id.service);
-
+//        btn_login.setShadowEnabled(true);
         screenHeight = this.getResources().getDisplayMetrics().heightPixels; //获取屏幕高度
         keyHeight = screenHeight / 3;//弹起高度为屏幕高度的1/3
+        btn_login.setEnabled(false);
     }
 
     private void initListener() {
+        regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegistActivity.class));
+            }
+        });
+        forget_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, PhoneGetBackPasswordActivity.class));
+            }
+        });
         iv_show_pwd.setOnClickListener(this);
         btn_login.setOnClickListener(this);
         et_mobile.addTextChangedListener(new TextWatcher() {
@@ -99,7 +115,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (TextUtils.isEmpty(et_mobile.getText().toString())) {
+                    btn_login.setEnabled(false);
+                    return;
+                }
+                if (TextUtils.isEmpty(et_password.getText().toString())) {
+                    btn_login.setEnabled(false);
+                    return;
+                }
+                btn_login.setEnabled(true);
             }
 
             @Override
@@ -114,7 +138,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (TextUtils.isEmpty(et_mobile.getText().toString())) {
+                    btn_login.setEnabled(false);
+                    return;
+                }
+                if (TextUtils.isEmpty(et_password.getText().toString())) {
+                    btn_login.setEnabled(false);
+                    return;
+                }
+                btn_login.setEnabled(true);
             }
 
             @Override
@@ -206,6 +238,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        if (!UsefullUtill.judgeClick(R.layout.activity_login, 500)) {
+            LogUtil.e("点击过快！");
+            return;
+        }
         int id = v.getId();
         switch (id) {
             case R.id.btn_login:
@@ -292,6 +328,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             hud.dismiss();
                             Gson gson = new Gson();
                             MyApplication.getMyApplication().setUserInfo(gson.fromJson(response, UserInfo.class));
+                            Hawk.put("UserInfo", MyApplication.getMyApplication().getUserInfo());
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
@@ -301,4 +338,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             super.handleMessage(msg);
         }
     };
+
 }

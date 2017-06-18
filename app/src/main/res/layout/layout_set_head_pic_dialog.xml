@@ -1,53 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/content_area_color"
         android:orientation="vertical">
-        <View
+
+        <Button
+            android:id="@+id/btn_phone_takephoto"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="@color/transparent"/>
-        <LinearLayout
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/btn_phone_takephoto"
+            android:textColor="@color/txt_color"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_local_photo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/btn_local_photo"
+            android:textColor="@color/txt_color"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/set_head_pic_dialog_btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="vertical"
-            android:background="@color/content_area_color"
-            >
-            <Button
-                android:id="@+id/btn_phone_takephoto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:textSize="12sp"
-                android:textColor="@color/txt_color"
-                android:gravity="center"
-                android:text="@string/btn_phone_takephoto"/>
-            <Button
-                android:id="@+id/btn_local_photo"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@color/transparent"
-                android:textSize="12sp"
-                android:textColor="@color/txt_color"
-                android:gravity="center"
-                android:text="@string/btn_local_photo"/>
-            <Button
-                android:id="@+id/set_head_pic_dialog_btn_cancel"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:background="@color/transparent"
-                android:textSize="12sp"
-                android:textColor="@color/txt_color"
-                android:gravity="center"
-                android:text="@string/btn_cancel2"/>
-        </LinearLayout>
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/btn_cancel2"
+            android:textColor="@color/txt_color"
+            android:textSize="12sp" />
     </LinearLayout>
+
 </LinearLayout>

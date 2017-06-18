@@ -1,6 +1,6 @@
 package com.heiman.smarthome.activity;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.heiman.baselibrary.BaseActivity;
 import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.smarthome.MyApplication;
-import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.smarthome.R;
 import com.heiman.utils.AsyncBitmapLoader;
 import com.heiman.utils.UsefullUtill;
@@ -36,7 +36,7 @@ public class UserCenterActivity extends BaseActivity {
     private TextView txtCommonProblem;
     private TextView txtAbout;
     private TextView txtSet;
-    private TextView txtExitAccount;
+    private Button btnExitAccount;
     private UserInfo userInfo = null;
     private List<XlinkDevice> xDevices = null;
 
@@ -46,6 +46,7 @@ public class UserCenterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_user_center);
+//        StatusBarUtil.setTransparent(this);
         setContentLayout(R.layout.activity_user_center);
         txtNickName = (TextView) findViewById(R.id.txt_nick_name);
         imgBtnBack = (ImageButton) findViewById(R.id.ivbtn_back);
@@ -56,7 +57,7 @@ public class UserCenterActivity extends BaseActivity {
         txtCommonProblem = (TextView) findViewById(R.id.txt_common_problem);
         txtAbout = (TextView) findViewById(R.id.txt_about);
         txtSet = (TextView) findViewById(R.id.txt_set);
-        txtExitAccount = (TextView) findViewById(R.id.txt_exit_account);
+        btnExitAccount = (Button) findViewById(R.id.btn_exit_account);
 
 
         imgBtnBack.setOnClickListener(mOnClickListener);
@@ -66,7 +67,7 @@ public class UserCenterActivity extends BaseActivity {
         txtCommonProblem.setOnClickListener(mOnClickListener);
         txtAbout.setOnClickListener(mOnClickListener);
         txtSet.setOnClickListener(mOnClickListener);
-        txtExitAccount.setOnClickListener(mOnClickListener);
+        btnExitAccount.setOnClickListener(mOnClickListener);
 
         showHeadView(false);
     }
@@ -112,22 +113,22 @@ public class UserCenterActivity extends BaseActivity {
                     Intent setting = new Intent(UserCenterActivity.this, SettingActivity.class);
                     startActivity(setting);
                     break;
-                case R.id.txt_exit_account:
+                case R.id.btn_exit_account:
                     showExitAccoutDialog();
                     break;
                 case R.id.exit_account_dialog_btn_cancel:
                     Object o = v.getTag();
 
-                    if (o != null && o instanceof AlertDialog) {
-                        AlertDialog dialog = (AlertDialog) o;
+                    if (o != null && o instanceof Dialog) {
+                        Dialog dialog = (Dialog) o;
                         dialog.dismiss();
                     }
                     break;
                 case R.id.exit_account_dialog_btn_confirm:
                     Object object = v.getTag();
 
-                    if (object != null && object instanceof AlertDialog) {
-                        AlertDialog dialog = (AlertDialog) object;
+                    if (object != null && object instanceof Dialog) {
+                        Dialog dialog = (Dialog) object;
                         dialog.dismiss();
                     }
                     break;
@@ -140,10 +141,9 @@ public class UserCenterActivity extends BaseActivity {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_exit_account_dialog, null);
         Button btnConfirm = (Button) view.findViewById(R.id.exit_account_dialog_btn_confirm);
         Button btnCancel = (Button) view.findViewById(R.id.exit_account_dialog_btn_cancel);
-        AlertDialog exitAccoutDialog = new AlertDialog.Builder(this, R.style.dialog_exit_account)
-                .setView(view)
-                .setCancelable(true)
-                .create();
+        Dialog exitAccoutDialog = new Dialog(this, R.style.dialog_exit_account);
+        exitAccoutDialog.setContentView(view);
+        exitAccoutDialog.setCancelable(true);
         btnCancel.setTag(exitAccoutDialog);
         btnConfirm.setTag(exitAccoutDialog);
         btnCancel.setOnClickListener(mOnClickListener);

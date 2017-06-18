@@ -52,8 +52,8 @@ import java.util.UUID;
 public class HttpManage {
     private static HttpManage instance;
 
-    //    private static final String COMPANY_ID = "1007d2acea6d2000";
     public static String COMPANY_ID = "1007d2ada7d4a000";
+    //    public static String COMPANY_ID = "100edcb0237f4200";
     private static String host = "https://console.heiman.cn:443";
     private static final String FEEDBACK_HOST = "http://47.88.192.21:80/";
     public static final int MAX_UPLOAD_IMAGE_FILE_SIZE = 2 * 1024 * 1024;
@@ -84,6 +84,8 @@ public class HttpManage {
     private final String thirdpartyloginUrl = host + "/v2/user_auth_third";
     // 第三方用户初始化登录密码
     private final String initthirdpwdUrl = host + "/v2/user/{user_id}/init_pwd";
+    // 修改昵称
+    private final String User = host + "/v2/user/";
     // 绑定第三方
     private final String bindingthirdUrl = host + "/v2/user/{user_id}/bind_third";
     // 使用验证码找回密码密码
@@ -163,6 +165,8 @@ public class HttpManage {
     //上传意见反馈图片
     private final String feedbackUploadPhoto = FEEDBACK_HOST + "SmartHome/feedBack/uploadPictures";
 
+    //家庭功能-->创建家庭
+    private final String Home = host + "/v2/home";
 
     /**
      * code : 5031001
@@ -183,8 +187,8 @@ public class HttpManage {
 
     static {
         // 设置网络超时时间
-        client.setTimeout(5000);
-        client.setConnectTimeout(3000);
+        client.setTimeout(1000 * 10);
+        client.setConnectTimeout(1000 * 5);
     }
 
     /**
@@ -335,6 +339,7 @@ public class HttpManage {
     }
 
 
+
     /**
      * .重置密码
      */
@@ -434,7 +439,6 @@ public class HttpManage {
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
         put(context, url, headers, params, callback);
     }
-
 
     /**
      * http //.管理员（用户）获取所有设备分享请求列表
@@ -833,7 +837,7 @@ public class HttpManage {
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post(context, newestversionUrl, params.getJsonEntity(),callback, headers );
+        post(context, newestversionUrl, params.getJsonEntity(), callback, headers);
     }
 
     /**
@@ -848,7 +852,7 @@ public class HttpManage {
         params.put("device_id", device_id);
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
-        post(context, updeviceUrl, params.getJsonEntity(),callback, headers );
+        post(context, updeviceUrl, params.getJsonEntity(), callback, headers);
     }
 
     /**
@@ -1025,6 +1029,50 @@ public class HttpManage {
             JSONObject id = new JSONObject();
             query.put("create_date", id);
             id.put("$gte", create_date);
+            query.put("from", from);
+            from.put("$in", device);
+            params.put("query", query);
+        }
+
+        Map<String, String> headers = new HashMap<String, String>();
+        BaseApplication.getLogger().d(url + "/messages" + "\n" + params.getStringData());
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, url + "/messages", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 查询所有ID的数据
+     *
+     * @param offset      偏移量
+     * @param limit       个数
+     * @param device      设备集合
+     * @param create_date 创建时间
+     * @param queryCreate 时间请求
+     * @param callback
+     * @throws JSONException
+     */
+    public void getMessagesID(Context context, String offset,
+                              String limit, JSONArray device,
+                              String queryCreate,
+                              String create_date,
+                              final ResultCallback callback) throws JSONException {
+        String url = getUserInfoUrl.replace("{user_id}", BaseApplication.getMyApplication().getAppid() + "");
+        RequestParams params = new RequestParams();
+        params.put("offset", offset);
+        params.put("limit", limit);
+
+        JSONObject order = new JSONObject();
+        order.put("create_date", "desc");
+        params.put("order", order);
+
+        if (device != null) {
+            JSONObject query = new JSONObject();
+            JSONObject from = new JSONObject();
+            JSONObject id = new JSONObject();
+            if (!SmartHomeUtils.isEmptyString(create_date)) {
+                query.put("create_date", id);
+                id.put(queryCreate, create_date);
+            }
             query.put("from", from);
             from.put("$in", device);
             params.put("query", query);
@@ -1341,6 +1389,11 @@ public class HttpManage {
         client.get(context, url, headersdata, null, callback);
     }
 
+    private void delete(Context context, String url, com.loopj.android.http.RequestParams params, Map<String, String> headers, ResultCallback callback) {
+        Header[] headersdata = map2Header(headers);
+        client.delete(context, url, headersdata, params, callback);
+    }
+
     private void delete(Context context, String url, Map<String, String> headers, ResultCallback callback) {
         Header[] headersdata = map2Header(headers);
         client.delete(context, url, headersdata, null, callback);
@@ -1418,7 +1471,7 @@ public class HttpManage {
 
         @Override
         public void onSuccess(int code, Header[] headers, String msg) {
-            BaseApplication.getLogger().json(msg);
+//            BaseApplication.getLogger().json(msg);
             if (mType == String.class) {
                 onSuccess(code, (T) msg);
             } else {
@@ -1472,4 +1525,363 @@ public class HttpManage {
             error = new Error();
         }
     }
+
+
+    /********************************************************************
+     ********************************************************************
+     **********************     Home管理    *****************************
+     ********************************************************************
+     ********************************************************************/
+
+    /**
+     * 创建家庭
+     *
+     * @param name     "home的名称"
+     * @param callback
+     */
+    public void createHome(Context context, String name, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home, params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 修改家庭名字
+     *
+     * @param homeid   家庭ID
+     * @param name     家庭名字
+     * @param callback
+     */
+    public void changeHomeName(Context context, String homeid, String name, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("name", name);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        put(context, Home + "/" + homeid, params.getJsonEntity(), callback, headers);
+        BaseApplication.getLogger().i("uri:" + Home + homeid
+                + "\nAccess-Token:" + BaseApplication.getMyApplication().getAccessToken()
+                + "\nname:" + name);
+    }
+
+    /**
+     * 删除家庭名字
+     *
+     * @param homeid   家庭ID
+     * @param callback
+     */
+    public void deleteHome(Context context, String homeid, ResultCallback callback) {
+
+//        RequestParams params = new RequestParams();
+//        params.put("name", name);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        delete(context, Home + "/" + homeid, headers, callback);
+    }
+
+    /**
+     * 邀请  Home c成员 只有超级管理员和管理员才能添加成员
+     *
+     * @param account     用户注册的账号
+     * @param role        成员的角色类型
+     * @param authority   对设备的控制权限
+     * @param expire_time 成员的到期时间
+     * @param mode        邀请方式
+     * @param homeid      家庭ID
+     * @param callback
+     */
+    public void userInviteHome(Context context, String account, String role, String authority, String expire_time, String mode, String homeid, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("account", account);
+        params.put("role", role);
+        params.put("authority", authority);
+        params.put("expire_time", expire_time);
+        params.put("mode", mode);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/user_invite", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 用户通过本接口可以查看已接收到的Home邀请的所有记录列表。
+     *
+     * @param userid   用户ID
+     * @param callback
+     */
+    public void getUserInviteeHomeList(Context context, String userid, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "s/invitee_list?user_id=" + userid, headers, callback);
+    }
+
+    /**
+     * 用户获取发出的邀请记录列表。
+     *
+     * @param userid   用户ID
+     * @param callback
+     */
+    public void getUserInviterHomeList(Context context, String userid, ResultCallback callback) {
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "s/inviter_list?user_id=" + userid, headers, callback);
+    }
+
+    /**
+     * 接收到home管理员发送的邀请后，用户响应邀请
+     *
+     * @param invite_id 邀请ID
+     * @param homeid    家庭ID
+     * @param callback
+     */
+    public void userAcceptHome(Context context, String invite_id, String homeid, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("invite_id", invite_id);
+//        post2(Home + homeid + "/user_accept", params.getJsonEntity(), callback, getHeaders());
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/user_accept", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 接收到home管理员发送的邀请后，用户响应邀请
+     *
+     * @param invite_id 邀请ID
+     * @param reason    用户拒绝分享的原因
+     * @param homeid    家庭ID
+     * @param callback
+     */
+    public void userDenyHome(Context context, String invite_id, String reason, String homeid, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("invite_id", invite_id);
+        if (reason != null && reason.equals("")) {
+            params.put("reason", reason);
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/user_accept", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 超级管理员能删除管理员,超级管理员和管理员能删除其他成员。除了创建者外，任何成员能够自行退出Home。
+     *
+     * @param homeid   家庭ID
+     * @param callback
+     */
+    public void deleteHomeUser(Context context, String homeid, String userid, ResultCallback callback) {
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        delete(context, Home + "/" + homeid + "/user/" + userid, headers, callback);
+
+    }
+
+    /**
+     * 超级管理员能修改管理员,超级管理员和管理员才能修改其他成员。
+     *
+     * @param homeid      家庭ID
+     * @param expire_time home成员的角色类型
+     * @param expire_time home成员的到期时间
+     * @param callback
+     */
+    public void changeHomeUser(Context context, String homeid, String role, String expire_time, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("role", role);
+        params.put("expire_time", expire_time);
+//        put(Home + homeid, params.getJsonEntity(), callback, getHeaders());
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        put(context, Home + "/" + homeid, params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 用户获取Home列表
+     *
+     * @param callback
+     */
+    public void getHomeList(Context context, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "s?user_id=" + BaseApplication.getMyApplication().getAppid() + "", headers, callback);
+    }
+
+    /**
+     * home的管理员把设备加入到home中。
+     *
+     * @param device_id 设备ID
+     * @param authority 对设备的控制权限，R可读，W可写，RW可读可写
+     * @param sub_role  用户和设备的订阅关系；0：管理员；1：普通用户
+     * @param homeid    家庭ID
+     * @param callback
+     */
+    public void addHomeDevice(Context context, String device_id, String authority, String sub_role, String homeid, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("device_id", device_id);
+        params.put("authority", authority);
+        params.put("sub_role", sub_role);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/user_accept", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * home的管理员把设备从home中移除。
+     *
+     * @param homeid   家庭ID
+     * @param deviceid 设备ID
+     * @param callback
+     */
+    public void deleteHomeDevice(Context context, String homeid, String deviceid, ResultCallback callback) {
+
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        delete(context, Home + "/" + homeid + "/device/" + deviceid, headers, callback);
+
+    }
+
+    /**
+     * home的成员可以获取home的设备列表
+     *
+     * @param homeid   家庭ID
+     * @param callback
+     */
+    public void GetDeviceHomeList(Context context, String homeid, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "/" + homeid + "/devices", headers, callback);
+    }
+
+    /**
+     * 管理员及以上才能修改其他home成员对设备的操作权限。
+     *
+     * @param homeid    家庭ID
+     * @param userid    home成员的用户Id
+     * @param deviceid  设备ID
+     * @param authority 对设备的控制权限，R可读，W可写，RW可读可写；
+     * @param callback
+     */
+    public void changeHomeDevicePermission(Context context, String homeid, String userid, String deviceid, String authority, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("user_id", userid);
+        params.put("device_id", deviceid);
+        params.put("authority", authority);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        put(context, Home + "/" + homeid + "/device_permission", params.getJsonEntity(), callback, headers);
+
+    }
+
+    /**
+     * home的管理员可以为home添加扩展属性
+     *
+     * @param data     {
+     *                 "{key}":{
+     *                 "name":"扩展属性的名称",
+     *                 "value":"扩展属性的值"
+     *                 }
+     *                 "{key}":{
+     *                 "name":"扩展属性的名称",
+     *                 "value":"扩展属性的值"
+     *                 }
+     *                 }
+     *                 <p>
+     *                 注意：扩展属性字段{key}不得包含小数点、空字符，不能以美元符号（$）开头。
+     * @param homeid   家庭ID
+     * @param callback
+     */
+    public void setHomeProperty(Context context, String data, String homeid, ResultCallback callback) {
+
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(data.toString(), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/property", entity, callback, headers);
+    }
+
+    /**
+     * home的成员可以获取设备扩展属性列表。
+     *
+     * @param homeid   家庭ID
+     * @param callback
+     */
+    public void getHomeProperty(Context context, String homeid, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "/" + homeid + "/property", headers, callback);
+    }
+
+    /**
+     * 超级管理员管理员可以获取home所有成员的设备权限信息，其他成员能获取自己对应的设备权限信息。
+     *
+     * @param homeid   家庭ID
+     * @param userid   用户id。如果为空，则返回所有home成员的设备权限信息
+     * @param callback
+     */
+    public void getHomeDeviceAuthority(Context context, String homeid, String userid, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, Home + "s/" + homeid + "/device_authority?user_id=" + userid, headers, callback);
+    }
+
+    /**
+     * 用户通过本接口删除自己邀请或者邀请自己的记录。
+     *
+     * @param id_list  ["记录ID1","记录ID2"...]
+     * @param callback
+     */
+    public void deleteInvitationHome(Context context, JSONArray id_list, ResultCallback callback) {
+
+        com.loopj.android.http.RequestParams params = new com.loopj.android.http.RequestParams();
+        params.put("id_list", id_list);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        delete(context, Home + "s/invitation/delete", params, headers, callback);
+
+    }
+
+    /**
+     * 邀请者可以取消邀请动作
+     *
+     * @param invite_id 邀请ID
+     * @param homeid    家庭ID
+     * @param callback
+     */
+    public void cancelHomeInvite(Context context, String invite_id, String homeid, ResultCallback callback) {
+
+        RequestParams params = new RequestParams();
+        params.put("invite_id", invite_id);
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        post(context, Home + "/" + homeid + "/invite_cancel", params.getJsonEntity(), callback, headers);
+    }
+
+    /**
+     * 通过本接口可以获取任意用户的公开信息，此接口无需任何权限
+     *
+     * @param userid   用户id。
+     * @param callback
+     */
+    public void getOpenInfo(Context context, String userid, ResultCallback callback) {
+        Map<String, String> headers = new HashMap<String, String>();
+        headers.put("Access-Token", BaseApplication.getMyApplication().getAccessToken());
+        get(context, User + userid + "/open_info", headers, callback);
+    }
+
+    /***********************************************************
+     * ************************** end ***************************
+     ***********************************************************/
+
 }

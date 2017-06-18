@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -21,16 +22,22 @@ public class THPSet {
      * t_ckvalid  : 1
      */
     @Expose
+    @SerializedName("HU")
     private String h_ckup = "";
     @Expose
+    @SerializedName("HL")
     private String h_cklow = "";
     @Expose
+    @SerializedName("HA")
     private int h_ckvalid = 9999;
     @Expose
+    @SerializedName("TU")
     private String t_ckup = "";
     @Expose
+    @SerializedName("TL")
     private String t_cklow = "";
     @Expose
+    @SerializedName("TA")
     private int t_ckvalid = 9999;
 
     public String getH_ckup() {

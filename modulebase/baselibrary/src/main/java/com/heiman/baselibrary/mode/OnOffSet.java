@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -35,46 +36,67 @@ public class OnOffSet {
      * wf3 : 255
      */
     @Expose
+    @SerializedName("OF1")
     private int onoff1;
     @Expose
+    @SerializedName("OF2")
     private int onoff2;
     @Expose
+    @SerializedName("OF3")
     private int onoff3;
     @Expose
+    @SerializedName("TM1")
     private int enableTime1;
     @Expose
+    @SerializedName("HS1")
     private int sh1;
     @Expose
+    @SerializedName("MS1")
     private int sm1;
     @Expose
+    @SerializedName("HE1")
     private int eh1;
     @Expose
+    @SerializedName("ME1")
     private int em1;
     @Expose
+    @SerializedName("WF1")
     private int wf1;
     @Expose
+    @SerializedName("TM2")
     private int enableTime2;
     @Expose
+    @SerializedName("HS2")
     private int sh2;
     @Expose
+    @SerializedName("MS2")
     private int sm2;
     @Expose
+    @SerializedName("HE2")
     private int eh2;
     @Expose
+    @SerializedName("ME2")
     private int em2;
     @Expose
+    @SerializedName("WF2")
     private int wf2;
     @Expose
+    @SerializedName("TM3")
     private int enableTime3;
     @Expose
+    @SerializedName("HS3")
     private int sh3;
     @Expose
+    @SerializedName("MS3")
     private int sm3;
     @Expose
+    @SerializedName("HE3")
     private int eh3;
     @Expose
+    @SerializedName("ME2")
     private int em3;
     @Expose
+    @SerializedName("WF3")
     private int wf3;
 
     public int getEnableTime1() {

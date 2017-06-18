@@ -73,7 +73,13 @@ public class Constant {
     public static final String IS_DEVICE = "isdevice";
     public static final String MY_ACCOUNT = "MY_ACCOUNT";// 用户账号
     public static final String MY_PASSWORD = "MY_PASSWORD";// 用户密码
+    public final static String SMARTHOME_SETTING_SHOW_DETAIL_MESSAGE = "setting_show_detail_message"; //通知显示详情设置
+    public final static String SMARTHOME_SETTING_VOICE = "setting_voice";   // 消息提示音设置
+    public final static String SMARTHOME_SETTING_VIBRATION = "setting_vibration";  //消息提示震动设置
 
+    public final static String SMARTHOME_SETTING_VALUE_OFF = "off"; //关
+    public final static String SMARTHOME_SETTING_VALUE_ON = "on";  //开
+    public static final String HOME_ID = "home_id";
 
     /**
      * 我的头像保存目录
@@ -102,10 +108,12 @@ public class Constant {
     //  WIFI气感
     public static String GAS_PRODUCTID = "160edcb0eb22e600160edcb0eb22e601";
     // ZigBee 新小网关
-    public static String ZIGBEE_H1GW_NEW_PRODUCTID = "0fc2c50412264ce29dae547ff08b941e";
+    public static String ZIGBEE_H1GW_NEW_PRODUCTID = "160edcb27f5c0001160edcb27f5cf801";
+    // ZigBee 新大网关
+    public static String ZIGBEE_H2GW_PRODUCTID = "160edcb05ac84400160edcb05ac84401";
 
-    public static String ZIGBEE_H1GW_NEW_KEY = "2f187a0983ea42db";
-
+//    public static String ZIGBEE_H1GW_NEW_KEY = "2f187a0983ea42db";
+    public static String ZIGBEE_H1GW_NEW_KEY = "a21411d54368a1e8";
 
     //Json CID指令集
     public static class JOSN_CID {
@@ -143,10 +151,10 @@ public class Constant {
         public static final int DEVICE_ZIGBEE_SMOKE = 20;                        //ZIGBEE 烟感
         public static final int DEVICE_ZIGBEE_THP = 21;                          //ZIGBEE 温湿度
         public static final int DEVICE_ZIGBEE_GAS = 22;                          //ZIGBEE 气感
-        public static final int DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM= 23;         //ZIGBEE 声光警号
+        public static final int DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM = 23;         //ZIGBEE 声光警号
 
         public static final int DEVICE_ZIGBEE_CO = 24;                           //ZIGBEE 一氧化碳探测器
-        public static final int DEVICE_ZIGBEE_ILLUMINANCE= 25;                   //ZIGBEE 光照度
+        public static final int DEVICE_ZIGBEE_ILLUMINANCE = 25;                   //ZIGBEE 光照度
         public static final int DEVICE_ZIGBEE_AIR = 26;                          //ZIGBEE 空气质量
         public static final int DEVICE_ZIGBEE_THERMOSTAT = 27;                   //ZIGBEE 温控器
 

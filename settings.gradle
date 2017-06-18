@@ -1,4 +1,4 @@
-include ':app', ':modulecore', ':gateway', ':modulebase', ':baselibrary', ':datacom', ':dbsqlite', ':thirdparty', ':utils', ':widget'
+include ':app', ':modulecore', ':gateway', ':modulebase', ':baselibrary', ':datacom', ':dbsqlite', ':thirdparty', ':utils', ':widget', ':home',':devicecommon', ':temphum'
 project(':gateway').projectDir = new File('modulecore/gateway')
 project(':baselibrary').projectDir = new File('modulebase/baselibrary')
 project(':datacom').projectDir = new File('modulebase/datacom')
@@ -6,3 +6,6 @@ project(':dbsqlite').projectDir = new File('modulebase/dbsqlite')
 project(':thirdparty').projectDir = new File('modulebase/thirdparty')
 project(':utils').projectDir = new File('modulebase/utils')
 project(':widget').projectDir = new File('modulebase/widget')
+project(':devicecommon').projectDir = new File('modulecore/devicecommon')
+project(':temphum').projectDir = new File('modulecore/temphum')
+project(':home').projectDir = new File('modulecore/home')

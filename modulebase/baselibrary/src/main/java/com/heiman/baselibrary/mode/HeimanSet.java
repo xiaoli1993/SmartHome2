@@ -102,22 +102,31 @@ public class HeimanSet extends PLBase {
 
         public static class GwBasicOID {
             @Expose
+            @SerializedName("AT")
             private int armtype = 9999;
             @Expose
+            @SerializedName("AL")
             private int alarmlevel = 9999;
             @Expose
+            @SerializedName("SL")
             private int soundlevel = 9999;
             @Expose
+            @SerializedName("BT")
             private int betimer = 9999;
             @Expose
+            @SerializedName("LG")
             private String gwlanguage = "";
             @Expose
+            @SerializedName("LL")
             private int gwlightlevel = 9999;
             @Expose
+            @SerializedName("LO")
             private int gwlightonoff = 9999;
             @Expose
+            @SerializedName("LT")
             private int lgtimer = 9999;
             @Expose
+            @SerializedName("RD")
             private String roomID = "";
 
             public int getArmtype() {

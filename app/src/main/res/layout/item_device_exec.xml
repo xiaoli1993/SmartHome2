@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/txt_device_exec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:textSize="15sp"
+        android:textColor="@color/txt_color"
+        android:drawableRight="@drawable/icon_device_exec_sel"
+        />
+</RelativeLayout>

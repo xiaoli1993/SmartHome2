@@ -2,102 +2,115 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/class_A_10_trans">
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="@color/navigation_bar_parting_line_color"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/txt_color"
-            android:textSize="12sp"
-            android:text="@string/wechat_login" />
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingRight="10dp"
-            android:textSize="12sp"
-            android:textColor="@color/txt_color"
-            android:gravity="center_vertical|right"
-            android:clickable="true"
-            android:drawableRight="@drawable/right"
-            android:drawablePadding="10dp"
-            android:text="@string/txt_unbound"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/navigation_bar_parting_line_color"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-        <CheckBox
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/txt_color"
-            android:textSize="12sp"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/authorization_qq"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
             android:text="@string/qq_login" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingRight="10dp"
-            android:textSize="12sp"
-            android:textColor="@color/txt_color"
+            android:textSize="14sp"
+            android:textColor="@color/prompt_text_color"
             android:gravity="center_vertical|right"
             android:clickable="true"
-            android:drawableRight="@drawable/right"
-            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/personal_next"
+            android:drawablePadding="3dp"
             android:text="@string/txt_unbound"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/navigation_bar_parting_line_color"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-        <CheckBox
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/txt_color"
-            android:textSize="12sp"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/authorization_wechat"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/wechat_login" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:textSize="14sp"
+            android:textColor="@color/prompt_text_color"
+            android:gravity="center_vertical|right"
+            android:clickable="true"
+            android:drawableRight="@drawable/personal_next"
+            android:drawablePadding="3dp"
+            android:text="@string/txt_unbound"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:background="@color/navigation_bar_parting_line_color"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/txt_color"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/authorization_wb"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
             android:text="@string/micro_blog_login" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingRight="10dp"
-            android:textSize="12sp"
-            android:textColor="@color/txt_color"
+            android:textSize="14sp"
+            android:textColor="@color/prompt_text_color"
             android:gravity="center_vertical|right"
             android:clickable="true"
-            android:drawableRight="@drawable/right"
-            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/personal_next"
+            android:drawablePadding="3dp"
             android:text="@string/txt_unbound"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:background="@color/navigation_bar_parting_line_color"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="10sp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="42dp"
+        android:textSize="12sp"
         android:textColor="@color/comment_text_color"
-        android:gravity="center"
         android:text="@string/txt_authorize_mana_bottom"/>
 
 </LinearLayout>

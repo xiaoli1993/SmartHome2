@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:RangeSeekBar="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar_transparent_white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grid_dr" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/txt_temp_alarm_condition_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/txt_color"
+            android:text="@string/temp_alarm_condition_setting"
+            />
+
+        <com.heiman.widget.togglebutton.ToggleButton
+            android:id="@+id/toggle_temp_alarm_condition"
+            android:layout_width="41dp"
+            android:layout_height="23dp"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_temp_alarm_setting_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <com.heiman.widget.seekbar.RangeSeekBar
+            android:id="@+id/range_temp_setting"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            RangeSeekBar:markTextArray="@array/temp_mark_array"
+            RangeSeekBar:lineColorSelected="@color/btn_regist_color"
+            RangeSeekBar:lineColorEdge="@color/color_range_seekbar_edge"
+            RangeSeekBar:markTextArrayColor="@color/prompt_text_color"
+            RangeSeekBar:thumbPrimaryColor="@color/btn_regist_color"
+            RangeSeekBar:thumbSecondaryColor="@color/btn_regist_color"
+            RangeSeekBar:textPadding="10dp"
+            RangeSeekBar:seek_textSize="14sp"
+            RangeSeekBar:seek_min="-10"
+            RangeSeekBar:seek_max="70"
+            RangeSeekBar:reserve="1"
+            RangeSeekBar:hintBGHeight="30dp"
+            RangeSeekBar:seekBarHeight="5dp"
+            RangeSeekBar:hintBGWith="10dp"
+            RangeSeekBar:seekBarLeftAndRightPadding="10dp"
+            RangeSeekBar:thumbSize="12dp"
+            RangeSeekBar:cellMode="number"
+            RangeSeekBar:seekBarMode="range"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/navigation_bar_parting_line_color"/>
+
+        <TextView
+            android:id="@+id/txt_temp_alarm_condition_explain1"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="bottom"
+            android:textColor="@color/comment_text_color"
+            android:text="@string/temp_alarm_condition_explain1"/>
+
+        <TextView
+            android:id="@+id/txt_temp_alarm_condition_explain2"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="top"
+            android:textColor="@color/comment_text_color"
+            android:text="@string/temp_alarm_condition_explain2"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/navigation_bar_parting_line_color"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/txt_hum_alarm_condition_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/txt_color"
+            android:textSize="16sp"
+            android:text="@string/hum_alarm_condition_setting"
+            />
+
+        <com.heiman.widget.togglebutton.ToggleButton
+            android:id="@+id/toggle_hum_alarm_condition"
+            android:layout_width="41dp"
+            android:layout_height="23dp"
+            android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_hum_alarm_setting_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <com.heiman.widget.seekbar.RangeSeekBar
+            android:id="@+id/range_hum_setting"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            RangeSeekBar:markTextArray="@array/hum_mark_array"
+            RangeSeekBar:lineColorSelected="@color/btn_regist_color"
+            RangeSeekBar:lineColorEdge="@color/color_range_seekbar_edge"
+            RangeSeekBar:markTextArrayColor="@color/prompt_text_color"
+            RangeSeekBar:thumbPrimaryColor="@color/btn_regist_color"
+            RangeSeekBar:thumbSecondaryColor="@color/btn_regist_color"
+            RangeSeekBar:textPadding="10dp"
+            RangeSeekBar:seek_textSize="14sp"
+            RangeSeekBar:seek_min="0"
+            RangeSeekBar:seek_max="100"
+            RangeSeekBar:reserve="1"
+            RangeSeekBar:hintBGHeight="30dp"
+            RangeSeekBar:seekBarHeight="5dp"
+            RangeSeekBar:hintBGWith="10dp"
+            RangeSeekBar:thumbSize="12dp"
+            RangeSeekBar:seekBarLeftAndRightPadding="10dp"
+            RangeSeekBar:cellMode="number"
+            RangeSeekBar:seekBarMode="range"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/navigation_bar_parting_line_color"/>
+
+        <TextView
+            android:id="@+id/txt_hum_alarm_condition_explain1"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="bottom"
+            android:textColor="@color/comment_text_color"
+            android:text="@string/hum_alarm_condition_explain1"/>
+
+        <TextView
+            android:id="@+id/txt_hum_alarm_condition_explain2"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:gravity="top"
+            android:textColor="@color/comment_text_color"
+            android:text="@string/hum_alarm_condition_explain1"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/navigation_bar_parting_line_color"/>
+
+    </LinearLayout>
+
+</LinearLayout>

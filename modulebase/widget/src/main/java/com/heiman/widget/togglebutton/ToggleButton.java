@@ -58,6 +58,7 @@ public class ToggleButton extends View {
      * 瀵拷閸忓磭濮搁�?锟�
      */
     private boolean toggleOn = false;
+
     /**
      * 鏉堣顢嬫径褍鐨�?
      */
@@ -362,6 +363,10 @@ public class ToggleButton extends View {
 
     public void setAnimate(boolean animate) {
         this.defaultAnimate = animate;
+    }
+
+    public boolean isToggleOn() {
+        return toggleOn;
     }
 
 }

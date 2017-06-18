@@ -404,4 +404,21 @@ public class UsefullUtill {
         return valid;
     }
 
+    /**
+     * String转float
+     * @param s
+     * @return
+     */
+    public static float stringToFloat(String s) {
+        float result = 0f;
+        try {
+            result = Float.parseFloat(s);
+        } catch (Exception e) {
+            if (e != null) {
+                LogUtil.e(e.getMessage());
+            }
+        }
+        return result;
+    }
+
 }

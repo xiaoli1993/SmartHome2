@@ -67,7 +67,7 @@ public class MainSceneAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void bind(ItemViewHolder holder, int position) {
 
-        holder.textView.setText(results.get(position).getScene().getName());
+        holder.textView.setText(results.get(position).getPL().getOID().getName());
 
     }
 

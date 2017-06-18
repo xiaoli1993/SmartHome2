@@ -1,84 +1,129 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:FButton="http://schemas.android.com/apk/res-auto"
+    xmlns:PasswordEditText="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/class_A_10_trans">
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/navigation_bar_parting_line_color"/>
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
 
     <com.heiman.widget.edittext.ClearEditText
         android:id="@+id/edit_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/common_input_bg"
-        android:drawableLeft="@drawable/login_icon_account"
-        android:drawablePadding="10dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/edit_input_common_bg"
+        android:drawableLeft="@drawable/email_registration_email"
+        android:gravity="center_vertical"
+        android:drawablePadding="5dp"
         android:hint="@string/input_email_address"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:minLines="1"
-        android:padding="10dp" />
+        android:padding="10dp"
+        android:textColorHint="@color/txt_hint_color"
+        android:textSize="15sp" />
 
     <com.heiman.widget.edittext.PasswordEditText
         android:id="@+id/edit_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/login_icon_password"
-        android:layout_marginTop="20dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/edit_email"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:drawablePadding="10dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/edit_input_common_bg"
+        android:drawableLeft="@drawable/phone_registration_password"
+        android:drawablePadding="5dp"
+        android:hint="@string/input_password"
         android:maxLines="1"
         android:minLines="1"
-        android:background="@drawable/common_input_bg"
-        android:hint="@string/input_password"/>
+        android:padding="10dp"
+        android:textColorHint="@color/txt_hint_color"
+        android:textSize="15sp"
+
+        PasswordEditText:hide_drawable="@drawable/login_eyeopen"
+        PasswordEditText:show_drawable="@drawable/login_eyeclose" />
+
+    <TextView
+        android:id="@+id/txt_password_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_password"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/input_correct_format_password"
+        android:textColor="@color/red_text_color"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
     <com.heiman.widget.edittext.PasswordEditText
         android:id="@+id/edit_password_next_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/login_icon_password"
-        android:layout_marginTop="20dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/edit_password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:padding="10dp"
-        android:drawablePadding="10dp"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/edit_input_common_bg"
+        android:drawableLeft="@drawable/phone_registration_password"
+        android:drawablePadding="5dp"
+        android:hint="@string/input_password_next_time"
         android:maxLines="1"
         android:minLines="1"
-        android:background="@drawable/common_input_bg"
-        android:hint="@string/input_password_next_time"/>
+        android:padding="10dp"
+        android:textColorHint="@color/txt_hint_color"
+        android:textSize="15sp"
+
+        PasswordEditText:hide_drawable="@drawable/login_eyeopen"
+        PasswordEditText:show_drawable="@drawable/login_eyeclose" />
+
+    <TextView
+        android:id="@+id/txt_password_next_time_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_password_next_time"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/input_correct_format_password"
+        android:textColor="@color/red_text_color"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
     <com.heiman.widget.button.FButton
         android:id="@+id/btn_regist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_password_next_time"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:text="@string/btn_regist"
         android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:textSize="18sp"
+        android:textStyle="bold"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="bottom|center_horizontal">
-        <TextView
-            android:id="@+id/txt_use_phone_regist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:padding="20dp"
-            android:clickable="true"
-            android:text="@string/regist_use_phone"/>
-    </LinearLayout>
+        FButton:buttonColor="@color/btn_regist_color"
+        FButton:cornerRadiusl="30dp"
+        FButton:shadowEnabled="false" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/txt_use_phone_regist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:clickable="true"
+        android:padding="20dp"
+        android:text="@string/regist_use_phone"
+        android:textColor="@color/btn_regist_color"
+        android:textSize="12sp"/>
+
+</RelativeLayout>

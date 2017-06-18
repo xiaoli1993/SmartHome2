@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/class_A_10_trans">
+
+    <View
+        android:id="@+id/view_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
+
+    <EditText
+        android:id="@+id/edit_device_search"
+        android:layout_width="307dp"
+        android:layout_height="38dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_input_common_bg"
+        android:drawableLeft="@drawable/icon_device_search"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="@string/txt_hint_search"
+        android:paddingLeft="10dp"
+        android:textColor="@color/txt_color"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_intelligent_device"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/edit_device_search"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:text="@string/intelligent_device"
+        android:textColor="@color/txt_hint_color"
+        android:textSize="16sp" />
+
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/recycler_intelligent_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_intelligent_device">
+
+    </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+</RelativeLayout>

@@ -20,15 +20,13 @@ import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
 import com.heiman.smarthome.modle.ListMain;
 import com.heiman.widget.dragindicator.DragIndicatorView;
-import com.heiman.widget.helper.ItemTouchHelperAdapter;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Administrator on 2015/11/24.
  */
-public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<ListMain> results;
 
@@ -47,7 +45,6 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void setOnItemClickListener(MyItemClickListener listener) {
         this.mItemClickListener = listener;
     }
-
 
 
     public interface MyItemClickListener {
@@ -131,7 +128,7 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onClick(View v) {
                 MyApplication.getLogger().i("点击：" + xlinkDevice.getDeviceName());
-                if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
+                if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW|| xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
                     Bundle paramBundle = new Bundle();
                     paramBundle.putBoolean(Constant.IS_DEVICE, true);
                     paramBundle.putString(Constant.DEVICE_MAC, xlinkDevice.getDeviceMac());
@@ -323,6 +320,14 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onClick(View v) {
                 MyApplication.getLogger().i("点击：" + subDevice.getDeviceName());
+                Bundle paramBundle = new Bundle();
+                paramBundle.putBoolean(Constant.IS_DEVICE, true);
+                paramBundle.putString(Constant.DEVICE_MAC, subDevice.getDeviceMac());
+                paramBundle.putBoolean(Constant.IS_SUB, true);
+                paramBundle.putString(Constant.ZIGBEE_MAC, subDevice.getZigbeeMac());
+                if (subDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP) {
+                    startActivityForName("com.heiman.temphum.TempHumActivity", paramBundle);
+                }
             }
         });
     }

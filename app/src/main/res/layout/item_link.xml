@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="91dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:background="@drawable/exit_account_dialog_bg"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/txt_link_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="0dp"
+        android:padding="0dp"
+        android:textSize="15sp"
+        android:textColor="@color/txt_color"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_item_link_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/icon_gw_line"/>
+
+        <ImageView
+            android:id="@+id/img_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/img_item_link_left"
+            android:src="@drawable/icon_link"/>
+
+        <ImageView
+            android:id="@+id/img_item_link_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"
+            android:layout_toRightOf="@+id/img_link"
+            android:src="@drawable/icon_gw_line"/>
+
+        <com.heiman.widget.togglebutton.ToggleButton
+            android:id="@+id/toggle_link_enable"
+            android:layout_width="50dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

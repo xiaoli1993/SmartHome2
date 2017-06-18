@@ -48,4 +48,5 @@ dependencies {
     compile project(':thirdparty')
     compile project(':utils')
     compile project(':widget')
+    compile files('libs/eventbus.jar')
 }

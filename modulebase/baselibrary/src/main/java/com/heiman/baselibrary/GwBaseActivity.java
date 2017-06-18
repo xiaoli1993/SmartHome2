@@ -17,6 +17,8 @@ import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.datacom.aes.AES128Utils;
+import com.heiman.widget.dialog.MDDialog;
+import com.heiman.widget.edittext.ClearEditText;
 import com.heiman.widget.swipeback.CloseActivityClass;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.orhanobut.hawk.Hawk;
@@ -59,6 +61,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
     private boolean isRun;// 界面是否可见
     private String pipeData = null;//保存数据
     public boolean isDevice;
+    public boolean isSub;
 
     @Override
     public void onClick(View v) {
@@ -182,20 +185,21 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
      */
     private void initDeviceData() {
         Bundle bundle = this.getIntent().getExtras();
-//        if (bundle != null) {
-        isDevice = bundle.getBoolean(Constant.IS_DEVICE, false);
-        if (isDevice) {
-            //接收name值
-            String mac = bundle.getString(Constant.DEVICE_MAC);
-            boolean isSub = bundle.getBoolean(Constant.IS_SUB, false);
-            if (isSub) {
-                String zigbeemac = bundle.getString(Constant.ZIGBEE_MAC);
-                subDevice = SubDeviceManage.getInstance().getDevice(mac, zigbeemac);
+        if (bundle != null) {
+            isDevice = bundle.getBoolean(Constant.IS_DEVICE, false);
+            if (isDevice) {
+                //接收name值
+                String mac = bundle.getString(Constant.DEVICE_MAC);
+                isSub = bundle.getBoolean(Constant.IS_SUB, false);
+                if (isSub) {
+                    String zigbeemac = bundle.getString(Constant.ZIGBEE_MAC);
+                    subDevice = SubDeviceManage.getInstance().getDevice(mac, zigbeemac);
+                }
+                BaseApplication.getLogger().e("mac:" + mac + "isSub:" + isSub);
+                device = DeviceManage.getInstance().getDevice(mac);
+                BaseApplication.getLogger().e("mac:" + device.getDeviceMac());
             }
-            BaseApplication.getLogger().e("mac:" + mac + "isSub:" + isSub);
-            device = DeviceManage.getInstance().getDevice(mac);
         }
-//        }
     }
 
 
@@ -292,6 +296,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                         JSONObject jsonObject = new JSONObject(data);
                         int RC = jsonObject.getInt("RC");
                         if (RC <= 0) {
+                            dismissHUMProgress();
                             XlinkUtils.shortTips(BaseApplication.getMyApplication(), SmartHomeUtils.showRcCode(RC), getResources().getColor(R.color.class_J), getResources().getColor(R.color.white), 0, false);
                             return;
                         }
@@ -347,6 +352,32 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
     };
 
     public abstract void deviceData(String dataString);
+
+    /**
+     * 弹出修改名称Dialog
+     *
+     * @param title              标题
+     * @param hint               输入框hint
+     * @param btMultiListenerYes 回调
+     */
+    public void showChangeNameDialog(String title, final String hint, final String edittext, final MDDialog.OnMultiClickListener btMultiListenerYes) {
+        new MDDialog.Builder(this)
+                .setContentView(R.layout.item_md_dialog)
+                .setContentViewOperator(new MDDialog.ContentViewOperator() {
+                    @Override
+                    public void operate(View contentView) {
+                        ClearEditText et = (ClearEditText) contentView.findViewById(R.id.edit0);
+                        et.setText(edittext);
+                        et.setHint(hint);
+                    }
+                })
+                .setTitle(title)
+                .setPositiveButtonMultiListener(btMultiListenerYes)
+                .setWidthMaxDp(600)
+                .setShowButtons(true)
+                .create()
+                .show();
+    }
 
     /**
      * 显示HUM等待
@@ -606,7 +637,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         DeviceManage.getInstance().addDevice(device);
     }
 
-    public boolean sendData(final String bs) {
+    public boolean sendData(final String data) {
         if (device.getDeviceState() == 0) {
             try {
                 connectDevice();
@@ -620,11 +651,11 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         try {
 
             try {
-                aesBs = AES128Utils.HmEncrypt(bs, device.getAesKey());
+                aesBs = AES128Utils.HmEncrypt(data, device.getAesKey());
             } catch (Exception e) {
                 e.printStackTrace();
                 BaseApplication.getLogger().i("加密失败" + device.getAesKey());
-                aesBs = bs;
+                aesBs = data;
             }
             try {
                 String sbe = AES128Utils.HmDecrypt(aesBs, device.getAesKey());
@@ -639,6 +670,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
             e.printStackTrace();
         }
         if (ret < 0) {
+            dismissHUMProgress();
             device.setDeviceState(0);
             DeviceManage.getInstance().updateDevice(device);
             switch (ret) {
@@ -663,12 +695,75 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
 
             return false;
         } else {
-            BaseApplication.getLogger().d("发送加密前数据：" + bs + "\t长度：" + bs.length() + "\n发送加密后数据：" + aesBs + "\t长度：" + aesBs.length());
+            BaseApplication.getLogger().d("发送加密前数据：" + data + "\t长度：" + data.length() + "\n发送加密后数据：" + aesBs + "\t长度：" + aesBs.length());
         }
         return true;
     }
 
-    public boolean sendData(final String bs, boolean isAes) {
+    public boolean sendData(final String data, SendPipeListener sendPipeListenerb) {
+        if (device.getDeviceState() == 0) {
+            try {
+                connectDevice();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        int ret = 0;
+        String aesBs = null;
+        try {
+
+            try {
+                aesBs = AES128Utils.HmEncrypt(data, device.getAesKey());
+            } catch (Exception e) {
+                e.printStackTrace();
+                BaseApplication.getLogger().i("加密失败" + device.getAesKey());
+                aesBs = data;
+            }
+            try {
+                String sbe = AES128Utils.HmDecrypt(aesBs, device.getAesKey());
+                BaseApplication.getLogger().i("解密数据:" + sbe);
+            } catch (Exception e) {
+                e.printStackTrace();
+                BaseApplication.getLogger().i("解密失败:");
+            }
+
+            ret = XlinkAgent.getInstance().sendPipeData(device.getxDevice(), aesBs.getBytes(), sendPipeListenerb);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (ret < 0) {
+            dismissHUMProgress();
+            device.setDeviceState(0);
+            DeviceManage.getInstance().updateDevice(device);
+            switch (ret) {
+                case XlinkCode.NO_CONNECT_SERVER:
+                    BaseApplication.getLogger().e("发送数据失败，手机未连接服务器");
+                    break;
+                case XlinkCode.NETWORD_UNAVAILABLE:
+                    BaseApplication.getLogger().e("当前网络不可用,发送数据失败");
+                    break;
+                case XlinkCode.NO_DEVICE:
+                    BaseApplication.getLogger().e("未找到设备");
+                    try {
+                        XlinkAgent.getInstance().initDevice(device.getxDevice());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    BaseApplication.getLogger().e("发送数据失败，错误码：" + ret);
+                    break;
+            }
+
+            return false;
+        } else {
+            BaseApplication.getLogger().d("发送加密前数据：" + data + "\t长度：" + data.length() + "\n发送加密后数据：" + aesBs + "\t长度：" + aesBs.length());
+        }
+        return true;
+    }
+
+    public boolean sendData(final String data, boolean isAes) {
         if (device.getDeviceState() == 0) {
             try {
                 connectDevice();
@@ -683,7 +778,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
 //            if (device.getxDevice().getDeviceId()==0){
 //                ret = XlinkAgent.getInstance().sendLocalPipeData(device.getxDevice(), bs.getBytes(), pipeListener);
 //            }
-            ret = XlinkAgent.getInstance().sendPipeData(device.getxDevice(), bs.getBytes(), pipeListener);
+            ret = XlinkAgent.getInstance().sendPipeData(device.getxDevice(), data.getBytes(), pipeListener);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -712,7 +807,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
 
             return false;
         } else {
-            BaseApplication.getLogger().i("发送数据,msgId:" + ret + " data:" + bs);
+            BaseApplication.getLogger().i("发送数据,msgId:" + ret + " data:" + data);
         }
         return true;
     }
@@ -722,18 +817,18 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         @Override
         public void onSendLocalPipeData(XDevice xdevice, int code, int messageId) {
             // setDeviceStatus(false);
-            BaseApplication.getLogger().json(XlinkAgent.deviceToJson(xdevice).toString());
+//            BaseApplication.getLogger().json(XlinkAgent.deviceToJson(xdevice).toString());
             switch (code) {
                 case XlinkCode.SUCCEED:
                     device.setDeviceState(1);
-
                     BaseApplication.getLogger().i("发送数据,msgId:" + messageId + "成功");
                     break;
                 case XlinkCode.TIMEOUT:
                     BaseApplication.getLogger().e("发送数据,msgId:" + messageId + "超时");
-
+                    dismissHUMProgress();
                     break;
                 case XlinkCode.SERVER_CODE_UNAUTHORIZED:
+                    dismissHUMProgress();
                     BaseApplication.getLogger().i("控制设备失败,当前帐号未订阅此设备，请重新订阅");
                     device.setDeviceState(0);
                     try {
@@ -743,6 +838,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                     }
                     break;
                 case XlinkCode.SERVER_DEVICE_OFFLIEN:
+                    dismissHUMProgress();
                     BaseApplication.getLogger().e("设备不在线");
                     device.setDeviceState(0);
                     break;

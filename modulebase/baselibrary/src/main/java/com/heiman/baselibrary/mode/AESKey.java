@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.SerializedName;
+import com.heiman.baselibrary.Json.HeimanCom;
 
 /**
  * @Author : 肖力
@@ -10,38 +11,32 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class AESKey {
+
+
     /**
-     * CID : 30012
+     * SID : uid
+     * PL : {"2.1.1.1.1":{"key":"^LHiuQl+zE0Am/7BG9bNdVDK53HOdSEfhl/Gw1htJkD0=&"}}
+     * SN : 48
      * ENCRYPT : 0
-     * PL : {"2.1.1.6":"AES128"}
+     * TEID : 452873318
      * RC : 1
-     * SID : 12345
-     * TEID : 100012461
-     * SN : 2
+     * CID : 30022
      */
 
-    private int CID;
-    private int ENCRYPT;
-    private PLBean PL;
-    private int RC;
     private String SID;
-    private String TEID;
+    private PLBean PL;
     private int SN;
+    private int ENCRYPT;
+    private String TEID;
+    private int RC;
+    private int CID;
 
-    public int getCID() {
-        return CID;
+    public String getSID() {
+        return SID;
     }
 
-    public void setCID(int CID) {
-        this.CID = CID;
-    }
-
-    public int getENCRYPT() {
-        return ENCRYPT;
-    }
-
-    public void setENCRYPT(int ENCRYPT) {
-        this.ENCRYPT = ENCRYPT;
+    public void setSID(String SID) {
+        this.SID = SID;
     }
 
     public PLBean getPL() {
@@ -52,20 +47,20 @@ public class AESKey {
         this.PL = PL;
     }
 
-    public int getRC() {
-        return RC;
+    public int getSN() {
+        return SN;
     }
 
-    public void setRC(int RC) {
-        this.RC = RC;
+    public void setSN(int SN) {
+        this.SN = SN;
     }
 
-    public String getSID() {
-        return SID;
+    public int getENCRYPT() {
+        return ENCRYPT;
     }
 
-    public void setSID(String SID) {
-        this.SID = SID;
+    public void setENCRYPT(int ENCRYPT) {
+        this.ENCRYPT = ENCRYPT;
     }
 
     public String getTEID() {
@@ -76,28 +71,52 @@ public class AESKey {
         this.TEID = TEID;
     }
 
-    public int getSN() {
-        return SN;
+    public int getRC() {
+        return RC;
     }
 
-    public void setSN(int SN) {
-        this.SN = SN;
+    public void setRC(int RC) {
+        this.RC = RC;
+    }
+
+    public int getCID() {
+        return CID;
+    }
+
+    public void setCID(int CID) {
+        this.CID = CID;
     }
 
     public static class PLBean {
         /**
-         * 2.1.1.6 : AES128
+         * 2.1.1.1.1 : {"key":"^LHiuQl+zE0Am/7BG9bNdVDK53HOdSEfhl/Gw1htJkD0=&"}
          */
 
-        @SerializedName("2.1.1.1.8")
-        private String AesKey;
+        @SerializedName(HeimanCom.COM_GW_OID.GET_AES_KEY)
+        private AESkeyBean AESkey;
 
-        public String getAesKey() {
-            return AesKey;
+        public AESkeyBean getAESkey() {
+            return AESkey;
         }
 
-        public void setAesKey(String AesKey) {
-            this.AesKey = AesKey;
+        public void setAESkey(AESkeyBean AESkey) {
+            this.AESkey = AESkey;
+        }
+
+        public static class AESkeyBean {
+            /**
+             * key : ^LHiuQl+zE0Am/7BG9bNdVDK53HOdSEfhl/Gw1htJkD0=&
+             */
+
+            private String key;
+
+            public String getKey() {
+                return key;
+            }
+
+            public void setKey(String key) {
+                this.key = key;
+            }
         }
     }
 }

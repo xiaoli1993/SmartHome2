@@ -111,6 +111,10 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void onError(Header[] headers, HttpManage.Error error) {
                             MyApplication.getLogger().e(error.getMsg() + "\t" + error.getCode());
+                            Message msg = new Message();
+                            msg.what = 2;
+                            msg.obj = error.getMsg() + "\t" + error.getCode();
+                            myHandler.sendMessage(msg);
                         }
 
                         @Override
@@ -118,10 +122,25 @@ public class SplashActivity extends AppCompatActivity {
                             MyApplication.getLogger().json(response);
                             Gson gson = new Gson();
                             MyApplication.getMyApplication().setUserInfo(gson.fromJson(response, UserInfo.class));
+                            Hawk.put("UserInfo", MyApplication.getMyApplication().getUserInfo());
                             startActivity(new Intent(SplashActivity.this, MainActivity.class));
                             finish();
                         }
                     });
+                    break;
+                case 2:
+//                    if (msg.obj != null) {
+//                        Toast.makeText(SplashActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+                    if (Hawk.contains("UserInfo")) {
+                        Hawk.get("UserInfo", MyApplication.getMyApplication().getUserInfo());
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+                        Message msgs = new Message();
+                        msgs.what = 1;
+                        myHandler.sendMessage(msgs);
+                    }
+//                    }
                     break;
             }
             super.handleMessage(msg);

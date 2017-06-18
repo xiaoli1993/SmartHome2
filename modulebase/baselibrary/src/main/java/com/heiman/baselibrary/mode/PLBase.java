@@ -2,11 +2,13 @@ package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * Copyright ©深圳市海曼科技有限公司
  */
 
-public class PLBase {
+public class PLBase extends DataSupport {
     /**
      * TEID : 1144507844
      * PL : {}
@@ -15,12 +17,15 @@ public class PLBase {
      * CID : 30022
      * SID :
      */
-
+    @Expose
     private String TEID;
     @Expose(serialize = true, deserialize = false)
     private int RC;
+    @Expose
     private int SN;
+    @Expose
     private int CID;
+    @Expose
     private String SID;
     @Expose
     private int ENCRYPT;

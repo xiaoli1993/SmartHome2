@@ -13,6 +13,8 @@
         android:layout_height="1px"
         android:background="@color/grid_dr" />
 
+
+
     <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
         android:id="@+id/recycler_device"
         android:layout_width="match_parent"

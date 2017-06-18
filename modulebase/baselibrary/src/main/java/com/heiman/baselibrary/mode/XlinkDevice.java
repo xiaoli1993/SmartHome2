@@ -20,7 +20,7 @@ import io.xlink.wifi.sdk.XlinkAgent;
 public class XlinkDevice extends DataSupport {
     private long id;
     private Date date;
-    private List<DataDevice> dataDevice = new ArrayList<DataDevice>();
+//    private List<DataDevice> dataDevice = new ArrayList<DataDevice>();
     private List<SubDevice> subDevice = new ArrayList<SubDevice>();
 
     private String softwareVer;// 软件版本
@@ -40,8 +40,8 @@ public class XlinkDevice extends DataSupport {
     private boolean isHome;// 是否家庭设备
     private int homeID;// 是否家庭设备
     private boolean isShared;// 是否是分享权限,默认是可以控制
-    public String ownerName;// 分享设备的拥有者
-    public String roomName;// 房间名
+    private String ownerName;// 分享设备的拥有者
+    private String roomName;// 房间名
     private String xDevice;//xDevice
     private String aesKey;//加密秘钥
     private String active_date; // 激活时间
@@ -50,6 +50,16 @@ public class XlinkDevice extends DataSupport {
     private String active_code;//激活码
     private String accessAESKey;// AES密码
     private String roomID;//房间ID
+    //以下是网关数据
+    private int armtype;//撤布防状态
+    private int alarmlevel;//报警亮度
+    private int soundlevel;//声音亮度
+    private int betimer;//报警时长
+    private String gwlanguage = "";//设备语言
+    private int gwlightlevel;//网关灯亮度
+    private int gwlightonoff;//网关灯开关
+    private int lgtimer;//网关小夜灯时长
+
 
     public String getRoomID() {
         return roomID;
@@ -189,13 +199,13 @@ public class XlinkDevice extends DataSupport {
         this.date = date;
     }
 
-    public List<DataDevice> getDataDevice() {
-        return dataDevice;
-    }
+//    public List<DataDevice> getDataDevice() {
+//        return dataDevice;
+//    }
 
-    public void setDataDevice(List<DataDevice> dataDevice) {
-        this.dataDevice = dataDevice;
-    }
+//    public void setDataDevice(List<DataDevice> dataDevice) {
+//        this.dataDevice = dataDevice;
+//    }
 
     public List<SubDevice> getSubDevice() {
         return subDevice;
@@ -306,5 +316,69 @@ public class XlinkDevice extends DataSupport {
     @Override
     public String toString() {
         return getDeviceName();
+    }
+
+    public int getArmtype() {
+        return armtype;
+    }
+
+    public void setArmtype(int armtype) {
+        this.armtype = armtype;
+    }
+
+    public int getAlarmlevel() {
+        return alarmlevel;
+    }
+
+    public void setAlarmlevel(int alarmlevel) {
+        this.alarmlevel = alarmlevel;
+    }
+
+    public int getSoundlevel() {
+        return soundlevel;
+    }
+
+    public void setSoundlevel(int soundlevel) {
+        this.soundlevel = soundlevel;
+    }
+
+    public int getBetimer() {
+        return betimer;
+    }
+
+    public void setBetimer(int betimer) {
+        this.betimer = betimer;
+    }
+
+    public String getGwlanguage() {
+        return gwlanguage;
+    }
+
+    public void setGwlanguage(String gwlanguage) {
+        this.gwlanguage = gwlanguage;
+    }
+
+    public int getGwlightlevel() {
+        return gwlightlevel;
+    }
+
+    public void setGwlightlevel(int gwlightlevel) {
+        this.gwlightlevel = gwlightlevel;
+    }
+
+    public int getGwlightonoff() {
+        return gwlightonoff;
+    }
+
+    public void setGwlightonoff(int gwlightonoff) {
+        this.gwlightonoff = gwlightonoff;
+    }
+
+    public int getLgtimer() {
+        return lgtimer;
+    }
+
+    public void setLgtimer(int lgtimer) {
+        this.lgtimer = lgtimer;
     }
 }

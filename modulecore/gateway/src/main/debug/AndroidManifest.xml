@@ -24,6 +24,24 @@
         <activity
             android:name=".GwMoreMenuActivity"
             android:exported="true" />
+        <activity
+            android:name=".XlinkScanActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GwControlActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GwAlarmDurationActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GwLanguageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GwSoundSettingsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GwNightLightTimeActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

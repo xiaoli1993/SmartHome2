@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <cn.iwgang.familiarrecyclerview.FamiliarRecyclerView
+        android:id="@+id/recycler_conditions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:frv_divider="@color/grid_dr"
+        app:frv_dividerHeight="1px"
+        app:frv_layoutManager="linear"
+        app:frv_layoutManagerOrientation="vertical" />
+
+</LinearLayout>

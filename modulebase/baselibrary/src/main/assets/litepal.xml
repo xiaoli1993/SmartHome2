@@ -7,6 +7,20 @@
         <mapping class="com.heiman.baselibrary.mode.XlinkDevice" />
         <mapping class="com.heiman.baselibrary.mode.SubDevice" />
         <mapping class="com.heiman.baselibrary.mode.DataDevice" />
+        <mapping class="com.heiman.baselibrary.mode.Scene" />
+        <mapping class="com.heiman.baselibrary.mode.scene.PLBean" />
+        <mapping class="com.heiman.baselibrary.mode.scene.pLBean.SceneBean" />
+        <mapping class="com.heiman.baselibrary.mode.scene.pLBean.sceneBean.ExecListBean" />
+        <mapping class="com.heiman.baselibrary.mode.Link" />
+        <mapping class="com.heiman.baselibrary.mode.link.PL" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.LinkBean" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.linkBean.ConListBean" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.linkBean.conListBean.TimeBean" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.linkBean.CheckListBean" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.linkBean.checkListBean.TimeBeanX" />
+        <mapping class="com.heiman.baselibrary.mode.link.plBean.linkBean.ExecBean" />
+        <mapping class="com.heiman.baselibrary.mode.Room" />
+        <mapping class="com.heiman.baselibrary.mode.Home" />
     </list>
 
 </litepal>

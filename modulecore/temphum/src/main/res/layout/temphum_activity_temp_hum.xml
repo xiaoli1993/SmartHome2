@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <include
+        android:id="@+id/temp_hum_head"
+        layout="@layout/title_bar_black" />
+
+    <View
+        android:id="@+id/view_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/temp_hum_head"
+        android:background="@color/navigation_bar_parting_line_color"/>
+
+    <RadioGroup
+        android:id="@+id/rgp_temp_hum_selector"
+        android:layout_width="192dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/view_top_line"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rgb_temp_hum_selector_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdo_temp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:background="@drawable/rbtn_temp_hum_selector"
+            android:textColor="@color/rdo_temp_hum_selector"
+            android:gravity="center"
+            android:text="@string/title_temp"/>
+
+        <RadioButton
+            android:id="@+id/rdo_hum"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:background="@drawable/rbtn_temp_hum_selector"
+            android:textColor="@color/rdo_temp_hum_selector"
+            android:gravity="center"
+            android:checked="true"
+            android:text="@string/title_hum"/>
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/frame_temp_hum_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/rgp_temp_hum_selector">
+
+    </FrameLayout>
+</RelativeLayout>

@@ -229,18 +229,18 @@
         <attr name="horizonGap" format="dimension|reference" />
         <attr name="verticalGap" format="dimension|reference" />
     </declare-styleable>
- <style name="dialog_exit_account">
+    <style name="dialog_exit_account" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:background">@color/transparent</item>
-        <item name="android:windowBackground">@color/transparent</item>
-        <item name="android:backgroundDimAmount">0.1</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:layout_margin">0dp</item>
     </style>
+
 
     <style name="dialog_set_head_pic" parent="dialog_exit_account">
         <item name="android:windowNoTitle">true</item>
@@ -249,8 +249,23 @@
         <item name="android:scrollHorizontally">true</item>
     </style>
 
+   <style name="dialog_set_repeat" parent="dialog_exit_account">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:scrollHorizontally">true</item>
+    </style>
     <style name="dialog_animation">
         <item name="android:windowEnterAnimation">@anim/enter</item>
         <item name="android:windowExitAnimation">@anim/exit</item>
+    </style>
+    <!--微信-->
+    <style name="dialog">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionModeOverlay">true</item>
     </style>
 </resources>

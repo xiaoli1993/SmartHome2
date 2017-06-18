@@ -2,6 +2,8 @@ package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * @Author : 肖力
  * @Time :  2017/5/31 10:22
@@ -9,7 +11,7 @@ import com.google.gson.annotations.Expose;
  * @Modify record :
  */
 
-public class Room {
+public class Room extends DataSupport {
     /**
      * updateAt : 2017-05-31T10:31:47.354Z
      * createAt : 2017-05-31T10:31:47.354Z

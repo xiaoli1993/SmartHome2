@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.heiman.baselibrary.BaseFragment;
-import com.heiman.smarthome.MyApplication;
+import com.heiman.baselibrary.Constant;
 import com.heiman.smarthome.R;
 import com.heiman.smarthome.activity.AddDeviceActivity;
 import com.heiman.smarthome.activity.MainActivity;
@@ -68,7 +68,7 @@ public class RoomFragment extends BaseFragment implements View.OnClickListener {
         titleBarMore.setVisibility(View.VISIBLE);
         titleBarTitle.setText(getResources().getString(R.string.Room));
         titleBarTitle.setTextColor(getResources().getColor(R.color.white));
-        btnBottom.setShadowEnabled(true);
+//        btnBottom.setShadowEnabled(true);
         btnBottom.setOnClickListener(this);
         titleBarReturn.setOnClickListener(this);
         titleBarMore.setOnClickListener(this);
@@ -78,9 +78,9 @@ public class RoomFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bottom:
-                MyApplication.getLogger().i("点击按键");
-
-                openActivity(AddDeviceActivity.class);
+                Bundle paramBundle = new Bundle();
+                paramBundle.putBoolean(Constant.IS_SUB, false);
+                openActivity(AddDeviceActivity.class, paramBundle);
                 break;
             case R.id.title_bar_more:
 

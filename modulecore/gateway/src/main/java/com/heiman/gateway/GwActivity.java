@@ -8,17 +8,27 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.GwBaseActivity;
-import com.heiman.baselibrary.http.HttpManage;
+import com.heiman.baselibrary.Json.HeimanCom;
+import com.heiman.baselibrary.Json.SmartPlug;
 import com.heiman.baselibrary.http.XlinkUtils;
+import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.manage.SubDeviceManage;
+import com.heiman.baselibrary.mode.HeimanSet.PLBean.GwBasicOID;
+import com.heiman.baselibrary.mode.SubDevice;
+import com.heiman.baselibrary.mode.ZigbeeNewDevice;
 import com.heiman.gateway.fragment.GwAutomationFragment;
 import com.heiman.gateway.fragment.GwHomeFragment;
 import com.heiman.widget.segmentcontrol.SegmentControl;
 import com.jaeger.library.StatusBarUtil;
 
-import org.apache.http.Header;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author : 肖力
@@ -37,28 +47,33 @@ public class GwActivity extends GwBaseActivity {
     private ImageView titleBarShare;
     private Fragment mTab01;
     private Fragment mTab02;
+    public static GwActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
         setContentView(R.layout.gateway_activity_gw);
         initView();
         initEven();
         setSelect(0);
         StatusBarUtil.setTranslucent(this, 50);
         XlinkUtils.StatusBarLightMode(this);
+        getGwData();
+    }
 
-        HttpManage.getInstance().onVersion(GwActivity.this,device.getProductId(),device.getDeviceId()+"", new HttpManage.ResultCallback<String>() {
-            @Override
-            public void onError(Header[] headers, HttpManage.Error error) {
-                BaseApplication.getLogger().e("code:"+error.getCode());
-            }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<String> OID = new ArrayList<String>();
+        OID.add(HeimanCom.COM_GW_OID.GW_BASIC_INFORMATION);
+        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
+        BaseApplication.getLogger().json(sb);
+        sendData(sb);
+    }
 
-            @Override
-            public void onSuccess(int code, String response) {
-                BaseApplication.getLogger().json(response);
-            }
-        });
+
+    private void getGwData() {
 
     }
 
@@ -105,6 +120,42 @@ public class GwActivity extends GwBaseActivity {
 
     @Override
     public void deviceData(String dataString) {
+        BaseApplication.getLogger().json(dataString);
+        Gson gson = new Gson();
+        try {
+            ZigbeeNewDevice zigbeeNewDevice = gson.fromJson(dataString, ZigbeeNewDevice.class);
+            SubDevice subDevice = new SubDevice();
+            subDevice.setDeviceMac(device.getDeviceMac());
+            List<ZigbeeNewDevice.PLBean.ZigbeeListBean.SubDeviceBean> subDeviceBeanList = zigbeeNewDevice.getPL().getZigbeeList().getSubDevice();
+            for (int i = 0; i < subDeviceBeanList.size(); i++) {
+                subDevice.setZigbeeMac(subDeviceBeanList.get(i).getDeviceMac());
+                subDevice.setDeviceName(subDeviceBeanList.get(i).getDeviceName());
+                subDevice.setRoomID(subDeviceBeanList.get(i).getRoomID());
+                subDevice.setIndex(subDeviceBeanList.get(i).getIndex());
+                subDevice.setDeviceType(subDeviceBeanList.get(i).getDeviceType());
+                SubDeviceManage.getInstance().addDevice(subDevice);
+            }
+        } catch (Exception e) {
+
+        }
+        try {
+            JSONObject jsonObject = new JSONObject(dataString);
+            JSONObject PL = jsonObject.getJSONObject("PL");
+            BaseApplication.getLogger().i(PL.toString());
+            JSONObject OID = PL.getJSONObject(HeimanCom.COM_GW_OID.GW_BASIC_INFORMATION);
+            GwBasicOID gwBasicOID = gson.fromJson(OID.toString(), GwBasicOID.class);
+            device.setArmtype(gwBasicOID.getArmtype());
+            device.setAlarmlevel(gwBasicOID.getAlarmlevel());
+            device.setSoundlevel(gwBasicOID.getSoundlevel());
+            device.setBetimer(gwBasicOID.getBetimer());
+            device.setGwlanguage(gwBasicOID.getGwlanguage());
+            device.setGwlightlevel(gwBasicOID.getGwlightlevel());
+            device.setGwlightonoff(gwBasicOID.getGwlightonoff());
+            device.setLgtimer(gwBasicOID.getLgtimer());
+            DeviceManage.getInstance().addDevice(device);
+        } catch (Exception e) {
+
+        }
 
     }
 

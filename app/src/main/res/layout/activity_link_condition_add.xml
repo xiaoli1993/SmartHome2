@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/class_A_10_trans">
+    <View
+        android:id="@+id/view_top_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/navigation_bar_parting_line_color" />
+
+    <EditText
+        android:id="@+id/edit_device_search"
+        android:layout_width="307dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="10dp"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:drawableLeft="@drawable/icon_device_search"
+        android:background="@drawable/edit_input_common_bg"
+        android:textSize="15sp"
+        android:textColor="@color/txt_color"
+        android:textColorHint="@color/prompt_text_color"
+        android:hint="@string/txt_hint_search"/>
+    <TextView
+        android:id="@+id/txt_common_used"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/edit_device_search"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:textColor="@color/txt_color"
+        android:text="@string/txt_link_condition_add_common_used"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_timing_container"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_below="@+id/txt_common_used"
+        android:background="@color/white"
+        android:clickable="true">
+        <ImageView
+            android:id="@+id/img_icon_timing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_scene_time" />
+        <TextView
+            android:id="@+id/txt_timing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_icon_timing"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:textColor="@color/condition_device_name_color"
+            android:text="@string/txt_timing"/>
+        <ImageView
+            android:id="@+id/img_icon_timing_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/personal_next"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/txt_intelligent_device"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/rl_timing_container"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:textColor="@color/txt_color"
+        android:text="@string/intelligent_device"/>
+    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+        android:id="@+id/recycler_intelligent_devices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_intelligent_device">
+
+    </com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView>
+
+</RelativeLayout>

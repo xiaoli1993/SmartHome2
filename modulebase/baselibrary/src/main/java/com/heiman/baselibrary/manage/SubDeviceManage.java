@@ -9,7 +9,10 @@ import com.heiman.baselibrary.mode.SubDevice;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.xlink.wifi.sdk.XlinkAgent;
 
@@ -23,6 +26,7 @@ import io.xlink.wifi.sdk.XlinkAgent;
 public class SubDeviceManage {
 
     private static SubDeviceManage instance;
+    public static ConcurrentHashMap<String, SubDevice> deviceMap = new ConcurrentHashMap<String, SubDevice>();
 
     public static SubDeviceManage getInstance() {
         if (instance == null) {
@@ -40,7 +44,24 @@ public class SubDeviceManage {
      */
     public synchronized List<SubDevice> getDevices() {
         listDev.clear();
-        listDev = DataSupport.order("deviceType").find(SubDevice.class);
+//        listDev = DataSupport.order("deviceType").find(SubDevice.class);
+        Iterator<Map.Entry<String, SubDevice>> iter = deviceMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, SubDevice> entry = iter.next();
+            listDev.add(entry.getValue());
+        }
+        return listDev;
+    }
+
+    public synchronized List<SubDevice> getDevices(String RoomID) {
+        listDev.clear();
+        Iterator<Map.Entry<String, SubDevice>> iter = deviceMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, SubDevice> entry = iter.next();
+            if (entry.getValue().getRoomID().equals(RoomID)) {
+                listDev.add(entry.getValue());
+            }
+        }
         return listDev;
     }
 
@@ -51,8 +72,15 @@ public class SubDeviceManage {
      * @return
      */
     public SubDevice getDevice(String mac, int index) {
-        List<SubDevice> Xldevice = DataSupport.where("deviceMac = ? and index = ?", mac, index + "").find(SubDevice.class);
-        return Xldevice.get(0);
+//        List<SubDevice> Xldevice = DataSupport.where("deviceMac = ? and index = ?", mac, index + "").find(SubDevice.class);
+        SubDevice dev = null;
+        for (SubDevice device : getDevices()) {
+            if (device.getIndex() == index) {
+                dev = device;
+                break;
+            }
+        }
+        return dev;
     }
 
     /**
@@ -62,8 +90,15 @@ public class SubDeviceManage {
      * @return
      */
     public SubDevice getDevice(String mac, String subMac) {
-        List<SubDevice> Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", mac, subMac).find(SubDevice.class);
-        return Xldevice.get(0);
+//        List<SubDevice> Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", mac, subMac).find(SubDevice.class);
+        SubDevice dev = null;
+        for (SubDevice device : getDevices()) {
+            if (device.getZigbeeMac() == subMac) {
+                dev = device;
+                break;
+            }
+        }
+        return dev;
     }
 
     /**
@@ -73,16 +108,24 @@ public class SubDeviceManage {
      */
     public void addDevice(SubDevice dev) {
         List<SubDevice> Xldevice = null;
-        try {
-            Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", dev.getWifiDevice().getDeviceMac(), dev.getZigbeeMac() + "").find(SubDevice.class);
-        } catch (Exception e) {
-            dev.save();
+        SubDevice device = deviceMap.get(dev.getZigbeeMac());
+        if (device != null) { // 如果已经保存过设备，就不add
+            deviceMap.put(dev.getZigbeeMac(), device);
+            dev.updateAllAsync("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac());
+            return;
         }
-        if (Xldevice != null && !Xldevice.isEmpty()) {
-            dev.updateAll("deviceMac = ? and zigbeeMac = ?", dev.getWifiDevice().getDeviceMac(), dev.getZigbeeMac());
-        } else {
-            dev.save();
-        }
+        deviceMap.put(dev.getZigbeeMac(), dev);
+        dev.saveAsync();
+//        try {
+//            Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac() + "").find(SubDevice.class);
+//        } catch (Exception e) {
+//            dev.save();
+//        }
+//        if (!SmartHomeUtils.isEmptyList(Xldevice)) {
+//            dev.updateAll("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac());
+//        } else {
+//            dev.save();
+//        }
     }
 
     /**
@@ -91,7 +134,9 @@ public class SubDeviceManage {
      * @param device
      */
     public void updateDevice(SubDevice device) {
-        device.updateAll("deviceMac = ? and zigbeeMac = ?", device.getWifiDevice().getDeviceMac(), device.getZigbeeMac());
+        deviceMap.remove(device.getDeviceMac());
+        deviceMap.put(device.getDeviceMac(), device);
+        device.updateAllAsync("deviceMac = ? and zigbeeMac = ?", device.getDeviceMac(), device.getZigbeeMac());
     }
 
     /**
@@ -100,7 +145,10 @@ public class SubDeviceManage {
      * @param mac
      */
     public void removeDevice(String mac, String zigbeeMac) {
-        DataSupport.deleteAll(SubDevice.class, "deviceMac = ? and zigbeeMac = ?", mac, zigbeeMac);
+        deviceMap.remove(mac);
+//        DataSupport.deleteAllAsync(SubDevice.class, "deviceMac = ?", mac);
+        XlinkAgent.getInstance().removeDevice(mac);
+        DataSupport.deleteAllAsync(SubDevice.class, "deviceMac = ? and zigbeeMac = ?", mac, zigbeeMac);
 
     }
 
@@ -108,8 +156,9 @@ public class SubDeviceManage {
      * 清空设备
      */
     public synchronized void clearAllDevice() {
-        DataSupport.deleteAll(SubDevice.class);
+        DataSupport.deleteAllAsync(SubDevice.class);
+        deviceMap.clear();
         listDev.clear();
-        XlinkAgent.getInstance().removeAllDevice();
+//        XlinkAgent.getInstance().removeAllDevice();
     }
 }

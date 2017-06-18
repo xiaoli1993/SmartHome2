@@ -7,9 +7,12 @@
       <module fileurl="file://$PROJECT_DIR$/modulebase/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/modulebase/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/datacom/datacom.iml" filepath="$PROJECT_DIR$/modulebase/datacom/datacom.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/dbsqlite/dbsqlite.iml" filepath="$PROJECT_DIR$/modulebase/dbsqlite/dbsqlite.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulecore/devicecommon/devicecommon.iml" filepath="$PROJECT_DIR$/modulecore/devicecommon/devicecommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulecore/gateway/gateway.iml" filepath="$PROJECT_DIR$/modulecore/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulecore/home/home.iml" filepath="$PROJECT_DIR$/modulecore/home/home.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/modulebase.iml" filepath="$PROJECT_DIR$/modulebase/modulebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulecore/modulecore.iml" filepath="$PROJECT_DIR$/modulecore/modulecore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulecore/temphum/temphum.iml" filepath="$PROJECT_DIR$/modulecore/temphum/temphum.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/thirdparty/thirdparty.iml" filepath="$PROJECT_DIR$/modulebase/thirdparty/thirdparty.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/utils/utils.iml" filepath="$PROJECT_DIR$/modulebase/utils/utils.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulebase/widget/widget.iml" filepath="$PROJECT_DIR$/modulebase/widget/widget.iml" />

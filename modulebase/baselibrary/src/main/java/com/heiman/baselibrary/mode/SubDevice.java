@@ -2,9 +2,7 @@ package com.heiman.baselibrary.mode;
 
 import org.litepal.crud.DataSupport;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * 作者：肖力
@@ -15,11 +13,11 @@ public class SubDevice extends DataSupport {
     private long id;
     private Date date;
     private XlinkDevice wifiDevice;
-    private List<DataDevice> subDevice = new ArrayList<DataDevice>();
+//    private List<DataDevice> subDevice = new ArrayList<DataDevice>();
 
-    public List<DataDevice> getSubDevice() {
-        return subDevice;
-    }
+//    public List<DataDevice> getSubDevice() {
+//        return subDevice;
+//    }
 
     private boolean onlineStatus;//在线状态
     private int relayOnoff; //开关状态
@@ -42,7 +40,8 @@ public class SubDevice extends DataSupport {
     private String tCkLow;//低温度阀值
     private String hCkUp;//高湿度阀值
     private String hCkLow;//低湿度阀值
-    private int thpCkOnoff;//温湿度报警阀值使能标志
+    private int tCkOnoff;//温度报警阀值使能标志
+    private int hCkOnoff;//湿度报警阀值使能标志
     private int pressure;//压力
     private int batteryPercent;//剩余电量
     private boolean batteryAlm;//低电量报警标志
@@ -61,6 +60,22 @@ public class SubDevice extends DataSupport {
     private Date lastDate;
     private int userId;//用户ID
     private String roomID;//房间ID
+
+    public int gettCkOnoff() {
+        return tCkOnoff;
+    }
+
+    public void settCkOnoff(int tCkOnoff) {
+        this.tCkOnoff = tCkOnoff;
+    }
+
+    public int gethCkOnoff() {
+        return hCkOnoff;
+    }
+
+    public void sethCkOnoff(int hCkOnoff) {
+        this.hCkOnoff = hCkOnoff;
+    }
 
     public String getRoomID() {
         return roomID;
@@ -110,9 +125,9 @@ public class SubDevice extends DataSupport {
         this.wifiDevice = wifiDevice;
     }
 
-    public void setSubDevice(List<DataDevice> subDevice) {
-        this.subDevice = subDevice;
-    }
+//    public void setSubDevice(List<DataDevice> subDevice) {
+//        this.subDevice = subDevice;
+//    }
 
     public boolean isOnlineStatus() {
         return onlineStatus;
@@ -274,13 +289,6 @@ public class SubDevice extends DataSupport {
         this.hCkLow = hCkLow;
     }
 
-    public int getThpCkOnoff() {
-        return thpCkOnoff;
-    }
-
-    public void setThpCkOnoff(int thpCkOnoff) {
-        this.thpCkOnoff = thpCkOnoff;
-    }
 
     public int getPressure() {
         return pressure;

@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -27,32 +28,46 @@ public class PlugSet {
      * wf_u : 255
      */
     @Expose
+    @SerializedName("RO")
     private int relayonoff = 9999;
     @Expose
+    @SerializedName("ETR")
     private int enableTime_r = 9999;
     @Expose
+    @SerializedName("HSr")
     private int sh_r = 9999;
     @Expose
+    @SerializedName("MSr")
     private int sm_r = 9999;
     @Expose
+    @SerializedName("HEr")
     private int eh_r = 9999;
     @Expose
+    @SerializedName("MEr")
     private int em_r = 9999;
     @Expose
+    @SerializedName("WFr")
     private int wf_r = 9999;
     @Expose
+    @SerializedName("UO")
     private int usbonoff = 9999;
     @Expose
+    @SerializedName("ETU")
     private int enableTime_u = 9999;
     @Expose
+    @SerializedName("HSu")
     private int sh_u = 9999;
     @Expose
+    @SerializedName("MSu")
     private int sm_u = 9999;
     @Expose
+    @SerializedName("HEu")
     private int eh_u = 9999;
     @Expose
+    @SerializedName("MEu")
     private int em_u = 9999;
     @Expose
+    @SerializedName("WFu")
     private int wf_u = 9999;
 
     public int getRelayonoff() {

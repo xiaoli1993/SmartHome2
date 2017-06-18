@@ -32,6 +32,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
     private EditText editPasswordNextTime;
     private Button btnRegist;
     private TextView txtRegistUseEmail;
+    private TextView txtPasswordRemind;
+    private TextView txtPasswordNextTimeRemind;
 
     private int getVerCodeInterval = 120;
 
@@ -94,6 +96,8 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         editPasswordNextTime = (EditText) findViewById(R.id.edit_password_next_time);
         btnRegist = (Button) findViewById(R.id.btn_regist);
         txtRegistUseEmail = (TextView) findViewById(R.id.txt_use_email_regist);
+        txtPasswordRemind = (TextView) findViewById(R.id.txt_password_remind);
+        txtPasswordNextTimeRemind = (TextView) findViewById(R.id.txt_password_next_time_remind);
 
         txtVerCode.setOnClickListener(this);
         btnRegist.setOnClickListener(this);
@@ -111,6 +115,7 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
         showTitleView(true);
 
         setTitle(getString(R.string.phone_regist));
+//        setReturnImage(R.drawable.back_black);
     }
 
     @Override
@@ -272,6 +277,22 @@ public class RegistActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void afterTextChanged(Editable s) {
+        if (editPassword.getText() == s) {
+            String password = editPassword.getText().toString();
+            if (TextUtils.isEmpty(password) || password.length() < 6 || password.length() > 16) {
+                txtPasswordRemind.setVisibility(View.VISIBLE);
+                return;
+            }
+            txtPasswordRemind.setVisibility(View.GONE);
+        }
 
+        if (editPasswordNextTime.getText() == s) {
+            String password = editPasswordNextTime.getText().toString();
+            if (TextUtils.isEmpty(password) || password.length() < 6 || password.length() > 16) {
+                txtPasswordNextTimeRemind.setVisibility(View.VISIBLE);
+                return;
+            }
+            txtPasswordNextTimeRemind.setVisibility(View.GONE);
+        }
     }
 }

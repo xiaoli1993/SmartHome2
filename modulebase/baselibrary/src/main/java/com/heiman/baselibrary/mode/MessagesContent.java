@@ -15,6 +15,13 @@ import java.util.List;
  * @Time :  2017/3/22 17:30
  * @Description :
  */
+/**
+ * @Author :    肖力
+ * @Email : 554674787@qq.com
+ * @Phone : 18312377810
+ * @Time :  2017/3/22 17:30
+ * @Description :
+ */
 public class MessagesContent {
     @Expose
     private NotificationBean notification;
@@ -164,6 +171,26 @@ public class MessagesContent {
         private String name;
         @Expose
         private int ispower;
+        @Expose
+        private boolean onoff;
+        @Expose
+        private String  SID;
+
+        public String getSID() {
+            return SID;
+        }
+
+        public void setSID(String SID) {
+            this.SID = SID;
+        }
+
+        public boolean isOnoff() {
+            return onoff;
+        }
+
+        public void setOnoff(boolean onoff) {
+            this.onoff = onoff;
+        }
 
         public String getName() {
             return name;

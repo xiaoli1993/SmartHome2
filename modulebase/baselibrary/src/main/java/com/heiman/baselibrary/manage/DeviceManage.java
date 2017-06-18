@@ -3,13 +3,20 @@ package com.heiman.baselibrary.manage;
  * Copyright ©深圳市海曼科技有限公司
  */
 
+import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 
 import org.json.JSONException;
 import org.litepal.crud.DataSupport;
+import org.litepal.crud.callback.SaveCallback;
+import org.litepal.crud.callback.UpdateOrDeleteCallback;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.xlink.wifi.sdk.XlinkAgent;
 
@@ -23,6 +30,7 @@ import io.xlink.wifi.sdk.XlinkAgent;
 public class DeviceManage {
 
     private static DeviceManage instance;
+    public static ConcurrentHashMap<String, XlinkDevice> deviceMap = new ConcurrentHashMap<String, XlinkDevice>();
 
     public static DeviceManage getInstance() {
         if (instance == null) {
@@ -40,30 +48,31 @@ public class DeviceManage {
      */
     public synchronized List<XlinkDevice> getDevices() {
         listDev.clear();
-//        DataSupport.findAllAsync(XlinkDevice.class).listen(new FindMultiCallback() {
-//            @Override
-//            public <T> void onFinish(List<T> t) {
-//                listDev = (List<XlinkDevice>) t;
-//                for (XlinkDevice device : listDev) {
-////                    MyApplication.getLogger().json(device.getxDevice());
-//                    try {
-//                        JSONObject devicejson = new JSONObject(device.getxDevice());
-//                        XDevice xdevice = XlinkAgent.JsonToDevice(devicejson);
-//                        XlinkAgent.getInstance().initDevice(xdevice);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-
-        listDev = DataSupport.findAll(XlinkDevice.class);
-        for (XlinkDevice device : listDev) {
-//                    MyApplication.getLogger().json(device.getxDevice());
+        Iterator<Map.Entry<String, XlinkDevice>> iter = deviceMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, XlinkDevice> entry = iter.next();
             try {
-                XlinkAgent.getInstance().initDevice(device.getxDevice());
+                XlinkAgent.getInstance().initDevice(entry.getValue().getxDevice());
             } catch (JSONException e) {
                 e.printStackTrace();
+            }
+            listDev.add(entry.getValue());
+        }
+        return listDev;
+    }
+
+    public synchronized List<XlinkDevice> getDevices(String RoomID) {
+        listDev.clear();
+        Iterator<Map.Entry<String, XlinkDevice>> iter = deviceMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, XlinkDevice> entry = iter.next();
+            try {
+                XlinkAgent.getInstance().initDevice(entry.getValue().getxDevice());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (entry.getValue().getRoomID().equals(RoomID)) {
+                listDev.add(entry.getValue());
             }
         }
         return listDev;
@@ -76,8 +85,15 @@ public class DeviceManage {
      * @return
      */
     public XlinkDevice getDevice(String mac) {
-        List<XlinkDevice> Xldevice = DataSupport.where("deviceMac = ?", mac).find(XlinkDevice.class);
-        return Xldevice.get(0);
+//        List<XlinkDevice> Xldevice = DataSupport.where("deviceMac = ?", mac).find(XlinkDevice.class);
+        XlinkDevice dev = null;
+        for (XlinkDevice device : getDevices()) {
+            if (device.getDeviceMac().equals(mac)) {
+                dev = device;
+                break;
+            }
+        }
+        return dev;
     }
 
     /**
@@ -87,8 +103,15 @@ public class DeviceManage {
      * @return
      */
     public XlinkDevice getDevice(int deviceid) {
-        List<XlinkDevice> Xldevice = DataSupport.where("deviceId = ?", deviceid + "").find(XlinkDevice.class);
-        return Xldevice.get(0);
+//        List<XlinkDevice> Xldevice = DataSupport.where("deviceId = ?", deviceid + "").find(XlinkDevice.class);
+        XlinkDevice dev = null;
+        for (XlinkDevice device : getDevices()) {
+            if (device.getDeviceId() == deviceid) {
+                dev = device;
+                break;
+            }
+        }
+        return dev;
     }
 
     /**
@@ -97,17 +120,70 @@ public class DeviceManage {
      * @param dev
      */
     public void addDevice(XlinkDevice dev) {
+        XlinkDevice device = deviceMap.get(dev.getDeviceMac());
+        if (device != null) { // 如果已经保存过设备，就不add
+            deviceMap.put(dev.getDeviceMac(), device);
+            dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac()).listen(new UpdateOrDeleteCallback() {
+                @Override
+                public void onFinish(int rowsAffected) {
+                    BaseApplication.getLogger().i("更新设备：" + rowsAffected);
+                }
+            });
+            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
+            return;
+        }
+        deviceMap.put(dev.getDeviceMac(), dev);
+//        dev.saveAsync();
+
         List<XlinkDevice> Xldevice = null;
         try {
             Xldevice = DataSupport.where("deviceMac = ?", dev.getDeviceMac()).find(XlinkDevice.class);
-
+            BaseApplication.getLogger().i("获取设备：" + Xldevice.get(0).getDeviceMac());
         } catch (Exception e) {
-            dev.save();
+            dev.saveAsync().listen(new SaveCallback() {
+                @Override
+                public void onFinish(boolean success) {
+                    BaseApplication.getLogger().i("添加设备：" + success);
+                }
+            });
+            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
         }
-        if (Xldevice != null && !Xldevice.isEmpty()) {
-            dev.updateAll("deviceMac = ?", dev.getDeviceMac());
+        if (!SmartHomeUtils.isEmptyList(Xldevice)) {
+            dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac());
+            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
         } else {
-            dev.save();
+            dev.saveAsync().listen(new SaveCallback() {
+                @Override
+                public void onFinish(boolean success) {
+                    BaseApplication.getLogger().i("添加设备：" + success);
+                }
+            });
+            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
+        }
+    }
+
+    public void addDevice(XlinkDevice dev, boolean isGet) {
+        XlinkDevice device = deviceMap.get(dev.getDeviceMac());
+        if (device != null) { // 如果已经保存过设备，就不add
+            deviceMap.put(dev.getDeviceMac(), device);
+            dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac());
+
+            return;
+        }
+        deviceMap.put(dev.getDeviceMac(), dev);
+//        dev.saveAsync();
+        if (isGet) {
+            List<XlinkDevice> Xldevice = null;
+            try {
+                Xldevice = DataSupport.where("deviceMac = ?", dev.getDeviceMac()).find(XlinkDevice.class);
+            } catch (Exception e) {
+                dev.saveAsync();
+            }
+            if (Xldevice != null && !Xldevice.isEmpty()) {
+                dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac());
+            } else {
+                dev.saveAsync();
+            }
         }
     }
 
@@ -117,7 +193,9 @@ public class DeviceManage {
      * @param device
      */
     public void updateDevice(XlinkDevice device) {
-        device.updateAll("deviceMac = ?", device.getDeviceMac());
+        deviceMap.remove(device.getDeviceMac());
+        deviceMap.put(device.getDeviceMac(), device);
+        device.updateAllAsync("deviceMac = ?", device.getDeviceMac());
     }
 
     /**
@@ -126,7 +204,8 @@ public class DeviceManage {
      * @param mac
      */
     public void removeDevice(String mac) {
-        DataSupport.deleteAll(XlinkDevice.class, "deviceMac = ?", mac);
+        deviceMap.remove(mac);
+        DataSupport.deleteAllAsync(XlinkDevice.class, "deviceMac = ?", mac);
         XlinkAgent.getInstance().removeDevice(mac);
     }
 
@@ -134,7 +213,8 @@ public class DeviceManage {
      * 清空设备
      */
     public synchronized void clearAllDevice() {
-        DataSupport.deleteAll(XlinkDevice.class);
+        DataSupport.deleteAllAsync(XlinkDevice.class);
+        deviceMap.clear();
         listDev.clear();
         XlinkAgent.getInstance().removeAllDevice();
     }

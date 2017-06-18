@@ -13,6 +13,7 @@ import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
+import com.heiman.baselibrary.manage.RoomManage;
 import com.heiman.baselibrary.mode.Room;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
@@ -93,8 +94,9 @@ public class RoomMoreActivity extends BaseActivity implements View.OnClickListen
                         JSONObject jsonObj = list.getJSONObject(i);
                         Gson gson = new Gson();
                         Room room = gson.fromJson(jsonObj.toString(), Room.class);
-                        MyApplication.getLogger().i("room_name:" + room.getRoom_name() + "\tcreator:" + room.getCreator()+"\nURL:"+room.getRoom_bg_url());
+                        MyApplication.getLogger().i("room_name:" + room.getRoom_name() + "\tcreator:" + room.getCreator() + "\nURL:" + room.getRoom_bg_url());
                         roomList.add(room);
+                        RoomManage.getInstance().addHome(room);
                     }
                     mAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -131,6 +133,7 @@ public class RoomMoreActivity extends BaseActivity implements View.OnClickListen
                             @Override
                             public void onSuccess(int code, String response) {
                                 roomList.remove(position);
+                                RoomManage.getInstance().removeHome(room);
                                 mAdapter.notifyDataSetChanged();
                             }
                         });

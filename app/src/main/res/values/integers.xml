@@ -16,5 +16,5 @@
 <resources>
 
     <integer name="grid_columns">3</integer>
-
+<dimen name="item_device_action_margin">10dp</dimen>
 </resources>

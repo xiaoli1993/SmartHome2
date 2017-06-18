@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_water"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="65dp"
+        android:src="@drawable/img_water"/>
+
+    <TextView
+        android:id="@+id/txt_current_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="69dp"
+        android:layout_alignParentRight="true"
+        android:textSize="16sp"
+        android:textColor="@color/temp_hum_font_color"
+        android:text="@string/txt_current_temp"/>
+</RelativeLayout>

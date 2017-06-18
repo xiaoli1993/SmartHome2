@@ -1,9 +1,7 @@
 package com.heiman.smarthome.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +11,7 @@ import com.heiman.smarthome.R;
 import com.heiman.utils.LogUtil;
 import com.heiman.utils.UsefullUtill;
 
-public class AboutActivity extends BaseActivity implements View.OnClickListener{
+public class AboutActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView txtCheckAppVersion;
     private TextView txtPolicy;
@@ -53,6 +51,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.txt_check_app_version:
                 Toast.makeText(AboutActivity.this, R.string.txt_check_app_version, Toast.LENGTH_LONG).show();
+                startActivityForName("com.heiman.devicecommon.ChoiceRoomActivity");
                 break;
             case R.id.txt_use_policy:
                 Toast.makeText(AboutActivity.this, R.string.txt_use_policy, Toast.LENGTH_LONG).show();

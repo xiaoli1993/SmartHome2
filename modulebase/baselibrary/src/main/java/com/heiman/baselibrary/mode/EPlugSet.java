@@ -1,6 +1,7 @@
 package com.heiman.baselibrary.mode;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * @Author : 肖力
@@ -20,18 +21,25 @@ public class EPlugSet {
      * wf : 255
      */
     @Expose
+    @SerializedName("RO")
     private int relayonoff = 9999;
     @Expose
+    @SerializedName("ET")
     private int enableTime = 9999;
     @Expose
+    @SerializedName("HS")
     private int sh = 9999;
     @Expose
+    @SerializedName("MS")
     private int sm = 9999;
     @Expose
+    @SerializedName("HE")
     private int eh = 9999;
     @Expose
+    @SerializedName("ME")
     private int em = 9999;
     @Expose
+    @SerializedName("WF")
     private int wf = 9999;
 
     public int getEnableTime() {

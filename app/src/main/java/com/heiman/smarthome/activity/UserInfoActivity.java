@@ -1,7 +1,7 @@
 package com.heiman.smarthome.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -287,6 +288,7 @@ public class UserInfoActivity extends BaseActivity {
         showTitleView(true);
 
         setTitle(getString(R.string.txt_user_info));
+//        setReturnImage(R.drawable.back_black);
     }
 
     @Override
@@ -444,12 +446,11 @@ public class UserInfoActivity extends BaseActivity {
 
     private void showResetNickNameDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_reset_nick_name_dialog, null);
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.dialog_exit_account)
-                .setView(view)
-                .setCancelable(true)
-                .create();
+        Dialog dialog = new Dialog(this, R.style.dialog_exit_account);
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
-        Button btnCancel = (Button) view.findViewById(R.id.reset_nick_name_btn_cancel);
+        ImageButton btnCancel = (ImageButton) view.findViewById(R.id.reset_nick_name_btn_cancel);
         Button btnComfirm = (Button) view.findViewById(R.id.reset_nick_name_btn_confirm);
         EditText editNickName = (EditText) view.findViewById(R.id.edit_nick_name);
         btnCancel.setTag(dialog);
@@ -462,10 +463,9 @@ public class UserInfoActivity extends BaseActivity {
 
     private void showSetHeadPicDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_set_head_pic_dialog, null);
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.dialog_set_head_pic)
-                .setView(view)
-                .setCancelable(true)
-                .create();
+        Dialog dialog = new Dialog(this, R.style.dialog_set_head_pic);
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         Button btnTakePhoto = (Button) view.findViewById(R.id.btn_phone_takephoto);
         Button btnLocalPhoto = (Button) view.findViewById(R.id.btn_local_photo);
@@ -491,10 +491,9 @@ public class UserInfoActivity extends BaseActivity {
 
     private void showGenderSelectorDialog() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_gender_selector_dialog, null);
-        AlertDialog dialog = new AlertDialog.Builder(this, R.style.dialog_exit_account)
-                .setView(view)
-                .setCancelable(true)
-                .create();
+        Dialog dialog = new Dialog(this, R.style.dialog_exit_account);
+        dialog.setContentView(view);
+        dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         RadioButton rbtnMale = (RadioButton) view.findViewById(R.id.rbtn_male);
         RadioButton rbtnFeMale = (RadioButton) view.findViewById(R.id.rbtn_female);
@@ -517,8 +516,8 @@ public class UserInfoActivity extends BaseActivity {
     private void dismissDialog(View v) {
         Object o = v.getTag();
 
-        if (o != null && o instanceof AlertDialog) {
-            AlertDialog dialog = (AlertDialog) o;
+        if (o != null && o instanceof Dialog) {
+            Dialog dialog = (Dialog) o;
             dialog.dismiss();
         }
     }
