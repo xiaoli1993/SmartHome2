@@ -106,32 +106,21 @@ public class TempHumAlarmSettingActivity extends GwBaseActivity implements Range
             if (humLow >= DEFAULT_HUM_LOW && humUp <= DEFAULT_HUM_UP && humLow < humUp) {
                 rangeSettingHum.setValue(humLow, humUp);
             }
-            //假定为0时都关闭，为1时温度报警开启湿度报警关闭，为2时温度报警关闭湿度报警开启，为3时都开启
-            switch (subDevice.gettCkOnoff()) {
-                case 0:
-                    toggleTempAlarmCondition.setToggleOff();
-                    toggleHumAlarmCondition.setToggleOff();
-                    llTempAlarmSettingContainer.setVisibility(View.GONE);
-                    llHumAlarmSettingContainer.setVisibility(View.GONE);
-                    break;
-                case 1:
-                    toggleTempAlarmCondition.setToggleOn();
-                    toggleHumAlarmCondition.setToggleOff();
-                    llTempAlarmSettingContainer.setVisibility(View.VISIBLE);
-                    llHumAlarmSettingContainer.setVisibility(View.GONE);
-                    break;
-                case 2:
-                    toggleTempAlarmCondition.setToggleOff();
-                    toggleHumAlarmCondition.setToggleOn();
-                    llTempAlarmSettingContainer.setVisibility(View.GONE);
-                    llHumAlarmSettingContainer.setVisibility(View.VISIBLE);
-                    break;
-                case 3:
-                    toggleTempAlarmCondition.setToggleOn();
-                    toggleHumAlarmCondition.setToggleOn();
-                    llTempAlarmSettingContainer.setVisibility(View.VISIBLE);
-                    llHumAlarmSettingContainer.setVisibility(View.VISIBLE);
-                    break;
+
+            if (subDevice.gettCkOnoff() == 1) {
+                toggleTempAlarmCondition.setToggleOn();
+                llTempAlarmSettingContainer.setVisibility(View.VISIBLE);
+            } else {
+                toggleTempAlarmCondition.setToggleOff();
+                llTempAlarmSettingContainer.setVisibility(View.GONE);
+            }
+
+            if (subDevice.gethCkOnoff() == 1) {
+                toggleHumAlarmCondition.setToggleOn();
+                llHumAlarmSettingContainer.setVisibility(View.VISIBLE);
+            } else {
+                toggleHumAlarmCondition.setToggleOff();
+                llHumAlarmSettingContainer.setVisibility(View.GONE);
             }
         }
 
@@ -197,9 +186,8 @@ public class TempHumAlarmSettingActivity extends GwBaseActivity implements Range
     @Override
     public void onToggle(View view, boolean on) {
         if (subDevice != null) {
-            int onoff = toggleTempAlarmCondition.isToggleOn() ? 1 : 0;
-            onoff = toggleHumAlarmCondition.isToggleOn() ? onoff + 2 : onoff;
-            subDevice.settCkOnoff(onoff);
+            subDevice.settCkOnoff(toggleTempAlarmCondition.isToggleOn() ? 1 : 0);
+            subDevice.sethCkOnoff(toggleHumAlarmCondition.isToggleOn() ? 1 : 0);
             SubDeviceManage.getInstance().updateDevice(subDevice);
         }
 

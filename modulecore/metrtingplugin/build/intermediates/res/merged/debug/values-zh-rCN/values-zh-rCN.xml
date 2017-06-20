@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="default_condition">
+        <item>@string/launch_condition_all</item>
+        <item>@string/launch_condition_living</item>
+        <item>@string/launch_condition_bedroom</item>
+        <item>@string/launch_condition_kitchen</item>
+        <item>@string/launch_condition_office</item>
+    </array>
+    <string-array name="default_scenes">
+        <item>@string/default_scene_at_home_arm</item>
+        <item>@string/default_scene_go_out_arm</item>
+        <item>@string/default_scene_disarm</item>
+        <item>@string/default_scene_sleep</item>
+        <item>@string/default_scene_get_up</item>
+    </string-array>
+    <array name="doors_and_pir_execs">
+        <item>@string/doors_and_pir_arm</item>
+        <item>@string/doors_and_pir_dis_arm</item>
+    </array>
+    <array name="gateway_execs">
+        <item>@string/gateway_exec_at_home</item>
+        <item>@string/gateway_exec_go_out</item>
+        <item>@string/gateway_exec_dis_arm</item>
+        <item>@string/gateway_rgb_on</item>
+        <item>@string/gateway_rgb_off</item>
+        <item>@string/gateway_rgb_color_255</item>
+        <item>@string/gateway_rgb_color_65535</item>
+    </array>
+    <array name="metrting_plugin_execs">
+        <item>@string/metrting_plugin_on</item>
+        <item>@string/metrting_plugin_off</item>
+    </array>
+    <array name="onoff_execs">
+        <item>@string/onoff_one_on</item>
+        <item>@string/onoff_one_off</item>
+        <item>@string/onoff_two_on</item>
+        <item>@string/onoff_two_off</item>
+        <item>@string/onoff_three_on</item>
+        <item>@string/onoff_three_off</item>
+    </array>
+    <array name="plugin_execs">
+        <item>@string/plugin_on</item>
+        <item>@string/plugin_off</item>
+        <item>@string/plugin_usb_on</item>
+        <item>@string/plugin_usb_off</item>
+        <item>@string/plugin_on_usb_off</item>
+        <item>@string/plugin_off_usb_off</item>
+        <item>@string/plugin_on_usb_on</item>
+        <item>@string/plugin_off_usb_on</item>
+    </array>
+    <array name="relay_execs">
+        <item>@string/relay_on</item>
+        <item>@string/relay_off</item>
+    </array>
+    <array name="rgb_execs">
+        <item>@string/rgb_on</item>
+        <item>@string/rgb_off</item>
+        <item>@string/rgb_color_255</item>
+        <item>@string/rgb_color_65535</item>
+    </array>
+    <array name="sound_and_light_alarm_execs">
+        <item>@string/sound_and_light_alarm_device_alarm</item>
+    </array>
+    <array name="thermostat_execs">
+        <item>@string/thermostat_on</item>
+        <item>@string/thermostat_off</item>
+        <item>@string/thermostat_control</item>
+    </array>
+    <string name="ACCESS_TOKEN_INVALID">无效的Access-Token</string>
+    <string name="ACCOUNT_PASSWORD_ERROR">密码错误</string>
+    <string name="ACCOUNT_VAILD_ERROR">帐号不合法</string>
+    <string name="ALARM_RULE_NAME_EXISTS">该告警规则名称已存在</string>
+    <string name="ALARM_RULE_NOT_EXISTS">告警规则不存在</string>
+    <string name="APP_APN_IS_NOT_ENABLE">APP的APN功能未启用</string>
+    <string name="APP_APN_LICENSE_FILE_SIZE_LIMIT">apn密钥文件超过大小限制</string>
+    <string name="APP_NOT_EXISTS">APP不存在</string>
+    <string name="Alarm">Alarm</string>
+    <string name="Automated_diary">自动化日记</string>
+    <string name="Automation">自动化</string>
+    <string name="CANT_NOT_DELETE_RELEASED_DATAPOINT">已发布的数据端点不可删除</string>
+    <string name="CAN_NOT_DELETE_ACTIVATED_DEVICE">不能删除已激活的设备</string>
+    <string name="CAN_NOT_DELETE_RELEASE_PRODUCT">已发布的产品不可删除</string>
+    <string name="CAN_NOT_DELETE_YOURSELF">不能删除本人</string>
+    <string name="CAN_NOT_MODIFY_OTHER_MEMBER_INFO">不可修改其他成员信息</string>
+    <string name="CORP_EMAIL_NOT_EXISTS">企业邮箱不存在</string>
+    <string name="CORP_NOT_EXISTS">企业不存在</string>
+    <string name="Check_firmware_upgrade">检查固件升级</string>
+    <string name="Clear">Clear</string>
+    <string name="Click_Cancel">点击了取消</string>
+    <string name="Common_problem">常见问题</string>
+    <string name="Create_family">创建家庭</string>
+    <string name="Create_room">创建房间</string>
+    <string name="DATAPOINT_INDEX_EXISTS">数据端点索引已存在</string>
+    <string name="DATAPOINT_NOT_EXISTS">数据端点不存在</string>
+    <string name="DATAPOINT_TYPE_UNKOWN">数据端点未知数据类型</string>
+    <string name="DATA_NOT_EXISTS">数据不存在</string>
+    <string name="DATA_TABLE_NAME_EXISTS">数据变名称已存在</string>
+    <string name="DATA_TABLE_NOT_EXISTS">数据表不存在</string>
+    <string name="DEVICE_ACTIVE_FAIL">设备激活失败</string>
+    <string name="DEVICE_AUTH_FAIL">设备认证失败</string>
+    <string name="DEVICE_MAC_ADDRESS_EXISTS">该产品下设备MAC地址已存在</string>
+    <string name="DEVICE_NOT_EXISTS">设备不存在</string>
+    <string name="DEVICE_PROPERTY_NOT_EXISTS">设备扩展属性不存在</string>
+    <string name="Daily">工作日</string>
+    <string name="Default_room">默认房间</string>
+    <string name="Delete_device">删除设备</string>
+    <string name="Device_sharing">设备分享</string>
+    <string name="Disarm">Disarm</string>
+    <string name="EMAIL_VERIFYCODE_ERROR">邮件验证码错误</string>
+    <string name="EMAIL_VERIFYCODE_NOT_EXISTS">邮件验证码不存在</string>
+    <string name="EMPOWER_NAME_EXISTS">授权名称已存在</string>
+    <string name="EMPOWER_NOT_EXISTS">第三方身份授权不存在</string>
+    <string name="Edat">编辑</string>
+    <string name="Edit_room">编辑房间</string>
+    <string name="Enter_Family_Name">请输入家庭名称</string>
+    <string name="FIRMWARE_NOT_EXISTS">产品固件不存在</string>
+    <string name="FIRMWARE_VERSION_EXISTS">固件版本已存在</string>
+    <string name="Family_management">家庭管理</string>
+    <string name="Friday">周五</string>
+    <string name="GoHome">Home</string>
+    <string name="Home">首页</string>
+    <string name="INVAILD_ACCESS_PRIVATE_DATA">禁止访问私有数据</string>
+    <string name="INVALID_ACCESS">禁止访问</string>
+    <string name="LOGIN_CONTINUOUS">密码登录多次失败</string>
+    <string name="Logins">登录中...</string>
+    <string name="MEMBER_ACCOUNT_NO_EXISTS">企业成员帐号不存在</string>
+    <string name="MEMBER_INVITE_EMAIL_NOT_EXISTS">激活的成员邮箱不存在</string>
+    <string name="MEMBER_INVITE_NOT_ADMIN">只有管理员才能邀请</string>
+    <string name="MEMBER_NOT_EXISTS">企业成员不存在</string>
+    <string name="MEMBER_ROLE_TYPE_UNKOWN">未知成员角色类型</string>
+    <string name="MEMBER_STATUS_ERROR">企业成员状态不合法</string>
+    <string name="Member_of_family">家庭成员</string>
+    <string name="Modify_name">修改名称</string>
+    <string name="Monday">周一</string>
+    <string name="MyDevice">我的设备</string>
+    <string name="MyScene">我的场景</string>
+    <string name="My_room">我的房间</string>
+    <string name="NEED_ACCESS_TOKEN">禁止访问，需要Access-Token</string>
+    <string name="NEED_CORP_ADMIN_MEMBER">需要企业管理员权限</string>
+    <string name="NEED_CORP_API">需要企业的调用权限</string>
+    <string name="NEED_DATA_PERMISSION">需要数据操作权限</string>
+    <string name="NOT_A_DEVICE_ADMIN">不是设备管理者</string>
+    <string name="Network_instability">当前网络有点不稳定噢，请重新加载</string>
+    <string name="Novice_guide">新手指引</string>
+    <string name="OTHER_ER">其他异常错误</string>
+    <string name="Open">Open</string>
+    <string name="OutAway">Away</string>
+    <string name="Owned_room">所属房间</string>
+    <string name="PARAM_MUST_NOT_NULL">请求数据必须字段不可为空</string>
+    <string name="PARAM_NETIO_ERROR">网络IO错误</string>
+    <string name="PARAM_VALID_ERROR">请求数据字段验证不通过</string>
+    <string name="PHONE_VERIFYCODE_ERROR">手机验证码错误</string>
+    <string name="PHONE_VERIFYCODE_NOT_EXISTS">手机验证码不存在</string>
+    <string name="PRODUCT_CAN_NOT_REGISTER_DEVICE">产品未允许用户注册设备</string>
+    <string name="PRODUCT_FIRMWARE_FILE_SIZE_LIMIT">产品固件文件超过大小限制</string>
+    <string name="PRODUCT_LINK_TYPE_UNKOWN">未知的产品连接类型</string>
+    <string name="PRODUCT_NOT_EXISTS">产品信息不存在</string>
+    <string name="PROPERTY_ADD_EXISTS">新增已存在的扩展属性</string>
+    <string name="PROPERTY_KEY_ERROR">属性字段名不合法</string>
+    <string name="PROPERTY_KEY_PROTECT">扩展属性Key为预留字段</string>
+    <string name="PROPERTY_LIMIT">设备扩展属性超过上限</string>
+    <string name="PROPERTY_UPDATE_NOT_EXISTS">更新不存在的扩展属性</string>
+    <string name="PeiZhi">配置</string>
+    <string name="Permission_denied">权限被拒绝</string>
+    <string name="Permission_is_granted">权限被允许</string>
+    <string name="Photograph">拍照</string>
+    <string name="Product_manual">产品手册</string>
+    <string name="RC_0">未知错误</string>
+    <string name="RC_1">参数错误</string>
+    <string name="RC_2">解密失败</string>
+    <string name="RC_3">不存在该OID</string>
+    <string name="RC_4">CID不存在</string>
+    <string name="RC_5">PL中不能为空</string>
+    <string name="RC_6">TEID不能为空</string>
+    <string name="REFRESH_TOKEN_ERROR">刷新token不合法</string>
+    <string name="REGISTER_EMAIL_EXISTS">注册的邮箱已存在</string>
+    <string name="REGISTER_EMAIL_USUE_EXISTS">注册的邮箱已存在</string>
+    <string name="REGISTER_PHONE_EXISTS">注册的手机号已存在</string>
+    <string name="REGISTER_PHONE_USUE_EXISTS">注册的手机已存在</string>
+    <string name="Reload">重新加载</string>
+    <string name="Room">房间</string>
+    <string name="Room_wallpaper">房间墙纸</string>
+    <string name="SERVICE_EXCEPTION">服务端发生异常</string>
+    <string name="SHARE_ACCEPTED">分享已经接受</string>
+    <string name="SHARE_CANCELED">分享已经被取消</string>
+    <string name="SHARE_NOT_EXISTS">分享资源不存在</string>
+    <string name="SUBSCRIBE_AUTHORIZE_CODE_ERROR">订阅设备认证码错误</string>
+    <string name="Saturday">周六</string>
+    <string name="Save">保存</string>
+    <string name="Scene">场景</string>
+    <string name="Select_device">选择设备</string>
+    <string name="Select_existing_wallpaper">选取现有墙纸</string>
+    <string name="Set_up">设置</string>
+    <string name="Sunday">周日</string>
+    <string name="Thursday">周四</string>
+    <string name="Tuesday">周二</string>
+    <string name="UPGRADE_TASK_HAVE_STARTING_VERSION">已有相同的起始版本升级任务</string>
+    <string name="UPGRADE_TASK_NAME_EXISTS">自动升级任务名称已存在</string>
+    <string name="UPGRADE_TASK_NOT_EXISTS">升级任务不存在</string>
+    <string name="UPGRADE_TASK_STATUS_UNKOWN">升级任务状态未知</string>
+    <string name="URL_NOT_FOUND">URL找不到</string>
+    <string name="USER_EMAIL_NOT_VAILD">用户邮箱尚未认证</string>
+    <string name="USER_HAS_SUBSCRIBE_DEVICE">用户已经订阅设备</string>
+    <string name="USER_HAVE_NO_SUBSCRIBE_DEVICE">用户没有订阅该设备</string>
+    <string name="USER_NOT_EXISTS">用户不存在</string>
+    <string name="USER_PHONE_NOT_VAILD">用户手机尚未认证</string>
+    <string name="USER_PROPERTY_NOT_EXISTS">用户扩展属性不存在</string>
+    <string name="USER_STATUS_ERROR">用户状态不合法</string>
+    <string name="Unallocated_room_equipment">未分配房间设备</string>
+    <string name="Wednesday">周三</string>
+    <string name="Weekdays">周末</string>
+    <string name="WiFi_Device">WiFi设备</string>
+    <string name="Zigbee_Device">Zigbee设备</string>
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"转到主屏幕"</string>
+    <string msgid="1397052879051804371" name="abc_action_bar_home_description_format">"%1$s：%2$s"</string>
+    <string msgid="6623331958280229229" name="abc_action_bar_home_subtitle_description_format">"%1$s - %2$s：%3$s"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"转到上一层级"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"更多选项"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"完成"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"查看全部"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"选择应用"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"关闭"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"开启"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"搜索…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"清除查询"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"搜索查询"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"搜索"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"提交查询"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"语音搜索"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"分享方式"</string>
+    <string msgid="7165123711973476752" name="abc_shareactionprovider_share_with_application">"通过%s分享"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"收起"</string>
+    <string name="add_sub_device">添加子设备</string>
+    <string name="alarm">alarm</string>
+    <string name="alarm_condition_setting">报警阀值设置</string>
+    <string name="alarm_information">报警消息</string>
+    <string name="alarm_record">报警记录</string>
+    <string name="alarm_title">报警提示</string>
+    <string name="app_version_code">应用版本号</string>
+    <string name="app_version_name">应用版本名</string>
+    <string name="brand_info">品牌信息</string>
+    <string name="btn_cancel">否</string>
+    <string name="btn_cancel2">取消</string>
+    <string name="btn_complete">完成</string>
+    <string name="btn_confirm">是</string>
+    <string name="btn_confirm2">确定</string>
+    <string name="btn_confirm3">确　　定</string>
+    <string name="btn_local_photo">本地相片</string>
+    <string name="btn_phone_takephoto">手机拍照</string>
+    <string name="btn_regist">注　　册</string>
+    <string name="btn_submit">提　　交</string>
+    <string name="btn_use">使用</string>
+    <string name="cancel">取消</string>
+    <string name="common_information">普通消息</string>
+    <string name="confirm">提交</string>
+    <string name="connecting_network">正在连接中...</string>
+    <string name="crop_photo_err">无法剪裁图片</string>
+    <string name="current_firmware_is_last">固件已是最新版本</string>
+    <string name="current_version">当前版本：</string>
+    <string name="custom">自定义</string>
+    <string name="default_scene_at_home_arm">在家布防</string>
+    <string name="default_scene_disarm">撤防</string>
+    <string name="default_scene_get_up">起床</string>
+    <string name="default_scene_go_out_arm">外出布防</string>
+    <string name="default_scene_sleep">睡觉</string>
+    <string name="device_exec_submit">提交</string>
+    <string name="device_mac_address">设备的MAC</string>
+    <string name="device_name_Illuminance">智能光照度</string>
+    <string name="device_name_air">智能空气质量</string>
+    <string name="device_name_co">智能一氧化碳探测器</string>
+    <string name="device_name_door">智能门磁探测器</string>
+    <string name="device_name_e_plug">智能计量插座</string>
+    <string name="device_name_gas">智能可燃气体探测器</string>
+    <string name="device_name_max_gw">智能大网关</string>
+    <string name="device_name_min_gw">智能小网关</string>
+    <string name="device_name_one_onoff">智能一路开关</string>
+    <string name="device_name_pir">智能人体红外探测器</string>
+    <string name="device_name_plug">智能插座</string>
+    <string name="device_name_rc">智能红外转发器</string>
+    <string name="device_name_relay">智能继电器</string>
+    <string name="device_name_rgb">智能彩灯</string>
+    <string name="device_name_smorke">智能烟雾探测器</string>
+    <string name="device_name_sos">智能紧急按钮</string>
+    <string name="device_name_sound_light_alarm">智能声光警号</string>
+    <string name="device_name_sw">智能安防遥控器</string>
+    <string name="device_name_temp_hum">智能温湿度探测器</string>
+    <string name="device_name_temp_k">智能温控器</string>
+    <string name="device_name_three_onoff">智能三路开关</string>
+    <string name="device_name_two_onoff">智能二路开关</string>
+    <string name="device_name_water">智能水浸探测器</string>
+    <string name="devicecommon_Connection_success">连接成功</string>
+    <string name="devicecommon_Do_you_star_the_timing_alarm">是否启动定时报警</string>
+    <string name="devicecommon_Select_the_location_of_the_device">选择设备所在位置</string>
+    <string name="devicecommon_Start_alarm_time">启动报警时间</string>
+    <string name="devicecommon_Turn_off_alarm_time">关闭报警时间</string>
+    <string name="devicecommon_alarm_settins">报警设置</string>
+    <string name="devicecommon_cycle">周期</string>
+    <string name="doors_and_pir_arm">布防</string>
+    <string name="doors_and_pir_dis_arm">撤防</string>
+    <string name="edit_hit_contact_way">请输入手机号或邮箱</string>
+    <string name="edit_hit_input_feed_back_content">为了更好的为您解决问题，请填写反馈内容，上传问题截图。</string>
+    <string name="edit_hit_new_pwd">请输入新密码</string>
+    <string name="edit_hit_new_pwd_next_time">请重新输入新密码</string>
+    <string name="edit_hit_old_pwd">请输入旧密码</string>
+    <string name="email">Email</string>
+    <string name="email_get_back_password">邮箱找回密码</string>
+    <string name="email_phone">邮箱/手机</string>
+    <string name="everyday">每天</string>
+    <string name="everyday_hum_record">每天湿度记录</string>
+    <string name="everyday_temp_record">每天温度记录</string>
+    <string name="feedback_content_too_less">反馈内容至少5个字</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="gateway_Add_sub_device">添加子设备</string>
+    <string name="gateway_Chinese">中文</string>
+    <string name="gateway_Delete_failed">删除失败</string>
+    <string name="gateway_Delete_successfully">删除成功</string>
+    <string name="gateway_Deleting">正在删除中...</string>
+    <string name="gateway_Device_language">设备语言</string>
+    <string name="gateway_English">英文</string>
+    <string name="gateway_Lamp_brightness">灯亮度</string>
+    <string name="gateway_Make_sure_the_device_is_deleted">确定删除该设备？</string>
+    <string name="gateway_Night_light_time">小夜灯时间</string>
+    <string name="gateway_Operation_diary">操作日记</string>
+    <string name="gateway_Send_in">发送中...</string>
+    <string name="gateway_Sound_settings">声音设置</string>
+    <string name="gateway_alarm_duration">报警时长</string>
+    <string name="gateway_alarm_volume">报警音量</string>
+    <string name="gateway_at_home">在家布防</string>
+    <string name="gateway_away">外出布防</string>
+    <string name="gateway_beep_volume">提示音量</string>
+    <string name="gateway_device">设备</string>
+    <string name="gateway_disarm">撤防</string>
+    <string name="gateway_exec_at_home">在家布防</string>
+    <string name="gateway_exec_dis_arm">撤防</string>
+    <string name="gateway_exec_go_out">外出布防</string>
+    <string name="gateway_rgb_color_255">灯光亮度0-255</string>
+    <string name="gateway_rgb_color_65535">灯光颜色0-65535</string>
+    <string name="gateway_rgb_off">关闭灯</string>
+    <string name="gateway_rgb_on">打开灯</string>
+    <string name="get_photo_err">取得图片出错</string>
+    <string name="home_Delete_family">删除家庭</string>
+    <string name="home_Modify_family_name">修改家庭名称</string>
+    <string name="home_My_Home">我的家庭</string>
+    <string name="home_automation">首页|自动化</string>
+    <string name="hum_alarm_condition_explain1">当设备湿度低于hum%网关将报警并推送湿度过低提示</string>
+    <string name="hum_alarm_condition_explain2">当设备湿度高于hum%网关将报警并推送湿度过高提示</string>
+    <string name="hum_alarm_condition_setting">湿度报警阀值设置</string>
+    <string name="ignore">忽略</string>
+    <string name="input_correct_format_pwd">请输入6到16位的密码!</string>
+    <string name="input_email_address">请输入邮箱号</string>
+    <string name="input_invited_user">请输入被分享用户！</string>
+    <string name="input_new_pwd">请输入新密码：</string>
+    <string name="input_new_pwd_next_time">再次输入新密码：</string>
+    <string name="input_old_pwd">请输入旧密码：</string>
+    <string name="input_password">请输入密码</string>
+    <string name="input_password_next_time">请再次输入密码</string>
+    <string name="input_phone_num">请输入手机号</string>
+    <string name="input_pwd_err">两次输入密码不一致！</string>
+    <string name="input_verification_code">请输入验证码</string>
+    <string name="intelligent_device">智能设备</string>
+    <string name="know_button">我知道了</string>
+    <string name="launch_condition_all">全部</string>
+    <string name="launch_condition_bedroom">卧室</string>
+    <string name="launch_condition_kitchen">厨房</string>
+    <string name="launch_condition_living">客厅</string>
+    <string name="launch_condition_office">办公室</string>
+    <string name="link_condition1">①满足条件时</string>
+    <string name="link_condition2">②满足以下所有条件/任意条件时</string>
+    <string name="link_condition3">③将执行以下任务</string>
+    <string name="link_mana_add_automation">添加自动化</string>
+    <string name="link_risk_warning">风险提示:删除该自动化任意一条件，则导致自动化执行失败。若执行条件中设备处于离线状态，自动化也将执行失败。</string>
+    <string name="loading">加载中...</string>
+    <string name="login">登录</string>
+    <string name="manufacturer_info">制造商信息</string>
+    <string name="metrting_plugin_off">关闭电源</string>
+    <string name="metrting_plugin_on">打开电源</string>
+    <string name="metrting_plugin_title">Mi Smart Power Plug</string>
+    <string name="micro_blog_login">微博登录</string>
+    <string name="model_info">设备信息</string>
+    <string name="monday_to_friday">周一至周五</string>
+    <string name="more">更多</string>
+    <string name="name_isempty">名字不能为空！</string>
+    <string name="news">消息</string>
+    <string name="nomessage">暂无任何消息</string>
+    <string name="offline">离线</string>
+    <string name="ok_button">确定</string>
+    <string name="one_time">一次</string>
+    <string name="online">在线</string>
+    <string name="onoff_one_off">关闭第一路开关</string>
+    <string name="onoff_one_on">打开第一路开关</string>
+    <string name="onoff_three_off">关闭第三路开关</string>
+    <string name="onoff_three_on">打开第三路开关</string>
+    <string name="onoff_two_off">关闭第二路开关</string>
+    <string name="onoff_two_on">打开第二路开关</string>
+    <string name="os_display_name">OS显示名</string>
+    <string name="os_version_code">OS版本号</string>
+    <string name="os_version_name">OS版本名</string>
+    <string name="password">密码</string>
+    <string name="people">人</string>
+    <string name="phone_get_back_password">手机找回密码</string>
+    <string name="phone_regist">手机注册</string>
+    <string name="picker_day">日</string>
+    <string name="picker_hour">时</string>
+    <string name="picker_minite">分</string>
+    <string name="picker_month">月</string>
+    <string name="picker_year">年</string>
+    <string name="plugin_off">关闭电源</string>
+    <string name="plugin_off_usb_off">关闭电源，关闭USB</string>
+    <string name="plugin_off_usb_on">关闭电源，打开USB</string>
+    <string name="plugin_on">打开电源</string>
+    <string name="plugin_on_usb_off">打开电源，关闭USB</string>
+    <string name="plugin_on_usb_on">打开电源，打开USB</string>
+    <string name="plugin_usb_off">关闭USB</string>
+    <string name="plugin_usb_on">打开USB</string>
+    <string name="product_info">产品信息</string>
+    <string name="progress_dialog_already">已完成</string>
+    <string name="pull_down_refresh">下拉刷新</string>
+    <string name="qq_login">QQ登录</string>
+    <string name="quick_logon">快速登录</string>
+    <string name="refreshing">载入中…</string>
+    <string name="refreshing_no_point">载入中</string>
+    <string name="refreshing_retry">加载失败，重试？</string>
+    <string name="regist">注册账号</string>
+    <string name="regist_use_email">邮箱注册</string>
+    <string name="regist_use_phone">使用手机注册</string>
+    <string name="relay_off">关闭继电器</string>
+    <string name="relay_on">打开继电器</string>
+    <string name="release_to_refresh">松开刷新</string>
+    <string name="reset_birthday_fail">修改出生年月日失败</string>
+    <string name="reset_birthday_succeed">修改出生年月日成功！</string>
+    <string name="reset_gender_fail">设置性别失败：</string>
+    <string name="reset_gender_succeed">设置性别成功！</string>
+    <string name="reset_head_photo_fail">修改头像失败</string>
+    <string name="reset_head_photo_succeed">修改头像成功！</string>
+    <string name="reset_nick_name_fail">修改昵称失败！</string>
+    <string name="reset_pwd">修改密码</string>
+    <string name="reset_pwd_fail">修改密码失败：</string>
+    <string name="reset_pwd_succeed">修改密码成功！</string>
+    <string name="residual_electricity">剩余电量</string>
+    <string name="rgb_color_255">灯光亮度0-255</string>
+    <string name="rgb_color_65535">灯光颜色0-65535</string>
+    <string name="rgb_off">关闭灯</string>
+    <string name="rgb_on">打开灯</string>
+    <string name="room_name">房间名称</string>
+    <string name="saves">保存中...</string>
+    <string name="scene_mana_add_action">添加动作</string>
+    <string name="scene_mana_add_scene">添加场景</string>
+    <string name="scene_mana_add_time_delay">添加延时</string>
+    <string name="scene_mana_save_scene">保存</string>
+    <string name="scene_mana_scene_edit">编辑</string>
+    <string name="scene_mana_scene_explain">触发该场景时执行以下动作</string>
+    <string name="scene_mana_scene_icon">场景图标</string>
+    <string name="scene_mana_time_delay_action">0秒后执行</string>
+    <string msgid="146198913615257606" name="search_menu_title">"搜索"</string>
+    <string name="select_photo_too_large">选择上传图片过大！</string>
+    <string name="select_photo_too_much">最多只能选择3张图片</string>
+    <string name="send_share_invition_fail">发送邀请失败</string>
+    <string name="send_share_invition_succeed">发送邀请成功！</string>
+    <string name="setting_show_detail_message">通知显示消息详情</string>
+    <string name="setting_title">设置</string>
+    <string name="setting_vibration">震动</string>
+    <string name="setting_voice">声音</string>
+    <string name="sound_and_light_alarm_device_alarm">设备报警</string>
+    <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
+    <string name="submit_feedback_complete">提交意见反馈完成！</string>
+    <string name="submit_feedback_fail">提交反馈意见失败</string>
+    <string name="support_only_chinese_phone">仅支持中国大陆手机号</string>
+    <string name="temp_alarm_condition_explain1">当设备温度低于temp度网关将报警并推送温度过低提示</string>
+    <string name="temp_alarm_condition_explain2">当设备温度高于temp度网关将报警并推送温度过高提示</string>
+    <string name="temp_alarm_condition_setting">温度报警阀值设置</string>
+    <string name="temp_hum_restore_default_values">恢复默认值</string>
+    <string name="thermostat_control">温度控制</string>
+    <string name="thermostat_off">温控器关</string>
+    <string name="thermostat_on">温控器开</string>
+    <string name="title_hum">湿度</string>
+    <string name="title_temp">温度</string>
+    <string name="title_temp_hum">温湿度</string>
+    <string name="tittle_launch_condition">启动条件</string>
+    <string name="toast_click_activation_email">请进入邮箱点击激活邮件！</string>
+    <string name="toast_do_not_select_share_device">您没有选择要分享的设备</string>
+    <string name="toast_get_back_password_fail">找回密码失败</string>
+    <string name="toast_get_back_password_succeed">找回密码成功！</string>
+    <string name="toast_get_verification_code_fail">获取验证码失败</string>
+    <string name="toast_get_verification_code_succeed">获取验证码成功！</string>
+    <string name="toast_regist_fail">注册失败！</string>
+    <string name="toast_regist_succeed">注册成功！</string>
+    <string name="toast_reset_nick_name_fail">修改昵称失败：</string>
+    <string name="toast_reset_nick_name_succeed">修改昵称成功！</string>
+    <string name="toast_you_do_not_have_gateways">您没有绑定网关！</string>
+    <string name="today_hum_line">24小时湿度曲线</string>
+    <string name="today_temp_line">24小时温度曲线</string>
+    <string name="txt_about">关于</string>
+    <string name="txt_about_logo">海曼智能家居</string>
+    <string name="txt_account">账号</string>
+    <string name="txt_account_info">4564546</string>
+    <string name="txt_alarm_total">报警总数</string>
+    <string name="txt_app_version">当前APP版本号：</string>
+    <string name="txt_authorize_mana">授权管理</string>
+    <string name="txt_authorize_mana_bottom">账号绑定成功后可用于快捷登录</string>
+    <string name="txt_authorized_login">授权登录</string>
+    <string name="txt_birthday">出生年月</string>
+    <string name="txt_birthday_info">2017/3/2</string>
+    <string name="txt_bound">已绑定</string>
+    <string name="txt_check_app_version">检查APP版本更新</string>
+    <string name="txt_common_problem">常见问题</string>
+    <string name="txt_confirm_quit">确认要退出？</string>
+    <string name="txt_contact_way">联系方式</string>
+    <string name="txt_copyright">Copyright@深圳市海曼科技有限公司</string>
+    <string name="txt_current_hum">当前湿度：</string>
+    <string name="txt_current_power">当前功率：</string>
+    <string name="txt_current_temp">当前温度：</string>
+    <string name="txt_delete">删除</string>
+    <string name="txt_device_total">个智能设备</string>
+    <string name="txt_email">邮箱</string>
+    <string name="txt_email_info">adc***dfg</string>
+    <string name="txt_exec_scene">执行某个场景</string>
+    <string name="txt_exit_account">退出账号</string>
+    <string name="txt_explain_setting_show_detail_message">若关闭，当接收新消息通知时，则不再显示报警消息。</string>
+    <string name="txt_explain_setting_voice_vibration">设置系统功能消息提示音及震动</string>
+    <string name="txt_feed_back">意见反馈</string>
+    <string name="txt_feed_back_content">反馈内容</string>
+    <string name="txt_gender">性别</string>
+    <string name="txt_gender_female">女</string>
+    <string name="txt_gender_male">男</string>
+    <string name="txt_gender_select">性别选择</string>
+    <string name="txt_gender_unknown">未知</string>
+    <string name="txt_get_verification_code">获取验证码</string>
+    <string name="txt_head_pic">头像</string>
+    <string name="txt_hint_search">搜索</string>
+    <string name="txt_input_nick_name">填写昵称</string>
+    <string name="txt_link_condition_add_common_used">通用</string>
+    <string name="txt_metrting_plugin_countdown_time">倒计时</string>
+    <string name="txt_metrting_plugin_elect">电量统计</string>
+    <string name="txt_metrting_plugin_onoff">开关</string>
+    <string name="txt_metrting_plugin_state1">电源已开启（有定时）</string>
+    <string name="txt_metrting_plugin_state2">电源已开启（无定时）</string>
+    <string name="txt_metrting_plugin_state3">电源已关闭（有定时）</string>
+    <string name="txt_metrting_plugin_state4">电源已关闭（无定时）</string>
+    <string name="txt_metrting_plugin_timing">定时</string>
+    <string name="txt_month">30天</string>
+    <string name="txt_month_power_elect_statistics">30天总电量</string>
+    <string name="txt_nick_name">昵称：</string>
+    <string name="txt_nick_name2">昵称</string>
+    <string name="txt_nick_name_info">哈哈哈123456789</string>
+    <string name="txt_nick_name_info2">名字是</string>
+    <string name="txt_open">打开</string>
+    <string name="txt_phone_number">手机号码</string>
+    <string name="txt_phone_number_info">138***525</string>
+    <string name="txt_prompt">提示</string>
+    <string name="txt_repeat">重复</string>
+    <string name="txt_reset_pwd">修改密码</string>
+    <string name="txt_save">保存</string>
+    <string name="txt_second">秒</string>
+    <string name="txt_set">设置</string>
+    <string name="txt_share_device">分享设备</string>
+    <string name="txt_start">开启</string>
+    <string name="txt_timer">定时器</string>
+    <string name="txt_timing">定时</string>
+    <string name="txt_today_power_elect_statistics">今天使用电量</string>
+    <string name="txt_unbound">未绑定</string>
+    <string name="txt_use_email_regist">使用邮箱注册</string>
+    <string name="txt_use_policy">使用条款和隐私政策</string>
+    <string name="txt_user_info">个人资料</string>
+    <string name="txt_week">7天</string>
+    <string name="txt_week_power_elect_statistics">7天总电量</string>
+    <string name="txt_year">1年</string>
+    <string name="txt_year_power_elect_statistics">1年总电量</string>
+    <string name="unknow">unknow</string>
+    <string name="update_content">更新内容：</string>
+    <string name="update_firmware_fail">更新固件失败！</string>
+    <string name="update_firmware_succeed">更新固件成功！</string>
+    <string name="update_now">立即更新</string>
+    <string name="upgrade_do_not_disconnect_the_power">更新过程中请勿断开设备电源。</string>
+    <string name="upgrade_remind">升级提醒：</string>
+    <string name="use_email_get_back_password">使用邮箱找回</string>
+    <string name="use_phone_get_back_password">使用手机找回</string>
+    <string name="user_nikename">User NikeName</string>
+    <string name="wechat_login">微信登录</string>
+    <string name="wifi">WIFI:</string>
+    <string name="wifi_pass">WIFI PASS:</string>
+</resources>

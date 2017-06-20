@@ -13,6 +13,7 @@ import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.mode.UserInfo;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.utils.Cockroach;
 import com.jiongbull.jlog.Logger;
 import com.jiongbull.jlog.constant.LogLevel;
@@ -74,7 +75,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
         }).build();
         initLiteSDK();
         getLogger().d("--------------------LiteSDKok--------------------");
-        initQuit();
+//        initQuit();
         getLogger().d("--------------------Quitok--------------------");
         initXlinkSDK();
         getLogger().d("--------------------XlinkSDKok--------------------");
@@ -378,6 +379,7 @@ public class BaseApplication extends Application implements XlinkNetListener {
                 ", notifyData=" + new String(eventNotify.notifyData) +
                 '}';
         getLogger().e("onEventNotify:" + str);
+        SmartHomeUtils.showAlarm(eventNotify);
         //        int badgeCount = 12;
 //        ShortcutBadger.applyCount(this, badgeCount); //for 1.1.4+
 //        ShortcutBadger.(getApplicationContext()).count(badgeCount); //for 1.1.3

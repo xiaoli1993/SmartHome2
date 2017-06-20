@@ -75,21 +75,31 @@ public class OwnedRoomActivity extends GwBaseActivity {
             if (!isSub) {
                 if (!SmartHomeUtils.isEmptyString(device.getRoomID())) {
                     if (device.getRoomID().equals(room.getObjectId())) {
-                        moreMenuList.add(new MoreMenu(room.getRoom_name(), "", true));
+                        MoreMenu moreMenu = new MoreMenu(room.getRoom_name(), "", true);
+                        moreMenu.setRoomID(room.getObjectId());
+                        moreMenuList.add(moreMenu);
                         isAddRoom = true;
                     } else {
-                        moreMenuList.add(new MoreMenu(room.getRoom_name(), "", false));
+                        MoreMenu moreMenu = new MoreMenu(room.getRoom_name(), "", false);
+                        moreMenu.setRoomID(room.getObjectId());
+                        moreMenuList.add(moreMenu);
                     }
                 } else {
-                    moreMenuList.add(new MoreMenu(room.getRoom_name(), "", false));
+                    MoreMenu moreMenu = new MoreMenu(room.getRoom_name(), "", false);
+                    moreMenu.setRoomID(room.getObjectId());
+                    moreMenuList.add(moreMenu);
                 }
             } else {
                 if (!SmartHomeUtils.isEmptyString(device.getRoomID())) {
                     if (subDevice.getRoomID().equals(room.getObjectId())) {
-                        moreMenuList.add(new MoreMenu(room.getRoom_name(), "", true));
+                        MoreMenu moreMenu = new MoreMenu(room.getRoom_name(), "", true);
+                        moreMenu.setRoomID(room.getObjectId());
+                        moreMenuList.add(moreMenu);
                         isAddRoom = true;
                     } else {
-                        moreMenuList.add(new MoreMenu(room.getRoom_name(), "", false));
+                        MoreMenu moreMenu = new MoreMenu(room.getRoom_name(), "", false);
+                        moreMenu.setRoomID(room.getObjectId());
+                        moreMenuList.add(moreMenu);
                     }
                 } else {
                     moreMenuList.add(new MoreMenu(room.getRoom_name(), "", false));
@@ -143,10 +153,10 @@ public class OwnedRoomActivity extends GwBaseActivity {
                 String roomid = "";
                 if (!isSub) {
                     HeimanSet.PLBean.GwBasicOID gwBasicOID = new HeimanSet.PLBean.GwBasicOID();
-                    gwBasicOID.setRoomID(moreMenu.getLeftText());
+                    gwBasicOID.setRoomID(moreMenu.getRoomID());
                     roomid = HeimanCom.setBasic(SmartPlug.mgetSN(), 0, gwBasicOID);
                 } else {
-                    roomid = HeimanCom.setRoomID(SmartPlug.mgetSN(), 0, subDevice.getIndex(), moreMenu.getLeftText());
+                    roomid = HeimanCom.setRoomID(SmartPlug.mgetSN(), 0, subDevice.getIndex(), moreMenu.getRoomID());
                 }
                 BaseApplication.getLogger().json(roomid);
                 sendData(roomid);

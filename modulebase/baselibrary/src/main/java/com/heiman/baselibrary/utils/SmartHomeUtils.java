@@ -3,14 +3,21 @@ package com.heiman.baselibrary.utils;
  * Copyright ©深圳市海曼科技有限公司
  */
 
+import android.app.ActivityManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.provider.MediaStore;
 
 import com.google.gson.Gson;
@@ -19,8 +26,15 @@ import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.R;
 import com.heiman.baselibrary.http.HttpConstant;
 import com.heiman.baselibrary.manage.DeviceManage;
+import com.heiman.baselibrary.manage.SubDeviceManage;
+import com.heiman.baselibrary.mode.DeviceSS;
+import com.heiman.baselibrary.mode.EventIsOnline;
+import com.heiman.baselibrary.mode.EventNotifyData;
 import com.heiman.baselibrary.mode.HttpDevice;
+import com.heiman.baselibrary.mode.Notifications;
+import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.utils.Time;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,13 +42,20 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.xlink.wifi.sdk.XDevice;
 import io.xlink.wifi.sdk.XlinkAgent;
+import io.xlink.wifi.sdk.bean.EventNotify;
 
 /**
  * @Author :    肖力
@@ -722,6 +743,185 @@ public class SmartHomeUtils {
     }
 
     /**
+     * 子设备对应状态
+     *
+     * @param subDevice 子设备
+     * @param ssBean    状态
+     */
+    public static void typeSetSS(SubDevice subDevice, DeviceSS.PLBean.OIDBean.DEVBean.SSBean ssBean) {
+        if (ssBean.getOL() == 0) {
+            subDevice.setOnlineStatus(false);
+        } else {
+            subDevice.setOnlineStatus(true);
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        switch (subDevice.getDeviceType()) {
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+                subDevice.setRgbOnoff(ssBean.getOF());
+                subDevice.setRgblevel(ssBean.getLE());
+                subDevice.setR(ssBean.getCR());
+                subDevice.setG(ssBean.getCG());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setTemp(ssBean.getTP() + "");
+                subDevice.setHumidity(ssBean.getHY() + "");
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                subDevice.setBatteryPercent(ssBean.getBP());
+                if (ssBean.getBA() == 0) {
+                    subDevice.setBatteryAlm(false);
+                } else {
+                    subDevice.setBatteryAlm(true);
+                }
+                subDevice.setDeviceOnoff(ssBean.getOF());
+                try {
+                    Date dateTmp = dateFormat.parse(ssBean.getTM() + "");
+                    subDevice.setLastDate(dateTmp);
+
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                subDevice.setRelayOnoff(ssBean.getRO());
+                subDevice.setUsbOnoff(ssBean.getUO());
+
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                subDevice.setRelayOnoff(ssBean.getRO());
+                subDevice.setPower(ssBean.getPW());
+                subDevice.setKwm(ssBean.getPH());
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+        }
+        SubDeviceManage.getInstance().addDevice(subDevice);
+    }
+
+    /**
      * 根据Type转换成昵称
      *
      * @param isSub      是否是子设备
@@ -911,6 +1111,79 @@ public class SmartHomeUtils {
                 return 0;
         }
     }
+
+    /**
+     * 通过包名跳转
+     *
+     * @param activityName
+     */
+    public static void startActivityForName(Context context, String activityName, Bundle paramBundle) {
+        try {
+            Class clazz = Class.forName(activityName);
+            Intent intent = new Intent(context, clazz);
+            if (paramBundle != null)
+                intent.putExtras(paramBundle);
+            context.startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void onClickDevice(Context context, SubDevice subDevice) {
+        Bundle paramBundle = new Bundle();
+        paramBundle.putBoolean(Constant.IS_DEVICE, true);
+        paramBundle.putString(Constant.DEVICE_MAC, subDevice.getDeviceMac());
+        paramBundle.putBoolean(Constant.IS_SUB, true);
+        paramBundle.putString(Constant.ZIGBEE_MAC, subDevice.getZigbeeMac());
+        switch (subDevice.getDeviceType()) {
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RGB:
+
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_DOORS:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_WATER:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PIR:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SMOKE:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP:
+                startActivityForName(context, "com.heiman.temphum.TempHumActivity", paramBundle);
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_GAS:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_CO:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOS:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SW:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_PLUGIN:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN:
+                startActivityForName(context, "com.heiman.metrtingplugin.MetrtingPluginActivity", paramBundle);
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ONE_ONOFF:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_TWO_ONOFF:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THREE_ONOFF:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RC:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_RELAY:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_SOUND_AND_LIGHT_ALARM:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_ILLUMINANCE:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_AIR:
+                break;
+            case Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THERMOSTAT:
+                break;
+        }
+    }
+
     public static final int Period_Sign = 0x80;
     public static final int Monday = 0x01;
     public static final int Tuesday = 0x02;
@@ -972,5 +1245,182 @@ public class SmartHomeUtils {
         return WkString;
     }
 
+    /**
+     * 反映射获取bodyLocKey
+     *
+     * @param bodyLocKey
+     * @return
+     */
+    public static int getBodyString(String bodyLocKey) {
+        try {
+            Field field = R.string.class.getField(bodyLocKey);
+            int i = field.getInt(new R.drawable());
+            return i;
+        } catch (Exception e) {
+            BaseApplication.getLogger().e(e.toString());
+            return R.string.unknow;
+        }
+    }
 
+    /**
+     * 判断程序是否处于后台云行
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isApplicationBroughtToBackground(final Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) {
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * 后台推送消息
+     * <p>
+     * //     * @param deviceName 设备名字
+     * //     * @param deviceType 设备类型
+     *
+     * @param deviceMac 设备MAC
+     * @param zigbeeMac Zigbee设备MAC
+     * @param Ticker    标题
+     * @param Title     头部
+     * @param Content   内容
+     * @param soundUri  音乐URL
+     * @param icon      头像
+     * @param ID        消息ID
+     */
+    private static void backgroundDisplay(String deviceMac, String zigbeeMac, String Ticker, long When, String Title, String Content, Uri soundUri, int icon, int ID) {
+        Class clazz = null;
+        try {
+            clazz = Class.forName("com.heiman.smarthome.activity.MainActivity");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(BaseApplication.getMyApplication(), clazz);
+//        intent.putExtra(Constants.DEVICE_NAME, deviceName);
+//        intent.putExtra(Constants.DEVICE_TYPES, deviceType);
+        intent.putExtra(Constant.DEVICE_MAC, deviceMac);
+        intent.putExtra(Constant.ZIGBEE_MAC, zigbeeMac);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(BaseApplication.getMyApplication(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        long[] vibrate = {100, 1000, 1000 * 30, 1000};
+        Notification notification = new Notification.Builder(BaseApplication.getMyApplication())//实例化Builder
+                .setTicker(Ticker)//在状态栏显示的标题
+                .setWhen(When)//设置显示的时间，默认就是currentTimeMillis()
+                .setContentTitle(Title)//设置标题
+                .setContentText(Content)//设置内容
+                .setSound(soundUri)
+                .setVibrate(vibrate)
+                .setLights(0x00FF00, 300, 1000)
+                .setSmallIcon(icon) //设置图标
+                .setWhen(System.currentTimeMillis()) //发送时间
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)//设置是否自动按下过后取消
+                .setOngoing(false)//设置为true时就不能删除  除非使用notificationManager.cancel(1)方法
+                .build();//创建Notification
+        notification.defaults |= Notification.DEFAULT_LIGHTS;
+        notification.flags |= Notification.FLAG_SHOW_LIGHTS;
+        notification.flags |= Notification.FLAG_INSISTENT;
+        NotificationManager nManager = (NotificationManager) BaseApplication.getMyApplication().getSystemService(BaseApplication.getMyApplication().NOTIFICATION_SERVICE);
+        nManager.notify(ID, notification);// id是应用中通知的唯一标识
+    }
+
+    /**
+     * 前台显示
+     * <p>
+     * //     * @param deviceName 设备名字
+     * //     * @param deviceType 设备类型
+     *
+     * @param deviceMac 设备MAC
+     * @param zigbeeMac Zigbee设备MAC
+     */
+    private static void broughtDisplay(final String deviceMac, final String zigbeeMac, String Title, String Content, int icon) {
+        Class clazz = null;
+        try {
+            clazz = Class.forName("com.heiman.smarthome.activity.AlarmActivity");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(BaseApplication.getMyApplication(), clazz);
+        intent.putExtra(Constant.DEVICE_MAC, deviceMac);
+        if (!isEmptyString(zigbeeMac)) {
+            intent.putExtra(Constant.IS_SUB, true);
+        }
+        intent.putExtra(Constant.IS_DEVICE, true);
+        intent.putExtra(Constant.ZIGBEE_MAC, zigbeeMac);
+        intent.putExtra("Title", Title);
+        intent.putExtra("Content", Content);
+        intent.putExtra("icon", icon);
+        BaseApplication.getMyApplication().getCurrentActivity().startActivity(intent);
+    }
+
+    public static int getDeviceIcon() {
+        return R.mipmap.ic_launcher;
+    }
+
+    /**
+     * 显示报警消息
+     *
+     * @param eventNotify
+     */
+    public static void showAlarm(EventNotify eventNotify) {
+        byte[] new_bts = Arrays.copyOfRange(eventNotify.notifyData, 2,
+                eventNotify.notifyData.length);
+        try {
+            String res = new String(new_bts, "UTF-8");
+            BaseApplication.getLogger().json(res);
+            Gson gson = new Gson();
+            try {
+                EventNotifyData eventNotifyData = gson.fromJson(res, EventNotifyData.class);
+                Notifications notification = gson.fromJson(eventNotifyData.getValue(), Notifications.class);
+                String Title = notification.getNotification().getTitle();
+                List<String> bodyLocArgs = notification.getNotification().getBody_loc_args();
+                String Sound = notification.getNotification().getSound();
+                String bodyLocKey = notification.getNotification().getBody_loc_key();
+                XlinkDevice xlinkDevice = DeviceManage.getInstance().getDevice(eventNotify.formId);
+                Uri soundUri;
+                if (Sound.equals("alarm.mp3")) {
+                    soundUri = Uri.parse("android.resource://" + BaseApplication.getMyApplication().getPackageName() + "/" + R.raw.alarm);
+                } else if (Sound.equals("alarm_119.mp3")) {
+                    soundUri = Uri.parse("android.resource://" + BaseApplication.getMyApplication().getPackageName() + "/" + R.raw.alarm_119);
+                } else {
+                    soundUri = Uri.parse("android.resource://" + BaseApplication.getMyApplication().getPackageName() + "/" + R.raw.message);
+                }
+                String zigbeeMac = "";
+                String sAgeFormatString = BaseApplication.getMyApplication().getResources().getString(getBodyString(bodyLocKey));
+                String Content = String.format(sAgeFormatString, bodyLocArgs.get(0));
+                if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY) {
+                    zigbeeMac = notification.getZigbeeMac();
+                } else if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
+                    zigbeeMac = bodyLocArgs.get(1);
+                }
+                if (isApplicationBroughtToBackground(BaseApplication.getMyApplication())) {
+                    try {
+                        backgroundDisplay(xlinkDevice.getDeviceMac(), zigbeeMac, Title + BaseApplication.getMyApplication().getString(R.string.alarm), Time.stringToLong(bodyLocArgs.get(0), "yyyy-MM-dd HH:mm:ss"), Title, Content, soundUri, getDeviceIcon(), eventNotify.messageId);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    broughtDisplay(xlinkDevice.getDeviceMac(), zigbeeMac, Title, Content, getDeviceIcon());
+                }
+
+            } catch (Exception e) {
+            }
+            try {
+                EventIsOnline eventIsOnline = gson.fromJson(res, EventIsOnline.class);
+            } catch (Exception e) {
+
+            }
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 }

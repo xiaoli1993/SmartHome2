@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/img_water"
+        android:id="@+id/img_centigrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="65dp"
@@ -19,4 +19,92 @@
         android:textSize="16sp"
         android:textColor="@color/temp_hum_font_color"
         android:text="@string/txt_current_temp"/>
+
+    <TextView
+        android:id="@+id/txt_current_temp_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txt_current_temp"
+        android:textSize="34.5sp"
+        android:textColor="@color/temp_hum_font_color"
+        android:text="27"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="69dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/txt_current_temp_info"
+        android:textSize="16sp"
+        android:textColor="@color/temp_hum_font_color"
+        android:text="℃"/>
+
+    <TextView
+        android:id="@+id/txt_everyday_temp_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/img_centigrade"
+        android:textColor="@color/prompt_text_color"
+        android:textSize="11.5sp"
+        android:text="@string/everyday_temp_record"/>
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_everyday_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/txt_everyday_temp_record"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_everyday_temp_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/txt_today_temp_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/scroll_everyday_temp"
+        android:textColor="@color/prompt_text_color"
+        android:textSize="11.5sp"
+        android:text="@string/today_temp_line"/>
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_today_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/txt_today_temp_line"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_today_temp_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            <com.heiman.widget.linechart.LineChart
+                android:id="@+id/line_chart_today_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
 </RelativeLayout>

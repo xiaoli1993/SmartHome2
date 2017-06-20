@@ -23,6 +23,15 @@ public class MoreMenu {
     private String leftText;//左边文字
     private String rightText;//右边文字
     private boolean isVRightImage;//是否显示右边图片
+    private String roomID;//房间ID
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
 
     public String getLeftText() {
         return leftText;

@@ -1,0 +1,64 @@
+if (rootProject.ext.isBuildApp) {
+    apply plugin: "com.android.application"
+
+} else {
+    apply plugin: 'com.android.library'
+
+}
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        if (rootProject.ext.isBuildApp) {
+            applicationId "com.heiman.metrtingplugin"
+        }
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    useLibrary 'org.apache.http.legacy'
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+//            if (rootProject.ext.isBuildApp) {
+//                Manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+//            } else {
+//                //移除debug资源
+//                Manifest.srcFile 'src/main/release/AndroidManifest.xml'
+//                java {
+//                    exclude 'debug/**'
+//                }
+//            }
+        }
+    }
+    resourcePrefix "metrtingplugin_"
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile rootProject.ext.dependencies.appcompatV7
+    compile rootProject.ext.dependencies.design
+    compile project(':baselibrary')
+    compile project(':devicecommon')
+    compile 'com.github.mzule.activityrouter:activityrouter:1.2.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    apt 'com.github.mzule.activityrouter:compiler:1.1.7'
+}

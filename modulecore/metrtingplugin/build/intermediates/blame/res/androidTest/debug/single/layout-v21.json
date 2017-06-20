@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    }
+]

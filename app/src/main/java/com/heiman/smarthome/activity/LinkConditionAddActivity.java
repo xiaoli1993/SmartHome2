@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.heiman.baselibrary.BaseActivity;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.devicecommon.TimerActivity;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
 import com.heiman.smarthome.adapter.DeviceAdapter;

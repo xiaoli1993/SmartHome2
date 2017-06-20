@@ -16,6 +16,7 @@ import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.manage.SubDeviceManage;
 import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
 import com.heiman.smarthome.R;
 import com.heiman.smarthome.modle.ListMain;
@@ -83,7 +84,7 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setXlinkView(ItemViewHolder holder, final XlinkDevice xlinkDevice) {
-        MyApplication.getLogger().i("设备名称：" + xlinkDevice.getDeviceName());
+//        MyApplication.getLogger().i("设备名称：" + xlinkDevice.getDeviceName());
         holder.dragIndicatorView.setText(String.valueOf(4));
         holder.dragIndicatorView.setOnDismissAction(new DragIndicatorView.OnIndicatorDismiss() {
             @Override
@@ -128,7 +129,9 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onClick(View v) {
                 MyApplication.getLogger().i("点击：" + xlinkDevice.getDeviceName());
-                if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW|| xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
+                if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY
+                        || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW
+                        || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
                     Bundle paramBundle = new Bundle();
                     paramBundle.putBoolean(Constant.IS_DEVICE, true);
                     paramBundle.putString(Constant.DEVICE_MAC, xlinkDevice.getDeviceMac());
@@ -140,6 +143,7 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     private void setSubView(final ItemViewHolder holder, final SubDevice subDevice) {
+        MyApplication.getLogger().i("Main:" + subDevice.getDeviceName());
         holder.textView.setText(subDevice.getDeviceName());
 
         switch (subDevice.getDeviceType()) {
@@ -320,14 +324,7 @@ public class MainDevicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             @Override
             public void onClick(View v) {
                 MyApplication.getLogger().i("点击：" + subDevice.getDeviceName());
-                Bundle paramBundle = new Bundle();
-                paramBundle.putBoolean(Constant.IS_DEVICE, true);
-                paramBundle.putString(Constant.DEVICE_MAC, subDevice.getDeviceMac());
-                paramBundle.putBoolean(Constant.IS_SUB, true);
-                paramBundle.putString(Constant.ZIGBEE_MAC, subDevice.getZigbeeMac());
-                if (subDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP) {
-                    startActivityForName("com.heiman.temphum.TempHumActivity", paramBundle);
-                }
+                SmartHomeUtils.onClickDevice(context,subDevice);
             }
         });
     }

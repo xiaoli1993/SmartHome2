@@ -49,4 +49,5 @@ dependencies {
     compile project(':utils')
     compile project(':widget')
     compile files('libs/eventbus.jar')
+    compile project(':hellocharts')
 }

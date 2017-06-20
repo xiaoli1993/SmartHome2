@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\drop_down_unselected_icon.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\mipmap-xxhdpi-v4\\drop_down_unselected_icon.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\drop_down_checked.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\mipmap-xxhdpi-v4\\drop_down_checked.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_launcher_round.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\ic_launcher.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi-v4\\drop_down_selected_icon.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\mipmap-xxhdpi-v4\\drop_down_selected_icon.png"
+    }
+]

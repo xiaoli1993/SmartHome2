@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#fbfbfb"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/ml_center_title"
+            android:gravity="center_vertical"
+            android:paddingLeft="3dp"
+            android:textColor="@color/class_text_14"
+            android:textSize="@dimen/font_size_3" />
+    </LinearLayout>
+
+    <view
+        android:id="@+id/select_dialog_listview"
+        class="com.heiman.widget.dialog.MLAlertController$RecycleListView"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#fbfbfb"
+        android:cacheColorHint="@null"
+        android:divider="@android:drawable/divider_horizontal_bright"
+        android:layoutAnimation="@null"
+        android:overScrollMode="ifContentScrolls"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

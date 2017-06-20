@@ -12,7 +12,6 @@ import com.heiman.baselibrary.GwBaseActivity;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.mode.MoreMenu;
 import com.heiman.devicecommon.CheckFirmwareUpgradeActivity;
-import com.heiman.devicecommon.ShareDeviceActivity;
 import com.heiman.utils.LogUtil;
 import com.heiman.utils.UsefullUtill;
 import com.jaeger.library.StatusBarUtil;

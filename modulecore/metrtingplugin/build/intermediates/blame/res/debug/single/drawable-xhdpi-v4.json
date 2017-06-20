@@ -1,0 +1,442 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_primary_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_dashboard_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ic_dashboard_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\shadow_background.9.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\shadow_background.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\notification_bg_low_normal.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\img_ring.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\img_ring.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\design_ic_visibility_off.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\drawable-xhdpi-v4\\design_ic_visibility_off.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\authorization_qq.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\authorization_qq.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\main_room.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\main_room.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_password.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_password.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_autorenew_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ic_autorenew_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_middle_mtrl_light.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\design_ic_visibility.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\drawable-xhdpi-v4\\design_ic_visibility.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_water.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_water.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_back.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_back.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_focused_holo.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_device_search.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_device_search.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_gw_line.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_gw_line.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\hide_password.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\hide_password.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_airplanemode_inactive_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ic_airplanemode_inactive_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\img_water.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\img_water.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\homedrop.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\homedrop.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_36dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\switch_checked.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\switch_checked.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_ds.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_ds.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_setting.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_setting.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\phone_registration_phone.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\phone_registration_phone.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\login_eyeclose.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\login_eyeclose.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\arrow_right.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\arrow_right.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_timing.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_timing.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_scene_add_action.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_scene_add_action.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_logo.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_logo.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_scene_add_delay.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_scene_add_delay.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_faq.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_faq.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_elect.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_elect.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\scene_setting_icon.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\scene_setting_icon.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\email_registration_email.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\email_registration_email.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_device_action_del.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_device_action_del.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\authorization_wb.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\authorization_wb.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_opinion.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_opinion.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ms__shadow_background.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\edc3fdce0af73d5826ecb69c12840a14e352a074\\output\\res\\drawable-xhdpi-v4\\ms__shadow_background.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_gw.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_gw.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_48dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_control_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_device_exec_sel.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_device_exec_sel.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_power.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_power.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\notification_bg_normal_pressed.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\phone_registration_note.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\phone_registration_note.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_link.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_link.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_right_mtrl_dark.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\feedback_img.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\feedback_img.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_countdown_time.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_countdown_time.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\login_eyeopen.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\login_eyeopen.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_right_mtrl_light.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_right_mtrl_light.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\switch_normal.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\switch_normal.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_more.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_more.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\authorization_wechat.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\authorization_wechat.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\img_power.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\img_power.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\icon_scene_time.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\icon_scene_time.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_about.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_about.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_home_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ic_home_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_next.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_next.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_light.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_text_select_handle_left_mtrl_light.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\personal_center_bg.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\personal_center_bg.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ic_notifications_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\ic_notifications_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\nickname_del.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\nickname_del.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\phone_registration_password.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\phone_registration_password.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\show_password.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\show_password.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\scene_mana_scene_icon_home.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-xhdpi-v4\\scene_mana_scene_icon_home.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ms__menu_down.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\edc3fdce0af73d5826ecb69c12840a14e352a074\\output\\res\\drawable-xhdpi-v4\\ms__menu_down.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\notification_bg_normal.9.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
+    }
+]

@@ -176,6 +176,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
         activityState = ACTIVITY_CREATE;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         CloseActivityClass.activityList.add(this);
+        BaseApplication.getMyApplication().setCurrentActivity(this);
         initDeviceData();
         initFilter();
     }
@@ -194,6 +195,7 @@ public abstract class GwBaseActivity extends FragmentActivity implements View.On
                 if (isSub) {
                     String zigbeemac = bundle.getString(Constant.ZIGBEE_MAC);
                     subDevice = SubDeviceManage.getInstance().getDevice(mac, zigbeemac);
+                    BaseApplication.getLogger().e("mac:" + mac + "zigbeemac:" + subDevice.getDeviceName());
                 }
                 BaseApplication.getLogger().e("mac:" + mac + "isSub:" + isSub);
                 device = DeviceManage.getInstance().getDevice(mac);

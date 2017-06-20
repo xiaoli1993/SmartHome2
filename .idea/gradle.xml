@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/modulebase/baselibrary" />
             <option value="$PROJECT_DIR$/modulebase/datacom" />
             <option value="$PROJECT_DIR$/modulebase/dbsqlite" />
+            <option value="$PROJECT_DIR$/modulebase/hellocharts" />
             <option value="$PROJECT_DIR$/modulebase/thirdparty" />
             <option value="$PROJECT_DIR$/modulebase/utils" />
             <option value="$PROJECT_DIR$/modulebase/widget" />
@@ -20,6 +21,7 @@
             <option value="$PROJECT_DIR$/modulecore/devicecommon" />
             <option value="$PROJECT_DIR$/modulecore/gateway" />
             <option value="$PROJECT_DIR$/modulecore/home" />
+            <option value="$PROJECT_DIR$/modulecore/metrtingplugin" />
             <option value="$PROJECT_DIR$/modulecore/temphum" />
           </set>
         </option>

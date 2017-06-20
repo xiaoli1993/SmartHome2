@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\pull_event.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\pull_event.mp3"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\beep.ogg",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\beep.ogg"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\message.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\message.mp3"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\alarm_119.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\alarm_119.mp3"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\refreshing_sound.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\refreshing_sound.mp3"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\numberpicker_value_change.ogg",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\numberpicker_value_change.ogg"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\alarm.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\alarm.mp3"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\raw\\reset_sound.mp3",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\raw\\reset_sound.mp3"
+    }
+]

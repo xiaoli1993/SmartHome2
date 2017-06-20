@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/select_dialog_listview"
+    class="com.heiman.widget.dialog.MLAlertController$RecycleListView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:cacheColorHint="@null"
+    android:divider="@drawable/std_dialog_line"
+    android:layoutAnimation="@null"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbars="none" />

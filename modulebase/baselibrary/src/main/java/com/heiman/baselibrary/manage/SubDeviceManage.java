@@ -4,7 +4,9 @@ package com.heiman.baselibrary.manage;
  */
 
 
+import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.mode.SubDevice;
+import com.heiman.baselibrary.utils.SmartHomeUtils;
 
 import org.litepal.crud.DataSupport;
 
@@ -93,9 +95,13 @@ public class SubDeviceManage {
 //        List<SubDevice> Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", mac, subMac).find(SubDevice.class);
         SubDevice dev = null;
         for (SubDevice device : getDevices()) {
-            if (device.getZigbeeMac() == subMac) {
-                dev = device;
-                break;
+            BaseApplication.getLogger().i(device.getDeviceMac() + "\n" + device.getZigbeeMac());
+            if (mac.equals(device.getDeviceMac())) {
+                if (device.getZigbeeMac().equals(subMac)) {
+                    BaseApplication.getLogger().i("返回："+subMac);
+                    dev = device;
+                    break;
+                }
             }
         }
         return dev;
@@ -112,20 +118,21 @@ public class SubDeviceManage {
         if (device != null) { // 如果已经保存过设备，就不add
             deviceMap.put(dev.getZigbeeMac(), device);
             dev.updateAllAsync("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac());
+
             return;
         }
         deviceMap.put(dev.getZigbeeMac(), dev);
-        dev.saveAsync();
-//        try {
-//            Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac() + "").find(SubDevice.class);
-//        } catch (Exception e) {
-//            dev.save();
-//        }
-//        if (!SmartHomeUtils.isEmptyList(Xldevice)) {
-//            dev.updateAll("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac());
-//        } else {
-//            dev.save();
-//        }
+//        dev.saveAsync();
+        try {
+            Xldevice = DataSupport.where("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac() + "").find(SubDevice.class);
+        } catch (Exception e) {
+            dev.save();
+        }
+        if (!SmartHomeUtils.isEmptyList(Xldevice)) {
+            dev.updateAll("deviceMac = ? and zigbeeMac = ?", dev.getDeviceMac(), dev.getZigbeeMac());
+        } else {
+            dev.save();
+        }
     }
 
     /**

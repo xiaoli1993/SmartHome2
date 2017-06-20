@@ -132,7 +132,7 @@ public class SplashActivity extends AppCompatActivity {
 //                    if (msg.obj != null) {
 //                        Toast.makeText(SplashActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
                     if (Hawk.contains("UserInfo")) {
-                        Hawk.get("UserInfo", MyApplication.getMyApplication().getUserInfo());
+                        MyApplication.getMyApplication().setUserInfo((UserInfo) Hawk.get("UserInfo"));
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         finish();
                     } else {

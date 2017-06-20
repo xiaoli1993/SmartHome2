@@ -22,7 +22,6 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -35,8 +34,10 @@ import com.heiman.baselibrary.http.HttpManage;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.manage.RoomManage;
+import com.heiman.baselibrary.manage.SubDeviceManage;
 import com.heiman.baselibrary.mode.Room;
 import com.heiman.baselibrary.mode.Scene;
+import com.heiman.baselibrary.mode.SubDevice;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 import com.heiman.smarthome.MyApplication;
@@ -44,7 +45,6 @@ import com.heiman.smarthome.R;
 import com.heiman.smarthome.activity.AddDeviceActivity;
 import com.heiman.smarthome.activity.MainActivity;
 import com.heiman.smarthome.activity.SceneManaActivity;
-import com.heiman.smarthome.adapter.GroupAdapter;
 import com.heiman.smarthome.adapter.MainDevicesAdapter;
 import com.heiman.smarthome.adapter.MainSceneAdapter;
 import com.heiman.smarthome.modle.ListMain;
@@ -68,6 +68,7 @@ import java.util.List;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import cn.iwgang.familiarrecyclerview.baservadapter.FamiliarEasyAdapter;
+import de.greenrobot.event.EventBus;
 import jp.wasabeef.recyclerview.animators.LandingAnimator;
 
 /**
@@ -93,7 +94,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private List<ListMain> listMainList;
     private MainDevicesAdapter mainDevicesAdapter;
     private MainSceneAdapter mainSceneAdapter;
-    private List<XlinkDevice> xlinkDeviceList;
     private View viewTopLine;
 
     @Override
@@ -112,7 +112,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onResume() {
         super.onResume();
-        initDevice();
+        handler.sendEmptyMessage(3);
     }
 
     private void initDevice() {
@@ -131,37 +131,71 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
                     int iSize = list.length();
                     for (int i = 0; i < iSize; i++) {
                         JSONObject jsonObj = list.getJSONObject(i);
-                        SmartHomeUtils.subscribeToDevice(jsonObj.toString());
-                    }
-
-                    listMainList.clear();
-//                    EventBus.getDefault().post("get bind devices");
-                    xlinkDeviceList = DeviceManage.getInstance().getDevices();
-                    for (int i = 0; i < xlinkDeviceList.size(); i++) {
-                        XlinkDevice xlinkDevice = xlinkDeviceList.get(i);
-                        MyApplication.getLogger().e("devicemac:" + xlinkDevice + "deviceType:" + xlinkDevice + "长度：" + xlinkDeviceList.size());
-                        listMainList.add(new ListMain(xlinkDevice.getDeviceMac(), "", false, xlinkDevice.getDeviceType()));
-                        if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
+                        final XlinkDevice xlinkDevice = SmartHomeUtils.subscribeToDevice(jsonObj.toString());
+                        if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW || xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS2GW) {
+                            ((MainActivity) getActivity()).setDevice(xlinkDevice);
+                            ((MainActivity) getActivity()).isDevice = true;
                             if (SmartHomeUtils.isEmptyString(xlinkDevice.getAccessAESKey())) {
                                 List<String> OID = new ArrayList<String>();
                                 OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
+                                String AESK = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
+                                BaseApplication.getLogger().json(AESK);
+                                ((MainActivity) getActivity()).sendData(AESK, false);
+                            } else {
+                                List<String> OID = new ArrayList<String>();
                                 OID.add(HeimanCom.COM_GW_OID.GW_SUB);
                                 OID.add(HeimanCom.COM_GW_OID.GW_SUB_SS);
                                 String AESK = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
                                 BaseApplication.getLogger().json(AESK);
-                                if (xlinkDevice.getDeviceState() != 0) {
-                                    ((MainActivity) getActivity()).sendData(AESK, false);
-                                }
+                                ((MainActivity) getActivity()).sendData(AESK, false);
                             }
                         }
+//                        Message msg = new Message();
+//                        msg.what = 5;
+//                        msg.obj = xlinkDevice;
+//                        handler.sendMessage(msg);
                     }
+                    EventBus.getDefault().post("get bind devices");
+                    handler.sendEmptyMessage(2);
 
-                    mainDevicesAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+    }
+
+    private void checkDeviceUp(XlinkDevice xlinkDevice) {
+        HttpManage.getInstance().onVersion(getActivity(), xlinkDevice.getProductId(), xlinkDevice.getDeviceId() + "", new HttpManage.ResultCallback<String>() {
+            @Override
+            public void onError(Header[] headers, HttpManage.Error error) {
+                MyApplication.getLogger().e("检测固件升级:" + error.getMsg() + "\t" + error.getCode());
+            }
+
+            @Override
+            public void onSuccess(int code, String response) {
+                Message msg = new Message();
+                msg.what = 4;
+                msg.obj = response;
+                handler.sendMessage(msg);
+            }
+        });
+    }
+
+    private void refreshDevice() {
+        listMainList.clear();
+        List<XlinkDevice> xlinkDeviceList = DeviceManage.getInstance().getDevices();
+        for (XlinkDevice xlinkDevice : xlinkDeviceList) {
+            listMainList.add(new ListMain(xlinkDevice.getDeviceMac(), "", false, xlinkDevice.getDeviceType()));
+        }
+
+        List<SubDevice> subDeviceList = SubDeviceManage.getInstance().getDevices();
+        for (SubDevice subDevice : subDeviceList) {
+            listMainList.add((new ListMain(subDevice.getDeviceMac(), subDevice.getZigbeeMac(), true, subDevice.getDeviceType())));
+        }
+        mainDevicesAdapter.notifyDataSetChanged();
     }
 
     private void initWidget(View view) {
@@ -217,7 +251,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 //                showPopwindow(v);
 //                showPopRoomTopList(getActivity(), titleBarTitle, 0, -(titleBarTitle.getHeight() + titleBarTitle.getHeight()), mockData());
                 List<Room> roomArrayList = RoomManage.getInstance().getHome();
-                roomArrayList.add(0,new Room(getResources().getString(R.string.Default_room),""));
+                roomArrayList.add(0, new Room(getResources().getString(R.string.Default_room), ""));
                 showLaunchCondition(roomArrayList);
             }
         });
@@ -235,12 +269,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         swipeLayout.setProgressViewEndTarget(false, 200);
 
         listMainList = new ArrayList<ListMain>();
-        xlinkDeviceList = DeviceManage.getInstance().getDevices();
-        for (int i = 0; i < xlinkDeviceList.size(); i++) {
-            MyApplication.getLogger().e("devicemac:" + xlinkDeviceList.get(i).getDeviceMac() + "deviceType:" + xlinkDeviceList.get(i).getDeviceType() + "长度：" + xlinkDeviceList.size());
-            listMainList.add(new ListMain(xlinkDeviceList.get(i).getDeviceMac(), "", false, xlinkDeviceList.get(i).getDeviceType()));
-        }
-
+        handler.sendEmptyMessage(2);
 
         List<Scene> sceneList = new ArrayList<Scene>();
 
@@ -287,7 +316,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         switch (v.getId()) {
             case R.id.title_bar_more:
                 MyApplication.getLogger().e("点击：");
-                final CharSequence[] items = new CharSequence[]{"添加设备", "添加场景"};
+                final CharSequence[] items = new CharSequence[]{getString(R.string.add_device), getString(R.string.add_sencen)};
                 MenuDialog menuDialog = new MenuDialog(getActivity());
                 menuDialog.setItems(items, new DialogInterface.OnClickListener() {
                     @Override
@@ -322,56 +351,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         }
     }
 
-    private GroupAdapter groupAdapter;
-    private ArrayList<String> groups;
     private PopupWindow mPopupWindow;
-    private View contentView;
-    private ListView listView;
 
-    private void showPopwindow(View parent) {
-        if (mPopupWindow == null) {
-            LayoutInflater mLayoutInflater = LayoutInflater.from(getActivity());
-            contentView = mLayoutInflater.inflate(R.layout.group_list, null);
-
-            listView = (ListView) contentView.findViewById(R.id.lv_group);
-
-            // 加载数据
-            groups = new ArrayList<String>();
-
-            groups.add("时间排序");
-
-            groups.add("智能排序");
-
-            groups.add("我的微博");
-
-            groups.add("密友圈");
-
-            groups.add("悄悄关注");
-
-            groups.add("周边");
-
-            groupAdapter = new GroupAdapter(getActivity(), groups);
-            listView.setAdapter(groupAdapter);
-
-            mPopupWindow = new PopupWindow(contentView, getActivity().getWindowManager()
-                    .getDefaultDisplay().getWidth() / 2, 250);
-        }
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        mPopupWindow.setFocusable(true);
-
-        // 显示的位置为:屏幕的宽度的1/16
-        int xPos = getActivity().getWindowManager().getDefaultDisplay().getWidth() / 4;
-
-        mPopupWindow.showAsDropDown(parent, 0, 0);
-
-        listView.setOnItemClickListener(this);
-
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        titleBarTitle.setText(groups.get(position));
         if (mPopupWindow != null) {
             mPopupWindow.dismiss();
         }
@@ -380,8 +365,32 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     private Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+        public void handleMessage(final Message msg) {
+            switch (msg.what) {
+                case 1:
+                    swipeLayout.setRefreshing(false);
+                    break;
+                case 2:
+                    refreshDevice();
+                    break;
+                case 3:
+                    initDevice();
+                    break;
+                case 4:
+//                    if (msg.obj != null) {
+//                        MyApplication.getLogger().json(msg.obj.toString());
+//                        Gson gson = new Gson();
+//                        DeviceUp deviceUp = gson.fromJson(msg.obj.toString(), DeviceUp.class);
+//                        if (deviceUp.getNewest()>deviceUp.getCurrent()){
+//
+//                        }
+//                    }
+                    break;
+                case 5:
+                    checkDeviceUp((XlinkDevice) msg.obj);
+                    break;
+
+            }
         }
     };
 
@@ -391,17 +400,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void run() {
                 try {
-                    //然刷新控件停留两秒后消失
-                    Thread.sleep(2000);
-                    handler.post(new Runnable() {//在主线程执行
-                        @Override
-                        public void run() {
-                            //更新数据
-                            initDevice();
-                            //停止刷新
-                            swipeLayout.setRefreshing(false);
-                        }
-                    });
+                    handler.sendEmptyMessage(3);//更新数据
+                    Thread.sleep(2000); //然刷新控件停留两秒后消失
+                    handler.sendEmptyMessage(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -445,7 +446,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         };
 
         recyclerCondition.setAdapter(mAdapter);
-        recyclerCondition.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener                                                       () {
+        recyclerCondition.setOnItemClickListener(new FamiliarRecyclerView.OnItemClickListener() {
             @Override
             public void onItemClick(FamiliarRecyclerView familiarRecyclerView, View view, int position) {
                 Room condition = conditions.get(position);

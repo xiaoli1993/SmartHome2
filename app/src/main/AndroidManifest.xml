@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -79,18 +79,14 @@
         <activity android:name=".activity.EmailGetBackPasswordActivity" />
 
         <activity android:name="com.heiman.devicecommon.ShareDeviceActivity" />
-        <activity android:name=".activity.RegistActivity" />
-        <activity android:name=".activity.RegistUseEmailActivity" />
-        <activity android:name=".activity.PhoneGetBackPasswordActivity" />
-        <activity android:name=".activity.EmailGetBackPasswordActivity" />
         <activity android:name=".activity.SceneManaActivity" />
         <activity android:name=".activity.LaunchConditionActivity" />
         <activity android:name=".activity.DeviceExecActivity" />
         <activity android:name=".activity.LinkManaActivity" />
         <activity android:name=".activity.LinkConditionAddActivity" />
-        <activity android:name=".activity.TimerActivity" />
         <activity android:name=".activity.LinkExecAddActivity" />
-        <activity android:name=".activity.LinkAddExecSceneActivity"/>
+        <activity android:name=".activity.LinkAddExecSceneActivity" />
+        <activity android:name=".activity.AlarmActivity" />
     </application>
 
 </manifest>

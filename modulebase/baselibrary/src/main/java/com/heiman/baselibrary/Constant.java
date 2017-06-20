@@ -48,6 +48,7 @@ public class Constant {
     public static final int TIMEOUT = 10;// 设置请求超时时间
 
     public static final String DATA = "data";
+    public static final String DATA_SUB = "data-sub";
     // public static final String DEVICE = "device";
     public static final String DEVICE_MAC = "device-mac";
     public static final String ROOM_ID = "room-id";
@@ -80,6 +81,7 @@ public class Constant {
     public final static String SMARTHOME_SETTING_VALUE_OFF = "off"; //关
     public final static String SMARTHOME_SETTING_VALUE_ON = "on";  //开
     public static final String HOME_ID = "home_id";
+    public static final String DATA_SUBDEVICE = "data-subdevice";
 
     /**
      * 我的头像保存目录

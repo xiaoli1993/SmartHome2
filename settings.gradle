@@ -1,4 +1,4 @@
-include ':app', ':modulecore', ':gateway', ':modulebase', ':baselibrary', ':datacom', ':dbsqlite', ':thirdparty', ':utils', ':widget', ':home',':devicecommon', ':temphum'
+include ':app', ':modulecore', ':gateway', ':modulebase', ':baselibrary', ':datacom', ':dbsqlite', ':thirdparty', ':utils', ':widget', ':home',':devicecommon', ':temphum', ':hellocharts', ':metrtingplugin'
 project(':gateway').projectDir = new File('modulecore/gateway')
 project(':baselibrary').projectDir = new File('modulebase/baselibrary')
 project(':datacom').projectDir = new File('modulebase/datacom')
@@ -9,3 +9,5 @@ project(':widget').projectDir = new File('modulebase/widget')
 project(':devicecommon').projectDir = new File('modulecore/devicecommon')
 project(':temphum').projectDir = new File('modulecore/temphum')
 project(':home').projectDir = new File('modulecore/home')
+project(':hellocharts').projectDir = new File('modulebase/hellocharts')
+project(':metrtingplugin').projectDir = new File('modulecore/metrtingplugin')

@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_notifications_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-ldpi-v4\\ic_notifications_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_autorenew_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-ldpi-v4\\ic_autorenew_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ms__menu_down.png",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\edc3fdce0af73d5826ecb69c12840a14e352a074\\output\\res\\drawable-ldpi-v4\\ms__menu_down.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_home_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-ldpi-v4\\ic_home_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_dashboard_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-ldpi-v4\\ic_dashboard_black_24dp.png"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi-v4\\ic_airplanemode_inactive_black_24dp.png",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\drawable-ldpi-v4\\ic_airplanemode_inactive_black_24dp.png"
+    }
+]

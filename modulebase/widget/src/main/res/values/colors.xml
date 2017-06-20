@@ -198,4 +198,14 @@
     <color name="color_range_seekbar_edge">#1f18807A</color>
     <color name="temp_hum_font_color">#373737</color>
     <color name="app_green">#53CAC3</color>
+    <color name="metrting_plugin_bg_color">#0ba1c3</color>
+    <color name="metrting_plugin_bg_color2">#0cb1d6</color>
+    <color name="metrting_chart_bg_color1">#006fa8</color>
+    <color name="metrting_chart_bg_color2">#c0006fa8</color>
+    <color name="metrting_chart_bg_color3">#7f006fa8</color>
+    <color name="metrting_chart_bg_color4">#3f006fa8</color>
+    <color name="metrting_chart_bg_color5">#00006fa8</color>
+    <color name="metrting_plugin_line_color">#4cffffff</color>
+    <color name="metrting_plugin_power_info_color">#cf202e</color>
+    <color name="metrting_plugin_power_elect_statistics_bg">#ccffffff</color>
 </resources>

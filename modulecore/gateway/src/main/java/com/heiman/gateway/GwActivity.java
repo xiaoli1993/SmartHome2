@@ -13,7 +13,6 @@ import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.Constant;
 import com.heiman.baselibrary.GwBaseActivity;
 import com.heiman.baselibrary.Json.HeimanCom;
-import com.heiman.baselibrary.Json.SmartPlug;
 import com.heiman.baselibrary.http.XlinkUtils;
 import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.manage.SubDeviceManage;
@@ -27,7 +26,6 @@ import com.jaeger.library.StatusBarUtil;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,23 +57,16 @@ public class GwActivity extends GwBaseActivity {
         setSelect(0);
         StatusBarUtil.setTranslucent(this, 50);
         XlinkUtils.StatusBarLightMode(this);
-        getGwData();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        List<String> OID = new ArrayList<String>();
-        OID.add(HeimanCom.COM_GW_OID.GW_BASIC_INFORMATION);
-        String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
-        BaseApplication.getLogger().json(sb);
-        sendData(sb);
     }
 
 
-    private void getGwData() {
 
-    }
 
     private void initEven() {
         titleBarReturn.setOnClickListener(new View.OnClickListener() {

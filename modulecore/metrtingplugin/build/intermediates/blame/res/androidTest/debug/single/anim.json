@@ -1,0 +1,186 @@
+[
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_in.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\move_left_in_activity.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\move_left_in_activity.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\pickerview_dialog_scale_in.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\712201bfc8f461701c4d0000d9dd2f9029f812eb\\output\\res\\anim\\pickerview_dialog_scale_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_dialog_layout_anim.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_dialog_layout_anim.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_enter.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_right.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_in_right.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_rotate_back_180.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_rotate_back_180.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\pickerview_dialog_scale_out.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\712201bfc8f461701c4d0000d9dd2f9029f812eb\\output\\res\\anim\\pickerview_dialog_scale_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_popup_exit.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\dd_mask_in.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\dd_mask_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_dialog_enter.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_dialog_enter.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_top.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_out_top.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_dialog_exit.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_dialog_exit.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\popwindow_anim_out.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\popwindow_anim_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\dd_menu_out.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\dd_menu_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\pickerview_slide_out_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\712201bfc8f461701c4d0000d9dd2f9029f812eb\\output\\res\\anim\\pickerview_slide_out_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_bottom.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_in_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_out.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_snackbar_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_out.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_fab_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_snackbar_in.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_snackbar_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_top.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_in_top.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\move_left_out_activity.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\move_left_out_activity.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_rotate_45.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_rotate_45.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_fab_in.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_fab_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\popwindow_anim_in.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\popwindow_anim_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\move_right_in_activity.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\move_right_in_activity.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\exit.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\exit.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\pickerview_slide_in_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\712201bfc8f461701c4d0000d9dd2f9029f812eb\\output\\res\\anim\\pickerview_slide_in_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\design_bottom_sheet_slide_out.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\4fc7fbef73ef3224e4ac8e9e09bc4d317988fbaa\\output\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_rotate_180.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_rotate_180.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\v5_dialog_item_in.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\v5_dialog_item_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\enter.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\enter.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\dd_mask_out.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\dd_mask_out.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\dd_menu_in.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\dd_menu_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\move_right_out_activity.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\move_right_out_activity.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_bottom.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_out_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\ucrop_fade_in.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\ucrop_fade_in.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_right.xml",
+        "source": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulebase\\widget\\build\\intermediates\\bundles\\default\\res\\anim\\slide_out_right.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\HiSmartHome\\SmartHome20170620\\SmartHome\\modulecore\\metrtingplugin\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\hp\\.android\\build-cache\\9d2438df40f2fe4a20709e25c4396b7590b9d489\\output\\res\\anim\\abc_slide_in_top.xml"
+    }
+]

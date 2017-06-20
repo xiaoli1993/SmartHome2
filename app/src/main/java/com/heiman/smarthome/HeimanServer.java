@@ -19,6 +19,7 @@ import com.heiman.baselibrary.manage.DeviceManage;
 import com.heiman.baselibrary.manage.SubDeviceManage;
 import com.heiman.baselibrary.mode.AESKey;
 import com.heiman.baselibrary.mode.DataDevice;
+import com.heiman.baselibrary.mode.DeviceSS;
 import com.heiman.baselibrary.mode.HeimanSet;
 import com.heiman.baselibrary.mode.Messages;
 import com.heiman.baselibrary.mode.RefreshToken;
@@ -79,6 +80,7 @@ public class HeimanServer extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         isRegisterBroadcast = true;
+        MyApplication.getLogger().i("注册广播");
         registerReceiver(mBroadcastReceiver, SmartHomeUtils.regFilter());
         return START_REDELIVER_INTENT;
     }
@@ -167,7 +169,7 @@ public class HeimanServer extends Service {
             String action = intent.getAction();
             String macs = intent.getStringExtra(Constant.DEVICE_MAC);
             // 收到pipe包
-            if (action.equals(Constant.BROADCAST_DEVICE_SYNC)) {
+            if (action.equals(Constant.BROADCAST_RECVPIPE)) {
                 String data = intent.getStringExtra(Constant.DATA);
                 analysisData(macs, data);
             } else if (action.equals(Constant.BROADCAST_RECVPIPE_SYNC)) {
@@ -211,6 +213,7 @@ public class HeimanServer extends Service {
      */
     private void aesKeyAnalysisData(String dataString, XlinkDevice xlinkDevice, Gson gson) {
         try {
+            BaseApplication.getLogger().i("进入解密aesKeyb:");
             AESKey aesKey = gson.fromJson(dataString, AESKey.class);
             BaseApplication.getLogger().i("aesKeyb:" + aesKey.getPL().getAESkey().getKey());
             String aesKeyb = AES128Utils.HmDecrypt(aesKey.getPL().getAESkey().getKey(), Constant.ZIGBEE_H1GW_NEW_KEY);
@@ -246,6 +249,23 @@ public class HeimanServer extends Service {
                 subDevice.setDeviceType(subDeviceBeanList.get(i).getDeviceType());
                 SubDeviceManage.getInstance().addDevice(subDevice);
             }
+            BaseApplication.getLogger().i("设备添加完成");
+            MyApplication.getMyApplication().sendBroadcast(new Intent(Constant.DATA_SUBDEVICE));
+            BaseApplication.getLogger().i("发送广播");
+            return;
+        } catch (Exception e) {
+
+        }
+        try {
+            DeviceSS zigbeeNewDevice = gson.fromJson(dataString, DeviceSS.class);
+            List<DeviceSS.PLBean.OIDBean.DEVBean> subDeviceBeanList = zigbeeNewDevice.getPL().getOID().getDEV();
+            for (int i = 0; i < subDeviceBeanList.size(); i++) {
+                DeviceSS.PLBean.OIDBean.DEVBean.SSBean ssBean = subDeviceBeanList.get(i).getSS();
+                SubDevice subDevice = SubDeviceManage.getInstance().getDevice(xlinkDevice.getDeviceMac(), subDeviceBeanList.get(i).getZX());
+                SmartHomeUtils.typeSetSS(subDevice, ssBean);
+            }
+            MyApplication.getMyApplication().sendBroadcast(new Intent(Constant.DATA_SUBDEVICE));
+            return;
         } catch (Exception e) {
 
         }
@@ -264,6 +284,7 @@ public class HeimanServer extends Service {
             xlinkDevice.setGwlightonoff(gwBasicOID.getGwlightonoff());
             xlinkDevice.setLgtimer(gwBasicOID.getLgtimer());
             DeviceManage.getInstance().addDevice(xlinkDevice);
+            return;
         } catch (Exception e) {
 
         }
@@ -391,49 +412,50 @@ public class HeimanServer extends Service {
                                     datadevice.setDeviceId(listsize.get(i).getFrom() + "");
                                     Messages.ListBean listBean = listsize.get(i);
                                     boolean isFirst = Hawk.contains(MyApplication.getMyApplication().getUserInfo() + "_isFirstAdd");
-                                    switch (listBean.getAlert_name()) {
-                                        case "gcm notification":
-                                            FcmNotification fcmNotification = gson.fromJson(listBean.getContent(), FcmNotification.class);
-                                            try {
-                                                Date date = Time.stringToDate(fcmNotification.getNotification().getBody_loc_args().get(0), "yyyy-MM-dd HH:mm:ss");
-                                                datadevice.setDate(date);
-                                                datadevice.setYear(Time.dateToString(date, "yyyy"));
-                                                datadevice.setMonth(Time.dateToString(date, "MM"));
-                                                datadevice.setDay(Time.dateToString(date, "dd"));
-                                                datadevice.setHH(Time.dateToString(date, "HH"));
-                                                datadevice.setMm(Time.dateToString(date, "mm"));
-                                                datadevice.setSs(Time.dateToString(date, "ss"));
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
-                                            }
-                                            datadevice.setBodyLocKey(fcmNotification.getNotification().getBody_loc_key());
-                                            try {
-                                                datadevice.setSubMac(fcmNotification.getNotification().getBody_loc_args().get(1));
-                                            } catch (Exception e) {
+                                    if (!SmartHomeUtils.isEmptyString(listBean.getAlert_name()))
+                                        switch (listBean.getAlert_name()) {
+                                            case "gcm notification":
+                                                FcmNotification fcmNotification = gson.fromJson(listBean.getContent(), FcmNotification.class);
+                                                try {
+                                                    Date date = Time.stringToDate(fcmNotification.getNotification().getBody_loc_args().get(0), "yyyy-MM-dd HH:mm:ss");
+                                                    datadevice.setDate(date);
+                                                    datadevice.setYear(Time.dateToString(date, "yyyy"));
+                                                    datadevice.setMonth(Time.dateToString(date, "MM"));
+                                                    datadevice.setDay(Time.dateToString(date, "dd"));
+                                                    datadevice.setHH(Time.dateToString(date, "HH"));
+                                                    datadevice.setMm(Time.dateToString(date, "mm"));
+                                                    datadevice.setSs(Time.dateToString(date, "ss"));
+                                                } catch (ParseException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                datadevice.setBodyLocKey(fcmNotification.getNotification().getBody_loc_key());
+                                                try {
+                                                    datadevice.setSubMac(fcmNotification.getNotification().getBody_loc_args().get(1));
+                                                } catch (Exception e) {
 
-                                            }
-                                            try {
-                                                datadevice.setData(fcmNotification.getNotification().getBody_loc_args().get(2));
-                                            } catch (Exception e) {
+                                                }
+                                                try {
+                                                    datadevice.setData(fcmNotification.getNotification().getBody_loc_args().get(2));
+                                                } catch (Exception e) {
 
-                                            }
-                                            break;
-                                        case "message":
-                                            DeviceMessages deviceMessages = gson.fromJson(listBean.getContent(), DeviceMessages.class);
-                                            try {
-                                                Date date = Time.stringToDate(deviceMessages.getTM(), "yyyy-MM-dd HH:mm:ss");
-                                                datadevice.setDate(date);
-                                                datadevice.setYear(Time.dateToString(date, "yyyy"));
-                                                datadevice.setMonth(Time.dateToString(date, "MM"));
-                                                datadevice.setDay(Time.dateToString(date, "dd"));
-                                                datadevice.setHH(Time.dateToString(date, "HH"));
-                                                datadevice.setMm(Time.dateToString(date, "mm"));
-                                                datadevice.setSs(Time.dateToString(date, "ss"));
-                                            } catch (ParseException e) {
-                                                e.printStackTrace();
-                                            }
-                                            break;
-                                    }
+                                                }
+                                                break;
+                                            case "message_notice":
+                                                DeviceMessages deviceMessages = gson.fromJson(listBean.getContent(), DeviceMessages.class);
+                                                try {
+                                                    Date date = Time.stringToDate(deviceMessages.getTM(), "yyyy-MM-dd HH:mm:ss");
+                                                    datadevice.setDate(date);
+                                                    datadevice.setYear(Time.dateToString(date, "yyyy"));
+                                                    datadevice.setMonth(Time.dateToString(date, "MM"));
+                                                    datadevice.setDay(Time.dateToString(date, "dd"));
+                                                    datadevice.setHH(Time.dateToString(date, "HH"));
+                                                    datadevice.setMm(Time.dateToString(date, "mm"));
+                                                    datadevice.setSs(Time.dateToString(date, "ss"));
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                break;
+                                        }
                                     if (isFirst) {
                                         if (!SmartHomeUtils.isEmptyString(CreateDate)) {
                                             if (CreateDate.equals(listsize.get(i).getCreate_date())) {
@@ -447,15 +469,17 @@ public class HeimanServer extends Service {
                                                 }
                                                 return;
                                             } else {
-                                                if (!listBean.getAlert_name().equals("apn_alarm")) {
-                                                    datalist.add(datadevice);
-                                                }
+                                                if (!SmartHomeUtils.isEmptyString(listBean.getAlert_name()))
+                                                    if (!listBean.getAlert_name().equals("apn notification")) {
+                                                        datalist.add(datadevice);
+                                                    }
                                             }
                                         }
                                     } else {
-                                        if (!listBean.getAlert_name().equals("apn notification")) {
-                                            datalist.add(datadevice);
-                                        }
+                                        if (!SmartHomeUtils.isEmptyString(listBean.getAlert_name()))
+                                            if (!listBean.getAlert_name().equals("apn notification")) {
+                                                datalist.add(datadevice);
+                                            }
                                     }
                                 }
                                 if (!SmartHomeUtils.isEmptyList(datalist)) {

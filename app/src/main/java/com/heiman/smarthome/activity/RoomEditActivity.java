@@ -277,7 +277,7 @@ public class RoomEditActivity extends BaseActivity implements View.OnClickListen
                 selectFromAlbum();
                 break;
             case R.id.title_tv_Right:
-                showHUDProgress("保存中...");
+                showHUDProgress(getString(R.string.saves));
                 Gson gson = new GsonBuilder().addSerializationExclusionStrategy(new ExclusionStrategy() {
                     @Override
                     public boolean shouldSkipField(FieldAttributes f) {
@@ -308,6 +308,7 @@ public class RoomEditActivity extends BaseActivity implements View.OnClickListen
                         public void onSuccess(int code, String response) {
                             MyApplication.getLogger().json(response);
                             dismissHUMProgress();
+                            finish();
                         }
                     });
                 } else {
@@ -323,6 +324,7 @@ public class RoomEditActivity extends BaseActivity implements View.OnClickListen
                         public void onSuccess(int code, String response) {
                             MyApplication.getLogger().json(response);
                             dismissHUMProgress();
+                            finish();
                         }
                     });
                 }

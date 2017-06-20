@@ -60,6 +60,24 @@ public class SubDevice extends DataSupport {
     private Date lastDate;
     private int userId;//用户ID
     private String roomID;//房间ID
+    private int power;
+    private int kwm;
+
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getKwm() {
+        return kwm;
+    }
+
+    public void setKwm(int kwm) {
+        this.kwm = kwm;
+    }
 
     public int gettCkOnoff() {
         return tCkOnoff;

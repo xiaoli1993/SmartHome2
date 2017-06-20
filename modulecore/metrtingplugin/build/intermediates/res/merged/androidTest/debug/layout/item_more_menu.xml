@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/selector_text"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/image_arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dip"
+        android:src="@drawable/arrow_right" />
+
+    <ImageButton
+        android:id="@+id/image_reduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/transparent"
+        android:src="@drawable/reduce"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_Left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_Right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/image_reduce"
+        android:layout_toRightOf="@+id/image_reduce"
+        android:text="sssssssss"
+        android:textColor="@color/class_V"
+        android:textSize="@dimen/font_size_15sp" />
+
+    <TextView
+        android:id="@+id/tv_Right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="65dip"
+        android:textColor="@color/class_6"
+        android:textSize="@dimen/font_size_13sp" />
+
+</RelativeLayout>

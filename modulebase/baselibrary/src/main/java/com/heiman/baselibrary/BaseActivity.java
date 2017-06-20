@@ -69,6 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.common_title);
         StatusBarUtil.setTranslucent(this, 50);
         CloseActivityClass.activityList.add(this);
+        BaseApplication.getMyApplication().setCurrentActivity(this);
         initTitleView();
         XlinkUtils.StatusBarLightMode(this);
         mContext = this;

@@ -19,4 +19,91 @@
         android:textColor="@color/temp_hum_font_color"
         android:text="@string/txt_current_hum"/>
 
+    <TextView
+        android:id="@+id/txt_current_hum_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="103dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txt_current_hum"
+        android:textSize="34.5sp"
+        android:textColor="@color/temp_hum_font_color"
+        android:text="70"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="69dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/txt_current_hum_info"
+        android:textSize="16sp"
+        android:textColor="@color/temp_hum_font_color"
+        android:text="%RH"/>
+
+    <TextView
+        android:id="@+id/txt_everyday_hum_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/img_water"
+        android:textColor="@color/prompt_text_color"
+        android:textSize="11.5sp"
+        android:text="@string/everyday_hum_record"/>
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_everyday_hum"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/txt_everyday_hum_record"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_everyday_hum_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/txt_today_hum_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/scroll_everyday_hum"
+        android:textColor="@color/prompt_text_color"
+        android:textSize="11.5sp"
+        android:text="@string/today_hum_line"/>
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_today_hum"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:scrollbars="none"
+        android:layout_below="@+id/txt_today_hum_line"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/ll_today_hum_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            <com.heiman.widget.linechart.LineChart
+                android:id="@+id/line_chart_today_hum"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
 </RelativeLayout>

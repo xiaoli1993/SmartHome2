@@ -47,27 +47,27 @@
         <attr name="sc_border_width" format="dimension" />
         <attr name="sc_tint_color" format="color" />
         <attr name="sc_checked_text_color" format="color" />
-        <attr name="sc_unchecked_tint_color" format="color"/>
+        <attr name="sc_unchecked_tint_color" format="color" />
     </declare-styleable>
 
     <declare-styleable name="AwesomeRadioButton">
-        <attr name="awesome_text" format="string"/>
+        <attr name="awesome_text" format="string" />
     </declare-styleable>
     <!--自定义MLImageView的属性-->
     <declare-styleable name="MLImageView">
         <attr name="press_alpha" format="integer" />
         <attr name="press_color" format="color" />
-        <attr name="radius" format="dimension"/>
+        <attr name="radius" format="dimension" />
         <attr name="border_width" format="dimension" />
-        <attr name="border_color" format="color"/>
+        <attr name="border_color" format="color" />
         <attr name="shape_type" format="enum">
-            <enum name="round" value="0"/>
+            <enum name="round" value="0" />
             <enum name="rectangle" value="1" />
         </attr>
     </declare-styleable>
     <declare-styleable name="RoundProgressBar">
-        <attr name="roundColor" format="color"/>
-        <attr name="roundProgressColor" format="color"/>
+        <attr name="roundColor" format="color" />
+        <attr name="roundProgressColor" format="color" />
         <attr name="roundWidth" format="dimension" />
         <attr name="textColor" format="color" />
         <attr name="textSize" format="dimension" />
@@ -77,38 +77,38 @@
             <enum name="STROKE" value="0" />
             <enum name="FILL" value="1" />
         </attr>
-        <attr name="roundBackgroundColor" format="color"/>
+        <attr name="roundBackgroundColor" format="color" />
     </declare-styleable>
     <declare-styleable name="RangeSeekBar">
-        <attr name="seek_max" format="float"/>
-        <attr name="seek_min" format="float"/>
-        <attr name="reserve" format="float"/>
-        <attr name="cells" format="integer"/>
-        <attr name="hideProgressHint" format="boolean"/>
-        <attr name="lineColorSelected" format="color"/>
-        <attr name="lineColorEdge" format="color"/>
-        <attr name="thumbPrimaryColor" format="color"/>
-        <attr name="thumbSecondaryColor" format="color"/>
-        <attr name="markTextArray" format="reference"/>
-<attr name="markTextArrayColor" format="color"/>
-        <attr name="seekBarResId" format="reference"/>
+        <attr name="seek_max" format="float" />
+        <attr name="seek_min" format="float" />
+        <attr name="reserve" format="float" />
+        <attr name="cells" format="integer" />
+        <attr name="hideProgressHint" format="boolean" />
+        <attr name="lineColorSelected" format="color" />
+        <attr name="lineColorEdge" format="color" />
+        <attr name="thumbPrimaryColor" format="color" />
+        <attr name="thumbSecondaryColor" format="color" />
+        <attr name="markTextArray" format="reference" />
+        <attr name="markTextArrayColor" format="color" />
+        <attr name="seekBarResId" format="reference" />
         <!-- must use 9 path ！！！-->
-        <attr name="progressHintResId" format="reference"/>
+        <attr name="progressHintResId" format="reference" />
         <attr name="textPadding" format="dimension" />
         <attr name="seek_textSize" format="dimension" />
         <attr name="hintBGHeight" format="dimension" />
         <attr name="hintBGWith" format="dimension" />
         <attr name="hintBGPadding" format="dimension" />
-        <attr name="seekBarHeight" format="dimension"/>
-        <attr name="thumbSize" format="dimension"/>
- <attr name="seekBarLeftAndRightPadding" format="dimension"/>
+        <attr name="seekBarHeight" format="dimension" />
+        <attr name="thumbSize" format="dimension" />
+        <attr name="seekBarLeftAndRightPadding" format="dimension" />
         <attr name="cellMode" format="enum">
-            <enum name="number" value="0"/>
-            <enum name="other" value="1"/>
+            <enum name="number" value="0" />
+            <enum name="other" value="1" />
         </attr>
         <attr name="seekBarMode" format="enum">
-            <enum name="single" value="1"/>
-            <enum name="range" value="2"/>
+            <enum name="single" value="1" />
+            <enum name="range" value="2" />
         </attr>
 
     </declare-styleable>
@@ -122,12 +122,23 @@
         <attr name="showHighlight" format="boolean" />
         <attr name="defaultDrawable" format="reference" />
         <attr name="selectDrawable" format="reference" />
-        <attr name="defaultTextColor" format="color|reference"/>
+        <attr name="defaultTextColor" format="color|reference" />
         <attr name="selectTextColor" format="color|reference" />
         <attr name="mode">
             <enum name="MULTI" value="0" />
-            <enum name="SINGLE" value="1"/>
+            <enum name="SINGLE" value="1" />
         </attr>
-        <attr name="maxSelectionCount" format="integer"/>
+        <attr name="maxSelectionCount" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="LineChart">
+        <attr name="line_color" format="color" />
+        <attr name="text_color" format="color" />
+        <attr name="node_color" format="color" />
+        <attr name="line_size" format="dimension" />
+        <attr name="font_size" format="dimension" />
+        <attr name="node_size" format="dimension" />
+        <attr name="node_spacing" format="dimension" />
+        <attr name="text_padding" format="dimension" />
     </declare-styleable>
 </resources>

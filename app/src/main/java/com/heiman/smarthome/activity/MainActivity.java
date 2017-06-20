@@ -145,21 +145,18 @@ public class MainActivity extends GwBaseActivity {
         DataSupport.findAllAsync(XlinkDevice.class).listen(new FindMultiCallback() {
             @Override
             public <T> void onFinish(List<T> t) {
-                MyApplication.getLogger().i("设备:" + t.size());
                 List<XlinkDevice> xlinkDeviceList = (List<XlinkDevice>) t;
-                MyApplication.getLogger().i("设备:" + xlinkDeviceList.size());
                 for (XlinkDevice xlinkDevice : xlinkDeviceList) {
                     MyApplication.getLogger().i("设备:" + xlinkDevice.getDeviceMac() + xlinkDevice.getAccessAESKey());
                     DeviceManage.getInstance().addDevice(xlinkDevice);
+                    setDevice(xlinkDevice);
                     if (xlinkDevice.getDeviceType() == Constant.DEVICE_TYPE.DEVICE_WIFI_GATEWAY_HS1GW_NEW) {
                         if (SmartHomeUtils.isEmptyString(xlinkDevice.getAccessAESKey())) {
                             List<String> OID = new ArrayList<String>();
                             OID.add(HeimanCom.COM_GW_OID.GET_AES_KEY);
                             String sb = HeimanCom.getOID(SmartPlug.mgetSN(), 0, OID);
                             BaseApplication.getLogger().json(sb);
-                            if (xlinkDevice.getDeviceState() != 0) {
-                                sendData(sb, false);
-                            }
+                            sendData(sb, false);
                         }
                     }
                 }
@@ -170,7 +167,7 @@ public class MainActivity extends GwBaseActivity {
             public <T> void onFinish(List<T> t) {
                 List<SubDevice> subDeviceList = (List<SubDevice>) t;
                 for (SubDevice subDevice : subDeviceList) {
-                    SubDeviceManage.deviceMap.put(subDevice.getZigbeeMac(), subDevice);
+                    SubDeviceManage.getInstance().addDevice(subDevice);
                 }
             }
         });
@@ -285,7 +282,7 @@ public class MainActivity extends GwBaseActivity {
                 subDevice.setIndex(1231456);
                 subDevice.setDate(new Date());
                 subDevice.setAQI("");
-                subDevice.setDeviceName("假的温湿度传感器");
+                subDevice.setDeviceName("虚拟的温湿度传感器");
                 subDevice.setDeviceType(Constant.DEVICE_TYPE.DEVICE_ZIGBEE_THP);
                 SubDeviceManage.getInstance().addDevice(subDevice);
 
@@ -297,7 +294,7 @@ public class MainActivity extends GwBaseActivity {
                 subDevice2.setIndex(12314567);
                 subDevice2.setDate(new Date());
                 subDevice2.setAQI("");
-                subDevice2.setDeviceName("假的计量插座");
+                subDevice2.setDeviceName("虚拟的计量插座");
                 subDevice2.setDeviceType(Constant.DEVICE_TYPE.DEVICE_ZIGBEE_METRTING_PLUGIN);
                 SubDeviceManage.getInstance().addDevice(subDevice2);
             }

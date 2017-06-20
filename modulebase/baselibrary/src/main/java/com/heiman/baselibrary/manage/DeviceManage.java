@@ -3,7 +3,6 @@ package com.heiman.baselibrary.manage;
  * Copyright ©深圳市海曼科技有限公司
  */
 
-import com.heiman.baselibrary.BaseApplication;
 import com.heiman.baselibrary.mode.XlinkDevice;
 import com.heiman.baselibrary.utils.SmartHomeUtils;
 
@@ -126,10 +125,10 @@ public class DeviceManage {
             dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac()).listen(new UpdateOrDeleteCallback() {
                 @Override
                 public void onFinish(int rowsAffected) {
-                    BaseApplication.getLogger().i("更新设备：" + rowsAffected);
+//                    BaseApplication.getLogger().i("更新设备：" + rowsAffected);
                 }
             });
-            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
+//            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
             return;
         }
         deviceMap.put(dev.getDeviceMac(), dev);
@@ -138,27 +137,27 @@ public class DeviceManage {
         List<XlinkDevice> Xldevice = null;
         try {
             Xldevice = DataSupport.where("deviceMac = ?", dev.getDeviceMac()).find(XlinkDevice.class);
-            BaseApplication.getLogger().i("获取设备：" + Xldevice.get(0).getDeviceMac());
+//            BaseApplication.getLogger().i("获取设备：" + Xldevice.get(0).getDeviceMac());
         } catch (Exception e) {
             dev.saveAsync().listen(new SaveCallback() {
                 @Override
                 public void onFinish(boolean success) {
-                    BaseApplication.getLogger().i("添加设备：" + success);
+//                    BaseApplication.getLogger().i("添加设备：" + success);
                 }
             });
-            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
+//            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
         }
         if (!SmartHomeUtils.isEmptyList(Xldevice)) {
             dev.updateAllAsync("deviceMac = ?", dev.getDeviceMac());
-            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
+//            BaseApplication.getLogger().i("更新设备：" + dev.getDeviceMac());
         } else {
             dev.saveAsync().listen(new SaveCallback() {
                 @Override
                 public void onFinish(boolean success) {
-                    BaseApplication.getLogger().i("添加设备：" + success);
+//                    BaseApplication.getLogger().i("添加设备：" + success);
                 }
             });
-            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
+//            BaseApplication.getLogger().i("添加设备：" + dev.getDeviceMac());
         }
     }
 

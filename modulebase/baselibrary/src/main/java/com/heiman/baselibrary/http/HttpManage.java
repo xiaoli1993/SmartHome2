@@ -251,7 +251,7 @@ public class HttpManage {
         }
         params.put("corp_id", COMPANY_ID);
         params.put("password", pwd);
-        params.put("resource", "2");
+        params.put("resource", "9");
         post(context, loginUrl, params, callback);
     }
 
